@@ -23,12 +23,12 @@ public class Lexicon {
 	private Hashtable<Character, SemanticAction> semanticAction;
 	private Hashtable<Integer, String> simbTable;
 	private Integer actualCharac;
-	//cualquier cosa
+	private String actualLexeme;
+
 	
-	
-	public Lexicon(String srcCode, MsgStack msgStack) {
+	public Lexicon(String srcCode) {
 		this.nlCounter = 0;
-		this.msgStack = msgStack;
+		this.msgStack = new MsgStack();
 		this.programBuffer=new ArrayList<>();
 		openFile(srcCode);
 		filePtr = 0;
@@ -36,6 +36,12 @@ public class Lexicon {
 		initMachineState();
 		initSemanticActions();
 	}
+	
+	public void addMsg(String msg)
+	{
+		this.msgStack.addMsg(msg);
+	}
+	
 	
 	public int getNLCounter() { return nlCounter; }
 	
@@ -79,25 +85,6 @@ public class Lexicon {
 	
 	private void initMachineState() {
 		//TODO: Inicializar con la matriz adecuada
-		/*for(int state=0;state<8;state++)
-		{
-			this.stateMachine.put(state, new Hashtable<Character,Integer>());
-		}
-		this.stateMachine.get(0).put('L', 1);
-		this.stateMachine.get(0).put('D', 2);
-		this.stateMachine.get(0).put('_', 0);
-		this.stateMachine.get(0).put('$', -1);
-		this.stateMachine.get(0).put('SE', -1);
-		this.stateMachine.get(0).put('{', 3);
-		this.stateMachine.get(0).put('}', 0);
-		this.stateMachine.get(0).put('<', 5);
-		this.stateMachine.get(0).put('>', 2);
-		this.stateMachine.get(0).put('=', 2);
-		this.stateMachine.get(0).put('nl', 2);
-		this.stateMachine.get(0).put('#', 2);
-		this.stateMachine.get(0).put('TAB ', 2);
-		this.stateMachine.get(0).put('otros', 2);
-		*/
 		
 		///Hecho por matriz[estado][simb]
 		this.stateMachine[0][0]=1;
@@ -109,6 +96,11 @@ public class Lexicon {
 	private Integer getActualCharac()
 	{
 		return this.actualCharac;
+	}
+	
+	public String getActualLexeme()
+	{
+		return this.actualLexeme;
 	}
 	
 	private void initSemanticActions () {
@@ -221,9 +213,16 @@ public class Lexicon {
 
 	}
 
-	public void addChar() {
+	public void returnCharacter() {
 		// TODO Auto-generated method stub
 		this.programBuffer.add(0, this.actualCharac);
 		
 	}
+	
+	public void addCharacter() {
+		// TODO Auto-generated method stub
+		this.actualLexeme=this.actualLexeme + this.actualCharac;
+		
+	}
+	
 }

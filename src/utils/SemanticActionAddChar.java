@@ -11,7 +11,7 @@ public class SemanticActionAddChar implements SemanticAction{
 	@Override
 	public void action(Lexicon Lex) {
 		// TODO Auto-generated method stub
-		Lex.addChar();
+		Lex.addCharacter();
 	}
 
 }
