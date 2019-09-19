@@ -22,7 +22,8 @@ public class Lexicon {
 	private Integer[][] stateMachine;
 	private Hashtable<Character, SemanticAction> semanticAction;
 	private Hashtable<Integer, String> simbTable;
-	
+	private Integer actualCharac;
+	//cualquier cosa
 	
 	
 	public Lexicon(String srcCode, MsgStack msgStack) {
@@ -105,7 +106,124 @@ public class Lexicon {
 		
 	}
 	
+	private Integer getActualCharac()
+	{
+		return this.actualCharac;
+	}
+	
 	private void initSemanticActions () {
 		//TODO: Inicializar segun acciones
+		this.stateMachine[0][0]=1;
+		this.stateMachine[0][1]=1;
+		this.stateMachine[0][2]=1;
+		this.stateMachine[0][3]=1;
+		this.stateMachine[0][4]=1;
+		this.stateMachine[0][5]=1;
+		this.stateMachine[0][6]=1;
+		this.stateMachine[0][7]=1;
+		this.stateMachine[0][8]=1;
+		this.StateMachine[0][9]= ;
+		this.StateMachine[0][10]= ;
+		this.StateMachine[0][11]= ;
+		this.StateMachine[0][12]= ;
+		this.StateMachine[1][0]= ;
+		this.StateMachine[1][1]= ;
+		this.StateMachine[1][2]= ;
+		this.StateMachine[1][3]= ;
+		this.StateMachine[1][4]= ;
+		this.StateMachine[1][5]= ;
+		this.StateMachine[1][6]= ;
+		this.StateMachine[1][7]= ;
+		this.StateMachine[1][8]= ;
+		this.StateMachine[1][9]= ;
+		this.StateMachine[1][10]= ;
+		this.StateMachine[1][11]= ;
+		this.StateMachine[1][12]= ;
+		this.StateMachine[2][0]= ;
+		this.StateMachine[2][1]= ;
+		this.StateMachine[2][2]= ;
+		this.StateMachine[2][3]= ;
+		this.StateMachine[2][4]= ;
+		this.StateMachine[2][5]= ;
+		this.StateMachine[2][6]= ;
+		this.StateMachine[2][7]= ;
+		this.StateMachine[2][8]= ;
+		this.StateMachine[2][9]= ;
+		this.StateMachine[2][10]= ;
+		this.StateMachine[2][11]= ;
+		this.StateMachine[2][12]= ;
+		this.StateMachine[3][0]= ;
+		this.StateMachine[3][1]= ;
+		this.StateMachine[3][2]= ;
+		this.StateMachine[3][3]= ;
+		this.StateMachine[3][4]= ;
+		this.StateMachine[3][5]= ;
+		this.StateMachine[3][6]= ;
+		this.StateMachine[3][7]= ;
+		this.StateMachine[3][8]= ;
+		this.StateMachine[3][9]= ;
+		this.StateMachine[3][10]= ;
+		this.StateMachine[3][11]= ;
+		this.StateMachine[3][12]= ;
+		this.StateMachine[4][0]= ;
+		this.StateMachine[4][1]= ;
+		this.StateMachine[4][2]= ;
+		this.StateMachine[4][3]= ;
+		this.StateMachine[4][4]= ;
+		this.StateMachine[4][5]= ;
+		this.StateMachine[4][6]= ;
+		this.StateMachine[4][7]= ;
+		this.StateMachine[4][8]= ;
+		this.StateMachine[4][9]= ;
+		this.StateMachine[4][10]= ;
+		this.StateMachine[4][11]= ;
+		this.StateMachine[4][12]= ;
+		this.StateMachine[5][0]= ;
+		this.StateMachine[5][1]= ;
+		this.StateMachine[5][2]= ;
+		this.StateMachine[5][3]= ;
+		this.StateMachine[5][4]= ;
+		this.StateMachine[5][5]= ;
+		this.StateMachine[5][6]= ;
+		this.StateMachine[5][7]= ;
+		this.StateMachine[5][8]= ;
+		this.StateMachine[5][9]= ;
+		this.StateMachine[5][10]= ;
+		this.StateMachine[5][11]= ;
+		this.StateMachine[5][12]= ;
+		this.StateMachine[6][0]= ;
+		this.StateMachine[6][1]= ;
+		this.StateMachine[6][2]= ;
+		this.StateMachine[6][3]= ;
+		this.StateMachine[6][4]= ;
+		this.StateMachine[6][5]= ;
+		this.StateMachine[6][6]= ;
+		this.StateMachine[6][7]= ;
+		this.StateMachine[6][8]= ;
+		this.StateMachine[6][9]= ;
+		this.StateMachine[6][10]= ;
+		this.StateMachine[6][11]= ;
+		this.StateMachine[6][12]= ;
+		this.StateMachine[7][0]= ;
+		this.StateMachine[7][1]= ;
+		this.StateMachine[7][2]= ;
+		this.StateMachine[7][3]= ;
+		this.StateMachine[7][4]= ;
+		this.StateMachine[7][5]= ;
+		this.StateMachine[7][6]= ;
+		this.StateMachine[7][7]= ;
+		this.StateMachine[7][8]= ;
+		this.StateMachine[7][9]= ;
+		this.StateMachine[7][10]= ;
+		this.StateMachine[7][11]= ;
+		this.StateMachine[7][12]= ;
+
+
+	}
+
+	public void addChar() {
+		// TODO Auto-generated method stub
+		this.programBuffer.add(0, this.actualCharac);
+		
 	}
 }
