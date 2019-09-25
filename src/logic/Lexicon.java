@@ -6,10 +6,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
-import java.util.Queue;
+
 
 import utils.MsgStack;
 import utils.SemanticAction;
+import utils.SemanticActionAddCharacter;
+import utils.SemanticActionInvalidCharact;
+import utils.SemanticActionLineCounter;
 import utils.Token;
 
 public class Lexicon {
@@ -19,20 +22,21 @@ public class Lexicon {
 	private int nlCounter;
 	private MsgStack msgStack;
 	//private Hashtable<Integer, Hashtable<Character, Integer>> stateMachine;
-	private Integer[][] stateMachine;
+	private Pair[][] stateMachine;
 	private Hashtable<Character, SemanticAction> semanticAction;
-	private Hashtable<Integer, String> simbTable;
+	private Hashtable<String, TuplaTS> simbTable;
 	private Integer actualCharac;
 	private String actualLexeme;
 
 	
-	public Lexicon(String srcCode) {
+	public Lexicon(String srcCode, MsgStack msgStack, Hashtable<String, TuplaTS> simbTable) {
 		this.nlCounter = 0;
-		this.msgStack = new MsgStack();
+		this.msgStack = msgStack;
+		this.simbTable=simbTable;
 		this.programBuffer=new ArrayList<>();
 		openFile(srcCode);
 		filePtr = 0;
-		this.stateMachine=new Integer[8][13];
+		this.stateMachine=new Pair[8][13];
 		initMachineState();
 		initSemanticActions();
 	}
@@ -87,7 +91,7 @@ public class Lexicon {
 		//TODO: Inicializar con la matriz adecuada
 		
 		///Hecho por matriz[estado][simb]
-		this.stateMachine[0][0]=1;
+		
 		
 		
 		
@@ -105,109 +109,111 @@ public class Lexicon {
 	
 	private void initSemanticActions () {
 		//TODO: Inicializar segun acciones
-		this.stateMachine[0][0]=1;
-		this.stateMachine[0][1]=1;
-		this.stateMachine[0][2]=1;
-		this.stateMachine[0][3]=1;
-		this.stateMachine[0][4]=1;
-		this.stateMachine[0][5]=1;
-		this.stateMachine[0][6]=1;
-		this.stateMachine[0][7]=1;
-		this.stateMachine[0][8]=1;
-		this.StateMachine[0][9]= ;
-		this.StateMachine[0][10]= ;
-		this.StateMachine[0][11]= ;
-		this.StateMachine[0][12]= ;
-		this.StateMachine[1][0]= ;
-		this.StateMachine[1][1]= ;
-		this.StateMachine[1][2]= ;
-		this.StateMachine[1][3]= ;
-		this.StateMachine[1][4]= ;
-		this.StateMachine[1][5]= ;
-		this.StateMachine[1][6]= ;
-		this.StateMachine[1][7]= ;
-		this.StateMachine[1][8]= ;
-		this.StateMachine[1][9]= ;
-		this.StateMachine[1][10]= ;
-		this.StateMachine[1][11]= ;
-		this.StateMachine[1][12]= ;
-		this.StateMachine[2][0]= ;
-		this.StateMachine[2][1]= ;
-		this.StateMachine[2][2]= ;
-		this.StateMachine[2][3]= ;
-		this.StateMachine[2][4]= ;
-		this.StateMachine[2][5]= ;
-		this.StateMachine[2][6]= ;
-		this.StateMachine[2][7]= ;
-		this.StateMachine[2][8]= ;
-		this.StateMachine[2][9]= ;
-		this.StateMachine[2][10]= ;
-		this.StateMachine[2][11]= ;
-		this.StateMachine[2][12]= ;
-		this.StateMachine[3][0]= ;
-		this.StateMachine[3][1]= ;
-		this.StateMachine[3][2]= ;
-		this.StateMachine[3][3]= ;
-		this.StateMachine[3][4]= ;
-		this.StateMachine[3][5]= ;
-		this.StateMachine[3][6]= ;
-		this.StateMachine[3][7]= ;
-		this.StateMachine[3][8]= ;
-		this.StateMachine[3][9]= ;
-		this.StateMachine[3][10]= ;
-		this.StateMachine[3][11]= ;
-		this.StateMachine[3][12]= ;
-		this.StateMachine[4][0]= ;
-		this.StateMachine[4][1]= ;
-		this.StateMachine[4][2]= ;
-		this.StateMachine[4][3]= ;
-		this.StateMachine[4][4]= ;
-		this.StateMachine[4][5]= ;
-		this.StateMachine[4][6]= ;
-		this.StateMachine[4][7]= ;
-		this.StateMachine[4][8]= ;
-		this.StateMachine[4][9]= ;
-		this.StateMachine[4][10]= ;
-		this.StateMachine[4][11]= ;
-		this.StateMachine[4][12]= ;
-		this.StateMachine[5][0]= ;
-		this.StateMachine[5][1]= ;
-		this.StateMachine[5][2]= ;
-		this.StateMachine[5][3]= ;
-		this.StateMachine[5][4]= ;
-		this.StateMachine[5][5]= ;
-		this.StateMachine[5][6]= ;
-		this.StateMachine[5][7]= ;
-		this.StateMachine[5][8]= ;
-		this.StateMachine[5][9]= ;
-		this.StateMachine[5][10]= ;
-		this.StateMachine[5][11]= ;
-		this.StateMachine[5][12]= ;
-		this.StateMachine[6][0]= ;
-		this.StateMachine[6][1]= ;
-		this.StateMachine[6][2]= ;
-		this.StateMachine[6][3]= ;
-		this.StateMachine[6][4]= ;
-		this.StateMachine[6][5]= ;
-		this.StateMachine[6][6]= ;
-		this.StateMachine[6][7]= ;
-		this.StateMachine[6][8]= ;
-		this.StateMachine[6][9]= ;
-		this.StateMachine[6][10]= ;
-		this.StateMachine[6][11]= ;
-		this.StateMachine[6][12]= ;
-		this.StateMachine[7][0]= ;
-		this.StateMachine[7][1]= ;
-		this.StateMachine[7][2]= ;
-		this.StateMachine[7][3]= ;
-		this.StateMachine[7][4]= ;
-		this.StateMachine[7][5]= ;
-		this.StateMachine[7][6]= ;
-		this.StateMachine[7][7]= ;
-		this.StateMachine[7][8]= ;
-		this.StateMachine[7][9]= ;
-		this.StateMachine[7][10]= ;
-		this.StateMachine[7][11]= ;
+		this.stateMachine[0][0]= new Pair(1,new SemanticActionAddCharacter());
+		this.stateMachine[0][1]=new Pair(2,new SemanticActionAddCharacter());
+		this.stateMachine[0][2]=new Pair(0,new SemanticActionInvalidCharact());
+		this.stateMachine[0][3]=new Pair(-1,new SemanticActionAddCharacter());
+		this.stateMachine[0][4]=new Pair(-1,null);
+		this.stateMachine[0][5]=new Pair(3,null);
+		this.stateMachine[0][6]=new Pair(0,new SemanticActionInvalidCharact());
+		this.stateMachine[0][7]=new Pair(5,new SemanticActionAddCharacter());
+		this.stateMachine[0][8]=new Pair(4,new SemanticActionAddCharacter());
+		this.stateMachine[0][9]=new Pair(6,new SemanticActionAddCharacter());
+		this.stateMachine[0][10]=new Pair(0,new SemanticActionLineCounter());
+		this.stateMachine[0][11]=new Pair(7,null);
+		this.stateMachine[0][12]=new Pair(0,null);
+		this.stateMachine[0][13]=new Pair(0,new SemanticActionInvalidCharact());
+		this.stateMachine[1][0]=new Pair(0,new SemanticActionInvalidCharact());
+		this.stateMachine[1][1]=new Pair(1,new SemanticActionAddCharacter());
+		this.stateMachine[1][2]=new Pair(1,new SemanticActionAddCharacter());
+		this.stateMachine[1][3]=new Pair(1,new SemanticActionAddCharacter());
+		this.stateMachine[1][4]=new Pair(1,new SemanticActionAddCharacter());
+		this.stateMachine[1][5]=new Pair(1,new SemanticActionAddCharacter());
+		this.stateMachine[1][6]=new Pair(1,new SemanticActionAddCharacter());
+		this.stateMachine[1][7]=new Pair(1,new SemanticActionAddCharacter());
+		this.stateMachine[1][8]=new Pair(1,new SemanticActionAddChar());
+		this.stateMachine[1][9]=new Pair(1,new SemanticActionAddChar());
+		this.stateMachine[1][10]=new Pair(1,new SemanticActionAddChar());
+		this.stateMachine[1][11]=new Pair(1,new SemanticActionAddChar());
+		this.stateMachine[1][12]=new Pair(1,new SemanticActionAddChar());
+		this.stateMachine[1][13]=new Pair(1,new SemanticActionAddChar());
+		this.stateMachine[2][0]= ;
+		this.stateMachine[2][1]= ;
+		this.stateMachine[2][2]= ;
+		this.stateMachine[2][3]= ;
+		this.stateMachine[2][4]= ;
+		this.stateMachine[2][5]= ;
+		this.stateMachine[2][6]= ;
+		this.stateMachine[2][7]= ;
+		this.stateMachine[2][8]= ;
+		this.stateMachine[2][9]= ;
+		this.stateMachine[2][10]= ;
+		this.stateMachine[2][11]= ;
+		this.stateMachine[2][12]= ;
+		this.stateMachine[3][0]= ;
+		this.stateMachine[3][1]= ;
+		this.stateMachine[3][2]= ;
+		this.stateMachine[3][3]= ;
+		this.stateMachine[3][4]= ;
+		this.stateMachine[3][5]= ;
+		this.stateMachine[3][6]= ;
+		this.stateMachine[3][7]= ;
+		this.stateMachine[3][8]= ;
+		this.stateMachine[3][9]= ;
+		this.stateMachine[3][10]= ;
+		this.stateMachine[3][11]= ;
+		this.stateMachine[3][12]= ;
+		this.stateMachine[4][0]= ;
+		this.stateMachine[4][1]= ;
+		this.stateMachine[4][2]= ;
+		this.stateMachine[4][3]= ;
+		this.stateMachine[4][4]= ;
+		this.stateMachine[4][5]= ;
+		this.stateMachine[4][6]= ;
+		this.stateMachine[4][7]= ;
+		this.stateMachine[4][8]= ;
+		this.stateMachine[4][9]= ;
+		this.stateMachine[4][10]= ;
+		this.stateMachine[4][11]= ;
+		this.stateMachine[4][12]= ;
+		this.stateMachine[5][0]= ;
+		this.stateMachine[5][1]= ;
+		this.stateMachine[5][2]= ;
+		this.stateMachine[5][3]= ;
+		this.stateMachine[5][4]= ;
+		this.stateMachine[5][5]= ;
+		this.stateMachine[5][6]= ;
+		this.stateMachine[5][7]= ;
+		this.stateMachine[5][8]= ;
+		this.stateMachine[5][9]= ;
+		this.stateMachine[5][10]= ;
+		this.stateMachine[5][11]= ;
+		this.stateMachine[5][12]= ;
+		this.stateMachine[6][0]= ;
+		this.stateMachine[6][1]= ;
+		this.stateMachine[6][2]= ;
+		this.stateMachine[6][3]= ;
+		this.stateMachine[6][4]= ;
+		this.stateMachine[6][5]= ;
+		this.stateMachine[6][6]= ;
+		this.stateMachine[6][7]= ;
+		this.stateMachine[6][8]= ;
+		this.stateMachine[6][9]= ;
+		this.stateMachine[6][10]= ;
+		this.stateMachine[6][11]= ;
+		this.stateMachine[6][12]= ;
+		this.stateMachine[7][0]= ;
+		this.stateMachine[7][1]= ;
+		this.stateMachine[7][2]= ;
+		this.stateMachine[7][3]= ;
+		this.stateMachine[7][4]= ;
+		this.stateMachine[7][5]= ;
+		this.stateMachine[7][6]= ;
+		this.stateMachine[7][7]= ;
+		this.stateMachine[7][8]= ;
+		this.stateMachine[7][9]= ;
+		this.stateMachine[7][10]= ;
+		this.stateMachine[7][11]= ;
 		this.StateMachine[7][12]= ;
 
 
@@ -223,6 +229,10 @@ public class Lexicon {
 		// TODO Auto-generated method stub
 		this.actualLexeme=this.actualLexeme + this.actualCharac;
 		
+	}
+	
+	public void addNlCounter() {
+		this.nlCounter=this.nlCounter+1;
 	}
 	
 }

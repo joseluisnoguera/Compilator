@@ -1,7 +1,9 @@
 package view;
 
-public class MainDePruebas {
+public final class Compilator {
 
+
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 

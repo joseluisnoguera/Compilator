@@ -2,9 +2,9 @@ package utils;
 
 import logic.Lexicon;
 
-public class SemanticActionAddChar implements SemanticAction{
+public class SemanticActionAddCharacter implements SemanticAction{
 
-	public SemanticActionAddChar()
+	public SemanticActionAddCharacter()
 	{
 		
 	}
