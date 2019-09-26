@@ -13,7 +13,7 @@ public class SemanticActionConstEnd implements SemanticAction{
 		// TODO Auto-generated method stub
 		Lex.addCharacter();
 		String lexemaActual = Lex.getActualLexeme();
-		double value = lexemaActual.parseInt();
+		double value = new Double(lexemaActual).doubleValue();
 		if (value <= 32768){
 			//agregar entero
 		}else if(value <= 2147483648){
