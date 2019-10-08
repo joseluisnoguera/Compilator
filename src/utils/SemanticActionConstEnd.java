@@ -16,11 +16,11 @@ public class SemanticActionConstEnd implements SemanticAction{
 		double value = new Double(lexemaActual).doubleValue();
 		if (value <= 32768){
 			//agregar entero
-		}else if(value <= 2147483648){
+		}else if(value <= (2^31)){
 			//agregar long
 		}else{
 			//generar error que pase la parte semantica
-			value = 2147483648;
+			value = (2^31);
 			//agregar long
 		}
 	}

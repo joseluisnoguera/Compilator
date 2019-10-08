@@ -1,3 +1,7 @@
+package utils;
+import java.util.Hashtable;
+import logic.Lexicon;
+import logic.TuplaTS;
 //### This file created by BYACC 1.8(/Java extension  1.15)
 //### Java capabilities added 7 Jan 97, Bob Jamison
 //### Updated : 27 Nov 97  -- Bob Jamison, Joe Nieten
@@ -11,7 +15,7 @@
 //### Please send bug reports to tom@hukatronic.cz
 //### static char yysccsid[] = "@(#)yaccpar	1.8 (Berkeley) 01/20/90";
 
-package utils;
+
 
 
 
@@ -371,6 +375,25 @@ final static String yyrule[] = {
 "sent_print : PRINT '(' CAD ')'",
 };
 
+//#line 119 "gramatica.y"
+
+
+private Lexicon lex;
+private Hashtable<String,TuplaTS> simbTable;
+
+public Parser(Lexicon lex, Hashtable<String, TuplaTS> simbTable){
+	this.lex = lex;
+	this.simbTable = simbTable;
+}
+
+private int yylex(){
+	Token token = lex.getNewToken();
+	String lexema = token.getLexeme();
+	if (lexema != null)
+		yylval = new ParserVal(lexema);
+	return token.getTokenValue();
+}
+//#line 323 "Parser.java"
 //###############################################################
 // method: yylexdebug : check lexer state
 //###############################################################
@@ -524,6 +547,49 @@ boolean doaction;
     switch(yyn)
       {
 //########## USER-SUPPLIED ACTIONS ##########
+case 43:
+//#line 77 "gramatica.y"
+{
+		ParserVal pv = val_peek(0);
+		String lexema = pv.sval;
+		TuplaTS tts = simbTable.get(lexema);
+		if(lexema == "32768"){
+			tts.setTipoAtributo("long");
+		}
+		if (lexema == "2147483648"){
+			String lexnuevo = "2147483647";
+			simbTable.get(lexema).addCant(-1);
+			if(simbTable.containsKey(lexnuevo)){
+				simbTable.get(lexnuevo).addCant(1);
+			}else{
+				TuplaTS ttsnuevo = new TuplaTS(tts.getTokenValue(),tts.getTipoAtributo());
+				simbTable.put(lexnuevo,ttsnuevo);
+				ttsnuevo.addCant(1);
+			}
+		}
+	}
+break;
+case 45:
+//#line 97 "gramatica.y"
+{
+		ParserVal pv = val_peek(0);
+		String lexema = pv.sval;
+		TuplaTS tts = simbTable.get(lexema);
+		String lexnuevo = "-" + lexema;
+		tts.addCant(-1);
+		if(!simbTable.containsKey(lexnuevo)){
+			TuplaTS ttsneg = new TuplaTS(tts.getTokenValue(),tts.getTipoAtributo());
+			ttsneg.addCant(1);
+			simbTable.put(lexnuevo,ttsneg);
+		}else{
+			simbTable.get(lexnuevo).addCant(1);
+		}
+		if (tts.getCant() == 0){
+			simbTable.remove(lexema);
+		}
+	}
+break;
+//#line 514 "Parser.java"
 //########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####

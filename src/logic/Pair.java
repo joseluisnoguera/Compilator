@@ -10,4 +10,12 @@ public class Pair {
 		this.state=state;
 		this.sAction=sAction;
 	}
+	public int getState()
+	{
+		return this.state;
+	}
+	public SemanticAction getSemanticAction()
+	{
+		return this.sAction;
+	}
 }

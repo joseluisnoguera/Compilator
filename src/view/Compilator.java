@@ -5,6 +5,7 @@ import java.util.Hashtable;
 import logic.Lexicon;
 import logic.TuplaTS;
 import utils.MsgStack;
+import utils.Parser;
 
 public final class Compilator {
 
@@ -23,7 +24,7 @@ public final class Compilator {
 		// TODO Auto-generated method stub
 		Compilator compi= new Compilator();
 		compi.lexico= new Lexicon(args[0], compi.msgStack, compi.simbTable);
-		
+		Parser sintactic = new Parser();
 	}
 
 }
