@@ -107,7 +107,7 @@ public class Lexicon {
 	
 	public Token getNewToken() {
 		actualLexeme = "";
-		
+		int tokenValue = -1;
 		String lexeme= new String();
 		int state=0;
 		while(state != -1)
@@ -127,6 +127,11 @@ public class Lexicon {
 						this.stateMachine[state][3].getSemanticAction().action(this);
 						state=this.stateMachine[state][3].getState();
 				case 4:
+						if(state==0)
+						{
+							tokenValue=(int)this.programBuffer.get(0);
+							lexeme=lexeme + this.actualCharac;
+						}
 						this.stateMachine[state][4].getSemanticAction().action(this);
 						state=this.stateMachine[state][4].getState();
 				case 5:
@@ -159,9 +164,12 @@ public class Lexicon {
 				case 14:
 						this.stateMachine[state][14].getSemanticAction().action(this);
 						state=this.stateMachine[state][14].getState();
-															
-			
 			}
+			
+		}
+		
+		if(this.simbTable.containsKey(lexeme)) {
+			
 		}
 	}
 	

@@ -4,6 +4,6 @@ import logic.Lexicon;
 
 public interface SemanticAction {
 
-	public void action(Lexicon Lex);
+	public void actualCharac(Lexicon Lex);
 	
 }
