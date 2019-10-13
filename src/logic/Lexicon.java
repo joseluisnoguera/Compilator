@@ -31,6 +31,7 @@ public class Lexicon {
 	private String actualLexeme;
 	private int ready;
 
+	public final static short ASSIGN=269;
 	public final static short ID=259;
 	public final static short CTE=260;
 	public final static short LET=270;
@@ -71,6 +72,7 @@ public class Lexicon {
 	public Token getNewToken() {
 		actualLexeme = ""; //Limpia la variable
 		int state = 0;
+		int previous_state = -1;
 		while(state != -1) //Mientras que no llegue a F, itera sobre la tabla de estados
 		{
 			actualCharac = programBuffer.get(0); //Lee el primer caracter
@@ -78,32 +80,42 @@ public class Lexicon {
 			int simbol = range(programBuffer.get(0)); //Ve a que columna tiene que ir
 			if (stateMachine[state][simbol].getSemanticAction() != null)
 				stateMachine[state][simbol].getSemanticAction().action(this); //Si tiene, realiza una A.S.
+			previous_state = state;
 			state = stateMachine[state][simbol].getState(); //Cambia de estado
 		}
-		//< > = : son los unicos literales que agregan en lexeme
-		if (actualLexeme.length() == 0 || actualLexeme == "<" || actualLexeme == ">" 
-				|| actualLexeme == "="  || actualLexeme == ":")
-			return new Token(actualCharac); //Entonces era un literal que pasa directo
-		else if(simbTable.containsKey(actualLexeme)) { //No era un literal, es PR, combinado de literales, ID, CTE o CAD
-			if ((simbTable.get(actualLexeme).getTipoToken()) == "PR")
-				return new Token(simbTable.get(actualLexeme).getValue());
-			else if ((simbTable.get(actualLexeme).getTipoToken()) == "ID") //Es un ID, una CTE o una CAD
-				return new Token(ID, actualLexeme); 
-			else if ((simbTable.get(actualLexeme).getTipoToken()) == "CTE")
-				return new Token(CTE, actualLexeme);
-			else return new Token(CAD, actualLexeme); //Si no es ninguno de los anterior es CAD
-		} else return new Token(getCombLiteral(actualLexeme)); //Si no está en la TS es combinado de literales
-	}
-	
-	private int getCombLiteral(String combined) {
-		int ret = 0;
-		switch(combined) {
-			case "<=": ret = LET;
-			case ">=": ret = GET;
-			case "==": ret = EQ;
-			case "<>": ret = DIF;
+		switch (previous_state) {
+		case 0:
+			return new Token(actualCharac); //Literal directo
+		case 1:
+			return new Token(ID, actualLexeme);
+		case 2:
+			return new Token(CTE, actualLexeme);
+		case 3:
+			return new Token(CAD, actualLexeme);
+		case 4:
+			if (actualLexeme.length() == 1)
+				return new Token(actualCharac);
+			else
+				return new Token(GET);
+		case 5:
+			if (actualLexeme.length() == 1)
+				return new Token(actualCharac);
+			else if (actualLexeme == "<=")
+				return new Token(LET);
+			else
+				return new Token(DIF);
+		case 6:
+			if (actualLexeme.length() == 1)
+				return new Token(actualCharac);
+			else
+				return new Token(EQ);
+		case 8:
+			if (actualLexeme.length() == 1)
+				return new Token(actualCharac);
+			else
+				return new Token(ASSIGN);
 		}
-		return ret;
+		return null; //No llega acá, es para que no de error de retorno
 	}
 	
 	private int openFile (String src){
