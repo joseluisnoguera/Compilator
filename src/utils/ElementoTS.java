@@ -28,7 +28,7 @@ public class ElementoTS{
 	
 	public int getCantidad(){ return cantidad; }
 	
-	public void setCantidad(int cant){ cantidad = cant; }
+	public void setCantidad(int cant){ cantidad = cantidad + cant; }
 	
 	public void setTipoAtributo(String tipo){ tipoAtributo = tipo; }
 }

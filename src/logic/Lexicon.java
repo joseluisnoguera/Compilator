@@ -12,6 +12,7 @@ import utils.StateAndSemAction;
 import utils.Token;
 import utils.ElementoTS;
 import utils.semantic.SemanticActionAddCharacter;
+import utils.semantic.SemanticActionCADend;
 import utils.semantic.SemanticActionConstEnd;
 import utils.semantic.SemanticActionFinID;
 import utils.semantic.SemanticActionInvalidAndReturnC;
@@ -70,11 +71,16 @@ public class Lexicon {
 		}
 	
 	public Token getNewToken() {
-		actualLexeme = ""; //Limpia la variable
+		this.actualLexeme = ""; //Limpia la variable
 		int state = 0;
 		int previous_state = -1;
+<<<<<<< HEAD
+		while(state != -1) { //Mientras que no llegue a F, itera sobre la tabla de estados
+=======
 		while(state != -1) //Mientras que no llegue a F, itera sobre la tabla de estados
 		{
+<<<<<<< Updated upstream
+>>>>>>> 6b7f13f... StateMachine
 			actualCharac = programBuffer.get(0); //Lee el primer caracter
 			programBuffer.remove(0); //Lo elimina del buffer
 			int simbol = range(programBuffer.get(0)); //Ve a que columna tiene que ir
@@ -84,6 +90,41 @@ public class Lexicon {
 			state = stateMachine[state][simbol].getState(); //Cambia de estado
 		}
 		switch (previous_state) {
+<<<<<<< HEAD
+			case 0:
+				return new Token(actualCharac); //Literal directo
+			case 1:
+				//Ver si el lexema es un PR, sino es un ID
+				if (simbTable.get(actualLexeme).getTipoToken() == "PR")
+					return new Token(simbTable.get(actualLexeme).getValue());
+				else return new Token(ID, actualLexeme);
+			case 2:
+				return new Token(CTE, actualLexeme);
+			case 3:
+				return new Token(CAD, actualLexeme);
+			case 4:
+				if (actualLexeme.length() == 1)
+					return new Token(actualCharac);
+				else
+					return new Token(GET);
+			case 5:
+				if (actualLexeme.length() == 1)
+					return new Token(actualCharac);
+				else if (actualLexeme == "<=")
+					return new Token(LET);
+				else
+					return new Token(DIF);
+			case 6:
+				if (actualLexeme.length() == 1)
+					return new Token(actualCharac);
+				else
+					return new Token(EQ);
+			case 8:
+				if (actualLexeme.length() == 1)
+					return new Token(actualCharac);
+				else
+					return new Token(ASSIGN);
+=======
 		case 0:
 			return new Token(actualCharac); //Literal directo
 		case 1:
@@ -114,6 +155,54 @@ public class Lexicon {
 				return new Token(actualCharac);
 			else
 				return new Token(ASSIGN);
+=======
+			this.actualCharac = programBuffer.get(0); //Lee el primer caracter
+			this.programBuffer.remove(0); //Lo elimina del buffer
+			int simbol = range(this.programBuffer.get(0)); //Ve a que columna tiene que ir
+			if (this.stateMachine[state][simbol].getSemanticAction() != null)
+				this.stateMachine[state][simbol].getSemanticAction().action(this); //Si tiene, realiza una A.S.
+			state = this.stateMachine[state][simbol].getState(); //Cambia de estado
+		}
+		//< > = : son los unicos literales que agregan en lexeme
+		if (actualLexeme.length() == 0 || actualLexeme == "<" || actualLexeme == ">" 
+				|| actualLexeme == "="  || actualLexeme == ":")
+			return new Token(actualCharac); //Entonces era un literal que pasa directo
+		else 
+			if(simbTable.containsKey(actualLexeme)) { //No era un literal, es PR, combinado de literales, ID, CTE o CAD
+				this.simbTable.get(this.actualLexeme).setCantidad(1);
+				if ((simbTable.get(actualLexeme).getTipoToken()) == "PR")
+					{
+					return new Token(simbTable.get(actualLexeme).getValue());
+					}
+				else 
+					if ((simbTable.get(actualLexeme).getTipoToken()) == "ID") //Es un ID, una CTE o una CAD
+						{
+						return new Token(ID, actualLexeme); 
+						}
+					else 
+						if ((simbTable.get(actualLexeme).getTipoToken()) == "CTE")
+							{
+							return new Token(CTE, actualLexeme);
+							}
+						else 
+							{
+							return new Token(CAD, actualLexeme); //Si no es ninguno de los anterior es CAD
+							}
+			} 
+			else 
+				
+				return new Token(getCombLiteral(actualLexeme), this.actualLexeme); //Si no está en la TS es combinado de literales
+	}
+	
+	private int getCombLiteral(String combined) {
+		int ret = 0;
+		switch(combined) {
+			case "<=": ret = LET;
+			case ">=": ret = GET;
+			case "==": ret = EQ;
+			case "<>": ret = DIF;
+>>>>>>> Stashed changes
+>>>>>>> 6b7f13f... StateMachine
 		}
 		return null; //No llega acá, es para que no de error de retorno
 	}
@@ -157,6 +246,11 @@ public class Lexicon {
 		this.simbTable.put("foreach", new ElementoTS(266,"PR"));
 		this.simbTable.put("in", new ElementoTS(267,"PR"));
 		this.simbTable.put("print", new ElementoTS(268,"PR"));
+	}
+	
+	public void altaSimbTable(String lexeme, ElementoTS tupla)
+	{
+		this.simbTable.put(lexeme, tupla);
 	}
 	
 	private void initStateMachine () {
@@ -212,7 +306,7 @@ public class Lexicon {
 		stateMachine[3][3] = new StateAndSemAction(-1,new SemanticActionAddCharacter());
 		stateMachine[3][4] = new StateAndSemAction(3,new SemanticActionReturnAndUp());
 		stateMachine[3][5] = new StateAndSemAction(3,new SemanticActionAddCharacter());
-		stateMachine[3][6] = new StateAndSemAction(-1,new SemanticActionAddCharacter());
+		stateMachine[3][6] = new StateAndSemAction(-1,new SemanticActionCADend());
 		stateMachine[3][7] = new StateAndSemAction(3,new SemanticActionAddCharacter());
 		stateMachine[3][8] = new StateAndSemAction(3,new SemanticActionAddCharacter());
 		stateMachine[3][9] = new StateAndSemAction(3,new SemanticActionAddCharacter());
@@ -313,5 +407,7 @@ public class Lexicon {
 	public void addCharacter() { actualLexeme = actualLexeme + (char)actualCharac; }
 	
 	public void addNlCounter() { nlCounter = nlCounter+1; }
+	
+	
 	
 }

@@ -1,6 +1,7 @@
 package utils.semantic;
 
 import logic.Lexicon;
+import utils.ElementoTS;
 
 public class SemanticActionConstEnd implements SemanticAction{
 
@@ -12,17 +13,22 @@ public class SemanticActionConstEnd implements SemanticAction{
 	public void action(Lexicon Lex) {
 		// TODO Auto-generated method stub
 		Lex.addCharacter();
-		String lexemaActual = Lex.getActualLexeme();
-		double value = new Double(lexemaActual).doubleValue();
+		String lexeme = Lex.getActualLexeme();
+		double value = new Double(lexeme).doubleValue();
 		if (value <= 32768){
 			//agregar entero
-		}else if(value <= (2^31)){
-			//agregar long
-		}else{
-			//generar error que pase la parte semantica
-			value = (2^31);
-			//agregar long
-		}
+			ElementoTS tupla = new ElementoTS(260, "CTE", "int");
+			 Lex.altaSimbTable(lexeme, tupla);
+		}else 
+		{
+			if(value > (2^31)){
+				//generar error que pase la parte semantica
+				value = (2^31);
+				lexeme = Double.toString(value);
+			}
+		ElementoTS tupla = new ElementoTS(260, "CTE", "long");
+		 Lex.altaSimbTable(lexeme, tupla);
+	}
 	}
 
 }

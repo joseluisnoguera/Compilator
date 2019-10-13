@@ -1,6 +1,9 @@
 package utils.semantic;
 
+import java.util.Hashtable;
+
 import logic.Lexicon;
+import utils.ElementoTS;
 
 public class SemanticActionFinID implements SemanticAction{
 
@@ -19,8 +22,12 @@ public class SemanticActionFinID implements SemanticAction{
 				index++;
 			}
 			//mandamos warning que se le trunco
+			Lex.addMsg("Warning: se trunco el valor del ID por exceder de los caracteres permitidos");
 		}
+		
 		//Hacer parte de TS --> habria que mandar por parametro la ts
+		 ElementoTS tupla = new ElementoTS(259, "ID");
+		 Lex.altaSimbTable(lexeme, tupla);
 	}
 
 	

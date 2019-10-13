@@ -10,7 +10,10 @@ public final class Compilator {
 	private static Hashtable<String, ElementoTS> simbTable;
 	private static MsgStack msgStack;
 	private static Lexicon lexico;
-	private 
+<<<<<<< HEAD
+=======
+
+>>>>>>> e2eb181... SA
 	
 	public Compilator()
 	{
