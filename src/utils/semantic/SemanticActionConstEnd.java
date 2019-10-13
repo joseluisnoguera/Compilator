@@ -26,9 +26,13 @@ public class SemanticActionConstEnd implements SemanticAction{
 				value = (2^31);
 				lexeme = Double.toString(value);
 			}
+		if(Lex.getSimbTable().containsKey(lexeme)) 
+			Lex.setCantSimbTable(1);
+		else
+		{
 		ElementoTS tupla = new ElementoTS(260, "CTE", "long");
 		 Lex.altaSimbTable(lexeme, tupla);
 	}
 	}
-
+	}
 }

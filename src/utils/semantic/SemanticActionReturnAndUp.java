@@ -13,7 +13,13 @@ public class SemanticActionReturnAndUp implements SemanticAction{
 	public void action(Lexicon Lex) {
 		Lex.returnCharacter();
 		//alta en TS
-		ElementoTS tupla = new ElementoTS(274, "CAD");
-		Lex.altaSimbTable(Lex.getActualLexeme(), tupla);
-	}
+		if(Lex.getSimbTable().containsKey(Lex.getActualLexeme())) 
+			Lex.setCantSimbTable(1);
+		else
+		{
+			ElementoTS tupla = new ElementoTS(274, "CAD");
+		
+			Lex.altaSimbTable(Lex.getActualLexeme(), tupla);
+		}
+		}
 }

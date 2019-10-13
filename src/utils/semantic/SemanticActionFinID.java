@@ -21,13 +21,19 @@ public class SemanticActionFinID implements SemanticAction{
 				auxLex=auxLex + lexeme.charAt(index);
 				index++;
 			}
+			lexeme=auxLex;
 			//mandamos warning que se le trunco
 			Lex.addMsg("Warning: se trunco el valor del ID por exceder de los caracteres permitidos");
 		}
 		
 		//Hacer parte de TS --> habria que mandar por parametro la ts
+		if(Lex.getSimbTable().containsKey(lexeme)) 
+			Lex.setCantSimbTable(1);
+		else
+		{
 		 ElementoTS tupla = new ElementoTS(259, "ID");
 		 Lex.altaSimbTable(lexeme, tupla);
+	}
 	}
 
 	

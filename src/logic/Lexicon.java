@@ -79,8 +79,11 @@ public class Lexicon {
 =======
 		while(state != -1) //Mientras que no llegue a F, itera sobre la tabla de estados
 		{
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 >>>>>>> 6b7f13f... StateMachine
+=======
+>>>>>>> cddb5e5... Lex
 			actualCharac = programBuffer.get(0); //Lee el primer caracter
 			programBuffer.remove(0); //Lo elimina del buffer
 			int simbol = range(programBuffer.get(0)); //Ve a que columna tiene que ir
@@ -89,6 +92,8 @@ public class Lexicon {
 			previous_state = state;
 			state = stateMachine[state][simbol].getState(); //Cambia de estado
 		}
+<<<<<<< HEAD
+<<<<<<< HEAD
 		switch (previous_state) {
 <<<<<<< HEAD
 			case 0:
@@ -125,6 +130,9 @@ public class Lexicon {
 				else
 					return new Token(ASSIGN);
 =======
+=======
+		switch (previous_state) {
+>>>>>>> 334ecd7... SA
 		case 0:
 			return new Token(actualCharac); //Literal directo
 		case 1:
@@ -155,6 +163,7 @@ public class Lexicon {
 				return new Token(actualCharac);
 			else
 				return new Token(ASSIGN);
+<<<<<<< HEAD
 =======
 			this.actualCharac = programBuffer.get(0); //Lee el primer caracter
 			this.programBuffer.remove(0); //Lo elimina del buffer
@@ -163,6 +172,9 @@ public class Lexicon {
 				this.stateMachine[state][simbol].getSemanticAction().action(this); //Si tiene, realiza una A.S.
 			state = this.stateMachine[state][simbol].getState(); //Cambia de estado
 		}
+=======
+
+>>>>>>> cddb5e5... Lex
 		//< > = : son los unicos literales que agregan en lexeme
 		if (actualLexeme.length() == 0 || actualLexeme == "<" || actualLexeme == ">" 
 				|| actualLexeme == "="  || actualLexeme == ":")
@@ -192,8 +204,8 @@ public class Lexicon {
 			else 
 				
 				return new Token(getCombLiteral(actualLexeme), this.actualLexeme); //Si no está en la TS es combinado de literales
-	}
 	
+<<<<<<< HEAD
 	private int getCombLiteral(String combined) {
 		int ret = 0;
 		switch(combined) {
@@ -204,8 +216,16 @@ public class Lexicon {
 >>>>>>> Stashed changes
 >>>>>>> 6b7f13f... StateMachine
 		}
+=======
+	
+
+>>>>>>> cddb5e5... Lex
 		return null; //No llega acá, es para que no de error de retorno
+=======
+>>>>>>> 334ecd7... SA
 	}
+		return null;
+}
 	
 	private int openFile (String src){
 		File file = new File(src);
@@ -251,6 +271,16 @@ public class Lexicon {
 	public void altaSimbTable(String lexeme, ElementoTS tupla)
 	{
 		this.simbTable.put(lexeme, tupla);
+	}
+	
+	public Hashtable<String, ElementoTS> getSimbTable()
+	{
+		return this.simbTable;
+	}
+	
+	public void setCantSimbTable(int cant)
+	{
+		this.simbTable.get(actualLexeme).setCantidad(cant);
 	}
 	
 	private void initStateMachine () {
