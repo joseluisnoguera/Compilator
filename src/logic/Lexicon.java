@@ -41,6 +41,10 @@ public class Lexicon {
 	public final static short DIF=273;
 	public final static short CAD=274;
 	
+	/*
+	 * TODO: Cambiar la carga de archivo a memoria principal pasado ya como vector de caracteres o alguna otra estructura lineal
+	 */
+	
 	public Lexicon(String srcCode, MsgStack msgStack, Hashtable<String, ElementoTS> simbTable) {
 		nlCounter = 0;
 		this.msgStackLex = msgStack;
@@ -71,7 +75,7 @@ public class Lexicon {
 		}
 	
 	public Token getNewToken() {
-		this.actualLexeme = ""; //Limpia la variable
+		actualLexeme = ""; //Limpia la variable
 		int state = 0;
 		int previous_state = -1;
 <<<<<<< HEAD
@@ -256,31 +260,31 @@ public class Lexicon {
 	private void initSimbTable()
 	{
 		//Carga de todas las palabras reservadas (PR) en la tabla de símbolos
-		this.simbTable.put("begin", new ElementoTS(257,"PR"));
-		this.simbTable.put("end", new ElementoTS(258,"PR"));
-		this.simbTable.put("int", new ElementoTS(261,"PR"));
-		this.simbTable.put("long", new ElementoTS(262,"PR"));
-		this.simbTable.put("if", new ElementoTS(263,"PR"));
-		this.simbTable.put("else", new ElementoTS(264,"PR"));
-		this.simbTable.put("end_if", new ElementoTS(265,"PR"));
-		this.simbTable.put("foreach", new ElementoTS(266,"PR"));
-		this.simbTable.put("in", new ElementoTS(267,"PR"));
-		this.simbTable.put("print", new ElementoTS(268,"PR"));
+		simbTable.put("begin", new ElementoTS(257,"PR"));
+		simbTable.put("end", new ElementoTS(258,"PR"));
+		simbTable.put("int", new ElementoTS(261,"PR"));
+		simbTable.put("long", new ElementoTS(262,"PR"));
+		simbTable.put("if", new ElementoTS(263,"PR"));
+		simbTable.put("else", new ElementoTS(264,"PR"));
+		simbTable.put("end_if", new ElementoTS(265,"PR"));
+		simbTable.put("foreach", new ElementoTS(266,"PR"));
+		simbTable.put("in", new ElementoTS(267,"PR"));
+		simbTable.put("print", new ElementoTS(268,"PR"));
 	}
 	
 	public void altaSimbTable(String lexeme, ElementoTS tupla)
 	{
-		this.simbTable.put(lexeme, tupla);
+		simbTable.put(lexeme, tupla);
 	}
 	
 	public Hashtable<String, ElementoTS> getSimbTable()
 	{
-		return this.simbTable;
+		return simbTable;
 	}
 	
 	public void setCantSimbTable(int cant)
 	{
-		this.simbTable.get(actualLexeme).setCantidad(cant);
+		simbTable.get(actualLexeme).setCantidad(cant);
 	}
 	
 	private void initStateMachine () {
@@ -424,7 +428,7 @@ public class Lexicon {
 
 	public boolean isReady(){ return (ready == 0); }
 	
-	public void addMsg(String msg){ this.msgStackLex.addMsg(msg); }
+	public void addMsg(String msg){ msgStackLex.addMsg(msg); }
 	
 	public int getNLCounter() { return nlCounter; }
 	
