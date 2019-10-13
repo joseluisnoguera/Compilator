@@ -17,14 +17,14 @@
 
 
 //#line 2 "gramatica.y"
-package utils;
+package logic;
+
 import java.util.Hashtable;
-import logic.Lexicon;
-import logic.TuplaTS;
-//#line 22 "Parser.java"
 
-
-
+import utils.MsgStack;
+import utils.Token;
+import utils.ElementoTS;
+import utils.ParserVal;
 
 public class Parser
 {
@@ -385,10 +385,10 @@ public class Parser
 
 	//#line 133 "gramatica.y"
 	private Lexicon lex;
-	private Hashtable<String,TuplaTS> simbTable;
+	private Hashtable<String,ElementoTS> simbTable;
 	private MsgStack msgStack;
 
-	public Parser(Lexicon lex, Hashtable<String, TuplaTS> simbTable, MsgStack msgStack){
+	public Parser(Lexicon lex, Hashtable<String, ElementoTS> simbTable, MsgStack msgStack){
 		this.lex = lex;
 		this.simbTable = simbTable;
 		this.msgStack = msgStack;
@@ -570,7 +570,7 @@ public class Parser
 			{
 				ParserVal pv = val_peek(0);
 				String lexema = pv.sval;
-				TuplaTS tts = simbTable.get(lexema);
+				ElementoTS tts = simbTable.get(lexema);
 				if(lexema == "32768"){
 					tts.setTipoAtributo("long");
 				}
@@ -580,7 +580,7 @@ public class Parser
 					if(simbTable.containsKey(lexnuevo)){
 						simbTable.get(lexnuevo).setCantidad(1);
 					}else{
-						TuplaTS ttsnuevo = new TuplaTS(tts.getTokenValue(),tts.getTipoAtributo());
+						ElementoTS ttsnuevo = new ElementoTS(tts.getValue(),tts.getTipoAtributo());
 						simbTable.put(lexnuevo,ttsnuevo);
 						ttsnuevo.setCantidad(1);
 					}
@@ -593,11 +593,11 @@ public class Parser
 			{
 				ParserVal pv = val_peek(0);
 				String lexema = pv.sval;
-				TuplaTS tts = simbTable.get(lexema);
+				ElementoTS tts = simbTable.get(lexema);
 				String lexnuevo = "-" + lexema;
 				tts.setCantidad(-1);
 				if(!simbTable.containsKey(lexnuevo)){
-					TuplaTS ttsneg = new TuplaTS(tts.getTokenValue(),tts.getTipoAtributo());
+					ElementoTS ttsneg = new ElementoTS(tts.getValue(),tts.getTipoAtributo());
 					ttsneg.setCantidad(1);
 					simbTable.put(lexnuevo,ttsneg);
 				}else{

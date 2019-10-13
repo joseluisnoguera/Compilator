@@ -1,17 +1,16 @@
-package view;
+package logic;
 
 import java.util.Hashtable;
 
-import logic.Lexicon;
-import logic.TuplaTS;
 import utils.MsgStack;
-import utils.Parser;
+import utils.ElementoTS;
 
 public final class Compilator {
 
-	private static Hashtable<String, TuplaTS> simbTable;
+	private static Hashtable<String, ElementoTS> simbTable;
 	private static MsgStack msgStack;
 	private static Lexicon lexico;
+	private 
 	
 	public Compilator()
 	{

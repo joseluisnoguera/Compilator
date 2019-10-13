@@ -1,9 +1,9 @@
-package utils;
+package utils.semantic;
 
 import logic.Lexicon;
 
 public interface SemanticAction {
 
-	public void actualCharac(Lexicon Lex);
+	void action(Lexicon Lex);
 	
 }
