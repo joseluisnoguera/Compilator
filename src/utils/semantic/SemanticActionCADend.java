@@ -4,21 +4,17 @@ import logic.Lexicon;
 import utils.ElementoTS;
 
 public class SemanticActionCADend implements SemanticAction{
-
-	public SemanticActionCADend()
-	{
-		
-	}
+	//Acción semántica cuando se cierra una cadena con '}'
+	
+	public SemanticActionCADend() { }
+	
 	@Override
 	public void action(Lexicon Lex) {
-		// TODO Auto-generated method stub
-		if(Lex.getSimbTable().containsKey(Lex.getActualLexeme())) 
-			Lex.setCantSimbTable(1);
-		else
-		{
-		ElementoTS tupla = new ElementoTS(274, "CAD");
-		Lex.altaSimbTable(Lex.getActualLexeme(), tupla);
-	}
-
+		if(Lex.getSymbolTable().containsKey(Lex.getCurrentLexeme())) 
+			Lex.increaseCounterSymbolTable();
+		else {
+			ElementoTS tupla = new ElementoTS("CAD", "cadena");
+			Lex.putSymbolTable(Lex.getCurrentLexeme(), tupla);
+		}
 	}
 }

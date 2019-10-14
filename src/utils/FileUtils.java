@@ -68,4 +68,8 @@ public class FileUtils {
 			return stringBuffer.toString();
 		else return null;
 	}
+	
+	public static void reset(){
+		stringBuffer = new StringBuilder();
+	}
 }

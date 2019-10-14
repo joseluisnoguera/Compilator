@@ -1,41 +1,26 @@
 package utils.semantic;
 
-import java.util.Hashtable;
-
 import logic.Lexicon;
 import utils.ElementoTS;
 
 public class SemanticActionFinID implements SemanticAction{
-
+	// Acción semántica asociado al final de un Identificador o una Palabra reservada
+	private static int MAX_CANT_ID = 25;
+	
 	@Override
 	public void action(Lexicon Lex) {
-		// TODO Auto-generated method stub
 		Lex.returnCharacter();
-		String lexeme=Lex.getActualLexeme();
-		if(lexeme.length()>25)
-		{
-			String auxLex = null;
-			int index=0;
-			while(auxLex.length()==25)
-			{
-				auxLex=auxLex + lexeme.charAt(index);
-				index++;
-			}
-			lexeme=auxLex;
-			//mandamos warning que se le trunco
-			Lex.addMsg("Warning: se trunco el valor del ID por exceder de los caracteres permitidos");
+		String lexeme = Lex.getCurrentLexeme();
+		if(lexeme.length()>25) {
+			lexeme = lexeme.substring(0, MAX_CANT_ID);
+			Lex.addMsg("Línea " + Lex.getNewLineCounter() + ": Warning: se trunco el nombre de variable por exceder de los caracteres permitidos (máx. 25)");
 		}
-		
-		//Hacer parte de TS --> habria que mandar por parametro la ts
-		if(Lex.getSimbTable().containsKey(lexeme)) 
-			Lex.setCantSimbTable(1);
-		else
-		{
-		 ElementoTS tupla = new ElementoTS(259, "ID");
-		 Lex.altaSimbTable(lexeme, tupla);
+		Lex.updateLexeme(lexeme);
+		if(Lex.getSymbolTable().containsKey(lexeme)) 
+			Lex.increaseCounterSymbolTable();
+		else {
+			ElementoTS tupla = new ElementoTS("ID");
+			Lex.putSymbolTable(lexeme, tupla);
+		}
 	}
-	}
-
-	
-	
 }

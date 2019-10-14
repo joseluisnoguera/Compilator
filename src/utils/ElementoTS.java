@@ -6,15 +6,23 @@ public class ElementoTS{
 	private String tipoAtributo; //int long
 	private int cantidad;
 
-	public ElementoTS(int value, String tipoToken, String tipoAtributo){
-		this.value = value;
+	public ElementoTS(String tipoToken, String tipoAtributo){
+		//Para CTEs
 		this.tipoToken = tipoToken;
 		this.tipoAtributo = tipoAtributo;
 		cantidad = 1;
 	}
 	
 	public ElementoTS(int value, String tipoToken){
+		//Para palabras reservadas en léxico
 		this.value = value;
+		this.tipoToken = tipoToken;
+		tipoAtributo = null;
+		cantidad = 1;
+	}
+	
+	public ElementoTS(String tipoToken){
+		//Para los ID, luego Parser debe setear el tipo y su valor
 		this.tipoToken = tipoToken;
 		tipoAtributo = null;
 		cantidad = 1;
@@ -28,7 +36,9 @@ public class ElementoTS{
 	
 	public int getCantidad(){ return cantidad; }
 	
-	public void setCantidad(int cant){ cantidad = cantidad + cant; }
+	public void increaseCounter(){ cantidad = cantidad + 1; }
+	
+	public void decreaseCounter(){ cantidad = cantidad - 1; }
 	
 	public void setTipoAtributo(String tipo){ tipoAtributo = tipo; }
 }

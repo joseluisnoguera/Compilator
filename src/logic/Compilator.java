@@ -1,16 +1,25 @@
 package logic;
 
 import java.util.Hashtable;
+import java.util.List;
+
 import utils.MsgStack;
 import utils.ElementoTS;
 
+/*
+ * Cambios: Pase la creación de estructuras al constructor así no están como estáticas, quedando más acorde con el patrón singletón
+ * Agregue los stack para obtener los Token del léxico y las estructuras semánticas del Parser
+ */
+
 public class Compilator {
 	private static Compilator single_instance = null;
-	private Hashtable<String, ElementoTS> simbTable;
-	private MsgStack msgStack;
-	private Lexicon lexico;
+	private Hashtable<String, ElementoTS> symbolTable;
+	private MsgStack msgStack, semanticStructStack, tokenStack;
+	
+	private Lexicon lexicon;
 	private Parser parser;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	private static Hashtable<String, ElementoTS> simbTable;
 	private static MsgStack msgStack;
@@ -24,28 +33,38 @@ public class Compilator {
 	{
 =======
 	public Compilator(String path_to_source) {
+=======
+	public Compilator(List<Integer> programBuffer) {
+>>>>>>> 1ade0f6... Funcion de carga de datos en paneles de la ventana
 		msgStack = new MsgStack();
-		simbTable = new Hashtable<String, ElementoTS>();
-		lexico = new Lexicon(path_to_source, msgStack, simbTable);
-		parser = new Parser(lexico, simbTable, msgStack);
+		semanticStructStack = new MsgStack();
+		tokenStack = new MsgStack();
+		symbolTable = new Hashtable<String, ElementoTS>();
+		lexicon = new Lexicon(programBuffer, msgStack, tokenStack, symbolTable);
+		parser = new Parser(lexicon, symbolTable, msgStack, semanticStructStack);
 	}
 >>>>>>> 04b8288... agregado parte del comportamiento de ventana y TODO's
 
-	public static Compilator getInstance(String path_to_source) {
-		if (single_instance == null)
-			single_instance = new Compilator(path_to_source);		
+	public static Compilator getInstance(List<Integer> programBuffer) {
+		single_instance = new Compilator(programBuffer); //Lo usamos así para cree siempre uno nuevo, así renueva el program buffer
 		return single_instance;
 	}
 	
-	//TODO: Hacer el método para que comience a compilar
+	public void compilate() {
+		int i = parser.yyparse();
+		if (i == 0)
+			System.out.println("Parser correcto");
+		else
+			System.out.println("Error en parser");
+	}
 	
-	//TODO: Métodos para acceder a la tabla de simbolos, buffer de mensajes
+	public MsgStack getMsgStack() { return msgStack; }
 	
-	/*
-	 * TODO: Método para suscribirse a la generación de token y de estructuras
-	 * Una posibilidad es usar un stack para ambos y que se obtengan al final de la compilación
-	 * Así no hay que meterse observer/observable
-	*/
+	public MsgStack getTokenStack() { return tokenStack; }
+	
+	public MsgStack getSemanticStructStack() { return semanticStructStack; }
+	
+	public Hashtable<String, ElementoTS> getSimbTable() { return symbolTable; }
 }
 
 
