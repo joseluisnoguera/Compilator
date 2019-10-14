@@ -6,23 +6,20 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.SpringLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
-import javax.swing.JEditorPane;
 import javax.swing.JFileChooser;
 import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
 import java.awt.Component;
 import javax.swing.JTextPane;
 import javax.swing.event.CaretListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 
-import logic.Compilator;
+import utils.FileUtils;
 
 import javax.swing.event.CaretEvent;
-import java.awt.event.MouseWheelListener;
 import java.io.File;
-import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -34,17 +31,26 @@ public class Window {
 	 * 
 	*/
 
-	private JFrame frmCompilador;
 	private static String SEARCH_MSG = "Seleccione el archivo \"txt\" con su programa";
+	private static String FILE_LOAD_ERROR_MSG = "Error al cargar el archivo";
+	private static String FILE_NOT_FOUND_MSG = "Archivo no encontrado";
+	private static String SAVE_CORRECT_MSG = "Archivo guardado con éxito";
+	private static String SAVE_ERROR_MSG = "Error al guardar el archivo";
+	private static String LINE_COUNTER_MSG = "Línea seleccionada: ";
+	
+	private JFrame frmCompilador;
 	private JButton btnGuardar;
 	private JButton btnCompilar;
 	private JButton btnCargar;
 	private JLabel lblNombrePrograma;
 	private JTextPane editorPanePrograma;
-	private JEditorPane editorPaneNumberLine;
 	private JTextPane editorPane;
 	private JTextPane editorPaneTablaSimbolos;
 	private JTextPane editorPane_1;
+	
+	private File file_selected;
+	private boolean loaded;
+	private JLabel lblNumberLine;
 
 	/**
 	 * Launch the application.
@@ -90,28 +96,39 @@ public class Window {
 		btnCargar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				loaded = false;
 				final JFileChooser dialog = new JFileChooser (FileSystemView.getFileSystemView().getHomeDirectory());
 				FileNameExtensionFilter filter = new FileNameExtensionFilter("\".txt\"", "txt", "text");
 				dialog.setFileFilter(filter);
 				dialog.setDialogTitle(SEARCH_MSG);
 				int returnValue = dialog.showOpenDialog(null);
-				File file_selected;
 				String path_to_file = "";
 				if (returnValue == JFileChooser.APPROVE_OPTION) {
 					file_selected = dialog.getSelectedFile();
 					path_to_file = file_selected.getAbsolutePath().trim();
 					System.out.println(path_to_file);
-					btnGuardar.setEnabled(true);
-					btnCompilar.setEnabled(true);
-					String nombre_archivo = "txt"; //Extraer el nombre del archivo del path_to_File
-					lblNombrePrograma.setText(nombre_archivo);
+					//Extraer el nombre del archivo de path_to_File
+					String nombre_archivo = path_to_file.substring(path_to_file.lastIndexOf("\\")+1);
+					//Extraer contenido del archivo y cargarlo en EditorPane
+					int readed = FileUtils.openFile(file_selected);
+					if (readed == FileUtils.LOAD_CORRECT) {
+						editorPanePrograma.setText(FileUtils.getContent());
+						lblNombrePrograma.setText(nombre_archivo);
+						btnGuardar.setEnabled(true);
+						btnCompilar.setEnabled(true);
+						loaded = true;
+					}
+					else if (readed == FileUtils.FILE_NOT_FOUND)
+						JOptionPane.showMessageDialog(new JFrame(), FILE_NOT_FOUND_MSG, "Warning", JOptionPane.ERROR_MESSAGE);
+					else
+						JOptionPane.showMessageDialog(new JFrame(), FILE_LOAD_ERROR_MSG, "Warning", JOptionPane.ERROR_MESSAGE);
+					
 				}
 			}
 		});
 		btnCargar.setAlignmentY(Component.TOP_ALIGNMENT);
 		btnCargar.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		springLayout.putConstraint(SpringLayout.NORTH, lblNombrePrograma, 4, SpringLayout.NORTH, btnCargar);
-		springLayout.putConstraint(SpringLayout.EAST, lblNombrePrograma, -231, SpringLayout.WEST, btnCargar);
 		springLayout.putConstraint(SpringLayout.NORTH, btnCargar, 6, SpringLayout.NORTH, frmCompilador.getContentPane());
 		frmCompilador.getContentPane().add(btnCargar);
 		
@@ -134,7 +151,11 @@ public class Window {
 		btnGuardar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//Guardar archivo de texto con programa
+				int writed = FileUtils.saveFile(file_selected, editorPanePrograma.getText());
+				if (writed == FileUtils.SAVE_CORRECT)
+					JOptionPane.showMessageDialog(new JFrame(), SAVE_CORRECT_MSG, "Guardado", JOptionPane.PLAIN_MESSAGE);
+				else
+					JOptionPane.showMessageDialog(new JFrame(), SAVE_ERROR_MSG, "Warning", JOptionPane.ERROR_MESSAGE);
 			}
 		});
 		btnGuardar.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -149,9 +170,10 @@ public class Window {
 		btnCompilar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				/*
-				 * Crear el compilador, que compile
-				 * Sacar tabla de simbolos, tokens, estructuras y errores con warning del compilador
+								
+				/* TODO: Pasar el contenido de EditorPanePrograma a un buffer List<Integer> con los char convertidos a ASCII
+				 * TODO: Crear el compilador, ponerlo a compilar
+				 * TODO: Sacar tabla de simbolos, tokens, estructuras y errores con warning del compilador
 				 */
 			}
 		});
@@ -200,30 +222,34 @@ public class Window {
 		editorPane_1.setEditable(false);
 		
 		JScrollPane scrollPane_Codigo = new JScrollPane();
-		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_Codigo, 10, SpringLayout.SOUTH, btnCargar);
-		springLayout.putConstraint(SpringLayout.WEST, scrollPane_Codigo, 50, SpringLayout.WEST, frmCompilador.getContentPane());
-		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_Codigo, -10, SpringLayout.SOUTH, frmCompilador.getContentPane());
+		springLayout.putConstraint(SpringLayout.WEST, scrollPane_Codigo, 10, SpringLayout.WEST, frmCompilador.getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, scrollPane_Codigo, -6, SpringLayout.WEST, scrollPane);
 		springLayout.putConstraint(SpringLayout.WEST, scrollPane_WarningYErrores, 6, SpringLayout.EAST, scrollPane_Codigo);
 		springLayout.putConstraint(SpringLayout.WEST, scrollPane_TS, 6, SpringLayout.EAST, scrollPane_Codigo);
+		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_Codigo, 10, SpringLayout.SOUTH, btnCargar);
+		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_Codigo, -10, SpringLayout.SOUTH, frmCompilador.getContentPane());
 		frmCompilador.getContentPane().add(scrollPane_Codigo);
 		
 		editorPanePrograma = new JTextPane();
-		editorPanePrograma.addMouseWheelListener(new MouseWheelListener() {
-			public void mouseWheelMoved(MouseWheelEvent arg0) {
-				//TODO: Mover el scrolling del numero de líneas
-			}
-		});
 		editorPanePrograma.addCaretListener(new CaretListener() {
-			public void caretUpdate(CaretEvent arg0) {
-				//TODO: Pintar la linea seleccionada
+			public void caretUpdate(CaretEvent e) {
+				if (loaded) {
+					int pos = e.getDot();
+			        int row = 1;
+					String text = editorPanePrograma.getText().replaceAll("\r", "");
+					for(int i=0;i<pos;i++){
+						if(text.charAt(i)==10){
+							row++;
+						}
+					}
+	                lblNumberLine.setText(LINE_COUNTER_MSG + row);
+				}
 			}
 		});
 		scrollPane_Codigo.setViewportView(editorPanePrograma);
 		springLayout.putConstraint(SpringLayout.NORTH, editorPanePrograma, 241, SpringLayout.NORTH, frmCompilador.getContentPane());
 		springLayout.putConstraint(SpringLayout.WEST, editorPanePrograma, 54, SpringLayout.WEST, frmCompilador.getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, editorPanePrograma, -6, SpringLayout.SOUTH, frmCompilador.getContentPane());
-		editorPanePrograma.setText("<texto>");
 		springLayout.putConstraint(SpringLayout.WEST, editorPane, 6, SpringLayout.EAST, editorPanePrograma);
 		
 		JLabel lblTokensLedos = new JLabel("Tokens y estructuras");
@@ -260,23 +286,12 @@ public class Window {
 		springLayout.putConstraint(SpringLayout.WEST, lblWarningsYErrores, 6, SpringLayout.EAST, scrollPane_Codigo);
 		springLayout.putConstraint(SpringLayout.EAST, editorPanePrograma, 0, SpringLayout.WEST, lblWarningsYErrores);
 		
-		JScrollPane scrollPane_NumeroLinea = new JScrollPane();
-		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_NumeroLinea, 15, SpringLayout.SOUTH, lblNombrePrograma);
-		springLayout.putConstraint(SpringLayout.WEST, scrollPane_NumeroLinea, 0, SpringLayout.WEST, lblNombrePrograma);
-		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_NumeroLinea, 0, SpringLayout.SOUTH, scrollPane_Codigo);
-		springLayout.putConstraint(SpringLayout.EAST, scrollPane_NumeroLinea, -6, SpringLayout.WEST, scrollPane_Codigo);
-		scrollPane_NumeroLinea.setAlignmentY(Component.TOP_ALIGNMENT);
-		scrollPane_NumeroLinea.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-		scrollPane_NumeroLinea.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane_NumeroLinea.setAlignmentX(Component.LEFT_ALIGNMENT);
-		frmCompilador.getContentPane().add(scrollPane_NumeroLinea);
-		
-		editorPaneNumberLine = new JEditorPane();
-		scrollPane_NumeroLinea.setViewportView(editorPaneNumberLine);
-		springLayout.putConstraint(SpringLayout.WEST, editorPaneNumberLine, 10, SpringLayout.WEST, frmCompilador.getContentPane());
-		springLayout.putConstraint(SpringLayout.EAST, editorPaneNumberLine, -736, SpringLayout.EAST, frmCompilador.getContentPane());
-		editorPaneNumberLine.setText("<1>");
-		springLayout.putConstraint(SpringLayout.NORTH, editorPaneNumberLine, 39, SpringLayout.NORTH, frmCompilador.getContentPane());
-		springLayout.putConstraint(SpringLayout.SOUTH, editorPaneNumberLine, -6, SpringLayout.SOUTH, frmCompilador.getContentPane());
+		lblNumberLine = new JLabel("L\u00EDnea seleccionada:");
+		springLayout.putConstraint(SpringLayout.WEST, lblNumberLine, 309, SpringLayout.WEST, frmCompilador.getContentPane());
+		springLayout.putConstraint(SpringLayout.EAST, lblNumberLine, -46, SpringLayout.WEST, btnCargar);
+		springLayout.putConstraint(SpringLayout.EAST, lblNombrePrograma, -6, SpringLayout.WEST, lblNumberLine);
+		springLayout.putConstraint(SpringLayout.NORTH, lblNumberLine, 10, SpringLayout.NORTH, frmCompilador.getContentPane());
+		lblNumberLine.setAlignmentY(Component.TOP_ALIGNMENT);
+		frmCompilador.getContentPane().add(lblNumberLine);
 	}
 }

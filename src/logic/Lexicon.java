@@ -1,8 +1,5 @@
 package logic;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -50,7 +47,7 @@ public class Lexicon {
 		this.msgStackLex = msgStack;
 		this.simbTable = simbTable;
 		programBuffer = new ArrayList<Integer>();
-		ready = openFile(srcCode);
+//		ready = openFile(srcCode);
 		stateMachine = new StateAndSemAction[9][15];
 		initStateMachine();
 		initSimbTable();
@@ -60,7 +57,7 @@ public class Lexicon {
 		return  (i >= 65 && i <= 90 || i>= 97 && i <= 122)? 0 : // Letras
 				( i >= 48 && i <= 57)? 1 : 						// Digitos
 				(i == 95)? 2 : 									// '_'
-				(i == 36)? 3 :									// '$' (debería ser Fin de archivo)
+				(i == 36)? 3 :									// '$' (debería ser Fin de archivo en ASCII)
 				(i >= 40 && i <= 47 || i==91 || i==93)? 4 :		// Símbolos literales
 				(i==123)? 5 :									// '{'
 				(i==125)? 6 :									// '}'
@@ -101,10 +98,11 @@ public class Lexicon {
 		switch (previous_state) {
 <<<<<<< HEAD
 			case 0:
+//				if (actualCharac == 13) //Es end of file y tiene que mandar 0, sino un token normal
 				return new Token(actualCharac); //Literal directo
 			case 1:
 				//Ver si el lexema es un PR, sino es un ID
-				if (simbTable.get(actualLexeme).getTipoToken() == "PR")
+				if (simbTable.get(actualLexeme).getTipoToken().equals("PR"))
 					return new Token(simbTable.get(actualLexeme).getValue());
 				else return new Token(ID, actualLexeme);
 			case 2:
@@ -119,7 +117,7 @@ public class Lexicon {
 			case 5:
 				if (actualLexeme.length() == 1)
 					return new Token(actualCharac);
-				else if (actualLexeme == "<=")
+				else if (actualLexeme.equals("<="))
 					return new Token(LET);
 				else
 					return new Token(DIF);
@@ -231,31 +229,31 @@ public class Lexicon {
 		return null;
 }
 	
-	private int openFile (String src){
-		File file = new File(src);
-	    if (!file.exists()) {
-	    	addMsg("ERROR: Archivo inexistente");
-	      return 1;
-	    }
-	    if (!(file.isFile() && file.canRead())) {
-	    	addMsg("ERROR: Archivo sin permiso de lectura");
-	      return 1;
-	    }
-	    try {
-	      FileInputStream fis = new FileInputStream(file);
-	      while (fis.available() > 0)
-	    	//Se agrega uno por uno los caracteres que contiene el file input
-	        programBuffer.add(fis.read());
-	    //Se agrega artificialmente el fin de archivo
-	      programBuffer.add(END_OF_FILE); 
-	      fis.close();
-	    } catch (IOException e) {
-	      e.printStackTrace();
-	      addMsg("ERROR: Error de lectura en archivo");
-	      return 1;
-	    }
-	    return 0;
-	}
+//	private int openFile (String src){
+//		File file = new File(src);
+//	    if (!file.exists()) {
+//	    	addMsg("ERROR: Archivo inexistente");
+//	      return 1;
+//	    }
+//	    if (!(file.isFile() && file.canRead())) {
+//	    	addMsg("ERROR: Archivo sin permiso de lectura");
+//	      return 1;
+//	    }
+//	    try {
+//	      FileInputStream fis = new FileInputStream(file);
+//	      while (fis.available() > 0)
+//	    	//Se agrega uno por uno los caracteres que contiene el file input
+//	        programBuffer.add(fis.read());
+//	    //Se agrega artificialmente el fin de archivo
+//	      programBuffer.add(END_OF_FILE); 
+//	      fis.close();
+//	    } catch (IOException e) {
+//	      e.printStackTrace();
+//	      addMsg("ERROR: Error de lectura en archivo");
+//	      return 1;
+//	    }
+//	    return 0;
+//	}
 	
 	private void initSimbTable()
 	{
