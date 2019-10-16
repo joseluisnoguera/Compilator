@@ -21,7 +21,7 @@ public class SemanticActionConstEnd implements SemanticAction{
 				//generar error que pase la parte semantica
 				value = (2^31);
 				lexeme = Double.toString(value);
-				Lex.addMsg("Línea " + Lex.getNewLineCounter() + ": Error: La constante excede el máximo posible");
+				Lex.addMsg("Línea " + Lex.getNewLineCounter() + ": Warning: La constante excede el máximo posible");
 			}
 			if(Lex.getSymbolTable().containsKey(lexeme)) 
 				Lex.increaseCounterSymbolTable();
