@@ -41,21 +41,6 @@ public class Lexicon {
 	private String currentLexeme;
 	private int ready;
 	
-	/*
-	 * Cambios: ahora se le pasa el buffer de programa directamente, porque se obtiene del editor de texto
-	 * range esta escrito con la nomenclatura: <asignacion> (<condion>)? <expresion then>: <expresion else>; para que sea más legible
-	 * getNewToken detecta cual fue el ultimo estado antes del final, así saber que tiene que devolver como token
-	 * Las constantes que genera el parser se pegaron dentro para usar la llamada a los token de manera más intuitiva y no andar poniendo los numeritos
-	 * Quite código de más (this, extructuras sin uso, librerías sin uso, etc)
-	 * Agregué el guardado de tokens detectados
-	 * Correcciones sobre las AS:
-	 *  FinID, ConstEnd
-	 *  Agregué descripciones a las AS y escribí los mensajes de error/warning con el formato que piden en el trabajo
-	 *  Corrección en la inicialización de la máquina de estados
-	 *  Arreglé errores de la ventana de edición con el botón Nuevo y Cargar
-	 *  Se añadió el método updateLexeme, ya que cuando trunca en FinID necesita enviarle el nuevo lexema (update para currentLexeme)
-	 */
-	
 	public Lexicon(List<Integer> programBuffer, MsgStack msgStack, MsgStack tokenStack, Hashtable<String, ElementoTS> simbTable) {
 		nlCounter = 1;
 		this.msgStack = msgStack;

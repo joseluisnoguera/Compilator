@@ -20,7 +20,7 @@ public class SemanticActionConstEnd implements SemanticAction{
 			if(value > Math.pow(2, 31)) {
 				//generar error que pase la parte semantica
 				value = Math.pow(2, 31);
-				lexeme = Double.toString(value);
+				lexeme = Double.toString((int)value);
 				Lex.addMsg("Línea " + Lex.getNewLineCounter() + ": Warning: La constante excede el máximo posible");
 			}
 			if(Lex.containsKey(lexeme)) 
@@ -30,7 +30,5 @@ public class SemanticActionConstEnd implements SemanticAction{
 				Lex.putSymbolTable(lexeme, tupla);
 			}
 		}
-		System.out.print(value);
-		System.out.print(lexeme);
 	}
 }

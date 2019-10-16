@@ -34,12 +34,6 @@ import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 
 public class Window {
-	
-	/* Notas:
-	 * El compilador se crea solo cuando es necesario compilar
-	 * El archivo se carga de lo que se encuentra en EditorPane, así que no es necesario que carge desde un path, cambiar eso en Compilator/Lexicon
-	 * 
-	*/
 
 	private static String SEARCH_MSG = "Seleccione el archivo \"txt\" con su programa";
 	private static String FILE_LOAD_ERROR_MSG = "Error al cargar el archivo";
