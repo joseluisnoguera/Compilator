@@ -325,6 +325,11 @@ public class Lexicon {
 		symbolTable.put(lexeme, tupla);
 	}
 	
+	public boolean containsKey(String lexeme)
+	{
+		return this.symbolTable.containsKey(lexeme);
+	}
+	
 	//
 	public Hashtable<String, ElementoTS> getSymbolTable() {
 		return symbolTable;

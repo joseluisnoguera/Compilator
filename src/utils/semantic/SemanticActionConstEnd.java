@@ -17,18 +17,20 @@ public class SemanticActionConstEnd implements SemanticAction{
 			ElementoTS tupla = new ElementoTS("CTE", "int");
 			Lex.putSymbolTable(lexeme, tupla);
 		} else {
-			if(value > (2^31)) {
+			if(value > Math.pow(2, 31)) {
 				//generar error que pase la parte semantica
-				value = (2^31);
+				value = Math.pow(2, 31);
 				lexeme = Double.toString(value);
 				Lex.addMsg("Línea " + Lex.getNewLineCounter() + ": Warning: La constante excede el máximo posible");
 			}
-			if(Lex.getSymbolTable().containsKey(lexeme)) 
+			if(Lex.containsKey(lexeme)) 
 				Lex.increaseCounterSymbolTable();
 			else {
 				ElementoTS tupla = new ElementoTS("CTE", "long");
 				Lex.putSymbolTable(lexeme, tupla);
 			}
 		}
+		System.out.print(value);
+		System.out.print(lexeme);
 	}
 }
