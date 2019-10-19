@@ -16,7 +16,7 @@
 
 
 
-//#line 2 "gramatica_2.y"
+//#line 2 "gramatica.y"
 package logic;
 import java.util.Hashtable;
 import logic.Lexicon;
@@ -611,16 +611,19 @@ final static String yyrule[] = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //#line 222 "gramatica_2.y"
 =======
 //#line 213 "gramatica_2.y"
 >>>>>>> 87f0bc1... cambios pre-entrega
+=======
+//#line 251 "gramatica.y"
+>>>>>>> f713e33... comentario generico
 
 private Lexicon lex;
 private Hashtable<String,ElementoTS> symbolTable;
 private MsgStack msgStack;
 private MsgStack semanticStructStack;
-private boolean declaracion = true;
 Stack<Integer> stackOfLines = new Stack<Integer>();
 private int numLineaDecl;
 
@@ -643,10 +646,14 @@ private void yyerror(String msg){
 	msgStack.addMsg("Línea "+ lex.getNewLineCounter() + ": " + msg);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 //#line 396 "Parser.java"
 =======
 //#line 410 "Parser.java"
 >>>>>>> 87f0bc1... cambios pre-entrega
+=======
+//#line 395 "Parser.java"
+>>>>>>> f713e33... comentario generico
 //###############################################################
 // method: yylexdebug : check lexer state
 //###############################################################
@@ -801,21 +808,22 @@ boolean doaction;
       {
 //########## USER-SUPPLIED ACTIONS ##########
 case 7:
-//#line 31 "gramatica_2.y"
+//#line 31 "gramatica.y"
 { semanticStructStack.addMsg("Linea "+ numLineaDecl +": Sentencia declarativa"); }
 break;
 case 8:
-//#line 32 "gramatica_2.y"
+//#line 32 "gramatica.y"
 { semanticStructStack.addMsg("Linea "+ numLineaDecl +": Sentencia declarativa"); }
 break;
 case 9:
-//#line 33 "gramatica_2.y"
+//#line 33 "gramatica.y"
 { msgStack.addMsg("Error genérico en el bloque declarativo no contemplado cerca de línea " + lex.getNewLineCounter()); }
 break;
 case 10:
-//#line 36 "gramatica_2.y"
+//#line 36 "gramatica.y"
 { numLineaDecl = lex.getNewLineCounter(); }
 break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 case 22:
 //#line 62 "gramatica_2.y"
@@ -833,21 +841,59 @@ break;
 case 23:
 //#line 63 "gramatica_2.y"
 { declaracion = false; }
+=======
+case 13:
+//#line 43 "gramatica.y"
+{
+		if(!symbolTable.get(val_peek(0).sval).getDeclaracion())
+			symbolTable.get(val_peek(0).sval).setDeclaracion(true);
+		else
+			msgStack.addMsg("Error: variable"+ val_peek(0).sval+" re-declarada en el número de línea " + lex.getNewLineCounter());
+		}
+break;
+case 14:
+//#line 49 "gramatica.y"
+{
+		if(!symbolTable.get(val_peek(2).sval).getDeclaracion())
+			symbolTable.get(val_peek(2).sval).setDeclaracion(true);
+		else
+			msgStack.addMsg("Error: variable"+ val_peek(2).sval+" re-declarada en el número de línea " + lex.getNewLineCounter());
+		}
+break;
+case 15:
+//#line 57 "gramatica.y"
+{
+		if(!symbolTable.get(val_peek(3).sval).getDeclaracion())
+			symbolTable.get(val_peek(3).sval).setDeclaracion(true);
+		else
+			msgStack.addMsg("Error: coleccion"+ val_peek(3).sval+"re-declarada en el número de línea " + lex.getNewLineCounter());;
+		}
+break;
+case 16:
+//#line 63 "gramatica.y"
+{
+		if(!symbolTable.get(val_peek(5).sval).getDeclaracion())
+			symbolTable.get(val_peek(5).sval).setDeclaracion(true);
+		else
+			msgStack.addMsg("Error: coleccion"+ val_peek(5).sval+" re-declarada en el número de línea " + lex.getNewLineCounter());
+		}
+>>>>>>> f713e33... comentario generico
 break;
 <<<<<<< HEAD
 case 26:
-//#line 68 "gramatica_2.y"
+//#line 88 "gramatica.y"
 { semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() +": Bloque de ejecución"); }
 break;
 case 27:
-//#line 71 "gramatica_2.y"
+//#line 91 "gramatica.y"
 { stackOfLines.push(lex.getNewLineCounter()); /*Para debugging*/}
 break;
 case 33:
-//#line 81 "gramatica_2.y"
+//#line 99 "gramatica.y"
 { msgStack.addMsg("Error genérico no contemplado cerca de línea " + lex.getNewLineCounter()); }
 break;
 case 34:
+<<<<<<< HEAD
 //#line 84 "gramatica_2.y"
 =======
 case 28:
@@ -861,6 +907,9 @@ break;
 case 37:
 //#line 87 "gramatica_2.y"
 >>>>>>> 87f0bc1... cambios pre-entrega
+=======
+//#line 102 "gramatica.y"
+>>>>>>> f713e33... comentario generico
 {
                     semanticStructStack.addMsg("Línea " + stackOfLines.peek().intValue() + ": Sentencia IF ");
                     stackOfLines.pop();
@@ -868,11 +917,15 @@ case 37:
 break;
 <<<<<<< HEAD
 case 35:
+<<<<<<< HEAD
 //#line 88 "gramatica_2.y"
 =======
 case 38:
 //#line 91 "gramatica_2.y"
 >>>>>>> 87f0bc1... cambios pre-entrega
+=======
+//#line 106 "gramatica.y"
+>>>>>>> f713e33... comentario generico
 {
                     semanticStructStack.addMsg("Línea " + stackOfLines.peek().intValue() + ": Sentencia IF ");
                     stackOfLines.pop();
@@ -880,10 +933,11 @@ case 38:
 break;
 <<<<<<< HEAD
 case 38:
-//#line 102 "gramatica_2.y"
+//#line 120 "gramatica.y"
 { stackOfLines.push(lex.getNewLineCounter()); }
 break;
 case 46:
+<<<<<<< HEAD
 //#line 116 "gramatica_2.y"
 =======
 case 39:
@@ -893,17 +947,25 @@ break;
 case 47:
 //#line 112 "gramatica_2.y"
 >>>>>>> 87f0bc1... cambios pre-entrega
+=======
+//#line 134 "gramatica.y"
+>>>>>>> f713e33... comentario generico
 { 
                 semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() + ": Sentencia foreach");
                 stackOfLines.pop();
+		if(symbolTable.get(val_peek(3).sval).getDeclaracion() == false)
+		        	msgStack.addMsg("ERROR: Variable no declarada.");
+		if(symbolTable.get(val_peek(1).sval).getDeclaracion() == false)
+		        	msgStack.addMsg("ERROR: Colección no declarada.");
             }
 break;
 <<<<<<< HEAD
 case 49:
-//#line 126 "gramatica_2.y"
+//#line 148 "gramatica.y"
 { stackOfLines.push(lex.getNewLineCounter()); }
 break;
 case 50:
+<<<<<<< HEAD
 //#line 129 "gramatica_2.y"
 =======
 case 48:
@@ -913,6 +975,9 @@ break;
 case 49:
 //#line 121 "gramatica_2.y"
 >>>>>>> 87f0bc1... cambios pre-entrega
+=======
+//#line 151 "gramatica.y"
+>>>>>>> f713e33... comentario generico
 { 
                 semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() + ": Asignación"); 
                 stackOfLines.pop();
@@ -920,14 +985,23 @@ case 49:
 break;
 <<<<<<< HEAD
 case 51:
-//#line 135 "gramatica_2.y"
-{ stackOfLines.push(lex.getNewLineCounter()); }
+//#line 157 "gramatica.y"
+{ 
+stackOfLines.push(lex.getNewLineCounter()); 
+if(symbolTable.get(val_peek(0).sval).getDeclaracion() == false)
+		        		msgStack.addMsg("ERROR: Variable no declarada.");
+}
 break;
 case 52:
-//#line 136 "gramatica_2.y"
-{ stackOfLines.push(lex.getNewLineCounter()); }
+//#line 162 "gramatica.y"
+{ 
+stackOfLines.push(lex.getNewLineCounter());
+if(symbolTable.get(val_peek(3).sval).getDeclaracion() == false)
+		        		msgStack.addMsg("ERROR: Variable no declarada.");
+}
 break;
 case 59:
+<<<<<<< HEAD
 //#line 149 "gramatica_2.y"
 =======
 case 50:
@@ -941,22 +1015,25 @@ break;
 case 58:
 //#line 141 "gramatica_2.y"
 >>>>>>> 87f0bc1... cambios pre-entrega
+=======
+//#line 179 "gramatica.y"
+>>>>>>> f713e33... comentario generico
 {
-		        if(declaracion){
-				symbolTable.get(val_peek(0).sval).setDeclaracion();
-			}else{
-				if(symbolTable.get(val_peek(0).sval).getDeclaracion() == false)
-			        	msgStack.addMsg("ERROR: Variable no declarada.");
-		        }
-	        }
+		if(symbolTable.get(val_peek(0).sval).getDeclaracion() == false)
+		        	msgStack.addMsg("ERROR: Variable no declarada.");
+		}
 break;
 <<<<<<< HEAD
 case 60:
+<<<<<<< HEAD
 //#line 157 "gramatica_2.y"
 =======
 case 59:
 //#line 149 "gramatica_2.y"
 >>>>>>> 87f0bc1... cambios pre-entrega
+=======
+//#line 183 "gramatica.y"
+>>>>>>> f713e33... comentario generico
 {
 		        String lexeme = val_peek(0).sval;
 		        ElementoTS tts = symbolTable.get(lexeme);
@@ -978,12 +1055,24 @@ case 59:
 	        }
 break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 case 62:
 //#line 177 "gramatica_2.y"
 =======
 case 61:
 //#line 169 "gramatica_2.y"
 >>>>>>> 87f0bc1... cambios pre-entrega
+=======
+case 61:
+//#line 202 "gramatica.y"
+{
+		if(symbolTable.get(val_peek(3).sval).getDeclaracion() == false)
+		        	msgStack.addMsg("ERROR: Variable no declarada.");
+		}
+break;
+case 62:
+//#line 206 "gramatica.y"
+>>>>>>> f713e33... comentario generico
 {
 		        String lexeme = val_peek(0).sval;
 		        ElementoTS tts = symbolTable.get(lexeme);
@@ -1003,11 +1092,15 @@ case 61:
 break;
 <<<<<<< HEAD
 case 63:
+<<<<<<< HEAD
 //#line 195 "gramatica_2.y"
 =======
 case 62:
 //#line 186 "gramatica_2.y"
 >>>>>>> 87f0bc1... cambios pre-entrega
+=======
+//#line 224 "gramatica.y"
+>>>>>>> f713e33... comentario generico
 {
                 semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() +": Sentencia print");
                 stackOfLines.pop();
@@ -1015,66 +1108,67 @@ case 62:
 break;
 <<<<<<< HEAD
 case 64:
-//#line 201 "gramatica_2.y"
+//#line 230 "gramatica.y"
 { stackOfLines.push(lex.getNewLineCounter()); }
 break;
 case 65:
-//#line 204 "gramatica_2.y"
+//#line 233 "gramatica.y"
 { msgStack.addMsg("Warning: Declaración de bloque sin contenido"); }
 break;
 case 66:
-//#line 205 "gramatica_2.y"
+//#line 234 "gramatica.y"
 { msgStack.addMsg("Error: Comparación incompleta"); }
 break;
 case 67:
-//#line 206 "gramatica_2.y"
+//#line 235 "gramatica.y"
 { msgStack.addMsg("Error: Declaración de IF sin condición"); }
 break;
 case 68:
-//#line 207 "gramatica_2.y"
+//#line 236 "gramatica.y"
 { msgStack.addMsg("Error: Declaracion de FOREACH sin índice y sin colección"); }
 break;
 case 69:
-//#line 208 "gramatica_2.y"
+//#line 237 "gramatica.y"
 { msgStack.addMsg("Error: Declaracion de FOREACH sin colección"); }
 break;
 case 70:
-//#line 209 "gramatica_2.y"
+//#line 238 "gramatica.y"
 { msgStack.addMsg("Error: Declaracion de FOREACH sin índice"); }
 break;
 case 71:
-//#line 210 "gramatica_2.y"
+//#line 239 "gramatica.y"
 { msgStack.addMsg("Error: Nombre y valor de posicion de coleccion faltante"); }
 break;
 case 72:
-//#line 211 "gramatica_2.y"
+//#line 240 "gramatica.y"
 { msgStack.addMsg("Error: Nombre de coleccion faltante"); }
 break;
 case 73:
-//#line 212 "gramatica_2.y"
+//#line 241 "gramatica.y"
 { msgStack.addMsg("Error: Corchete de apertura faltante"); }
 break;
 case 74:
-//#line 213 "gramatica_2.y"
+//#line 242 "gramatica.y"
 { msgStack.addMsg("Error: Corchete de cierre faltante"); }
 break;
 case 75:
-//#line 214 "gramatica_2.y"
+//#line 243 "gramatica.y"
 { msgStack.addMsg("Error: Constante a la izquierda de una asignación"); }
 break;
 case 76:
-//#line 215 "gramatica_2.y"
+//#line 244 "gramatica.y"
 { msgStack.addMsg("Error: Sentencia inválida"); }
 break;
 case 77:
-//#line 216 "gramatica_2.y"
+//#line 245 "gramatica.y"
 { msgStack.addMsg("Error: Constantes declaradas con tipo"); }
 break;
 case 78:
-//#line 217 "gramatica_2.y"
+//#line 246 "gramatica.y"
 { msgStack.addMsg("Error: Falta de separador entre valores constantes"); }
 break;
 case 79:
+<<<<<<< HEAD
 //#line 218 "gramatica_2.y"
 =======
 case 63:
@@ -1143,6 +1237,12 @@ case 78:
 { msgStack.addMsg("Error: Sentencia de asignación inválida"); }
 break;
 //#line 761 "Parser.java"
+=======
+//#line 247 "gramatica.y"
+{ msgStack.addMsg("Error: Sentencia de asignación inválida"); }
+break;
+//#line 790 "Parser.java"
+>>>>>>> f713e33... comentario generico
 //########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####

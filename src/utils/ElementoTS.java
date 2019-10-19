@@ -6,6 +6,7 @@ public class ElementoTS{
 	private String tipoAtributo; //int long
 	private int cantidad;
 	private boolean declaracion;
+	private String tipoID;
 
 	public ElementoTS(String tipoToken, String tipoAtributo){
 		//Para CTEs
@@ -13,6 +14,7 @@ public class ElementoTS{
 		this.tipoAtributo = tipoAtributo;
 		cantidad = 1;
 		this.declaracion=false;
+		this.tipoID=null;
 	}
 	
 	public ElementoTS(int value, String tipoToken){
@@ -22,6 +24,7 @@ public class ElementoTS{
 		tipoAtributo = null;
 		cantidad = 1;
 		this.declaracion=false;
+		this.tipoID=null;
 	}
 	
 	public ElementoTS(String tipoToken){
@@ -30,6 +33,7 @@ public class ElementoTS{
 		tipoAtributo = null;
 		cantidad = 1;
 		this.declaracion=false;
+		this.tipoID = null;
 	}
 
 	public int getValue(){ return value; }
@@ -44,14 +48,15 @@ public class ElementoTS{
 	
 	public void decreaseCounter(){ cantidad = cantidad - 1; }
 	
-	public void setDeclaracion() {
-		if(!this.declaracion)
-			this.declaracion=true;
-		else
-			this.declaracion=false;
+	public void setDeclaracion(boolean dato) {
+		this.declaracion=dato;
 	}
 	
 	public boolean getDeclaracion(){return this.declaracion;}
 	
 	public void setTipoAtributo(String tipo){ tipoAtributo = tipo; }
+	
+	public void setTipoID(String tipo) { this.tipoID=tipo;}
+	
+	public String getTipoID() {return this.tipoID;}
 }
