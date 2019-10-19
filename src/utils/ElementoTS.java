@@ -7,6 +7,7 @@ public class ElementoTS{
 	private int cantidad;
 	private boolean declaracion;
 	private String estructuraID;
+	private int cSize; //tamaño de la coleccion
 
 	public ElementoTS(String tipoToken, String tipoAtributo){
 		//Para CTEs
@@ -15,6 +16,7 @@ public class ElementoTS{
 		cantidad = 1;
 		this.declaracion=false;
 		this.estructuraID=null;
+		this.cSize = 0;
 	}
 	
 	public ElementoTS(int value, String tipoToken){
@@ -25,6 +27,7 @@ public class ElementoTS{
 		cantidad = 1;
 		this.declaracion=false;
 		this.estructuraID=null;
+		this.cSize = 0;
 	}
 	
 	public ElementoTS(String tipoToken){
@@ -34,6 +37,7 @@ public class ElementoTS{
 		cantidad = 1;
 		this.declaracion=false;
 		this.estructuraID = null;
+		this.cSize = 0;
 	}
 
 	public int getValue(){ return value; }
@@ -44,6 +48,8 @@ public class ElementoTS{
 	
 	public int getCantidad(){ return cantidad; }
 	
+	public int getCSize() {return cSize;}
+	
 	public void increaseCounter(){ cantidad = cantidad + 1; }
 	
 	public void decreaseCounter(){ cantidad = cantidad - 1; }
@@ -51,6 +57,8 @@ public class ElementoTS{
 	public void setDeclaracion(boolean dato) {
 		this.declaracion=dato;
 	}
+	
+	public void setCSize(int dato) {this.cSize = dato;}
 	
 	public boolean getDeclaracion(){return this.declaracion;}
 	
