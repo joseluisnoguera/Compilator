@@ -304,6 +304,7 @@ public class Lexicon {
 		symbolTable.put("foreach", new ElementoTS(266,"PR"));
 		symbolTable.put("in", new ElementoTS(267,"PR"));
 		symbolTable.put("print", new ElementoTS(268,"PR"));
+		symbolTable.put("size", new ElementoTS(275,"PR"));
 	}
 	
 	public void putSymbolTable(String lexeme, ElementoTS tupla) {

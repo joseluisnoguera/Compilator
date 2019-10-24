@@ -16,7 +16,7 @@
 
 
 
-//#line 2 "gramatica.y"
+//#line 2 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 package logic;
 import java.util.Hashtable;
 import logic.Lexicon;
@@ -181,8 +181,10 @@ public final static short GET=271;
 public final static short EQ=272;
 public final static short DIF=273;
 public final static short CAD=274;
+public final static short SIZE=275;
 public final static short YYERRCODE=256;
 final static short yylhs[] = {                           -1,
+<<<<<<< HEAD
     0,    1,    1,    1,    2,    2,    4,    4,    4,    5,
     8,    8,    6,    6,    7,    7,    9,    9,    9,    9,
 <<<<<<< HEAD
@@ -211,95 +213,126 @@ final static short yylen[] = {                            2,
     1,    4,    3,    3,    1,    3,    3,    1,    1,    1,
     4,    2,    4,    1,    2,    2,    5,    3,    4,    4,
     2,    3,    3,    4,    2,    2,    2,    5,    2,
+=======
+    0,    1,    1,    1,    2,    2,    4,    4,    4,    4,
+    5,    8,    8,    6,    6,    7,    7,    7,    7,    9,
+    9,    9,    9,    3,   11,   11,   11,   11,   10,   13,
+   12,   12,   12,   12,   12,   12,   14,   14,   21,   22,
+   19,   20,   24,   24,   24,   24,   24,   24,   15,   26,
+   26,   25,   16,   27,   27,   28,   28,   28,   29,   29,
+   29,   23,   23,   23,   23,   17,   30,   18,   18,   18,
+   18,   18,   18,   18,   18,   18,   18,   18,   18,   18,
+   18,   18,
+};
+final static short yylen[] = {                            2,
+    1,    2,    1,    1,    1,    2,    3,    3,    1,    2,
+    1,    1,    1,    1,    3,    4,    6,    6,    8,    1,
+    1,    3,    3,    1,    1,    2,    2,    1,    4,    1,
+    2,    1,    2,    2,    2,    2,    6,    8,    1,    1,
+    1,    3,    1,    1,    1,    1,    1,    1,    5,    1,
+    1,    1,    3,    1,    4,    3,    3,    1,    3,    3,
+    1,    1,    1,    4,    2,    4,    1,    2,    2,    5,
+    3,    4,    4,    2,    3,    3,    4,    2,    2,    2,
+    5,    2,
+>>>>>>> 733ee4b... Agregado size y TS
 };
 final static short yydefred[] = {                         0,
-    0,   27,   11,   12,    0,    1,    0,    4,    5,    0,
-   10,   21,    0,    9,    2,    6,    0,    0,    0,    0,
-    0,    0,   38,   49,   64,   42,   43,   44,   45,    0,
-   40,   41,    0,   22,    0,   25,    0,    0,   29,    0,
+    0,   30,   12,   13,    0,    1,    0,    4,    5,    0,
+   11,   24,    0,   10,    2,    6,    0,    0,    0,    0,
+    0,    0,   41,   52,   67,   45,   46,   47,   48,    0,
+   43,   44,    0,   25,    0,   28,    0,    0,   32,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    7,    0,
-    8,    0,   33,   76,    0,    0,   75,    0,   71,   77,
-    0,   23,   24,   65,   28,   30,   31,   32,    0,    0,
-   60,   79,    0,   66,    0,    0,    0,    0,   17,   18,
-    0,   14,    0,   73,    0,   72,   26,    0,    0,    0,
-    0,   62,    0,    0,   68,   58,    0,    0,    0,    0,
-   15,    0,    0,   74,   52,    0,    0,    0,    0,    0,
-   69,   70,    0,    0,    0,    0,   63,   19,   20,    0,
-   78,   67,    0,    0,   39,   61,   47,   48,   46,    0,
-    0,   56,   57,   16,    0,   34,    0,    0,   35,
+    8,    0,   36,   79,    0,    0,   78,    0,   74,   80,
+    0,   26,   27,   68,   31,   33,   34,   35,    0,    0,
+   63,   82,    0,   69,    0,    0,    0,    0,   20,    0,
+   21,    0,   15,    0,   76,    0,   75,   29,    0,    0,
+    0,    0,   65,    0,    0,   71,   61,    0,    0,    0,
+    0,    0,   16,    0,    0,   77,   55,    0,    0,    0,
+    0,    0,   72,   73,    0,    0,    0,    0,   66,    0,
+   22,   23,    0,    0,   81,   70,    0,    0,   42,   64,
+   50,   51,   49,    0,    0,   59,   60,   18,    0,   17,
+    0,   37,    0,    0,    0,   19,   38,
 };
 final static short yydgoto[] = {                          5,
-    6,    7,    8,    9,   10,   18,   19,   33,   81,   34,
-   35,   36,   37,   38,   39,   40,   41,   42,   43,   89,
-  124,  138,   96,   44,   45,  129,   46,   97,   98,   47,
+    6,    7,    8,    9,   10,   18,   19,   33,   82,   34,
+   35,   36,   37,   38,   39,   40,   41,   42,   43,   90,
+  128,  145,   97,   44,   45,  133,   46,   98,   99,   47,
 };
-final static short yysindex[] = {                      -198,
-  -12,    0,    0,    0,    0,    0, -198,    0,    0, -236,
-    0,    0,   13,    0,    0,    0,  -19,  -11,  -10,    2,
-  -81, -195,    0,    0,    0,    0,    0,    0,    0,  -80,
-    0,    0, -184,    0,  -23,    0,   -5,   19,    0,   26,
-   31,   33,   53,  -42, -215, -175,   55,  -84,    0, -163,
-    0, -162,    0,    0,    5, -161,    0,    8,    0,    0,
-   46,    0,    0,    0,    0,    0,    0,    0,  -36,   16,
-    0,    0, -154,    0, -157, -203,  -38, -160,    0,    0,
-  -27,    0,   20,    0,  -85,    0,    0, -144,   74,   17,
- -141,    0, -197, -144,    0,    0,   22,   -7,   79,  -83,
-    0,  -84,   28,    0,    0, -143,   13,  -38,   30,   13,
-    0,    0,  -38,  -38,  -38,  -38,    0,    0,    0,  -24,
-    0,    0,   13, -194,    0,    0,    0,    0,    0,   -7,
-   -7,    0,    0,    0,   13,    0,   13, -139,    0,
+final static short yysindex[] = {                      -197,
+   -1,    0,    0,    0,    0,    0, -197,    0,    0, -221,
+    0,    0,   27,    0,    0,    0,  -24,  -16,   -4,   16,
+  -78, -196,    0,    0,    0,    0,    0,    0,    0,  -77,
+    0,    0, -214,    0,  -21,    0,    9,   22,    0,   25,
+   32,   33,   45,  -45, -223, -183,   48,  -86,    0, -166,
+    0, -164,    0,    0,    3, -159,    0,   10,    0,    0,
+   46,    0,    0,    0,    0,    0,    0,    0,  -34,   13,
+    0,    0, -154,    0, -158, -207,  -40, -163,    0,   50,
+    0,  -30,    0,   19,    0,  -81,    0,    0, -141,   76,
+  -43, -138,    0, -191, -141,    0,    0,   29,   14,   78,
+ -137,  -80,    0,  -85,   31,    0,    0, -140,   27,  -40,
+   34,   27,    0,    0,  -40,  -40,  -40,  -40,    0,   35,
+    0,    0,   68,  -17,    0,    0,   27, -187,    0,    0,
+    0,    0,    0,   14,   14,    0,    0,    0, -131,    0,
+   27,    0,   39,   27, -132,    0,    0,
 };
 final static short yyrindex[] = {                         0,
-    0,    0,    0,    0,    0,    0,  124,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,   -8,    0,    0,    0,
- -142,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,  134,    0,    0,    1,
+    0,    0,    0,    0,    0,    0,   -2,    0,    0,    0,
+ -134,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,  -41,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,  -39,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,   69,  -17,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,   16,  -14,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0, -183,    0,    0,    0,    0,    0,    0,  -16,
-  -13,    0,    0,    0,    0,    0, -136,    0,    0,
+    0,    0,    0,    0,    0,    0, -185,    0,    0,    0,
+    0,    0,    0,  -11,   -8,    0,    0,    0,    0,    0,
+    0,    0,    0, -129,    0,    0,    0,
 };
 final static short yygindex[] = {                         0,
-    0,    0,  123,  125,    0,    0,    0,   38,   29,   15,
-  -82,  -21,   24,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,  -28,   43,    0,    0,    0,    0,  -30,    0,
+    0,    0,  130,  131,    0,    0,    0,   47,   36,   18,
+  -79,  -13,   26,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,  -20,   51,    0,    0,    0,    0,  -33,    0,
 };
-final static int YYTABLESIZE=290;
+final static int YYTABLESIZE=300;
 static short yytable[];
 static { yytable();}
 static void yytable(){
-yytable = new short[]{                         59,
-   59,   59,   73,   59,   88,   59,   73,  105,   73,   56,
-   80,  119,   59,   63,   12,   74,  100,   59,   59,  100,
-   59,   12,   17,   13,  123,   55,   54,   55,   54,   53,
-   13,   53,   50,   52,  115,   13,   31,   11,   32,  116,
-   90,   55,   54,   75,   11,   53,   14,   49,   51,   62,
-   13,   76,  137,    2,   31,   94,   32,    1,    2,    2,
-   53,  110,    3,    4,  114,  101,  113,   30,  134,  135,
-  136,   48,   31,   57,   32,   60,   31,   65,   32,  125,
-   36,   36,  130,  131,   66,   30,  132,  133,  128,   67,
-   95,   68,   69,   77,   78,   82,   83,   84,   85,   13,
-   86,   63,  106,   30,   87,   92,   91,  111,  112,   93,
-  102,   13,    2,   99,  107,   63,   13,   13,  109,  117,
-  121,  122,  126,    3,  127,  139,   51,   50,   37,   15,
-  120,   16,  108,    0,    0,    0,    0,   62,    0,    0,
+yytable = new short[]{                         73,
+    9,   62,   62,   62,   73,   62,   89,   62,   81,   81,
+   73,  107,   56,  102,  122,   59,   31,   12,   32,   62,
+   62,   63,   62,   74,   12,   13,  102,   50,   58,  127,
+   58,   57,   13,   57,   56,   75,   56,   17,   31,   52,
+   32,   14,   49,   76,   58,   60,   11,   57,   91,    2,
+   56,   95,   62,   11,   51,  117,   14,   14,    1,    2,
+  118,  144,  103,    3,    4,    2,   48,  112,   31,   30,
+   32,  116,   57,  115,   53,  140,  141,  142,   39,   39,
+   65,  134,  135,   66,   69,   77,   31,   78,   32,  129,
+   67,   68,   83,   96,   84,   85,  136,  137,  132,   30,
+   86,   13,   87,   92,   88,   93,  108,  101,   94,  104,
+  100,  113,  114,   63,   13,    2,  109,   30,  119,   13,
+   13,  111,  120,  125,  126,  139,  130,  138,  143,  131,
+   63,  146,  147,    3,   54,   40,   15,   16,    0,  124,
+    0,  110,    0,    0,   62,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,   62,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,   79,   79,    0,    0,    0,  105,  121,
+   54,   55,   58,    0,    0,    0,    0,  106,   80,  123,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,  103,   79,  118,   54,   55,   58,
-    0,    0,    0,  104,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,   70,   71,    0,    0,
-   70,   71,   70,   71,    0,    0,   72,    0,   59,   59,
-   59,   59,   20,    2,   61,   21,   22,    3,    4,   23,
+    0,    0,    0,   70,   71,    0,    0,    0,   70,   71,
+    0,    0,    0,   72,   70,   71,   26,   27,   28,   29,
+   62,   62,   62,   62,   20,    2,   61,   21,   22,    3,
+    4,   23,    0,    0,   24,    0,   25,    0,   26,   27,
+   28,   29,    0,    0,    0,    0,    9,    9,    0,    0,
+    0,    9,    9,    0,   20,    2,   64,   21,   22,    3,
+    4,   23,    0,    0,   24,    0,   25,    0,   26,   27,
+   28,   29,   20,    2,    0,   21,   22,    3,    4,   23,
     0,    0,   24,    0,   25,    0,   26,   27,   28,   29,
+<<<<<<< HEAD
    20,    2,   64,   21,   22,    3,    4,   23,    0,    0,
    24,    0,   25,    0,   26,   27,   28,   29,   20,    2,
     0,   21,   22,    3,    4,   23,    0,    0,   24,    0,
@@ -414,11 +447,14 @@ yytable = new short[]{                         58,
     0,    0,   23,    0,   24,    0,   25,   26,   27,   28,
    25,   26,   27,   28,
 >>>>>>> 87f0bc1... cambios pre-entrega
+=======
+>>>>>>> 733ee4b... Agregado size y TS
 };
 }
 static short yycheck[];
 static { yycheck(); }
 static void yycheck() {
+<<<<<<< HEAD
 yycheck = new short[] {                         41,
    42,   43,   45,   45,   41,   47,   45,   93,   45,   91,
 <<<<<<< HEAD
@@ -454,11 +490,31 @@ yycheck = new short[] {                         41,
   265,    0,  269,   59,    7,    7,  101,  113,   88,   -1,
    -1,   -1,   -1,   -1,  133,   -1,   -1,   91,   -1,   -1,
 >>>>>>> 87f0bc1... cambios pre-entrega
+=======
+yycheck = new short[] {                         45,
+    0,   41,   42,   43,   45,   45,   41,   47,   95,   95,
+   45,   93,   91,   44,   95,   93,   60,    0,   62,   59,
+   60,   35,   62,   44,    7,    0,   44,   44,   43,  109,
+   45,   43,    7,   45,   43,  259,   45,  259,   60,   44,
+   62,   44,   59,  267,   59,  260,    0,   59,   69,  257,
+   59,  259,   35,    7,   59,   42,   59,   59,  256,  257,
+   47,  141,   93,  261,  262,  257,   91,  259,   60,   91,
+   62,   43,  269,   45,   59,   93,  264,  265,  264,  265,
+   59,  115,  116,   59,   40,  269,   60,   40,   62,  110,
+   59,   59,  259,   76,  259,   93,  117,  118,  112,   91,
+  260,   76,   93,   91,   59,  260,   89,   58,  267,   91,
+  274,   94,   95,  127,   89,  257,   41,   91,   41,   94,
+   95,  260,  260,   93,  265,   58,   93,   93,  260,  112,
+  144,   93,  265,    0,  269,  265,    7,    7,   -1,  104,
+   -1,   91,   -1,   -1,  127,   -1,   -1,   -1,   -1,   -1,
+>>>>>>> 733ee4b... Agregado size y TS
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
-   -1,   -1,   -1,   -1,  260,  260,  260,  259,  260,  260,
-   -1,   -1,   -1,  269,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,  144,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,  260,  260,   -1,   -1,   -1,  260,  260,
+  259,  260,  260,   -1,   -1,   -1,   -1,  269,  275,  275,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+<<<<<<< HEAD
    -1,   -1,   -1,   -1,   -1,   -1,  259,  260,   -1,   -1,
   259,  260,  259,  260,   -1,   -1,  269,   -1,  270,  271,
   272,  273,  256,  257,  258,  259,  260,  261,  262,  263,
@@ -481,15 +537,26 @@ yycheck = new short[] {                         41,
    -1,   -1,  266,   -1,  268,   -1,  270,  271,  272,  273,
   270,  271,  272,  273,
 >>>>>>> 87f0bc1... cambios pre-entrega
+=======
+   -1,   -1,   -1,  259,  260,   -1,   -1,   -1,  259,  260,
+   -1,   -1,   -1,  269,  259,  260,  270,  271,  272,  273,
+  270,  271,  272,  273,  256,  257,  258,  259,  260,  261,
+  262,  263,   -1,   -1,  266,   -1,  268,   -1,  270,  271,
+  272,  273,   -1,   -1,   -1,   -1,  256,  257,   -1,   -1,
+   -1,  261,  262,   -1,  256,  257,  258,  259,  260,  261,
+  262,  263,   -1,   -1,  266,   -1,  268,   -1,  270,  271,
+  272,  273,  256,  257,   -1,  259,  260,  261,  262,  263,
+   -1,   -1,  266,   -1,  268,   -1,  270,  271,  272,  273,
+>>>>>>> 733ee4b... Agregado size y TS
 };
 }
 final static short YYFINAL=5;
-final static short YYMAXTOKEN=274;
+final static short YYMAXTOKEN=275;
 final static String yyname[] = {
 "end-of-file",null,null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,"'('","')'","'*'","'+'","','",
-"'-'",null,"'/'",null,null,null,null,null,null,null,null,null,null,null,"';'",
+"'-'",null,"'/'",null,null,null,null,null,null,null,null,null,null,"':'","';'",
 "'<'",null,"'>'",null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 "'['",null,"']'",null,"'_'",null,null,null,null,null,null,null,null,null,null,
@@ -504,6 +571,7 @@ null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,"BEGIN","END","ID","CTE","INT","LONG","IF",
 "ELSE","END_IF","FOREACH","IN","PRINT","ASSIGN","LET","GET","EQ","DIF","CAD",
+"SIZE",
 };
 final static String yyrule[] = {
 "$accept : programa_completo",
@@ -515,6 +583,7 @@ final static String yyrule[] = {
 "bloque_decl : bloque_decl sent_decl",
 "sent_decl : comienzo_decl lista_vars ';'",
 "sent_decl : comienzo_decl lista_colecciones ';'",
+"sent_decl : comienzo_decl",
 "sent_decl : error ';'",
 "comienzo_decl : tipo",
 "tipo : INT",
@@ -523,6 +592,8 @@ final static String yyrule[] = {
 "lista_vars : lista_vars ',' ID",
 "lista_colecciones : ID '[' lista_valores_inic ']'",
 "lista_colecciones : lista_colecciones ',' ID '[' lista_valores_inic ']'",
+"lista_colecciones : ID '[' SIZE ':' CTE ']'",
+"lista_colecciones : lista_colecciones ',' ID '[' SIZE ':' CTE ']'",
 "lista_valores_inic : CTE",
 "lista_valores_inic : '_'",
 "lista_valores_inic : lista_valores_inic ',' CTE",
@@ -612,6 +683,7 @@ final static String yyrule[] = {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 //#line 222 "gramatica_2.y"
 =======
 //#line 213 "gramatica_2.y"
@@ -619,6 +691,9 @@ final static String yyrule[] = {
 =======
 //#line 251 "gramatica.y"
 >>>>>>> f713e33... comentario generico
+=======
+//#line 264 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+>>>>>>> 733ee4b... Agregado size y TS
 
 private Lexicon lex;
 private Hashtable<String,ElementoTS> symbolTable;
@@ -643,8 +718,9 @@ private int yylex(){
 }
 
 private void yyerror(String msg){
-	msgStack.addMsg("Línea "+ lex.getNewLineCounter() + ": " + msg);
+	msgStack.addMsg("L?a "+ lex.getNewLineCounter() + ": " + msg);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 //#line 396 "Parser.java"
@@ -654,6 +730,9 @@ private void yyerror(String msg){
 =======
 //#line 395 "Parser.java"
 >>>>>>> f713e33... comentario generico
+=======
+//#line 407 "Parser.java"
+>>>>>>> 733ee4b... Agregado size y TS
 //###############################################################
 // method: yylexdebug : check lexer state
 //###############################################################
@@ -808,21 +887,22 @@ boolean doaction;
       {
 //########## USER-SUPPLIED ACTIONS ##########
 case 7:
-//#line 31 "gramatica.y"
+//#line 31 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 { semanticStructStack.addMsg("Linea "+ numLineaDecl +": Sentencia declarativa"); }
 break;
 case 8:
-//#line 32 "gramatica.y"
+//#line 32 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 { semanticStructStack.addMsg("Linea "+ numLineaDecl +": Sentencia declarativa"); }
 break;
-case 9:
-//#line 33 "gramatica.y"
-{ msgStack.addMsg("Error genérico en el bloque declarativo no contemplado cerca de línea " + lex.getNewLineCounter()); }
-break;
 case 10:
-//#line 36 "gramatica.y"
+//#line 34 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{ msgStack.addMsg("Error gené²©co en el bloque declarativo no contemplado cerca de l?a " + lex.getNewLineCounter()); }
+break;
+case 11:
+//#line 37 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 { numLineaDecl = lex.getNewLineCounter(); }
 break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 case 22:
@@ -844,54 +924,83 @@ case 23:
 =======
 case 13:
 //#line 43 "gramatica.y"
+=======
+case 14:
+//#line 44 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+>>>>>>> 733ee4b... Agregado size y TS
 {
 		if(!symbolTable.get(val_peek(0).sval).getDeclaracion())
 			symbolTable.get(val_peek(0).sval).setDeclaracion(true);
 		else
-			msgStack.addMsg("Error: variable"+ val_peek(0).sval+" re-declarada en el número de línea " + lex.getNewLineCounter());
+			msgStack.addMsg("Error: variable"+ val_peek(0).sval+" re-declarada en el nÃºmero de l?a " + lex.getNewLineCounter());
 		}
 break;
-case 14:
-//#line 49 "gramatica.y"
+case 15:
+//#line 50 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 {
 		if(!symbolTable.get(val_peek(2).sval).getDeclaracion())
 			symbolTable.get(val_peek(2).sval).setDeclaracion(true);
 		else
-			msgStack.addMsg("Error: variable"+ val_peek(2).sval+" re-declarada en el número de línea " + lex.getNewLineCounter());
+			msgStack.addMsg("Error: variable"+ val_peek(2).sval+" re-declarada en el nÃºmero de l?a " + lex.getNewLineCounter());
 		}
 break;
-case 15:
-//#line 57 "gramatica.y"
+case 16:
+//#line 58 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 {
 		if(!symbolTable.get(val_peek(3).sval).getDeclaracion())
 			symbolTable.get(val_peek(3).sval).setDeclaracion(true);
 		else
-			msgStack.addMsg("Error: coleccion"+ val_peek(3).sval+"re-declarada en el número de línea " + lex.getNewLineCounter());;
+			msgStack.addMsg("Error: coleccion"+ val_peek(3).sval+"re-declarada en el nÃºmero de l?a " + lex.getNewLineCounter());;
 		}
 break;
-case 16:
-//#line 63 "gramatica.y"
+case 17:
+//#line 64 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 {
 		if(!symbolTable.get(val_peek(5).sval).getDeclaracion())
 			symbolTable.get(val_peek(5).sval).setDeclaracion(true);
 		else
-			msgStack.addMsg("Error: coleccion"+ val_peek(5).sval+" re-declarada en el número de línea " + lex.getNewLineCounter());
+			msgStack.addMsg("Error: coleccion"+ val_peek(5).sval+" re-declarada en el nÃºmero de l?a " + lex.getNewLineCounter());
+		}
+break;
+case 18:
+//#line 70 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{
+		if(!symbolTable.get(val_peek(5).sval).getDeclaracion())
+			symbolTable.get(val_peek(5).sval).setDeclaracion(true);
+		else
+			msgStack.addMsg("Error: coleccion"+ val_peek(5).sval+"re-declarada en el nÃºmero de l?a " + lex.getNewLineCounter());;
 		}
 >>>>>>> f713e33... comentario generico
 break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 case 26:
 //#line 88 "gramatica.y"
 { semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() +": Bloque de ejecución"); }
+=======
+case 19:
+//#line 76 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{
+		if(!symbolTable.get(val_peek(7).sval).getDeclaracion())
+			symbolTable.get(val_peek(7).sval).setDeclaracion(true);
+		else
+			msgStack.addMsg("Error: coleccion"+ val_peek(7).sval+" re-declarada en el nÃºmero de l?a " + lex.getNewLineCounter());
+		}
 break;
-case 27:
-//#line 91 "gramatica.y"
+case 29:
+//#line 101 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{ semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() +": Bloque de ejecució®¢©"); }
+>>>>>>> 733ee4b... Agregado size y TS
+break;
+case 30:
+//#line 104 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 { stackOfLines.push(lex.getNewLineCounter()); /*Para debugging*/}
 break;
-case 33:
-//#line 99 "gramatica.y"
-{ msgStack.addMsg("Error genérico no contemplado cerca de línea " + lex.getNewLineCounter()); }
+case 36:
+//#line 112 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{ msgStack.addMsg("Error gené²©co no contemplado cerca de l?a " + lex.getNewLineCounter()); }
 break;
+<<<<<<< HEAD
 case 34:
 <<<<<<< HEAD
 //#line 84 "gramatica_2.y"
@@ -910,11 +1019,16 @@ case 37:
 =======
 //#line 102 "gramatica.y"
 >>>>>>> f713e33... comentario generico
+=======
+case 37:
+//#line 115 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+>>>>>>> 733ee4b... Agregado size y TS
 {
-                    semanticStructStack.addMsg("Línea " + stackOfLines.peek().intValue() + ": Sentencia IF ");
+                    semanticStructStack.addMsg("L?a " + stackOfLines.peek().intValue() + ": Sentencia IF ");
                     stackOfLines.pop();
                 }
 break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 case 35:
 <<<<<<< HEAD
@@ -926,11 +1040,16 @@ case 38:
 =======
 //#line 106 "gramatica.y"
 >>>>>>> f713e33... comentario generico
+=======
+case 38:
+//#line 119 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+>>>>>>> 733ee4b... Agregado size y TS
 {
-                    semanticStructStack.addMsg("Línea " + stackOfLines.peek().intValue() + ": Sentencia IF ");
+                    semanticStructStack.addMsg("L?a " + stackOfLines.peek().intValue() + ": Sentencia IF ");
                     stackOfLines.pop();
                 }
 break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 case 38:
 //#line 120 "gramatica.y"
@@ -950,15 +1069,24 @@ case 47:
 =======
 //#line 134 "gramatica.y"
 >>>>>>> f713e33... comentario generico
+=======
+case 41:
+//#line 133 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{ stackOfLines.push(lex.getNewLineCounter()); }
+break;
+case 49:
+//#line 147 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+>>>>>>> 733ee4b... Agregado size y TS
 { 
                 semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() + ": Sentencia foreach");
                 stackOfLines.pop();
 		if(symbolTable.get(val_peek(3).sval).getDeclaracion() == false)
 		        	msgStack.addMsg("ERROR: Variable no declarada.");
 		if(symbolTable.get(val_peek(1).sval).getDeclaracion() == false)
-		        	msgStack.addMsg("ERROR: Colección no declarada.");
+		        	msgStack.addMsg("ERROR: Colecció® ®o declarada.");
             }
 break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 case 49:
 //#line 148 "gramatica.y"
@@ -978,28 +1106,42 @@ case 49:
 =======
 //#line 151 "gramatica.y"
 >>>>>>> f713e33... comentario generico
+=======
+case 52:
+//#line 161 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{ stackOfLines.push(lex.getNewLineCounter()); }
+break;
+case 53:
+//#line 164 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+>>>>>>> 733ee4b... Agregado size y TS
 { 
-                semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() + ": Asignación"); 
+                semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() + ": Asignació®¢©"); 
                 stackOfLines.pop();
             }
 break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 case 51:
 //#line 157 "gramatica.y"
+=======
+case 54:
+//#line 170 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+>>>>>>> 733ee4b... Agregado size y TS
 { 
 stackOfLines.push(lex.getNewLineCounter()); 
 if(symbolTable.get(val_peek(0).sval).getDeclaracion() == false)
 		        		msgStack.addMsg("ERROR: Variable no declarada.");
 }
 break;
-case 52:
-//#line 162 "gramatica.y"
+case 55:
+//#line 175 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 { 
 stackOfLines.push(lex.getNewLineCounter());
 if(symbolTable.get(val_peek(3).sval).getDeclaracion() == false)
 		        		msgStack.addMsg("ERROR: Variable no declarada.");
 }
 break;
+<<<<<<< HEAD
 case 59:
 <<<<<<< HEAD
 //#line 149 "gramatica_2.y"
@@ -1018,11 +1160,16 @@ case 58:
 =======
 //#line 179 "gramatica.y"
 >>>>>>> f713e33... comentario generico
+=======
+case 62:
+//#line 192 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+>>>>>>> 733ee4b... Agregado size y TS
 {
 		if(symbolTable.get(val_peek(0).sval).getDeclaracion() == false)
 		        	msgStack.addMsg("ERROR: Variable no declarada.");
 		}
 break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 case 60:
 <<<<<<< HEAD
@@ -1034,6 +1181,10 @@ case 59:
 =======
 //#line 183 "gramatica.y"
 >>>>>>> f713e33... comentario generico
+=======
+case 63:
+//#line 196 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+>>>>>>> 733ee4b... Agregado size y TS
 {
 		        String lexeme = val_peek(0).sval;
 		        ElementoTS tts = symbolTable.get(lexeme);
@@ -1056,6 +1207,7 @@ case 59:
 break;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 case 62:
 //#line 177 "gramatica_2.y"
 =======
@@ -1065,14 +1217,23 @@ case 61:
 =======
 case 61:
 //#line 202 "gramatica.y"
+=======
+case 64:
+//#line 215 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+>>>>>>> 733ee4b... Agregado size y TS
 {
 		if(symbolTable.get(val_peek(3).sval).getDeclaracion() == false)
 		        	msgStack.addMsg("ERROR: Variable no declarada.");
 		}
 break;
+<<<<<<< HEAD
 case 62:
 //#line 206 "gramatica.y"
 >>>>>>> f713e33... comentario generico
+=======
+case 65:
+//#line 219 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+>>>>>>> 733ee4b... Agregado size y TS
 {
 		        String lexeme = val_peek(0).sval;
 		        ElementoTS tts = symbolTable.get(lexeme);
@@ -1091,6 +1252,7 @@ case 62:
 	        }
 break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 case 63:
 <<<<<<< HEAD
 //#line 195 "gramatica_2.y"
@@ -1101,11 +1263,16 @@ case 62:
 =======
 //#line 224 "gramatica.y"
 >>>>>>> f713e33... comentario generico
+=======
+case 66:
+//#line 237 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+>>>>>>> 733ee4b... Agregado size y TS
 {
                 semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() +": Sentencia print");
                 stackOfLines.pop();
             }
 break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 case 64:
 //#line 230 "gramatica.y"
@@ -1119,55 +1286,58 @@ case 66:
 //#line 234 "gramatica.y"
 { msgStack.addMsg("Error: Comparación incompleta"); }
 break;
+=======
+>>>>>>> 733ee4b... Agregado size y TS
 case 67:
-//#line 235 "gramatica.y"
-{ msgStack.addMsg("Error: Declaración de IF sin condición"); }
+//#line 243 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{ stackOfLines.push(lex.getNewLineCounter()); }
 break;
 case 68:
-//#line 236 "gramatica.y"
-{ msgStack.addMsg("Error: Declaracion de FOREACH sin índice y sin colección"); }
+//#line 246 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{ msgStack.addMsg("Warning: Declaració® ¤e bloque sin contenido"); }
 break;
 case 69:
-//#line 237 "gramatica.y"
-{ msgStack.addMsg("Error: Declaracion de FOREACH sin colección"); }
+//#line 247 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{ msgStack.addMsg("Error: Comparació® ©ncompleta"); }
 break;
 case 70:
-//#line 238 "gramatica.y"
-{ msgStack.addMsg("Error: Declaracion de FOREACH sin índice"); }
+//#line 248 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{ msgStack.addMsg("Error: Declaració® ¤e IF sin condició®¢©"); }
 break;
 case 71:
-//#line 239 "gramatica.y"
-{ msgStack.addMsg("Error: Nombre y valor de posicion de coleccion faltante"); }
+//#line 249 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{ msgStack.addMsg("Error: Declaracion de FOREACH sin ?ice y sin colecció®¢©"); }
 break;
 case 72:
-//#line 240 "gramatica.y"
-{ msgStack.addMsg("Error: Nombre de coleccion faltante"); }
+//#line 250 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{ msgStack.addMsg("Error: Declaracion de FOREACH sin colecció®¢©"); }
 break;
 case 73:
-//#line 241 "gramatica.y"
-{ msgStack.addMsg("Error: Corchete de apertura faltante"); }
+//#line 251 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{ msgStack.addMsg("Error: Declaracion de FOREACH sin ?ice"); }
 break;
 case 74:
-//#line 242 "gramatica.y"
-{ msgStack.addMsg("Error: Corchete de cierre faltante"); }
+//#line 252 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{ msgStack.addMsg("Error: Nombre y valor de posicion de coleccion faltante"); }
 break;
 case 75:
-//#line 243 "gramatica.y"
-{ msgStack.addMsg("Error: Constante a la izquierda de una asignación"); }
+//#line 253 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{ msgStack.addMsg("Error: Nombre de coleccion faltante"); }
 break;
 case 76:
-//#line 244 "gramatica.y"
-{ msgStack.addMsg("Error: Sentencia inválida"); }
+//#line 254 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{ msgStack.addMsg("Error: Corchete de apertura faltante"); }
 break;
 case 77:
-//#line 245 "gramatica.y"
-{ msgStack.addMsg("Error: Constantes declaradas con tipo"); }
+//#line 255 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{ msgStack.addMsg("Error: Corchete de cierre faltante"); }
 break;
 case 78:
-//#line 246 "gramatica.y"
-{ msgStack.addMsg("Error: Falta de separador entre valores constantes"); }
+//#line 256 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{ msgStack.addMsg("Error: Constante a la izquierda de una asignació®¢©"); }
 break;
 case 79:
+<<<<<<< HEAD
 <<<<<<< HEAD
 //#line 218 "gramatica_2.y"
 =======
@@ -1243,6 +1413,24 @@ break;
 break;
 //#line 790 "Parser.java"
 >>>>>>> f713e33... comentario generico
+=======
+//#line 257 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{ msgStack.addMsg("Error: Sentencia invá¬©da"); }
+break;
+case 80:
+//#line 258 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{ msgStack.addMsg("Error: Constantes declaradas con tipo"); }
+break;
+case 81:
+//#line 259 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{ msgStack.addMsg("Error: Falta de separador entre valores constantes"); }
+break;
+case 82:
+//#line 260 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{ msgStack.addMsg("Error: Sentencia de asignació® ©nvá¬©da"); }
+break;
+//#line 820 "Parser.java"
+>>>>>>> 733ee4b... Agregado size y TS
 //########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####
