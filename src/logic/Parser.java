@@ -16,7 +16,7 @@
 
 
 
-//#line 2 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+//#line 2 
 package logic;
 import java.util.Hashtable;
 import logic.Lexicon;
@@ -684,6 +684,7 @@ final static String yyrule[] = {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 //#line 222 "gramatica_2.y"
 =======
 //#line 213 "gramatica_2.y"
@@ -694,6 +695,9 @@ final static String yyrule[] = {
 =======
 //#line 264 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 >>>>>>> 733ee4b... Agregado size y TS
+=======
+//#line 278 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+>>>>>>> 3ddb440... Update Parser / ElementoTS :+1:
 
 private Lexicon lex;
 private Hashtable<String,ElementoTS> symbolTable;
@@ -701,12 +705,14 @@ private MsgStack msgStack;
 private MsgStack semanticStructStack;
 Stack<Integer> stackOfLines = new Stack<Integer>();
 private int numLineaDecl;
+private int countSize;
 
 public Parser(Lexicon lex, Hashtable<String, ElementoTS> symbolTable, MsgStack msgStack, MsgStack semanticStructStack){
 	this.lex = lex;
 	this.symbolTable = symbolTable;
 	this.msgStack = msgStack;
 	this.semanticStructStack = semanticStructStack;
+	this.countSize=0;
 }
 
 private int yylex(){
@@ -718,8 +724,9 @@ private int yylex(){
 }
 
 private void yyerror(String msg){
-	msgStack.addMsg("L?a "+ lex.getNewLineCounter() + ": " + msg);
+	msgStack.addMsg("Línea "+ lex.getNewLineCounter() + ": " + msg);
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -733,6 +740,9 @@ private void yyerror(String msg){
 =======
 //#line 407 "Parser.java"
 >>>>>>> 733ee4b... Agregado size y TS
+=======
+//#line 409 "Parser.java"
+>>>>>>> 3ddb440... Update Parser / ElementoTS :+1:
 //###############################################################
 // method: yylexdebug : check lexer state
 //###############################################################
@@ -887,19 +897,19 @@ boolean doaction;
       {
 //########## USER-SUPPLIED ACTIONS ##########
 case 7:
-//#line 31 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+//#line 31 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 { semanticStructStack.addMsg("Linea "+ numLineaDecl +": Sentencia declarativa"); }
 break;
 case 8:
-//#line 32 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+//#line 32 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 { semanticStructStack.addMsg("Linea "+ numLineaDecl +": Sentencia declarativa"); }
 break;
 case 10:
-//#line 34 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
-{ msgStack.addMsg("Error gen鲩co en el bloque declarativo no contemplado cerca de l?a " + lex.getNewLineCounter()); }
+//#line 34 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{ msgStack.addMsg("Error genérico en el bloque declarativo no contemplado cerca de línea " + lex.getNewLineCounter()); }
 break;
 case 11:
-//#line 37 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+//#line 37 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 { numLineaDecl = lex.getNewLineCounter(); }
 break;
 <<<<<<< HEAD
@@ -926,49 +936,64 @@ case 13:
 //#line 43 "gramatica.y"
 =======
 case 14:
+<<<<<<< HEAD
 //#line 44 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 >>>>>>> 733ee4b... Agregado size y TS
+=======
+//#line 44 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+>>>>>>> 3ddb440... Update Parser / ElementoTS :+1:
 {
 		if(!symbolTable.get(val_peek(0).sval).getDeclaracion())
 			symbolTable.get(val_peek(0).sval).setDeclaracion(true);
 		else
-			msgStack.addMsg("Error: variable"+ val_peek(0).sval+" re-declarada en el número de l?a " + lex.getNewLineCounter());
+			msgStack.addMsg("Error: variable"+ val_peek(0).sval+" re-declarada en el número de línea " + lex.getNewLineCounter());
 		}
 break;
 case 15:
-//#line 50 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+//#line 50 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 {
 		if(!symbolTable.get(val_peek(2).sval).getDeclaracion())
 			symbolTable.get(val_peek(2).sval).setDeclaracion(true);
 		else
-			msgStack.addMsg("Error: variable"+ val_peek(2).sval+" re-declarada en el número de l?a " + lex.getNewLineCounter());
+			msgStack.addMsg("Error: variable"+ val_peek(2).sval+" re-declarada en el número de línea " + lex.getNewLineCounter());
 		}
 break;
 case 16:
-//#line 58 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+//#line 58 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 {
 		if(!symbolTable.get(val_peek(3).sval).getDeclaracion())
+		{
 			symbolTable.get(val_peek(3).sval).setDeclaracion(true);
+			symbolTable.get(val_peek(3).sval).setCSize(String.valueOf(countSize)); /*setea tamanio de arreglo de val iniciales*/
+			countSize=0;
+		}
 		else
-			msgStack.addMsg("Error: coleccion"+ val_peek(3).sval+"re-declarada en el número de l?a " + lex.getNewLineCounter());;
+			msgStack.addMsg("Error: coleccion"+ val_peek(3).sval+"re-declarada en el número de línea " + lex.getNewLineCounter());;
 		}
 break;
 case 17:
-//#line 64 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+//#line 68 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 {
 		if(!symbolTable.get(val_peek(5).sval).getDeclaracion())
+		{
 			symbolTable.get(val_peek(5).sval).setDeclaracion(true);
+			symbolTable.get(val_peek(5).sval).setCSize(String.valueOf(countSize));/*setea tamanio de arreglo de val iniciales*/
+			countSize=0;
+		}
 		else
-			msgStack.addMsg("Error: coleccion"+ val_peek(5).sval+" re-declarada en el número de l?a " + lex.getNewLineCounter());
+			msgStack.addMsg("Error: coleccion"+ val_peek(5).sval+" re-declarada en el número de línea " + lex.getNewLineCounter());
 		}
 break;
 case 18:
-//#line 70 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+//#line 78 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 {
 		if(!symbolTable.get(val_peek(5).sval).getDeclaracion())
+		{
 			symbolTable.get(val_peek(5).sval).setDeclaracion(true);
+			symbolTable.get(val_peek(5).sval).setCSize(val_peek(1).sval);
+		}
 		else
-			msgStack.addMsg("Error: coleccion"+ val_peek(5).sval+"re-declarada en el número de l?a " + lex.getNewLineCounter());;
+			msgStack.addMsg("Error: coleccion"+ val_peek(5).sval+"re-declarada en el número de línea " + lex.getNewLineCounter());;
 		}
 >>>>>>> f713e33... comentario generico
 break;
@@ -979,26 +1004,50 @@ case 26:
 { semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() +": Bloque de ejecuci�n"); }
 =======
 case 19:
-//#line 76 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+//#line 87 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 {
 		if(!symbolTable.get(val_peek(7).sval).getDeclaracion())
+		{
 			symbolTable.get(val_peek(7).sval).setDeclaracion(true);
+			symbolTable.get(val_peek(7).sval).setCSize(val_peek(1).sval);
+		}
 		else
-			msgStack.addMsg("Error: coleccion"+ val_peek(7).sval+" re-declarada en el número de l?a " + lex.getNewLineCounter());
+			msgStack.addMsg("Error: coleccion"+ val_peek(7).sval+" re-declarada en el número de línea " + lex.getNewLineCounter());
 		}
 break;
+case 20:
+//#line 98 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{countSize++;}
+break;
+case 21:
+//#line 99 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{countSize++;}
+break;
+case 22:
+//#line 100 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{countSize++;}
+break;
+case 23:
+//#line 101 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{countSize++;}
+break;
 case 29:
+<<<<<<< HEAD
 //#line 101 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 { semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() +": Bloque de ejecuci󮢩"); }
 >>>>>>> 733ee4b... Agregado size y TS
+=======
+//#line 115 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{ semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() +": Bloque de ejecución"); }
+>>>>>>> 3ddb440... Update Parser / ElementoTS :+1:
 break;
 case 30:
-//#line 104 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+//#line 118 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 { stackOfLines.push(lex.getNewLineCounter()); /*Para debugging*/}
 break;
 case 36:
-//#line 112 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
-{ msgStack.addMsg("Error gen鲩co no contemplado cerca de l?a " + lex.getNewLineCounter()); }
+//#line 126 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{ msgStack.addMsg("Error genérico no contemplado cerca de línea " + lex.getNewLineCounter()); }
 break;
 <<<<<<< HEAD
 case 34:
@@ -1021,10 +1070,14 @@ case 37:
 >>>>>>> f713e33... comentario generico
 =======
 case 37:
+<<<<<<< HEAD
 //#line 115 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 >>>>>>> 733ee4b... Agregado size y TS
+=======
+//#line 129 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+>>>>>>> 3ddb440... Update Parser / ElementoTS :+1:
 {
-                    semanticStructStack.addMsg("L?a " + stackOfLines.peek().intValue() + ": Sentencia IF ");
+                    semanticStructStack.addMsg("Línea " + stackOfLines.peek().intValue() + ": Sentencia IF ");
                     stackOfLines.pop();
                 }
 break;
@@ -1042,10 +1095,14 @@ case 38:
 >>>>>>> f713e33... comentario generico
 =======
 case 38:
+<<<<<<< HEAD
 //#line 119 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 >>>>>>> 733ee4b... Agregado size y TS
+=======
+//#line 133 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+>>>>>>> 3ddb440... Update Parser / ElementoTS :+1:
 {
-                    semanticStructStack.addMsg("L?a " + stackOfLines.peek().intValue() + ": Sentencia IF ");
+                    semanticStructStack.addMsg("Línea " + stackOfLines.peek().intValue() + ": Sentencia IF ");
                     stackOfLines.pop();
                 }
 break;
@@ -1071,19 +1128,23 @@ case 47:
 >>>>>>> f713e33... comentario generico
 =======
 case 41:
-//#line 133 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+//#line 147 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 { stackOfLines.push(lex.getNewLineCounter()); }
 break;
 case 49:
+<<<<<<< HEAD
 //#line 147 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 >>>>>>> 733ee4b... Agregado size y TS
+=======
+//#line 161 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+>>>>>>> 3ddb440... Update Parser / ElementoTS :+1:
 { 
                 semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() + ": Sentencia foreach");
                 stackOfLines.pop();
 		if(symbolTable.get(val_peek(3).sval).getDeclaracion() == false)
 		        	msgStack.addMsg("ERROR: Variable no declarada.");
 		if(symbolTable.get(val_peek(1).sval).getDeclaracion() == false)
-		        	msgStack.addMsg("ERROR: Colecci󮠮o declarada.");
+		        	msgStack.addMsg("ERROR: Colección no declarada.");
             }
 break;
 <<<<<<< HEAD
@@ -1108,14 +1169,18 @@ case 49:
 >>>>>>> f713e33... comentario generico
 =======
 case 52:
-//#line 161 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+//#line 175 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 { stackOfLines.push(lex.getNewLineCounter()); }
 break;
 case 53:
+<<<<<<< HEAD
 //#line 164 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 >>>>>>> 733ee4b... Agregado size y TS
+=======
+//#line 178 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+>>>>>>> 3ddb440... Update Parser / ElementoTS :+1:
 { 
-                semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() + ": Asignaci󮢩"); 
+                semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() + ": Asignación"); 
                 stackOfLines.pop();
             }
 break;
@@ -1125,8 +1190,12 @@ case 51:
 //#line 157 "gramatica.y"
 =======
 case 54:
+<<<<<<< HEAD
 //#line 170 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 >>>>>>> 733ee4b... Agregado size y TS
+=======
+//#line 184 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+>>>>>>> 3ddb440... Update Parser / ElementoTS :+1:
 { 
 stackOfLines.push(lex.getNewLineCounter()); 
 if(symbolTable.get(val_peek(0).sval).getDeclaracion() == false)
@@ -1134,7 +1203,7 @@ if(symbolTable.get(val_peek(0).sval).getDeclaracion() == false)
 }
 break;
 case 55:
-//#line 175 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+//#line 189 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 { 
 stackOfLines.push(lex.getNewLineCounter());
 if(symbolTable.get(val_peek(3).sval).getDeclaracion() == false)
@@ -1162,8 +1231,12 @@ case 58:
 >>>>>>> f713e33... comentario generico
 =======
 case 62:
+<<<<<<< HEAD
 //#line 192 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 >>>>>>> 733ee4b... Agregado size y TS
+=======
+//#line 206 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+>>>>>>> 3ddb440... Update Parser / ElementoTS :+1:
 {
 		if(symbolTable.get(val_peek(0).sval).getDeclaracion() == false)
 		        	msgStack.addMsg("ERROR: Variable no declarada.");
@@ -1183,8 +1256,12 @@ case 59:
 >>>>>>> f713e33... comentario generico
 =======
 case 63:
+<<<<<<< HEAD
 //#line 196 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 >>>>>>> 733ee4b... Agregado size y TS
+=======
+//#line 210 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+>>>>>>> 3ddb440... Update Parser / ElementoTS :+1:
 {
 		        String lexeme = val_peek(0).sval;
 		        ElementoTS tts = symbolTable.get(lexeme);
@@ -1219,8 +1296,12 @@ case 61:
 //#line 202 "gramatica.y"
 =======
 case 64:
+<<<<<<< HEAD
 //#line 215 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 >>>>>>> 733ee4b... Agregado size y TS
+=======
+//#line 229 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+>>>>>>> 3ddb440... Update Parser / ElementoTS :+1:
 {
 		if(symbolTable.get(val_peek(3).sval).getDeclaracion() == false)
 		        	msgStack.addMsg("ERROR: Variable no declarada.");
@@ -1232,8 +1313,12 @@ case 62:
 >>>>>>> f713e33... comentario generico
 =======
 case 65:
+<<<<<<< HEAD
 //#line 219 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 >>>>>>> 733ee4b... Agregado size y TS
+=======
+//#line 233 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+>>>>>>> 3ddb440... Update Parser / ElementoTS :+1:
 {
 		        String lexeme = val_peek(0).sval;
 		        ElementoTS tts = symbolTable.get(lexeme);
@@ -1265,8 +1350,12 @@ case 62:
 >>>>>>> f713e33... comentario generico
 =======
 case 66:
+<<<<<<< HEAD
 //#line 237 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 >>>>>>> 733ee4b... Agregado size y TS
+=======
+//#line 251 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+>>>>>>> 3ddb440... Update Parser / ElementoTS :+1:
 {
                 semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() +": Sentencia print");
                 stackOfLines.pop();
@@ -1289,54 +1378,55 @@ break;
 =======
 >>>>>>> 733ee4b... Agregado size y TS
 case 67:
-//#line 243 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+//#line 257 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 { stackOfLines.push(lex.getNewLineCounter()); }
 break;
 case 68:
-//#line 246 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
-{ msgStack.addMsg("Warning: Declaraci󮠤e bloque sin contenido"); }
+//#line 260 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{ msgStack.addMsg("Warning: Declaración de bloque sin contenido"); }
 break;
 case 69:
-//#line 247 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
-{ msgStack.addMsg("Error: Comparaci󮠩ncompleta"); }
+//#line 261 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{ msgStack.addMsg("Error: Comparación incompleta"); }
 break;
 case 70:
-//#line 248 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
-{ msgStack.addMsg("Error: Declaraci󮠤e IF sin condici󮢩"); }
+//#line 262 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{ msgStack.addMsg("Error: Declaración de IF sin condición"); }
 break;
 case 71:
-//#line 249 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
-{ msgStack.addMsg("Error: Declaracion de FOREACH sin ?ice y sin colecci󮢩"); }
+//#line 263 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{ msgStack.addMsg("Error: Declaracion de FOREACH sin índice y sin colección"); }
 break;
 case 72:
-//#line 250 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
-{ msgStack.addMsg("Error: Declaracion de FOREACH sin colecci󮢩"); }
+//#line 264 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{ msgStack.addMsg("Error: Declaracion de FOREACH sin colección"); }
 break;
 case 73:
-//#line 251 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
-{ msgStack.addMsg("Error: Declaracion de FOREACH sin ?ice"); }
+//#line 265 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{ msgStack.addMsg("Error: Declaracion de FOREACH sin índice"); }
 break;
 case 74:
-//#line 252 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+//#line 266 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 { msgStack.addMsg("Error: Nombre y valor de posicion de coleccion faltante"); }
 break;
 case 75:
-//#line 253 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+//#line 267 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 { msgStack.addMsg("Error: Nombre de coleccion faltante"); }
 break;
 case 76:
-//#line 254 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+//#line 268 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 { msgStack.addMsg("Error: Corchete de apertura faltante"); }
 break;
 case 77:
-//#line 255 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+//#line 269 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 { msgStack.addMsg("Error: Corchete de cierre faltante"); }
 break;
 case 78:
-//#line 256 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
-{ msgStack.addMsg("Error: Constante a la izquierda de una asignaci󮢩"); }
+//#line 270 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{ msgStack.addMsg("Error: Constante a la izquierda de una asignación"); }
 break;
 case 79:
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 //#line 218 "gramatica_2.y"
@@ -1416,21 +1506,29 @@ break;
 =======
 //#line 257 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 { msgStack.addMsg("Error: Sentencia invᬩda"); }
+=======
+//#line 271 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{ msgStack.addMsg("Error: Sentencia inválida"); }
+>>>>>>> 3ddb440... Update Parser / ElementoTS :+1:
 break;
 case 80:
-//#line 258 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+//#line 272 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 { msgStack.addMsg("Error: Constantes declaradas con tipo"); }
 break;
 case 81:
-//#line 259 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+//#line 273 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 { msgStack.addMsg("Error: Falta de separador entre valores constantes"); }
 break;
 case 82:
-//#line 260 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
-{ msgStack.addMsg("Error: Sentencia de asignaci󮠩nvᬩda"); }
+//#line 274 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
+{ msgStack.addMsg("Error: Sentencia de asignación inválida"); }
 break;
+<<<<<<< HEAD
 //#line 820 "Parser.java"
 >>>>>>> 733ee4b... Agregado size y TS
+=======
+//#line 852 "Parser.java"
+>>>>>>> 3ddb440... Update Parser / ElementoTS :+1:
 //########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####

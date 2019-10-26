@@ -9,6 +9,7 @@ public class ElementoTS{
 	private String estructuraID;
 	private int cSize; //tamaño de la coleccion
 
+
 	public ElementoTS(String tipoToken, String tipoAtributo){
 		//Para CTEs
 		this.tipoToken = tipoToken;
@@ -58,7 +59,7 @@ public class ElementoTS{
 		this.declaracion=dato;
 	}
 	
-	public void setCSize(int dato) {this.cSize = dato;}
+	public void setCSize(String dato) {this.cSize = Integer.valueOf(dato);}
 	
 	public boolean getDeclaracion(){return this.declaracion;}
 	
