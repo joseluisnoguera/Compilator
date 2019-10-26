@@ -16,7 +16,7 @@
 
 
 
-//#line 2 
+//#line 2 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 package logic;
 import java.util.Hashtable;
 import logic.Lexicon;
@@ -946,16 +946,16 @@ case 14:
 		if(!symbolTable.get(val_peek(0).sval).getDeclaracion())
 			symbolTable.get(val_peek(0).sval).setDeclaracion(true);
 		else
-			msgStack.addMsg("Error: variable"+ val_peek(0).sval+" re-declarada en el número de línea " + lex.getNewLineCounter());
+			msgStack.addMsg("Error: variable "+ val_peek(0).sval+" re-declarada en el número de línea " + lex.getNewLineCounter());
 		}
 break;
 case 15:
 //#line 50 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 {
-		if(!symbolTable.get(val_peek(2).sval).getDeclaracion())
-			symbolTable.get(val_peek(2).sval).setDeclaracion(true);
+		if(!symbolTable.get(val_peek(0).sval).getDeclaracion())
+			symbolTable.get(val_peek(0).sval).setDeclaracion(true);
 		else
-			msgStack.addMsg("Error: variable"+ val_peek(2).sval+" re-declarada en el número de línea " + lex.getNewLineCounter());
+			msgStack.addMsg("Error: variable "+ val_peek(0).sval+" re-declarada en el número de línea " + lex.getNewLineCounter());
 		}
 break;
 case 16:
@@ -968,7 +968,7 @@ case 16:
 			countSize=0;
 		}
 		else
-			msgStack.addMsg("Error: coleccion"+ val_peek(3).sval+"re-declarada en el número de línea " + lex.getNewLineCounter());;
+			msgStack.addMsg("Error: coleccion "+ val_peek(3).sval+" re-declarada en el número de línea " + lex.getNewLineCounter());;
 		}
 break;
 case 17:
@@ -976,12 +976,12 @@ case 17:
 {
 		if(!symbolTable.get(val_peek(5).sval).getDeclaracion())
 		{
-			symbolTable.get(val_peek(5).sval).setDeclaracion(true);
-			symbolTable.get(val_peek(5).sval).setCSize(String.valueOf(countSize));/*setea tamanio de arreglo de val iniciales*/
+			symbolTable.get(val_peek(3).sval).setDeclaracion(true);
+			symbolTable.get(val_peek(3).sval).setCSize(String.valueOf(countSize));/*setea tamanio de arreglo de val iniciales*/
 			countSize=0;
 		}
 		else
-			msgStack.addMsg("Error: coleccion"+ val_peek(5).sval+" re-declarada en el número de línea " + lex.getNewLineCounter());
+			msgStack.addMsg("Error: coleccion "+ val_peek(3).sval+" re-declarada en el número de línea " + lex.getNewLineCounter());
 		}
 break;
 case 18:
@@ -993,7 +993,7 @@ case 18:
 			symbolTable.get(val_peek(5).sval).setCSize(val_peek(1).sval);
 		}
 		else
-			msgStack.addMsg("Error: coleccion"+ val_peek(5).sval+"re-declarada en el número de línea " + lex.getNewLineCounter());;
+			msgStack.addMsg("Error: coleccion"+ val_peek(5).sval+" re-declarada en el número de línea " + lex.getNewLineCounter());;
 		}
 >>>>>>> f713e33... comentario generico
 break;
@@ -1006,13 +1006,13 @@ case 26:
 case 19:
 //#line 87 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
 {
-		if(!symbolTable.get(val_peek(7).sval).getDeclaracion())
+		if(!symbolTable.get(val_peek(5).sval).getDeclaracion())
 		{
-			symbolTable.get(val_peek(7).sval).setDeclaracion(true);
-			symbolTable.get(val_peek(7).sval).setCSize(val_peek(1).sval);
+			symbolTable.get(val_peek(5).sval).setDeclaracion(true);
+			symbolTable.get(val_peek(5).sval).setCSize(val_peek(1).sval);
 		}
 		else
-			msgStack.addMsg("Error: coleccion"+ val_peek(7).sval+" re-declarada en el número de línea " + lex.getNewLineCounter());
+			msgStack.addMsg("Error: coleccion "+ val_peek(5).sval+" re-declarada en el número de línea " + lex.getNewLineCounter());
 		}
 break;
 case 20:
