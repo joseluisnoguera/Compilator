@@ -152,6 +152,7 @@ public class Lexicon {
 					tokenStack.addMsg("=="); //Si es = solo, lo completa como comparación
 					return new Token(EQ);
 			case 8:
+<<<<<<< HEAD
 					tokenStack.addMsg("Asignación"); //Si es :, lo completa como asignación
 					return new Token(ASSIGN);
 <<<<<<< HEAD
@@ -285,6 +286,16 @@ public class Lexicon {
 				}
 =======
 >>>>>>> 569d5c9... varios
+=======
+					if (currentLexeme.length() == 1) { // Solo :
+						tokenStack.addMsg(currentLexeme);
+						return new Token((int)(currentLexeme.charAt(0)));
+					}
+					else if (currentLexeme.equals(":=")) {
+						tokenStack.addMsg("Asignación"); //Si es :, lo completa como asignación
+						return new Token(ASSIGN);
+					}
+>>>>>>> cdec646... Repair err :
 		}
 		return null; //No llega acá, es para que no de error por falta de retorno
 >>>>>>> 0999ae6... varios
@@ -464,21 +475,21 @@ public class Lexicon {
 		stateMachine[7][14] = new StateAndSemAction(7, null);
 		
 		//Nuevo estado//
-		stateMachine[8][0]  = new StateAndSemAction(-1, new SemanticActionInvalidAndReturn());
-		stateMachine[8][1]  = new StateAndSemAction(-1, new SemanticActionInvalidAndReturn());
-		stateMachine[8][2]  = new StateAndSemAction(-1, new SemanticActionInvalidAndReturn());
-		stateMachine[8][3]  = new StateAndSemAction(-1, new SemanticActionInvalidAndReturn());
-		stateMachine[8][4]  = new StateAndSemAction(-1, new SemanticActionInvalidAndReturn());
-		stateMachine[8][5]  = new StateAndSemAction(-1, new SemanticActionInvalidAndReturn());
-		stateMachine[8][6]  = new StateAndSemAction(-1, new SemanticActionInvalidAndReturn());
-		stateMachine[8][7]  = new StateAndSemAction(-1, new SemanticActionInvalidAndReturn());
-		stateMachine[8][8]  = new StateAndSemAction(-1, new SemanticActionInvalidAndReturn());
+		stateMachine[8][0]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
+		stateMachine[8][1]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
+		stateMachine[8][2]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
+		stateMachine[8][3]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
+		stateMachine[8][4]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
+		stateMachine[8][5]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
+		stateMachine[8][6]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
+		stateMachine[8][7]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
+		stateMachine[8][8]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
 		stateMachine[8][9]  = new StateAndSemAction(-1, new SemanticActionAddCharacter());
-		stateMachine[8][10] = new StateAndSemAction(-1, new SemanticActionInvalidAndReturn());
-		stateMachine[8][11] = new StateAndSemAction(-1, new SemanticActionInvalidAndReturn());
-		stateMachine[8][12] = new StateAndSemAction(-1, new SemanticActionInvalidAndReturn());
-		stateMachine[8][13] = new StateAndSemAction(-1, new SemanticActionInvalidAndReturn());
-		stateMachine[8][14] = new StateAndSemAction(-1, new SemanticActionInvalidAndReturn());
+		stateMachine[8][10] = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
+		stateMachine[8][11] = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
+		stateMachine[8][12] = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
+		stateMachine[8][13] = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
+		stateMachine[8][14] = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
 	}
 
 	public boolean isReady(){ return (ready == 0); }
