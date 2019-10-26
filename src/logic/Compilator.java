@@ -1,9 +1,11 @@
 package logic;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
 import utils.MsgStack;
+import utils.SintacticTree;
 import utils.ElementoTS;
 
 /*
@@ -15,7 +17,7 @@ public class Compilator {
 	private static Compilator single_instance = null;
 	private Hashtable<String, ElementoTS> symbolTable;
 	private MsgStack msgStack, semanticStructStack, tokenStack;
-	
+	private ArrayList<SintacticTree> sintacTree;
 	private Lexicon lexicon;
 	private Parser parser;
 
@@ -41,7 +43,9 @@ public class Compilator {
 		tokenStack = new MsgStack();
 		symbolTable = new Hashtable<String, ElementoTS>();
 		lexicon = new Lexicon(programBuffer, msgStack, tokenStack, symbolTable);
-		parser = new Parser(lexicon, symbolTable, msgStack, semanticStructStack);
+		this.sintacTree=new ArrayList<>();
+		parser = new Parser(lexicon, symbolTable, msgStack, semanticStructStack, sintacTree);
+
 	}
 >>>>>>> 04b8288... agregado parte del comportamiento de ventana y TODO's
 
