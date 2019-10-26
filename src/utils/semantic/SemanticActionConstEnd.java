@@ -14,7 +14,7 @@ public class SemanticActionConstEnd implements SemanticAction{
 		double value = new Double(lexeme).doubleValue();
 		if (value <= 32768) {
 			//agregar entero
-			ElementoTS tupla = new ElementoTS("CTE", "int");
+			ElementoTS tupla = new ElementoTS("CTE","", "int");
 			Lex.putSymbolTable(lexeme, tupla);
 		} else {
 			if(value > Math.pow(2, 31)) {
@@ -26,7 +26,7 @@ public class SemanticActionConstEnd implements SemanticAction{
 			if(Lex.containsKey(lexeme)) 
 				Lex.increaseCounterSymbolTable();
 			else {
-				ElementoTS tupla = new ElementoTS("CTE", "long");
+				ElementoTS tupla = new ElementoTS("CTE","", "long");
 				Lex.putSymbolTable(lexeme, tupla);
 			}
 		}

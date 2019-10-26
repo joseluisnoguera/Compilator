@@ -15,7 +15,7 @@ public class SemanticActionReturnAndAdd implements SemanticAction{
 		if(Lex.getSymbolTable().containsKey(Lex.getCurrentLexeme())) 
 			Lex.increaseCounterSymbolTable();
 		else {
-			ElementoTS tupla = new ElementoTS("CAD");
+			ElementoTS tupla = new ElementoTS("CAD","","");
 			Lex.putSymbolTable(Lex.getCurrentLexeme(), tupla);
 		}
 	}

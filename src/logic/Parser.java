@@ -1275,7 +1275,7 @@ case 63:
 			        if(symbolTable.containsKey(lexnuevo)){
 			    	    symbolTable.get(lexnuevo).increaseCounter();
 			        }else {
-			    	    ElementoTS ttsnuevo = new ElementoTS(tts.getValue(),tts.getTipoAtributo());
+			    	    ElementoTS ttsnuevo = new ElementoTS(tts.getTipoAtributo(),tts.getValue(),"");
 			    	    symbolTable.put(lexnuevo,ttsnuevo);
 		    	    }
 			        msgStack.addMsg("Warning: Constante positiva fuera de rango.");
@@ -1325,7 +1325,7 @@ case 65:
 		        String lexnuevo = "-" + lexeme;
 		        val_peek(0).sval = lexnuevo;
 		        if(!symbolTable.containsKey(lexnuevo)){
-		    	    ElementoTS ttsneg = new ElementoTS(tts.getValue(),tts.getTipoAtributo());
+		    	    ElementoTS ttsneg = new ElementoTS(tts.getTipoAtributo(),tts.getValue(),"");
 		    	    symbolTable.put(lexnuevo,ttsneg);
 		        }else{
 		    	    symbolTable.get(lexnuevo).increaseCounter();

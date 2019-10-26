@@ -114,7 +114,7 @@ public class Lexicon {
 				//Ver si el lexema es un PR, sino es un ID
 				if (symbolTable.get(currentLexeme).getTipoToken().equals("PR")) {
 					tokenStack.addMsg("Palabra reservada " + currentLexeme);
-					return new Token(symbolTable.get(currentLexeme).getValue());
+					return new Token(Integer.valueOf(symbolTable.get(currentLexeme).getValue()));
 				}
 				else {
 					tokenStack.addMsg("Identificador " + currentLexeme);
@@ -305,17 +305,17 @@ public class Lexicon {
 	private void initSimbTable()
 	{
 		//Carga de todas las palabras reservadas (PR) en la tabla de símbolos
-		symbolTable.put("begin", new ElementoTS(257,"PR"));
-		symbolTable.put("end", new ElementoTS(258,"PR"));
-		symbolTable.put("int", new ElementoTS(261,"PR"));
-		symbolTable.put("long", new ElementoTS(262,"PR"));
-		symbolTable.put("if", new ElementoTS(263,"PR"));
-		symbolTable.put("else", new ElementoTS(264,"PR"));
-		symbolTable.put("end_if", new ElementoTS(265,"PR"));
-		symbolTable.put("foreach", new ElementoTS(266,"PR"));
-		symbolTable.put("in", new ElementoTS(267,"PR"));
-		symbolTable.put("print", new ElementoTS(268,"PR"));
-		symbolTable.put("size", new ElementoTS(275,"PR"));
+		symbolTable.put("begin", new ElementoTS("PR", String.valueOf(257), null));
+		symbolTable.put("end", new ElementoTS("PR", String.valueOf(258), null));;
+		symbolTable.put("int", new ElementoTS("PR", String.valueOf(261), null));
+		symbolTable.put("long", new ElementoTS("PR", String.valueOf(262), null));
+		symbolTable.put("if", new ElementoTS("PR", String.valueOf(263), null));
+		symbolTable.put("else", new ElementoTS("PR", String.valueOf(264), null));
+		symbolTable.put("end_if", new ElementoTS("PR", String.valueOf(265), null));
+		symbolTable.put("foreach",new ElementoTS("PR", String.valueOf(266), null));
+		symbolTable.put("in", new ElementoTS("PR", String.valueOf(267), null));
+		symbolTable.put("print", new ElementoTS("PR", String.valueOf(268), null));
+		symbolTable.put("size", new ElementoTS("PR", String.valueOf(275), null));
 	}
 	
 	public void putSymbolTable(String lexeme, ElementoTS tupla) {
