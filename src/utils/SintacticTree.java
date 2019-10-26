@@ -1,16 +1,20 @@
 package utils;
 
-public class SintacticTree {
+public abstract class SintacticTree {
 	private SintacticTree izq;
 	private SintacticTree der;
-	private ElementoTS elem;
+	private String lexeme;
 	
-	public SintacticTree(){}
+	public SintacticTree(String lexeme){
+		this.lexeme=lexeme;
+		this.der=null;
+		this.izq=null;
+	}
 	
 	public SintacticTree getHijoIzq(){return this.izq;}
 	public SintacticTree getHijoDer() {return this.der;}
-	public ElementoTS getElem() {return this.elem;} 
+	public String getElem() {return this.lexeme;} 
 	public void setHijoIzq(SintacticTree izq) {this.izq=izq;}
 	public void setHijoDer(SintacticTree der) {this.der=der;}
-	public void setElem(ElementoTS elem) {this.elem=elem;}
+	public void setElem(String elem) {this.lexeme=elem;}
 }
