@@ -709,7 +709,7 @@ private Lexicon lex;
 private Hashtable<String,ElementoTS> symbolTable;
 private MsgStack msgStack;
 private MsgStack semanticStructStack;
-Stack<Integer> stackOfLines = new Stack<Integer>();
+private Stack<Integer> stackOfLines = new Stack<Integer>();
 private int numLineaDecl;
 private int countSize;
 private ArrayList<SintacticTree> sintacTree;
