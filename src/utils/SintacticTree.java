@@ -1,6 +1,6 @@
 package utils;
 
-public abstract class SintacticTree {
+public abstract class SintacticTree extends ParserVal {
 	private SintacticTree izq;
 	private SintacticTree der;
 	private String lexeme;

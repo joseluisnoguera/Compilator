@@ -8,6 +8,7 @@ public class ElementoTS{
 	private boolean declaracion;
 	private String estructuraID;
 	private int cSize; //tamaño de la coleccion
+	private int 
 
 	
 
