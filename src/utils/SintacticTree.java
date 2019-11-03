@@ -4,6 +4,7 @@ public abstract class SintacticTree extends ParserVal {
 	private SintacticTree izq;
 	private SintacticTree der;
 	private String lexeme;
+	private String tipo;
 	
 	public SintacticTree(String lexeme){
 		this.lexeme=lexeme;
@@ -11,6 +12,8 @@ public abstract class SintacticTree extends ParserVal {
 		this.izq=null;
 	}
 	
+	public String getTipo() {return this.tipo;}
+	public void setTipo(String tipo) {this.tipo=tipo;}
 	public SintacticTree getHijoIzq(){return this.izq;}
 	public SintacticTree getHijoDer() {return this.der;}
 	public String getElem() {return this.lexeme;} 

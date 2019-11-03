@@ -8,7 +8,8 @@ public class ElementoTS{
 	private boolean declaracion;
 	private String estructuraID;
 	private int cSize; //tamaño de la coleccion
-	private int 
+	private String elemsColecc;
+
 
 	
 
@@ -23,7 +24,9 @@ public class ElementoTS{
 		this.cSize = 0;
 	}
 
-
+	public String getElemsColecc() {return this.elemsColecc;}
+	
+	public void setElemsColecc(String elems) {this.elemsColecc=elems;}
 
 	public String getValue(){ return value; }
 
