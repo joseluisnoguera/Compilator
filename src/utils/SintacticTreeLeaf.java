@@ -7,5 +7,8 @@ public class SintacticTreeLeaf extends SintacticTree{
 		super(lex);
 	}
 	
-	
+	public String recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm) {
+		return "_" + super.getElem();
+	}
 }
+

@@ -5,7 +5,9 @@ import java.util.Hashtable;
 import java.util.List;
 
 import utils.MsgStack;
+import utils.RegisterTable;
 import utils.SintacticTree;
+import utils.SintacticTreeCtrl;
 import utils.ElementoTS;
 
 /*
@@ -17,9 +19,13 @@ public class Compilator {
 	private static Compilator single_instance = null;
 	private Hashtable<String, ElementoTS> symbolTable;
 	private MsgStack msgStack, semanticStructStack, tokenStack;
-	private ArrayList<SintacticTree> sintacTree;
 	private Lexicon lexicon;
 	private Parser parser;
+	private SintacticTreeCtrl nodoRaiz;
+	private RegisterTable registros;
+	private MsgStack comAssembler;
+	private MsgStack comInterm;
+	
 
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -43,9 +49,9 @@ public class Compilator {
 		tokenStack = new MsgStack();
 		symbolTable = new Hashtable<String, ElementoTS>();
 		lexicon = new Lexicon(programBuffer, msgStack, tokenStack, symbolTable);
-		this.sintacTree=new ArrayList<>();
-		parser = new Parser(lexicon, symbolTable, msgStack, semanticStructStack, sintacTree);
-
+		parser = new Parser(lexicon, symbolTable, msgStack, semanticStructStack);
+		
+	//	nodoRaiz.recorreArbol(registros, comAssembler, comInterm);
 	}
 >>>>>>> 04b8288... agregado parte del comportamiento de ventana y TODO's
 
@@ -57,7 +63,11 @@ public class Compilator {
 	public void compilate() {
 		int i = parser.yyparse();
 		if (i == 0)
+			{
 			System.out.println("Parser correcto");
+			nodoRaiz=((SintacticTreeCtrl)parser.getRaiz());
+			System.out.println(nodoRaiz.getElem());
+			}
 		else
 			System.out.println("Error en parser");
 	}
