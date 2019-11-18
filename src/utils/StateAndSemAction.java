@@ -1,6 +1,6 @@
 package utils;
 
-import utils.semantic.SemanticAction;
+import utils.semanticActions.SemanticAction;
 
 public class StateAndSemAction {
 	private int state;

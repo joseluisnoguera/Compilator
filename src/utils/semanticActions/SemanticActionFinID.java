@@ -1,4 +1,4 @@
-package utils.semantic;
+package utils.semanticActions;
 
 import logic.Lexicon;
 import utils.ElementoTS;
@@ -19,7 +19,7 @@ public class SemanticActionFinID implements SemanticAction{
 		if(Lex.getSymbolTable().containsKey(lexeme)) 
 			Lex.increaseCounterSymbolTable();
 		else {
-			ElementoTS tupla = new ElementoTS("ID","","");
+			ElementoTS tupla = new ElementoTS(ElementoTS.ID,"","");
 			Lex.putSymbolTable(lexeme, tupla);
 		}
 	}

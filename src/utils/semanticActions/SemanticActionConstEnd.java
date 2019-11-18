@@ -1,4 +1,4 @@
-package utils.semantic;
+package utils.semanticActions;
 
 import logic.Lexicon;
 import utils.ElementoTS;
@@ -11,10 +11,10 @@ public class SemanticActionConstEnd implements SemanticAction{
 	public void action(Lexicon Lex) {
 		Lex.returnCharacter();
 		String lexeme = Lex.getCurrentLexeme();
-		double value = new Double(lexeme).doubleValue();
+		double value = Double.parseDouble(lexeme);
 		if (value <= 32768) {
 			//agregar entero
-			ElementoTS tupla = new ElementoTS("CTE","", "int");
+			ElementoTS tupla = new ElementoTS(ElementoTS.CONST,"", ElementoTS.INT);
 			Lex.putSymbolTable(lexeme, tupla);
 		} else {
 			if(value > Math.pow(2, 31)) {
@@ -26,7 +26,7 @@ public class SemanticActionConstEnd implements SemanticAction{
 			if(Lex.containsKey(lexeme)) 
 				Lex.increaseCounterSymbolTable();
 			else {
-				ElementoTS tupla = new ElementoTS("CTE","", "long");
+				ElementoTS tupla = new ElementoTS(ElementoTS.CONST,"", ElementoTS.LONG);
 				Lex.putSymbolTable(lexeme, tupla);
 			}
 		}

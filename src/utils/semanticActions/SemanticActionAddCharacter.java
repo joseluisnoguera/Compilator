@@ -1,4 +1,4 @@
-package utils.semantic;
+package utils.semanticActions;
 
 import logic.Lexicon;
 

@@ -12,4 +12,17 @@ public class MsgStack {
 	public void addMsg(String msg) { msgs.add(msg); }
 	
 	public int getSize() { return msgs.size(); }
+	
+	public MsgStack addAll(MsgStack others) {
+		msgs.addAll(others.msgs);
+		return this;
+	}
+	
+	public String toString() {
+		String text = "";
+		for (int i = 0; i < msgs.size(); i++) {
+			text += msgs.get(i) + "\n";
+		}
+		return text;
+	}
 }

@@ -1,7 +1,11 @@
-package utils;
+package utils.sintacticTree;
 
 import java.util.Hashtable;
 import java.util.regex.*;
+
+import utils.ElementoTS;
+import utils.MsgStack;
+import utils.RegisterTable;
 
 public class SintacticTreeCommon extends SintacticTree {
 
@@ -12,13 +16,20 @@ public class SintacticTreeCommon extends SintacticTree {
 		super.setHijoDer(nodoDer);
 	}
 
-	public String recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm, Hashtable<String, ElementoTS> symbolTable) {
+	@Override
+	public String recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm,
+			Hashtable<String, ElementoTS> symbolTable) {
 		String datoIzq = super.getHijoIzq().recorreArbol(registros, comAssembler, comInterm,symbolTable);
 		String datoDer = super.getHijoDer().recorreArbol(registros, comAssembler, comInterm,symbolTable);
 
+		Pattern patron = Pattern.compile("_*");
+		Matcher matchIzq = patron.matcher(datoIzq);
+		Matcher matchDer = patron.matcher(datoDer);
+
 		String op="";
 
-		switch(super.getElem()){
+		switch(super.getElem())
+		{
 		case "+":
 			op="ADD";
 		case "-":
@@ -28,25 +39,23 @@ public class SintacticTreeCommon extends SintacticTree {
 		case "/":
 		{
 			op="DIV";
-			comAssembler.addMsg("CMP " + datoDer + ", " + 0);
-			comAssembler.addMsg("JZ _DivisionPorCero");//Salto al error del programa si el divisor es 0
-			/*
-					contEtiquetas++;
 
-					comAssembler.addMsg("CMP " + datoDer + ", " + 0);
-					comAssembler.addMsg("JZ _label" + contEtiquetas);//Salto al error del programa si el divisor es 0
-					comAssembler.addMsg("_label" + contEtiquetas + ":");
-					comAssembler.addMsg("invoke StdOut, addr _Errorlabel" + contEtiquetas);
+			contEtiquetas++;
 
-					ElementoTS tupla = new ElementoTS("_Errorlabel"+contEtiquetas, "", "Error: division por cero");
-					symbolTable.put("_Errorlabel"+contEtiquetas, tupla);
+			comAssembler.addMsg("ADD datoDer, "+0);
+			comAssembler.addMsg("JZ _label"+contEtiquetas);//Salto al error del programa si el divisor es 0
+			comAssembler.addMsg("_label"+contEtiquetas+":");
+			comAssembler.addMsg("invoke StdOut, addr _Errorlabel"+contEtiquetas);
 
-					contEtiquetas++;
+			ElementoTS tupla = new ElementoTS("_Errorlabel"+contEtiquetas, "", "Error: division por cero");
+			symbolTable.put("_Errorlabel"+contEtiquetas, tupla);
 
-					comAssembler.addMsg("JMP _label"+contEtiquetas);//salto al final del programa
-					comAssembler.addMsg("_label"+contEtiquetas+":");
+			contEtiquetas++;
 
-					comAssembler.addMsg("invoke ExitProcess, "+0);*/
+			comAssembler.addMsg("JMP _label"+contEtiquetas);//salto al final del programa
+			comAssembler.addMsg("_label"+contEtiquetas+":");
+
+			comAssembler.addMsg("invoke ExitProcess, "+0);
 		}
 		case ":=":
 		{
@@ -57,7 +66,11 @@ public class SintacticTreeCommon extends SintacticTree {
 			op="CMP";
 		}
 		}
-		if(esHoja(datoIzq) && esHoja(datoDer)){//si los dos son hojas
+		if( matchIzq.matches() && matchDer.matches()) 
+
+		{
+
+			//si los dos son hojas
 			int reg=registros.getRegFree();//obtener algun registro libre
 			boolean state=true;
 			registros.setRegTable(reg, state);
@@ -71,7 +84,7 @@ public class SintacticTreeCommon extends SintacticTree {
 			if(super.getElem() == "+" || super.getElem() == "*" || super.getElem()=="-" || super.getElem()==":=" || super.getElem()=="/")			
 
 
-				if(esHoja(datoIzq))//si el izquierdo es hoja;
+				if(matchIzq.matches())//si el izquierdo es hoja;
 					if(super.getElem() == "+" || super.getElem() == "*" || super.getElem()==":=")//es operacion conmutativa
 					{
 						comAssembler.addMsg(op+" "+datoDer+", "+datoIzq);//operacion sobre el mismo registro
@@ -90,7 +103,7 @@ public class SintacticTreeCommon extends SintacticTree {
 					}
 				else
 				{
-					if(esHoja(datoDer))
+					if(matchDer.matches())
 					{	//si el derecho es hoja;
 						comAssembler.addMsg(op+" "+datoIzq+", "+datoDer);
 						//comInterm.addMsg();
@@ -108,7 +121,7 @@ public class SintacticTreeCommon extends SintacticTree {
 
 			else 
 			{
-				if(esHoja(datoDer))
+				if(matchDer.matches())
 				{
 					comAssembler.addMsg("");
 				}
@@ -119,8 +132,5 @@ public class SintacticTreeCommon extends SintacticTree {
 
 			}
 		return datoDer;
-	}
-	public boolean esHoja(String dato) {
-		return ((dato.charAt(0) == '_') || ((dato.charAt(0) <= '9')&&(dato.charAt(0) >= '0')));
 	}
 }

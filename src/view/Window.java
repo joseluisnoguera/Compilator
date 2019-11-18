@@ -15,8 +15,11 @@ import javax.swing.JTextPane;
 import javax.swing.event.CaretListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
+import javax.swing.text.Document;
+import javax.swing.text.PlainDocument;
 
 import logic.Compilator;
+//import logic.Compilator;
 import utils.ElementoTS;
 import utils.FileUtils;
 import utils.MsgStack;
@@ -62,6 +65,7 @@ public class Window {
 	private JScrollPane scrollPane_EstructurasSemanticas;
 	private JEditorPane editorPaneSemanticStruct;
 	private JLabel lblEstructurasDetectas;
+	private JTextPane editorPaneSintacticTree;
 
 	/**
 	 * Launch the application.
@@ -92,9 +96,9 @@ public class Window {
 	private void initialize() {
 		frmCompilator = new JFrame();
 		frmCompilator.setTitle("Compilador");
-		frmCompilator.setBounds(100, 100, 900, 552);
+		frmCompilator.setBounds(100, 100, 1024, 645);
 		frmCompilator.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmCompilator.setMinimumSize(new Dimension(900, 600));
+		frmCompilator.setMinimumSize(new Dimension(1024, 645));
 		SpringLayout springLayout = new SpringLayout();
 		frmCompilator.getContentPane().setLayout(springLayout);
 		
@@ -215,9 +219,10 @@ public class Window {
 				programBuffer.add(END_OF_TEXT); //Caracter de fin de texto en ASCII, tiene que coordinar con el que se usa en Lexicon
 				Compilator compilator = Compilator.getInstance(programBuffer);
 				compilator.compilate();
-				editorPaneMsgs.setText(getStringFromStack(compilator.getMsgStack()));
-				editorPaneTokens .setText(getStringFromStack(compilator.getTokenStack()));
-				editorPaneSemanticStruct.setText(getStringFromStack(compilator.getSemanticStructStack()));
+				editorPaneMsgs.setText(compilator.getMsgStack().toString());
+				editorPaneTokens .setText(compilator.getTokenStack().toString());
+				editorPaneSemanticStruct.setText(compilator.getSemanticStructStack().toString());
+//				editorPaneSintacticTree.setText(getStringFromStack(compilator.getRecorrido()));
 				loadSymbolTable(compilator.getSimbTable());
 			}
 		});
@@ -234,10 +239,11 @@ public class Window {
 		frmCompilator.getContentPane().add(lblNumberLine);
 		
 		JScrollPane scrollPane_Codigo = new JScrollPane();
+		springLayout.putConstraint(SpringLayout.EAST, scrollPane_Codigo, 474, SpringLayout.WEST, frmCompilator.getContentPane());
+		scrollPane_Codigo.setAlignmentY(Component.TOP_ALIGNMENT);
 		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_Codigo, 6, SpringLayout.SOUTH, lblNumberLine);
 		springLayout.putConstraint(SpringLayout.WEST, scrollPane_Codigo, 10, SpringLayout.WEST, frmCompilator.getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_Codigo, -10, SpringLayout.SOUTH, frmCompilator.getContentPane());
-		springLayout.putConstraint(SpringLayout.EAST, scrollPane_Codigo, 0, SpringLayout.EAST, lblNumberLine);
 		frmCompilator.getContentPane().add(scrollPane_Codigo);
 		
 		editorPaneProgram = new JTextPane();
@@ -255,13 +261,17 @@ public class Window {
                 lblNumberLine.setText(LINE_COUNTER_MSG + row);
 			}
 		});
+		Document doc = editorPaneProgram.getDocument();
+		if (doc instanceof PlainDocument) {
+			System.out.println("entro");
+		    doc.putProperty(PlainDocument.tabSizeAttribute, 1);
+		} else
+			System.out.println("no entro");
 		scrollPane_Codigo.setViewportView(editorPaneProgram);
 		
 		JScrollPane scrollPane_Tokens = new JScrollPane();
 		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_Tokens, 6, SpringLayout.SOUTH, panel);
-		springLayout.putConstraint(SpringLayout.WEST, scrollPane_Tokens, -403, SpringLayout.EAST, panel);
-		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_Tokens, 116, SpringLayout.SOUTH, panel);
-		springLayout.putConstraint(SpringLayout.EAST, scrollPane_Tokens, 0, SpringLayout.EAST, panel);
+		springLayout.putConstraint(SpringLayout.EAST, scrollPane_Tokens, -10, SpringLayout.EAST, frmCompilator.getContentPane());
 		scrollPane_Tokens.setMaximumSize(new Dimension(403, 162));
 		scrollPane_Tokens.setMinimumSize(new Dimension(403, 162));
 		scrollPane_Tokens.setAutoscrolls(true);
@@ -281,10 +291,11 @@ public class Window {
 		lblTokens.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		
 		scrollPane_EstructurasSemanticas = new JScrollPane();
-		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_EstructurasSemanticas, 6, SpringLayout.SOUTH, scrollPane_Tokens);
-		springLayout.putConstraint(SpringLayout.WEST, scrollPane_EstructurasSemanticas, -403, SpringLayout.EAST, panel);
-		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_EstructurasSemanticas, 116, SpringLayout.SOUTH, scrollPane_Tokens);
-		springLayout.putConstraint(SpringLayout.EAST, scrollPane_EstructurasSemanticas, 0, SpringLayout.EAST, panel);
+		springLayout.putConstraint(SpringLayout.WEST, scrollPane_Tokens, 6, SpringLayout.EAST, scrollPane_EstructurasSemanticas);
+		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_EstructurasSemanticas, 0, SpringLayout.SOUTH, scrollPane_Tokens);
+		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_EstructurasSemanticas, 0, SpringLayout.NORTH, scrollPane_Tokens);
+		springLayout.putConstraint(SpringLayout.WEST, scrollPane_EstructurasSemanticas, 6, SpringLayout.EAST, scrollPane_Codigo);
+		springLayout.putConstraint(SpringLayout.EAST, scrollPane_EstructurasSemanticas, -273, SpringLayout.EAST, frmCompilator.getContentPane());
 		scrollPane_EstructurasSemanticas.setMinimumSize(new Dimension(403, 162));
 		scrollPane_EstructurasSemanticas.setMaximumSize(new Dimension(403, 162));
 		scrollPane_EstructurasSemanticas.setAlignmentX(Component.RIGHT_ALIGNMENT);
@@ -299,10 +310,10 @@ public class Window {
 		scrollPane_EstructurasSemanticas.setColumnHeaderView(lblEstructurasDetectas);
 		
 		JScrollPane scrollPane_TS = new JScrollPane();
-		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_TS, 6, SpringLayout.SOUTH, scrollPane_EstructurasSemanticas);
-		springLayout.putConstraint(SpringLayout.WEST, scrollPane_TS, -403, SpringLayout.EAST, panel);
-		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_TS, 116, SpringLayout.SOUTH, scrollPane_EstructurasSemanticas);
-		springLayout.putConstraint(SpringLayout.EAST, scrollPane_TS, 0, SpringLayout.EAST, panel);
+		springLayout.putConstraint(SpringLayout.WEST, scrollPane_TS, 6, SpringLayout.EAST, scrollPane_Codigo);
+		springLayout.putConstraint(SpringLayout.EAST, scrollPane_TS, -7, SpringLayout.EAST, frmCompilator.getContentPane());
+		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_Tokens, -6, SpringLayout.NORTH, scrollPane_TS);
+		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_TS, 166, SpringLayout.NORTH, frmCompilator.getContentPane());
 		scrollPane_TS.setMaximumSize(new Dimension(403, 162));
 		scrollPane_TS.setMinimumSize(new Dimension(403, 162));
 		scrollPane_TS.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -321,10 +332,10 @@ public class Window {
 		labelTablaSimbolos.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		
 		JScrollPane scrollPane_WarningYErrores = new JScrollPane();
-		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_WarningYErrores, 6, SpringLayout.SOUTH, scrollPane_TS);
-		springLayout.putConstraint(SpringLayout.WEST, scrollPane_WarningYErrores, -403, SpringLayout.EAST, panel);
-		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_WarningYErrores, 116, SpringLayout.SOUTH, scrollPane_TS);
-		springLayout.putConstraint(SpringLayout.EAST, scrollPane_WarningYErrores, 0, SpringLayout.EAST, panel);
+		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_WarningYErrores, 287, SpringLayout.NORTH, frmCompilator.getContentPane());
+		springLayout.putConstraint(SpringLayout.WEST, scrollPane_WarningYErrores, 6, SpringLayout.EAST, scrollPane_Codigo);
+		springLayout.putConstraint(SpringLayout.EAST, scrollPane_WarningYErrores, -7, SpringLayout.EAST, frmCompilator.getContentPane());
+		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_TS, -6, SpringLayout.NORTH, scrollPane_WarningYErrores);
 		scrollPane_WarningYErrores.setMinimumSize(new Dimension(403, 162));
 		scrollPane_WarningYErrores.setMaximumSize(new Dimension(403, 162));
 		scrollPane_WarningYErrores.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -341,6 +352,20 @@ public class Window {
 		scrollPane_WarningYErrores.setColumnHeaderView(lblWarningsYErrores);
 		lblWarningsYErrores.setAlignmentY(Component.TOP_ALIGNMENT);
 		lblWarningsYErrores.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		
+		JScrollPane scrollPane_ArbolSintactico = new JScrollPane();
+		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_ArbolSintactico, 408, SpringLayout.NORTH, frmCompilator.getContentPane());
+		springLayout.putConstraint(SpringLayout.WEST, scrollPane_ArbolSintactico, 6, SpringLayout.EAST, scrollPane_Codigo);
+		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_ArbolSintactico, -10, SpringLayout.SOUTH, frmCompilator.getContentPane());
+		springLayout.putConstraint(SpringLayout.EAST, scrollPane_ArbolSintactico, -7, SpringLayout.EAST, frmCompilator.getContentPane());
+		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_WarningYErrores, -6, SpringLayout.NORTH, scrollPane_ArbolSintactico);
+		frmCompilator.getContentPane().add(scrollPane_ArbolSintactico);
+		
+		editorPaneSintacticTree = new JTextPane();
+		scrollPane_ArbolSintactico.setViewportView(editorPaneSintacticTree);
+		
+		JLabel lblrbolSintctico = new JLabel("\u00C1rbol sint\u00E1ctico");
+		scrollPane_ArbolSintactico.setColumnHeaderView(lblrbolSintctico);
 	}
 	
 	private void loadSymbolTable(Hashtable<String, ElementoTS> symbolTable) {
@@ -349,16 +374,11 @@ public class Window {
 		for(String key:keys) {
 			ElementoTS elem = symbolTable.get(key);
 			text += "Token: " + elem.getTipoToken() + " - Tipo:" + elem.getTipoAtributo() + 
-					" - Lexema: " + key + " - Valor: " + elem.getValue() + "\n";
+					" - Lexema: " + key + " - Valor: " + elem.getValue() + " - Repeticiones: " + elem.getCantidad() +
+					" - Declarada: " + elem.isDeclarada() + " - Estructura: " + elem.getEstructuraID() +
+					" - Tamaño en Bytes(Colecciones): " + elem.getCSizeBytes() + " - Elementos en colección: " + elem.getElemsCollection() +
+					" - Id único(Cadenas y variables auxiliares): " + elem.getId() + "\n";
 		}
 		editorPaneSymbolTable.setText(text);
-	}
-	
-	private String getStringFromStack(MsgStack stack) {
-		String text = "";
-		for (int i = 0; i < stack.getSize(); i++) {
-			text += stack.getMsg(i) + "\n";
-		}
-		return text;
 	}
 }

@@ -1,18 +1,25 @@
 package logic;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
 import utils.MsgStack;
 import utils.RegisterTable;
-import utils.SintacticTree;
-import utils.SintacticTreeCtrl;
+import utils.sintacticTree.SintacticTreeCtrl;
 import utils.ElementoTS;
 
 /*
- * Cambios: Pase la creación de estructuras al constructor así no están como estáticas, quedando más acorde con el patrón singletón
- * Agregue los stack para obtener los Token del léxico y las estructuras semánticas del Parser
+ *TODO: En recorre árbol que guarde el mismo árbol para mostrar
+ *TODO: Ver como hacer código assembler para print
+ *TODO: En compilator que junte todo el assembler y agregue lo faltante
+ *TODO: Llevar códigos de errores dinámicos y la funcion de print al objeto que junta todo el assembler
+ *TODO: Que file utils guarde en archivo el stack de assembler
+ *TODO: Revisar Nodo common
+ *TODO: Revisar si gramática es correcta
+ *TODO: Agregar '_' en los ID en la gramática (para el árbol de parser)
+ *TODO: Función para pedir registros específicos (CWD usa EAX, la multiplicación usa EDX y EAX), el genérico devuelve cualquiera menos EAX
+ *TODO: Revisar que todos los recorre árbol liberen los registros que usaron
+ *TODO: Dejar siempre libre EAX
  */
 
 public class Compilator {
@@ -25,7 +32,7 @@ public class Compilator {
 	private RegisterTable registros;
 	private MsgStack comAssembler;
 	private MsgStack comInterm;
-	
+
 
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -50,8 +57,8 @@ public class Compilator {
 		symbolTable = new Hashtable<String, ElementoTS>();
 		lexicon = new Lexicon(programBuffer, msgStack, tokenStack, symbolTable);
 		parser = new Parser(lexicon, symbolTable, msgStack, semanticStructStack);
-		
-	//	nodoRaiz.recorreArbol(registros, comAssembler, comInterm);
+
+		//	nodoRaiz.recorreArbol(registros, comAssembler, comInterm);
 	}
 >>>>>>> 04b8288... agregado parte del comportamiento de ventana y TODO's
 
@@ -59,25 +66,24 @@ public class Compilator {
 		single_instance = new Compilator(programBuffer); //Lo usamos así para cree siempre uno nuevo, así renueva el program buffer
 		return single_instance;
 	}
-	
+
 	public void compilate() {
 		int i = parser.yyparse();
-		if (i == 0)
-			{
+		if (i == 0) {
 			System.out.println("Parser correcto");
-			nodoRaiz=((SintacticTreeCtrl)parser.getRaiz());
+			nodoRaiz = ((SintacticTreeCtrl)parser.getRaiz());
 			System.out.println(nodoRaiz.getElem());
-			}
+		}
 		else
 			System.out.println("Error en parser");
 	}
-	
+
 	public MsgStack getMsgStack() { return msgStack; }
-	
+
 	public MsgStack getTokenStack() { return tokenStack; }
-	
+
 	public MsgStack getSemanticStructStack() { return semanticStructStack; }
-	
+
 	public Hashtable<String, ElementoTS> getSimbTable() { return symbolTable; }
 }
 

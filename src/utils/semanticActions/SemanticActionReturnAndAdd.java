@@ -1,4 +1,4 @@
-package utils.semantic;
+package utils.semanticActions;
 
 import logic.Lexicon;
 import utils.ElementoTS;
@@ -15,7 +15,7 @@ public class SemanticActionReturnAndAdd implements SemanticAction{
 		if(Lex.getSymbolTable().containsKey(Lex.getCurrentLexeme())) 
 			Lex.increaseCounterSymbolTable();
 		else {
-			ElementoTS tupla = new ElementoTS("CAD","","");
+			ElementoTS tupla = new ElementoTS(ElementoTS.CAD,"","");
 			Lex.putSymbolTable(Lex.getCurrentLexeme(), tupla);
 		}
 	}
