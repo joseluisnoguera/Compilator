@@ -20,7 +20,7 @@ public class AssemblerGenerator {
 		asm.addMsg(".code");
 		asm.addMsg("start:");
 		asm.addAll(code);
-		//TODO: Agregar funciones de errores dinámicos y print
+		asm.addAll(getExtraFunctions());
 		asm.addMsg("end start");
 		return asm;
 	}
@@ -51,5 +51,15 @@ public class AssemblerGenerator {
 			}			
 		}
 		return data;
+	}
+	
+	private static MsgStack getExtraFunctions() {
+		MsgStack extra = new MsgStack();
+		//TODO: Agregar funciones de control dinámico
+//		extra.addMsg("_");
+		extra.addMsg("_print:"); //El print debe tener el puntero al mensaje en eax, debe pasarse como: lea eax, NombreCadena
+		extra.addMsg("invoke MessageBox, NULL, eax, eax, MB_OK");
+		extra.addMsg("invoke ExitProcess, 0");
+		return extra;
 	}
 }

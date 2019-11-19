@@ -33,7 +33,7 @@ public class Compilator {
 	private Parser parser;
 	private SyntacticTreeCtrl nodoRaiz;
 	private RegisterTable registros;
-	private MsgStack assemblerCod;
+	private MsgStack assemblerCode;
 	private MsgStack syntaticTree;
 
 
@@ -64,7 +64,7 @@ public class Compilator {
 >>>>>>> 04b8288... agregado parte del comportamiento de ventana y TODO's
 
 	public static Compilator getInstance(List<Integer> programBuffer) {
-		single_instance = new Compilator(programBuffer); //Lo usamos así para cree siempre uno nuevo, así renueva el program buffer
+		single_instance = new Compilator(programBuffer); //Lo usamos así para que cree siempre uno nuevo, así renueva el program buffer
 		return single_instance;
 	}
 
@@ -73,8 +73,8 @@ public class Compilator {
 		if (i == 0) {
 			System.out.println("Parser correcto");
 			nodoRaiz = ((SyntacticTreeCtrl)parser.getRaiz());
-			nodoRaiz.recorreArbol(registros, assemblerCod, syntaticTree, symbolTable, 0);
-			assemblerCod = AssemblerGenerator.getAssembler(symbolTable, assemblerCod);
+			nodoRaiz.recorreArbol(registros, assemblerCode, syntaticTree, symbolTable, "");
+			assemblerCode = AssemblerGenerator.getAssembler(symbolTable, assemblerCode);
 		}
 		else
 			System.out.println("Error en parser");
@@ -86,11 +86,11 @@ public class Compilator {
 
 	public MsgStack getSemanticStructStack() { return semanticStructStack; }
 	
-	public MsgStack getAssemblerCod() { return assemblerCod; }
+	public MsgStack getAssemblerCode() { return assemblerCode; }
 	
 	public MsgStack getSyntacticTree() { return syntaticTree; }
 
-	public Hashtable<String, ElementoTS> getSimbTable() { return symbolTable; }
+	public Hashtable<String, ElementoTS> getSymbTable() { return symbolTable; }
 }
 
 

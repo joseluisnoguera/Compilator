@@ -134,7 +134,7 @@ public class SyntacticTreeCommon extends SyntacticTree {
 						comAssembler.addMsg("MOV EAX, "+datoIzq);				//devuelvo codigo assembler correspondiente
 						comAssembler.addMsg("IMUL EAX, "+datoDer);
 						reg = registros.getRegFreeLong();
-						comAssembler.addMsg(/*comando para reducir a EAX el contenido de EDX:EAX*/);
+//						comAssembler.addMsg(/*comando para reducir a EAX el contenido de EDX:EAX*/); //Línea comentada para poder compilar
 						comAssembler.addMsg("MOV " + reg + ", EAX");
 						return reg;
 					}

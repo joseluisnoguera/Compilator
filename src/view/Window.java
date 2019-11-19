@@ -118,9 +118,9 @@ public class Window {
 		frmCompilator = new JFrame();
 		frmCompilator.setResizable(false);
 		frmCompilator.setTitle("Compilador");
-		frmCompilator.setBounds(100, 100, 1024, 800);
+		frmCompilator.setBounds(100, 100, 1024, 700);
 		frmCompilator.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmCompilator.setMinimumSize(new Dimension(1024, 800));
+		frmCompilator.setMinimumSize(new Dimension(1024, 700));
 		SpringLayout springLayout = new SpringLayout();
 		frmCompilator.getContentPane().setLayout(springLayout);
 		
@@ -218,6 +218,9 @@ public class Window {
 			public void mouseClicked(MouseEvent e) {
 				if (file_selected == null) {
 					final JFileChooser dialog = new JFileChooser (FileSystemView.getFileSystemView().getHomeDirectory());
+					dialog.setApproveButtonText("Save");
+					dialog.setApproveButtonMnemonic('S');
+					dialog.setApproveButtonToolTipText("Save a file \"txt\"");
 					FileNameExtensionFilter filter = new FileNameExtensionFilter("\".txt\"", "txt", "text");
 					dialog.setFileFilter(filter);
 					dialog.setDialogTitle(SEARCH_MSG);
@@ -244,13 +247,15 @@ public class Window {
 							e1.printStackTrace();
 							JOptionPane.showMessageDialog(new JFrame(), FILE_CREATE_ERROR_MSG, "Warning", JOptionPane.ERROR_MESSAGE);
 						}
-					}
+					}						
 				}
-				int writed = FileUtils.saveFile(file_selected, editorPaneProgram.getText());
-				if (writed == FileUtils.SAVE_CORRECT)
-					JOptionPane.showMessageDialog(new JFrame(), SAVE_CORRECT_MSG, "Guardado", JOptionPane.PLAIN_MESSAGE);
-				else
-					JOptionPane.showMessageDialog(new JFrame(), SAVE_ERROR_MSG, "Warning", JOptionPane.ERROR_MESSAGE);
+				if (file_selected != null) {
+					int writed = FileUtils.saveFile(file_selected, editorPaneProgram.getText());
+					if (writed == FileUtils.SAVE_CORRECT)
+						JOptionPane.showMessageDialog(new JFrame(), SAVE_CORRECT_MSG, "Guardado", JOptionPane.PLAIN_MESSAGE);
+					else
+						JOptionPane.showMessageDialog(new JFrame(), SAVE_ERROR_MSG, "Warning", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		btnSave.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -272,8 +277,8 @@ public class Window {
 					editorPaneMsgs.setText(compilator.getMsgStack().toString());
 					editorPaneTokens .setText(compilator.getTokenStack().toString());
 					editorPaneSemanticStruct.setText(compilator.getSemanticStructStack().toString());
-	//				editorPaneSintacticTree.setText(getStringFromStack(compilator.getRecorrido()));
-					loadSymbolTable(compilator.getSimbTable());
+					editorPaneSintacticTree.setText(compilator.getSyntacticTree().toString());
+					loadSymbolTable(compilator.getSymbTable());
 					
 					// Guardado del archivo Assembler (.ASM)
 					String path_to_file = file_selected.getAbsolutePath().trim();
@@ -281,15 +286,16 @@ public class Window {
 					if (nombre_archivo.contains("."))
 						nombre_archivo = nombre_archivo.substring(0, nombre_archivo.lastIndexOf(".")+1);
 					String nombre_archivo_asm = nombre_archivo + ".asm";
-					path_to_file = path_to_file.substring(0, path_to_file.lastIndexOf("\\")+1) + nombre_archivo_asm;
-//					File file = new File(path_to_file);
-	//				FileUtils.saveFile(file, compilator.getAssemblerCode().toString());
+					path_to_file = path_to_file.substring(0, path_to_file.lastIndexOf("\\")+1); //Path queda con el último slash previo el nombre
+					File file = new File(path_to_file + nombre_archivo_asm);
+					FileUtils.saveFile(file, compilator.getAssemblerCode().toString());
 					
 					if (askMakeExecutable()) { // Pregunta si quiere el ejecutable
 						if (masm32_path == null) // Si no está definida la ubicación de masm32
 							masm32_path = askMasmPath();
 						if (isMasmPath(masm32_path)) // Verifica que existan los ejecutables ml y link
-							generateExecutable(path_to_file, nombre_archivo, masm32_path);
+//							generateExecutable(path_to_file, nombre_archivo, masm32_path);
+							System.out.println("generando");
 						else
 							JOptionPane.showMessageDialog(new JFrame(), FILE_NOT_STORED, "Warning", JOptionPane.ERROR_MESSAGE);
 					}
@@ -319,7 +325,7 @@ public class Window {
 		frmCompilator.getContentPane().add(scrollPane_Codigo);
 		
 		editorPaneProgram = new JTextArea();
-		editorPaneProgram.setTabSize(4);
+		editorPaneProgram.setTabSize(2);
 		editorPaneProgram.addCaretListener(new CaretListener() {
 			public void caretUpdate(CaretEvent e) {
 				int pos = e.getDot();
@@ -500,7 +506,7 @@ public class Window {
 				System.out.println(output);
 				System.exit(0);
 			} else {
-				//abnormal...
+				System.out.println("Abnormal termination");
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

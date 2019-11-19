@@ -30,6 +30,7 @@ public class SyntacticTreeMemory extends SyntacticTree{
 		String op = super.getElem();
 		String reg = registros.getRegFreeLong();//usa un registro
 		switch(op) {
+<<<<<<< HEAD
 		case "::=":{
 			comAssembler.addMsg("mov " + reg + ", offset " + dato2);
 			comAssembler.addMsg("mov " + dato1 + ", " + reg);
@@ -58,6 +59,33 @@ public class SyntacticTreeMemory extends SyntacticTree{
 				comAssembler.addMsg("add " + reg + ", 2");
 			}else {
 				comAssembler.addMsg("add " + reg + ", 4");
+=======
+			case "::=":{
+				comAssembler.addMsg("mov " + reg + ", offset " + dato2);//posicion inicial del arreglo
+				comAssembler.addMsg("mov " + dato1 + ", " + reg);
+			}
+			case "<<":{
+				String lexico = dato1.substring(1);
+				comAssembler.addMsg("mov " + reg + ", " + dato1);//reg tiene la direccion del arreglo a la que apunta i
+				String reg2 = registros.getRegFreeLong();
+				comAssembler.addMsg("mov " + reg2 + ", " + symbolTable.get(lexico).getCSizeBytes());//reg 2 tiene el largo del arreglo en bytes
+				String reg3 = registros.getRegFreeLong();
+				comAssembler.addMsg("mov " + reg3 + ", offset " + dato2);//reg3 tiene la direccion inicial del arreglo
+				comAssembler.addMsg("add " + reg2 + ", " + reg3);//reg2 tiene la direccion fin del arreglo
+				comAssembler.addMsg("cmp " + reg + ", " + reg2);//se compara la direccion a la que apunta i con direccion fin del arreglo
+				registros.setRegTable(reg2,false);//libera el registro usado
+				registros.setRegTable(reg3,false);//libera el registro usado
+			}
+			case "+=":{
+				comAssembler.addMsg("mov " + reg + ", " + dato1);
+				String lexico = dato2.substring(1);
+				if (symbolTable.get(lexico).getTipoAtributo() == "int") {
+					comAssembler.addMsg("add " + reg + ", 2");
+				}else {
+					comAssembler.addMsg("add " + reg + ", 4");
+				}
+				comAssembler.addMsg("mov " + dato1 + ", " + reg);
+>>>>>>> 3c084f9... Update SyntacticTreeMemory-Leaf
 			}
 			comAssembler.addMsg("mov " + dato1 + ", " + reg);
 		}
