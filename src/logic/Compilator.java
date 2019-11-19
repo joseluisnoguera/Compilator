@@ -5,18 +5,16 @@ import java.util.List;
 
 import utils.MsgStack;
 import utils.RegisterTable;
-import utils.sintacticTree.SintacticTreeCtrl;
+import utils.syntacticTree.SyntacticTreeCtrl;
 import utils.ElementoTS;
 
 /*
  *TODO: En recorre árbol que guarde el mismo árbol para mostrar
- *TODO: Ver como hacer código assembler para print
  *TODO: En compilator que junte todo el assembler y agregue lo faltante
+ *TODO: Ver como hacer código assembler para print
  *TODO: Llevar códigos de errores dinámicos y la funcion de print al objeto que junta todo el assembler
- *TODO: Que file utils guarde en archivo el stack de assembler
  *TODO: Revisar Nodo common
  *TODO: Revisar si gramática es correcta
- *TODO: Agregar '_' en los ID en la gramática (para el árbol de parser)
  *TODO: Función para pedir registros específicos (CWD usa EAX, la multiplicación usa EDX y EAX), el genérico devuelve cualquiera menos EAX
  *TODO: Revisar que todos los recorre árbol liberen los registros que usaron
  *TODO: Dejar siempre libre EAX
@@ -28,10 +26,10 @@ public class Compilator {
 	private MsgStack msgStack, semanticStructStack, tokenStack;
 	private Lexicon lexicon;
 	private Parser parser;
-	private SintacticTreeCtrl nodoRaiz;
+	private SyntacticTreeCtrl nodoRaiz;
 	private RegisterTable registros;
-	private MsgStack comAssembler;
-	private MsgStack comInterm;
+	private MsgStack codAssembler;
+	private MsgStack syntaticTree;
 
 
 <<<<<<< HEAD
@@ -57,8 +55,6 @@ public class Compilator {
 		symbolTable = new Hashtable<String, ElementoTS>();
 		lexicon = new Lexicon(programBuffer, msgStack, tokenStack, symbolTable);
 		parser = new Parser(lexicon, symbolTable, msgStack, semanticStructStack);
-
-		//	nodoRaiz.recorreArbol(registros, comAssembler, comInterm);
 	}
 >>>>>>> 04b8288... agregado parte del comportamiento de ventana y TODO's
 
@@ -71,8 +67,8 @@ public class Compilator {
 		int i = parser.yyparse();
 		if (i == 0) {
 			System.out.println("Parser correcto");
-			nodoRaiz = ((SintacticTreeCtrl)parser.getRaiz());
-			System.out.println(nodoRaiz.getElem());
+			nodoRaiz = ((SyntacticTreeCtrl)parser.getRaiz());
+			nodoRaiz.recorreArbol(registros, codAssembler, syntaticTree, symbolTable);
 		}
 		else
 			System.out.println("Error en parser");
@@ -83,6 +79,10 @@ public class Compilator {
 	public MsgStack getTokenStack() { return tokenStack; }
 
 	public MsgStack getSemanticStructStack() { return semanticStructStack; }
+	
+	public MsgStack getCodAssembler() { return codAssembler; }
+	
+	public MsgStack getSyntacticTree() { return syntaticTree; }
 
 	public Hashtable<String, ElementoTS> getSimbTable() { return symbolTable; }
 }

@@ -1,4 +1,4 @@
-package utils.sintacticTree;
+package utils.syntacticTree;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -8,11 +8,11 @@ import utils.ElementoTS;
 import utils.MsgStack;
 import utils.RegisterTable;
 
-public class SintacticTreeCtrl extends SintacticTree {
+public class SyntacticTreeCtrl extends SyntacticTree {
 
 	protected static List<String> etiquetas = new ArrayList<String>();
 
-	public SintacticTreeCtrl(String lexeme, SintacticTree nodo) {
+	public SyntacticTreeCtrl(String lexeme, SyntacticTree nodo) {
 		super(lexeme);
 		// TODO Auto-generated constructor stub
 		super.setHijoIzq(nodo);

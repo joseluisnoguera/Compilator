@@ -1,4 +1,4 @@
-package utils.sintacticTree;
+package utils.syntacticTree;
 
 import java.util.Hashtable;
 
@@ -6,14 +6,22 @@ import utils.ElementoTS;
 import utils.MsgStack;
 import utils.RegisterTable;
 
-public class SintacticTreeConver extends SintacticTree{
+public class SyntacticTreeConver extends SyntacticTree{
 
 
+<<<<<<< HEAD:src/utils/sintacticTree/SintacticTreeConver.java
 	public SintacticTreeConver(String lexeme, SintacticTree nodo) {
 		super(lexeme);
 		// TODO Auto-generated constructor stub
 		super.setHijoIzq(nodo);
 	}
+=======
+		public SyntacticTreeConver(String lexeme, SyntacticTree nodo) {
+			super(lexeme);
+			// TODO Auto-generated constructor stub
+			super.setHijoIzq(nodo);
+		}
+>>>>>>> cf97fd0... Arreglos en ventana:src/utils/syntacticTree/SyntacticTreeConver.java
 
 	@Override
 	public String recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm,Hashtable<String, ElementoTS> symbolTable) {

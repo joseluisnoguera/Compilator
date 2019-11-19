@@ -7,22 +7,27 @@ import javax.swing.JFrame;
 import javax.swing.SpringLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JScrollPane;
 import java.awt.Component;
 import javax.swing.JTextPane;
+import javax.swing.KeyStroke;
 import javax.swing.event.CaretListener;
+import javax.swing.event.UndoableEditEvent;
+import javax.swing.event.UndoableEditListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.text.Document;
-import javax.swing.text.PlainDocument;
+import javax.swing.undo.CannotRedoException;
+import javax.swing.undo.CannotUndoException;
+import javax.swing.undo.UndoManager;
 
 import logic.Compilator;
 //import logic.Compilator;
 import utils.ElementoTS;
 import utils.FileUtils;
-import utils.MsgStack;
 
 import javax.swing.event.CaretEvent;
 import java.io.File;
@@ -31,30 +36,35 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Set;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JEditorPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 public class Window {
 
-	private static String SEARCH_MSG = "Seleccione el archivo \"txt\" con su programa";
-	private static String FILE_LOAD_ERROR_MSG = "Error al cargar el archivo";
-	private static String FILE_NOT_FOUND_MSG = "Archivo no encontrado";
-	private static String SAVE_CORRECT_MSG = "Archivo guardado con éxito";
-	private static String SAVE_ERROR_MSG = "Error al guardar el archivo";
+	private static String SEARCH_MSG = "Ingrese el nombre para su archivo.";
+	private static String FILE_LOAD_ERROR_MSG = "Error al cargar el archivo.";
+	private static String FILE_NOT_FOUND_MSG = "Archivo no encontrado.";
+	private static String FILE_NOT_STORED = "El archivo debe ser guardado antes de compilar.";
+	private static String SAVE_CORRECT_MSG = "Archivo guardado con éxito.";
+	private static String SAVE_ERROR_MSG = "Error al guardar el archivo.";
 	private static String LINE_COUNTER_MSG = "Línea seleccionada: ";
-	private static String FILE_CREATED_MSG = "El archivo fue creado exitosamente";
-	private static String FILE_ALREADY_EXIST_MSG = "El archivo especificado ya existe";
-	private static String FILE_CREATE_ERROR_MSG = "Hubo algún error al crear el archivo";
+	private static String FILE_CREATED_MSG = "El archivo fue creado exitosamente.";
+	private static String FILE_ALREADY_EXIST_MSG = "El archivo especificado ya existe.";
+	private static String FILE_CREATE_ERROR_MSG = "Hubo algún error al crear el archivo.";
 	private static int END_OF_TEXT = 3;
+	
+	final UndoManager undo;
 	
 	private JFrame frmCompilator;
 	private JButton btnSave;
 	private JButton btnCompile;
 	private JButton btnLoad;
 	private JLabel lblProgramName;
-	private JTextPane editorPaneProgram;
+	private JTextArea editorPaneProgram;
 	private JTextPane editorPaneTokens;
 	private JTextPane editorPaneSymbolTable;
 	private JTextPane editorPaneMsgs;
@@ -87,18 +97,22 @@ public class Window {
 	 * Create the application.
 	 */
 	public Window() {
+		file_selected = null;
+		undo = new UndoManager();
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	@SuppressWarnings("serial")
 	private void initialize() {
 		frmCompilator = new JFrame();
+		frmCompilator.setResizable(false);
 		frmCompilator.setTitle("Compilador");
-		frmCompilator.setBounds(100, 100, 1024, 645);
+		frmCompilator.setBounds(100, 100, 1024, 800);
 		frmCompilator.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmCompilator.setMinimumSize(new Dimension(1024, 645));
+		frmCompilator.setMinimumSize(new Dimension(1024, 800));
 		SpringLayout springLayout = new SpringLayout();
 		frmCompilator.getContentPane().setLayout(springLayout);
 		
@@ -122,6 +136,9 @@ public class Window {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				final JFileChooser dialog = new JFileChooser (FileSystemView.getFileSystemView().getHomeDirectory());
+				dialog.setApproveButtonText("Create");
+				dialog.setApproveButtonMnemonic('c');
+				dialog.setApproveButtonToolTipText("Create a new file \"txt\"");
 				FileNameExtensionFilter filter = new FileNameExtensionFilter("\".txt\"", "txt", "text");
 				dialog.setFileFilter(filter);
 				dialog.setDialogTitle(SEARCH_MSG);
@@ -139,11 +156,9 @@ public class Window {
 					try {
 						if(file.createNewFile()){
 							String nombre_archivo = path_and_name.substring(path_and_name.lastIndexOf("\\")+1);
-							editorPaneProgram.setEnabled(true);
+							editorPaneProgram.setEditable(true);
 							editorPaneProgram.setText(FileUtils.getContent());
 							lblProgramName.setText(nombre_archivo);
-							btnSave.setEnabled(true);
-							btnCompile.setEnabled(true);
 							JOptionPane.showMessageDialog(new JFrame(), FILE_CREATED_MSG, "Creado", JOptionPane.PLAIN_MESSAGE);
 						}else
 							JOptionPane.showMessageDialog(new JFrame(), FILE_ALREADY_EXIST_MSG, "Archivo ya existente", JOptionPane.PLAIN_MESSAGE);
@@ -174,11 +189,9 @@ public class Window {
 					String nombre_archivo = path_to_file.substring(path_to_file.lastIndexOf("\\")+1);
 					int readed = FileUtils.openFile(file_selected);
 					if (readed == FileUtils.LOAD_CORRECT) {
-						editorPaneProgram.setEnabled(true);
+						editorPaneProgram.setEditable(true);
 						editorPaneProgram.setText(FileUtils.getContent());
 						lblProgramName.setText(nombre_archivo);
-						btnSave.setEnabled(true);
-						btnCompile.setEnabled(true);
 					}
 					else if (readed == FileUtils.FILE_NOT_FOUND)
 						JOptionPane.showMessageDialog(new JFrame(), FILE_NOT_FOUND_MSG, "Warning", JOptionPane.ERROR_MESSAGE);
@@ -196,6 +209,36 @@ public class Window {
 		btnSave.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if (file_selected == null) {
+					final JFileChooser dialog = new JFileChooser (FileSystemView.getFileSystemView().getHomeDirectory());
+					FileNameExtensionFilter filter = new FileNameExtensionFilter("\".txt\"", "txt", "text");
+					dialog.setFileFilter(filter);
+					dialog.setDialogTitle(SEARCH_MSG);
+					int returnValue = dialog.showOpenDialog(null);
+					String path_and_name = "";
+					if (returnValue == JFileChooser.APPROVE_OPTION) {
+						file_selected = dialog.getSelectedFile();
+						path_and_name = file_selected.getAbsolutePath().trim();
+						String ext = path_and_name.substring(path_and_name.lastIndexOf('.')+1, path_and_name.length());
+						if (ext.equals("ext") || !path_and_name.contains("."))
+							path_and_name += ".txt";
+						File file = new File(path_and_name);
+						file_selected = file;
+						FileUtils.reset();
+						try {
+							if(file.createNewFile()){
+								String nombre_archivo = path_and_name.substring(path_and_name.lastIndexOf("\\")+1);
+								editorPaneProgram.setEditable(true);
+								editorPaneProgram.setText(FileUtils.getContent());
+								lblProgramName.setText(nombre_archivo);
+								JOptionPane.showMessageDialog(new JFrame(), FILE_CREATED_MSG, "Creado", JOptionPane.PLAIN_MESSAGE);
+							}
+						} catch (IOException e1) {
+							e1.printStackTrace();
+							JOptionPane.showMessageDialog(new JFrame(), FILE_CREATE_ERROR_MSG, "Warning", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+				}
 				int writed = FileUtils.saveFile(file_selected, editorPaneProgram.getText());
 				if (writed == FileUtils.SAVE_CORRECT)
 					JOptionPane.showMessageDialog(new JFrame(), SAVE_CORRECT_MSG, "Guardado", JOptionPane.PLAIN_MESSAGE);
@@ -205,30 +248,46 @@ public class Window {
 		});
 		btnSave.setAlignmentY(Component.TOP_ALIGNMENT);
 		btnSave.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		btnSave.setEnabled(false);
 		
 		btnCompile = new JButton("Compilar");
 		panel.add(btnCompile);
 		btnCompile.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				List<Integer> programBuffer = new ArrayList<Integer>();
-				String text = editorPaneProgram.getText().replaceAll("\r", ""); //Esto ahora el problema del doble símbolo para el salto de línea
-				for (int i = 0; i < text.length(); i++)
-					programBuffer.add((int)text.charAt(i));
-				programBuffer.add(END_OF_TEXT); //Caracter de fin de texto en ASCII, tiene que coordinar con el que se usa en Lexicon
-				Compilator compilator = Compilator.getInstance(programBuffer);
-				compilator.compilate();
-				editorPaneMsgs.setText(compilator.getMsgStack().toString());
-				editorPaneTokens .setText(compilator.getTokenStack().toString());
-				editorPaneSemanticStruct.setText(compilator.getSemanticStructStack().toString());
-//				editorPaneSintacticTree.setText(getStringFromStack(compilator.getRecorrido()));
-				loadSymbolTable(compilator.getSimbTable());
+				if (file_selected != null ) {
+					List<Integer> programBuffer = new ArrayList<Integer>();
+					String text = editorPaneProgram.getText().replaceAll("\r", ""); //Esto ahora el problema del doble símbolo para el salto de línea
+					for (int i = 0; i < text.length(); i++)
+						programBuffer.add((int)text.charAt(i));
+					programBuffer.add(END_OF_TEXT); //Caracter de fin de texto en ASCII, tiene que coordinar con el que se usa en Lexicon
+					Compilator compilator = Compilator.getInstance(programBuffer);
+					compilator.compilate();
+					editorPaneMsgs.setText(compilator.getMsgStack().toString());
+					editorPaneTokens .setText(compilator.getTokenStack().toString());
+					editorPaneSemanticStruct.setText(compilator.getSemanticStructStack().toString());
+	//				editorPaneSintacticTree.setText(getStringFromStack(compilator.getRecorrido()));
+					// Guardado del archivo Assembler
+					String path_to_file = file_selected.getAbsolutePath().trim();
+					String nombre_archivo = path_to_file.substring(path_to_file.lastIndexOf("\\")+1);
+					if (nombre_archivo.contains("."))
+						nombre_archivo = nombre_archivo.substring(0, nombre_archivo.lastIndexOf(".")+1);
+					nombre_archivo += ".asl";
+					path_to_file = path_to_file.substring(0, path_to_file.lastIndexOf("\\")+1) + nombre_archivo;
+//					File file = new File(path_to_file);
+	//				FileUtils.saveFile(file, compilator.getAssemblerCode().toString());
+					loadSymbolTable(compilator.getSimbTable());
+					
+	//				path_and_name = file_selected.getAbsolutePath().trim();
+	//				String ext = path_and_name.substring(path_and_name.lastIndexOf('.')+1, path_and_name.length());
+	//				if (ext.equals("ext") || !path_and_name.contains("."))
+	//					path_and_name += ".txt";
+	//				File file = new File(path_and_name);
+				} else
+					JOptionPane.showMessageDialog(new JFrame(), FILE_NOT_STORED, "Warning", JOptionPane.ERROR_MESSAGE);
 			}
 		});
 		btnCompile.setAlignmentY(Component.TOP_ALIGNMENT);
 		btnCompile.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		btnCompile.setEnabled(false);
 		
 		lblNumberLine = new JLabel("L\u00EDnea seleccionada:");
 		springLayout.putConstraint(SpringLayout.WEST, panel, 11, SpringLayout.EAST, lblNumberLine);
@@ -246,8 +305,8 @@ public class Window {
 		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_Codigo, -10, SpringLayout.SOUTH, frmCompilator.getContentPane());
 		frmCompilator.getContentPane().add(scrollPane_Codigo);
 		
-		editorPaneProgram = new JTextPane();
-		editorPaneProgram.setEnabled(false);
+		editorPaneProgram = new JTextArea();
+		editorPaneProgram.setTabSize(4);
 		editorPaneProgram.addCaretListener(new CaretListener() {
 			public void caretUpdate(CaretEvent e) {
 				int pos = e.getDot();
@@ -262,11 +321,38 @@ public class Window {
 			}
 		});
 		Document doc = editorPaneProgram.getDocument();
-		if (doc instanceof PlainDocument) {
-			System.out.println("entro");
-		    doc.putProperty(PlainDocument.tabSizeAttribute, 1);
-		} else
-			System.out.println("no entro");
+		doc.addUndoableEditListener(new UndoableEditListener() {
+			@Override
+			public void undoableEditHappened(UndoableEditEvent e) {
+				undo.addEdit(e.getEdit());
+			}
+	    });
+		editorPaneProgram.getActionMap().put("Undo",
+	        new AbstractAction("Undo") {
+	            public void actionPerformed(ActionEvent evt) {
+	                try {
+	                    if (undo.canUndo()) {
+	                        undo.undo();
+	                    }
+	                } catch (CannotUndoException e) {
+	                }
+	            }
+	       });
+		editorPaneProgram.getInputMap().put(KeyStroke.getKeyStroke("control Z"), "Undo");
+	    
+	    editorPaneProgram.getActionMap().put("Redo",
+	        new AbstractAction("Redo") {
+	            public void actionPerformed(ActionEvent evt) {
+	                try {
+	                    if (undo.canRedo()) {
+	                        undo.redo();
+	                    }
+	                } catch (CannotRedoException e) {
+	                }
+	            }
+	        });
+	    editorPaneProgram.getInputMap().put(KeyStroke.getKeyStroke("control shift Z"), "Redo");
+		
 		scrollPane_Codigo.setViewportView(editorPaneProgram);
 		
 		JScrollPane scrollPane_Tokens = new JScrollPane();

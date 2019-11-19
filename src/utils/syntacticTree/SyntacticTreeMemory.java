@@ -1,4 +1,4 @@
-package utils.sintacticTree;
+package utils.syntacticTree;
 
 import java.util.Hashtable;
 
@@ -6,8 +6,8 @@ import utils.ElementoTS;
 import utils.MsgStack;
 import utils.RegisterTable;
 
-public class SintacticTreeMemory extends SintacticTree{
-	public SintacticTreeMemory(String lexeme, SintacticTree nodoIzq, SintacticTree nodoDer) {
+public class SyntacticTreeMemory extends SyntacticTree{
+	public SyntacticTreeMemory(String lexeme, SyntacticTree nodoIzq, SyntacticTree nodoDer) {
 		super(lexeme);
 		// TODO Auto-generated constructor stub
 		super.setHijoIzq(nodoIzq);

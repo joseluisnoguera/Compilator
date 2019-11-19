@@ -1,4 +1,4 @@
-package utils.sintacticTree;
+package utils.syntacticTree;
 
 import java.util.Hashtable;
 
@@ -6,9 +6,9 @@ import utils.ElementoTS;
 import utils.MsgStack;
 import utils.RegisterTable;
 
-public class SintacticTreeUnary extends SintacticTree{
+public class SyntacticTreeUnary extends SyntacticTree{
 
-	public SintacticTreeUnary(String lexeme, SintacticTree nodo) {
+	public SyntacticTreeUnary(String lexeme, SyntacticTree nodo) {
 		super(lexeme);
 		super.setHijoIzq(nodo);
 	}
