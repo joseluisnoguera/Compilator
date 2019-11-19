@@ -6,18 +6,23 @@ import java.util.List;
 import utils.MsgStack;
 import utils.RegisterTable;
 import utils.syntacticTree.SyntacticTreeCtrl;
+import utils.AssemblerGenerator;
 import utils.ElementoTS;
 
 /*
- *TODO: En recorre árbol que guarde el mismo árbol para mostrar
- *TODO: En compilator que junte todo el assembler y agregue lo faltante
- *TODO: Ver como hacer código assembler para print
+ *TODO: Antes de entregar sacar las ventanas de token y estructura sintáctica
+ *TODO: En recorre árbol que agregue blancos según profundidad
  *TODO: Llevar códigos de errores dinámicos y la funcion de print al objeto que junta todo el assembler
  *TODO: Revisar Nodo common
  *TODO: Revisar si gramática es correcta
  *TODO: Función para pedir registros específicos (CWD usa EAX, la multiplicación usa EDX y EAX), el genérico devuelve cualquiera menos EAX
  *TODO: Revisar que todos los recorre árbol liberen los registros que usaron
+<<<<<<< HEAD
  *TODO: Dejar siempre libre EAX
+ *TODO: Agregar tipo puntero, y la colección a la que pertenece en TS
+=======
+ *TODO: Dejar siempre libre EAX (PREGUNTAR SI ES CORRECTO, EN CASO TAL HABRIA QUE DEJAR LIBRE DX TAMBIEN)
+>>>>>>> 9acbfaf... comentario
  */
 
 public class Compilator {
@@ -28,7 +33,7 @@ public class Compilator {
 	private Parser parser;
 	private SyntacticTreeCtrl nodoRaiz;
 	private RegisterTable registros;
-	private MsgStack codAssembler;
+	private MsgStack assemblerCod;
 	private MsgStack syntaticTree;
 
 
@@ -68,7 +73,8 @@ public class Compilator {
 		if (i == 0) {
 			System.out.println("Parser correcto");
 			nodoRaiz = ((SyntacticTreeCtrl)parser.getRaiz());
-			nodoRaiz.recorreArbol(registros, codAssembler, syntaticTree, symbolTable);
+			nodoRaiz.recorreArbol(registros, assemblerCod, syntaticTree, symbolTable, 0);
+			assemblerCod = AssemblerGenerator.getAssembler(symbolTable, assemblerCod);
 		}
 		else
 			System.out.println("Error en parser");
@@ -80,7 +86,7 @@ public class Compilator {
 
 	public MsgStack getSemanticStructStack() { return semanticStructStack; }
 	
-	public MsgStack getCodAssembler() { return codAssembler; }
+	public MsgStack getAssemblerCod() { return assemblerCod; }
 	
 	public MsgStack getSyntacticTree() { return syntaticTree; }
 

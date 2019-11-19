@@ -13,7 +13,9 @@ public class SyntacticTreeLeaf extends SyntacticTree{
 		super(lex);
 	}
 
-	public String recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm, Hashtable<String, ElementoTS> symbolTable) {
+	public String recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm, Hashtable<String, ElementoTS> symbolTable, int deep) {
+		//TODO: Agregar blancos
+		comInterm.addMsg("Nodo: " + super.getElem());
 		return super.getElem();
 	}
 }

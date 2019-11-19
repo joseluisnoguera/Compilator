@@ -14,19 +14,21 @@ public class SyntacticTreeCtrl extends SyntacticTree {
 
 	public SyntacticTreeCtrl(String lexeme, SyntacticTree nodo) {
 		super(lexeme);
-		// TODO Auto-generated constructor stub
+		
 		super.setHijoIzq(nodo);
 	}
 
 	@Override
 	public String recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm,
-			Hashtable<String, ElementoTS> symbolTable) {
+			Hashtable<String, ElementoTS> symbolTable, int deep) {
+		//TODO: Agregar blancos
+		comInterm.addMsg("Nodo: " + super.getElem());
 		if(super.getElem() == "cond") {//cond del foreach
 			contEtiquetas++;
 			comAssembler.addMsg("_label" + contEtiquetas + ":");
 			etiquetas.add("_label" + contEtiquetas);//etiqueta de inicio de condicion de foreach
 		}
-		String op = super.getHijoIzq().recorreArbol(registros, comAssembler, comInterm,symbolTable);
+		String op = super.getHijoIzq().recorreArbol(registros, comAssembler, comInterm,symbolTable, deep+1);
 		switch(super.getElem()){
 		case "Cond":{//condicion de if
 			contEtiquetas++;

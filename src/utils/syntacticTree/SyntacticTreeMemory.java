@@ -13,10 +13,20 @@ public class SyntacticTreeMemory extends SyntacticTree{
 		super.setHijoIzq(nodoIzq);
 		super.setHijoDer(nodoDer);
 	}
+<<<<<<< HEAD
 
 	public String recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm, Hashtable<String, ElementoTS> symbolTable) {
 		String dato1 = super.getHijoIzq().recorreArbol(registros, comAssembler, comInterm, symbolTable);
 		String dato2 = super.getHijoDer().recorreArbol(registros, comAssembler, comInterm, symbolTable);
+=======
+	
+	@Override
+	public String recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm, Hashtable<String, ElementoTS> symbolTable, int deep) {
+		//TODO: Agregar blancos
+		comInterm.addMsg("Nodo: " + super.getElem());
+		String dato1 = super.getHijoIzq().recorreArbol(registros, comAssembler, comInterm, symbolTable, deep+1);
+		String dato2 = super.getHijoDer().recorreArbol(registros, comAssembler, comInterm, symbolTable, deep+1);
+>>>>>>> 7eacf2b... _
 		String op = super.getElem();
 		String reg = registros.getRegFreeLong();//usa un registro
 		switch(op) {

@@ -25,13 +25,15 @@ import javax.swing.undo.CannotUndoException;
 import javax.swing.undo.UndoManager;
 
 import logic.Compilator;
-//import logic.Compilator;
 import utils.ElementoTS;
 import utils.FileUtils;
 
 import javax.swing.event.CaretEvent;
+
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -55,6 +57,9 @@ public class Window {
 	private static String FILE_CREATED_MSG = "El archivo fue creado exitosamente.";
 	private static String FILE_ALREADY_EXIST_MSG = "El archivo especificado ya existe.";
 	private static String FILE_CREATE_ERROR_MSG = "Hubo algún error al crear el archivo.";
+	private static String ASK_TO_MAKE_EXECUTABLE = "¿Desea crear el ejecutable además del archivo asm?";
+	private static String SELECT_FOLDER = "Seleccione el directorio donde se encuentran los archivos \"ml.exe\" y \"link.exe\" de Masm32";
+	private static String INVALID_SELECTION = "Selección inválida";
 	private static int END_OF_TEXT = 3;
 	
 	final UndoManager undo;
@@ -76,6 +81,8 @@ public class Window {
 	private JEditorPane editorPaneSemanticStruct;
 	private JLabel lblEstructurasDetectas;
 	private JTextPane editorPaneSintacticTree;
+	
+	private String masm32_path;
 
 	/**
 	 * Launch the application.
@@ -98,6 +105,7 @@ public class Window {
 	 */
 	public Window() {
 		file_selected = null;
+		masm32_path = null;
 		undo = new UndoManager();
 		initialize();
 	}
@@ -148,7 +156,7 @@ public class Window {
 					file_selected = dialog.getSelectedFile();
 					path_and_name = file_selected.getAbsolutePath().trim();
 					String ext = path_and_name.substring(path_and_name.lastIndexOf('.')+1, path_and_name.length());
-					if (ext.equals("ext") || !path_and_name.contains("."))
+					if (!ext.equals("txt") || !path_and_name.contains("."))
 						path_and_name += ".txt";
 					File file = new File(path_and_name);
 					file_selected = file;
@@ -181,9 +189,8 @@ public class Window {
 				FileNameExtensionFilter filter = new FileNameExtensionFilter("\".txt\"", "txt", "text");
 				dialog.setFileFilter(filter);
 				dialog.setDialogTitle(SEARCH_MSG);
-				int returnValue = dialog.showOpenDialog(null);
 				String path_to_file = "";
-				if (returnValue == JFileChooser.APPROVE_OPTION) {
+				if ( dialog.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 					file_selected = dialog.getSelectedFile();
 					path_to_file = file_selected.getAbsolutePath().trim();
 					String nombre_archivo = path_to_file.substring(path_to_file.lastIndexOf("\\")+1);
@@ -266,25 +273,31 @@ public class Window {
 					editorPaneTokens .setText(compilator.getTokenStack().toString());
 					editorPaneSemanticStruct.setText(compilator.getSemanticStructStack().toString());
 	//				editorPaneSintacticTree.setText(getStringFromStack(compilator.getRecorrido()));
-					// Guardado del archivo Assembler
+					loadSymbolTable(compilator.getSimbTable());
+					
+					// Guardado del archivo Assembler (.ASM)
 					String path_to_file = file_selected.getAbsolutePath().trim();
 					String nombre_archivo = path_to_file.substring(path_to_file.lastIndexOf("\\")+1);
 					if (nombre_archivo.contains("."))
 						nombre_archivo = nombre_archivo.substring(0, nombre_archivo.lastIndexOf(".")+1);
-					nombre_archivo += ".asl";
-					path_to_file = path_to_file.substring(0, path_to_file.lastIndexOf("\\")+1) + nombre_archivo;
+					String nombre_archivo_asm = nombre_archivo + ".asm";
+					path_to_file = path_to_file.substring(0, path_to_file.lastIndexOf("\\")+1) + nombre_archivo_asm;
 //					File file = new File(path_to_file);
 	//				FileUtils.saveFile(file, compilator.getAssemblerCode().toString());
-					loadSymbolTable(compilator.getSimbTable());
 					
-	//				path_and_name = file_selected.getAbsolutePath().trim();
-	//				String ext = path_and_name.substring(path_and_name.lastIndexOf('.')+1, path_and_name.length());
-	//				if (ext.equals("ext") || !path_and_name.contains("."))
-	//					path_and_name += ".txt";
-	//				File file = new File(path_and_name);
+					if (askMakeExecutable()) { // Pregunta si quiere el ejecutable
+						if (masm32_path == null) // Si no está definida la ubicación de masm32
+							masm32_path = askMasmPath();
+						if (isMasmPath(masm32_path)) // Verifica que existan los ejecutables ml y link
+							generateExecutable(path_to_file, nombre_archivo, masm32_path);
+						else
+							JOptionPane.showMessageDialog(new JFrame(), FILE_NOT_STORED, "Warning", JOptionPane.ERROR_MESSAGE);
+					}
+										
 				} else
 					JOptionPane.showMessageDialog(new JFrame(), FILE_NOT_STORED, "Warning", JOptionPane.ERROR_MESSAGE);
 			}
+
 		});
 		btnCompile.setAlignmentY(Component.TOP_ALIGNMENT);
 		btnCompile.setAlignmentX(Component.RIGHT_ALIGNMENT);
@@ -466,5 +479,62 @@ public class Window {
 					" - Id único(Cadenas y variables auxiliares): " + elem.getId() + "\n";
 		}
 		editorPaneSymbolTable.setText(text);
+	}
+	
+	private void generateExecutable(String path, String file_name, String masm32_path) {
+		ProcessBuilder processBuilder = new ProcessBuilder();
+		processBuilder.command("cmd.exe", "/c", "cd " + path + "&& " + masm32_path + "\\ml.exe /c /coff " + file_name + ".asm && " +
+				masm32_path + "\\link.exe /subsystem:windows " + file_name + ".obj");
+		try {
+			Process process = processBuilder.start();
+			StringBuilder output = new StringBuilder();
+			BufferedReader reader = new BufferedReader(
+					new InputStreamReader(process.getInputStream()));
+			String line;
+			while ((line = reader.readLine()) != null) {
+				output.append(line + "\n");
+			}
+			int exitVal = process.waitFor();
+			if (exitVal == 0) {
+				System.out.println("Success!");
+				System.out.println(output);
+				System.exit(0);
+			} else {
+				//abnormal...
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private String askMasmPath() {
+		String masm_path = "";
+		JFileChooser chooser = new JFileChooser(); 
+	    chooser.setCurrentDirectory(new java.io.File("."));
+	    chooser.setDialogTitle(SELECT_FOLDER);
+	    chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+	    chooser.setAcceptAllFileFilterUsed(false);
+	    if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
+	    	masm_path = chooser.getCurrentDirectory().getAbsolutePath();
+	    else
+	    	JOptionPane.showMessageDialog(new JFrame(), INVALID_SELECTION, "Warning", JOptionPane.ERROR_MESSAGE);
+		return masm_path;
+	}
+	
+	private boolean isMasmPath(String masm32_path) {
+		File f_ml = new File(masm32_path + "ml.exe");
+		File f_linker = new File(masm32_path + "ml.exe");
+		return f_ml.exists() && !f_ml.isDirectory() && f_linker.exists() && !f_linker.isDirectory();
+	}
+	
+	private boolean askMakeExecutable() {
+		int i = JOptionPane.showOptionDialog(new JFrame(), ASK_TO_MAKE_EXECUTABLE, "Selecciona una opción",
+		        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+		if (i == 0)
+			return true;
+		else
+			return false;
 	}
 }

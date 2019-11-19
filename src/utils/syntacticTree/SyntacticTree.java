@@ -29,5 +29,5 @@ public abstract class SyntacticTree extends ParserVal {
 	public void setHijoDer(SyntacticTree der) {this.der=(SyntacticTree)der;}
 	public void setElem(String elem) {this.lexeme=elem;}
 
-	public abstract String recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm, Hashtable<String, ElementoTS> symbolTable);
+	public abstract String recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm, Hashtable<String, ElementoTS> symbolTable, int deep);
 }
