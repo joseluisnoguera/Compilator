@@ -18,17 +18,28 @@ public class SyntacticTreeCtrl extends SyntacticTree {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public String recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm,
 <<<<<<< HEAD
 			Hashtable<String, ElementoTS> symbolTable, int deep) {
 		//TODO: Agregar blancos
 		comInterm.addMsg("Nodo: " + super.getElem());
+=======
+	public void recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm,
+			Hashtable<String, ElementoTS> symbolTable, String blankPrefix) {
+		comInterm.addMsg(blankPrefix + "Nodo: " + super.getElem());
+>>>>>>> 154a393... comentario
 		if(super.getElem() == "cond") {//cond del foreach
 			contEtiquetas++;
 			comAssembler.addMsg("_label" + contEtiquetas + ":");
 			etiquetas.add("_label" + contEtiquetas);//etiqueta de inicio de condicion de foreach
 		}
+<<<<<<< HEAD
 		String op = super.getHijoIzq().recorreArbol(registros, comAssembler, comInterm,symbolTable, deep+1);
+=======
+		super.getHijoIzq().recorreArbol(registros, comAssembler, comInterm,symbolTable, blankPrefix + " ");
+		String op = getHijoIzq().getAlmacenamiento();
+>>>>>>> 154a393... comentario
 		switch(super.getElem()){
 		case "Cond":{//condicion de if
 			contEtiquetas++;
@@ -93,6 +104,7 @@ public class SyntacticTreeCtrl extends SyntacticTree {
 			etiquetas.remove(etiquetas.size()-1);
 		}
 		}
+<<<<<<< HEAD
 =======
 			Hashtable<String, ElementoTS> symbolTable, String blankPrefix) {
 		comInterm.addMsg(blankPrefix + "Nodo: " + super.getElem());
@@ -170,5 +182,8 @@ public class SyntacticTreeCtrl extends SyntacticTree {
 //		}
 >>>>>>> 45299ea... visualización de árbol sintáctico
 		return "";
+=======
+		setAlmacenamiento("");
+>>>>>>> 154a393... comentario
 	}	
 }

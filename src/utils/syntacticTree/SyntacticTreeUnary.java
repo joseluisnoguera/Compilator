@@ -15,6 +15,7 @@ public class SyntacticTreeUnary extends SyntacticTree{
 
 	@Override
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public String recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm, Hashtable<String, ElementoTS> symbolTable, int deep) {
 		//TODO: Agregar blancos
 		comInterm.addMsg("Nodo: " + super.getElem());
@@ -22,8 +23,21 @@ public class SyntacticTreeUnary extends SyntacticTree{
 =======
 	public String recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm, Hashtable<String, ElementoTS> symbolTable, String blankPrefix) {
 		comInterm.addMsg(blankPrefix + "Nodo: " + super.getElem());
+<<<<<<< HEAD
 //		comAssembler.addMsg("invoke StdOut, addr " + super.getElem());
 >>>>>>> 45299ea... visualización de árbol sintáctico
+=======
+		String reg=registros.getRegEAX();
+		comAssembler.addMsg("mov "+reg+", " + super.getElem());
+		comAssembler.addMsg("call _print");
+		
+>>>>>>> df1f095... Update ElementoTS/AssGen/Leaf/Unary
 		return "";
+=======
+	public void recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm, Hashtable<String, ElementoTS> symbolTable, String blankPrefix) {
+		comInterm.addMsg(blankPrefix + "Nodo: " + super.getElem());
+		comAssembler.addMsg("invoke StdOut, addr " + super.getElem());
+		setAlmacenamiento("");
+>>>>>>> 154a393... comentario
 	}
 }

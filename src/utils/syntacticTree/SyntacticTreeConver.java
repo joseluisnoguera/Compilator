@@ -33,34 +33,43 @@ public class SyntacticTreeConver extends SyntacticTree{
 			comAssembler.addMsg("MOV " + regDato + ", " + dato);
 =======
 		@Override
+<<<<<<< HEAD
 		public String recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm,Hashtable<String, ElementoTS> symbolTable, int deep) {
 			//TODO: Agregar blancos
 			comInterm.addMsg("Nodo: " + super.getElem());
 			//transforma un int en long
 <<<<<<< HEAD
 			String dato = super.getHijoIzq().recorreArbol(registros,comAssembler,comInterm,symbolTable, deep+1);
+=======
+		public void recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm,
+				Hashtable<String, ElementoTS> symbolTable, String blankPrefix) {
+			comInterm.addMsg(blankPrefix + "Nodo: " + super.getElem());
+			//transforma un int en long
+			super.getHijoIzq().recorreArbol(registros,comAssembler,comInterm,symbolTable, blankPrefix + " ");
+			String dato = getHijoIzq().getAlmacenamiento();
+>>>>>>> 154a393... comentario
 			if((dato != "AX")&&(dato != "BX")&&(dato != "CX")&&(dato != "DX")) {//no es un registro
 				if (dato.charAt(0) == '_') {//es id
-					String regDato = registros.getRegAX();
+					String regDato = registros.getReg("AX",this, comAssembler);
 					comAssembler.addMsg("MOV " + regDato + ", " + dato);
 					comAssembler.addMsg("CWDE");
-					String regAux = registros.getRegFreeLong();
+					String regAux = registros.getRegFreeLong(this);
 					comAssembler.addMsg("MOV " + regAux + ", " + regDato);
 					registros.setRegTable("AX",false);
-					return regAux;
+					setAlmacenamiento(regAux);
 				}else {//es cte
-					String regDato = registros.getRegFreeLong();
+					String regDato = registros.getRegFreeLong(this);
 					comAssembler.addMsg("MOV " + regDato + ", " + dato);
-					return regDato;
+					setAlmacenamiento(regDato);
 				}
 			}else {//es un registro de 16b
-				String regAX = registros.getRegAX();
+				String regAX = registros.getReg("AX",this, comAssembler);
 				comAssembler.addMsg("MOV " + regAX + ", " + dato);
 				comAssembler.addMsg("CWDE");
-				String regAux = registros.getRegFreeLong();
+				String regAux = registros.getRegFreeLong(this);
 				comAssembler.addMsg("MOV " + regAux + ", " + regAX);
 				registros.setRegTable("AX",false);
-				return regAux;
+				setAlmacenamiento(regAux);
 			}
 >>>>>>> 7eacf2b... _
 =======

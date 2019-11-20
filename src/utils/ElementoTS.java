@@ -12,6 +12,7 @@ public class ElementoTS{
 	private String elemsCollection; //Elementos de la colección separados por ','
 	private static int idCounter = 0; //Generador de ID único
 	private int id; // Id para identificar variables
+	private boolean accmemory;
 	
 	// Tipos de variables:
 	public static final String INT = "int";
@@ -35,9 +36,14 @@ public class ElementoTS{
 		this.cSize = 0;
 		id = -1;
 		cSizeBytes = -1;
+		this.accmemory=false;
 	}
 
 	public String getElemsCollection() {return elemsCollection;}
+	
+	public Boolean getAccMemory() {return this.accmemory;}
+	
+	public void setAccMemory() {this.accmemory=!this.accmemory;}
 	
 	public void setElemsCollection(String elems) { elemsCollection = elems;}
 

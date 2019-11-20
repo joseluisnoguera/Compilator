@@ -20,7 +20,7 @@ public class AssemblerGenerator {
 		asm.addMsg(".code");
 		asm.addMsg("start:");
 		asm.addAll(code);
-		asm.addAll(getExtraFunctions());
+		asm.addAll(getExtraFunctions(symbolTable));
 		asm.addMsg("end start");
 		return asm;
 	}
@@ -53,12 +53,26 @@ public class AssemblerGenerator {
 		return data;
 	}
 	
-	private static MsgStack getExtraFunctions() {
+	private static MsgStack getExtraFunctions(Hashtable<String, ElementoTS> symbolTable) {
 		MsgStack extra = new MsgStack();
 		//TODO: Agregar funciones de control dinámico
 //		extra.addMsg("_");
+		
+		
 		extra.addMsg("_print:"); //El print debe tener el puntero al mensaje en eax, debe pasarse como: lea eax, NombreCadena
-		extra.addMsg("invoke MessageBox, NULL, eax, eax, MB_OK");
+		extra.addMsg("invoke MessageBox, NULL, Cadena, eax, MB_OK");
+		extra.addMsg("ret");
+		
+		
+		extra.addMsg("_DivisionPorCero:");
+		extra.addMsg("invoke StdOut, addr _ErrorDivisionPorCero");
+		ElementoTS tupla = new ElementoTS("_ErrorDivisionPorCero", "","Error: division por cero");
+		symbolTable.put("_ErrorDivisionPorCero", tupla);
+		extra.addMsg("JMP _FinDelPrograma");//salto al final del programa
+		
+		
+		
+		extra.addMsg("_FinDelPrograma:");
 		extra.addMsg("invoke ExitProcess, 0");
 		return extra;
 	}

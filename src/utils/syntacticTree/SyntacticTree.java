@@ -13,7 +13,8 @@ public abstract class SyntacticTree extends ParserVal {
 	private String lexeme;
 	private String tipo;
 	protected static int contEtiquetas = 0;
-
+	protected static String almacenamiento;
+	
 	public SyntacticTree(String lexeme){
 		this.lexeme=lexeme;
 		this.der=null;
@@ -30,5 +31,20 @@ public abstract class SyntacticTree extends ParserVal {
 	public void setHijoDer(SyntacticTree der) {this.der=(SyntacticTree)der;}
 	public void setElem(String elem) {this.lexeme=elem;}
 
+<<<<<<< HEAD
 	public abstract String recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm, Hashtable<String, ElementoTS> symbolTable, int deep);
+=======
+	public abstract void recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm, Hashtable<String, ElementoTS> symbolTable, String blankPrefix);
+	public void cambiaRegistro(String regNuevo) {
+		almacenamiento = regNuevo;
+	}
+	
+	public String getAlmacenamiento() {
+		return almacenamiento;
+	}
+	
+	public void setAlmacenamiento(String dato) {
+		this.almacenamiento = dato;
+	}
+>>>>>>> 154a393... comentario
 }
