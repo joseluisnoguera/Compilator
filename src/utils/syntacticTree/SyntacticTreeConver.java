@@ -27,6 +27,7 @@ public class SyntacticTreeConver extends SyntacticTree{
 	@Override
 	public String recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm,Hashtable<String, ElementoTS> symbolTable) {
 		//transforma un int en long
+<<<<<<< HEAD
 		String dato = super.getHijoIzq().recorreArbol(registros,comAssembler,comInterm,symbolTable);
 		if((dato != "AX")&&(dato != "BX")&&(dato != "CX")&&(dato != "DX")) {
 			String regDato = registros.getRegFreeInt();
@@ -65,6 +66,18 @@ public class SyntacticTreeConver extends SyntacticTree{
 			}else {//es un registro de 16b
 				String regAX = registros.getReg("AX",this, comAssembler);
 				comAssembler.addMsg("MOV " + regAX + ", " + dato);
+=======
+		String dato = "";
+		if (getHijoIzq() != null) {
+			getHijoIzq().recorreArbol(registros,comAssembler,comInterm,symbolTable, blankPrefix + "  ");
+			dato = getHijoIzq().getAlmacenamiento();
+		}
+		if((dato != RegisterTable.NAME_AX) && (dato != RegisterTable.NAME_BX) && (dato != RegisterTable.NAME_CX)
+				&& (dato != RegisterTable.NAME_DX)) { //no es un registro
+			if (dato.charAt(0) == '_') { //es id
+				String regDato = registros.getReg(RegisterTable.NAME_AX, this, comAssembler);
+				comAssembler.addMsg("MOV " + regDato + ", " + dato);
+>>>>>>> 1375c5c... arreglos varios
 				comAssembler.addMsg("CWDE");
 				String regAux = registros.getRegFreeLong(this);
 				comAssembler.addMsg("MOV " + regAux + ", " + regAX);

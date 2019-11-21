@@ -16,6 +16,7 @@ public class SyntacticTreeUnary extends SyntacticTree{
 	@Override
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public String recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm, Hashtable<String, ElementoTS> symbolTable, int deep) {
 		//TODO: Agregar blancos
 		comInterm.addMsg("Nodo: " + super.getElem());
@@ -34,6 +35,12 @@ public class SyntacticTreeUnary extends SyntacticTree{
 		String reg=((Object) registros).getRegEAX();
 >>>>>>> a3a7142... Update SyntacticTreeLeaf | Indice accMemory y dato
 		comAssembler.addMsg("mov "+reg+", " + super.getElem());
+=======
+	public void recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm, Hashtable<String, ElementoTS> symbolTable, String blankPrefix) {
+		comInterm.addMsg(blankPrefix + "Nodo: " + getElem());
+		String reg= registros.getReg(RegisterTable.NAME_EAX, this, comAssembler);
+		comAssembler.addMsg("lea " + reg + ", " + getElem());
+>>>>>>> 1375c5c... arreglos varios
 		comAssembler.addMsg("call _print");
 		
 >>>>>>> df1f095... Update ElementoTS/AssGen/Leaf/Unary

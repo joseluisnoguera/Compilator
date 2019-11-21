@@ -22,14 +22,14 @@ public abstract class SyntacticTree extends ParserVal {
 		tipo = ""; //Sin tipo
 	}
 
-	public String getTipo() {return this.tipo;}
-	public void setTipo(String tipo) {this.tipo=tipo;}
-	public SyntacticTree getHijoIzq(){return this.izq;}
-	public SyntacticTree getHijoDer() {return this.der;}
-	public String getElem() {return this.lexeme;} 
-	public void setHijoIzq(SyntacticTree izq) {this.izq=((SyntacticTree)izq);}
-	public void setHijoDer(SyntacticTree der) {this.der=(SyntacticTree)der;}
-	public void setElem(String elem) {this.lexeme=elem;}
+	public String getTipo() { return tipo; }
+	public void setTipo(String tipo) { this.tipo=tipo; }
+	public SyntacticTree getHijoIzq(){ return izq; }
+	public SyntacticTree getHijoDer() { return der; }
+	public String getElem() { return lexeme; } 
+	public void setHijoIzq(SyntacticTree izq) { this.izq=((SyntacticTree)izq); }
+	public void setHijoDer(SyntacticTree der) { this.der=(SyntacticTree)der; }
+	public void setElem(String elem) { lexeme=elem; }
 
 <<<<<<< HEAD
 	public abstract String recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm, Hashtable<String, ElementoTS> symbolTable, int deep);

@@ -107,6 +107,7 @@ public class SyntacticTreeCommon extends SyntacticTree {
 		}
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< HEAD:src/utils/sintacticTree/SintacticTreeCommon.java
 		if( matchIzq.matches() && matchDer.matches()) 
 
@@ -166,6 +167,41 @@ public class SyntacticTreeCommon extends SyntacticTree {
 					String reg;
 					if(symbolTable.get(dato1.substring(0)).getTipoAtributo() == "int")
 						reg = registros.getRegFreeInt(this);//obtener algun registro int libre
+=======
+		if(getElem() == "+" || getElem() == "*" || getElem()=="-" || getElem()==":=" || getElem()=="/") {
+			if(esHoja(dato1) && esHoja(dato2)) {//si los dos son hojas
+				if((op == "IMUL")) {//si es operacion de multiplicacion
+					String reg;
+					if(symbolTable.get(dato1.substring(1)).getTipoAtributo().equals(ElementoTS.INT)) {
+						String regAX = registros.getReg(RegisterTable.NAME_AX, this, comAssembler);
+						@SuppressWarnings("unused")
+						String regDX = registros.getReg(RegisterTable.NAME_DX, this, comAssembler); //Se reserva para, si tiene algo, no pisarlo
+						dato1 = getHijoIzq().getAlmacenamiento();
+						dato2 = getHijoDer().getAlmacenamiento();
+						comAssembler.addMsg("MOV " + regAX + ", " + dato1);
+						comAssembler.addMsg("IMUL " + regAX + ", " + dato2);
+						reg = registros.getRegFreeLong(this);
+						comAssembler.addMsg("MOV " + reg + ", DX:AX");
+						registros.freeReg(RegisterTable.AX);
+						registros.freeReg(RegisterTable.DX);
+						setAlmacenamiento(reg);
+					}else {
+						String regEAX = registros.getReg(RegisterTable.NAME_EAX,this, comAssembler);
+						@SuppressWarnings("unused")
+						String regEDX = registros.getReg(RegisterTable.NAME_EDX,this, comAssembler); //Se reserva para, si tiene algo, no pisarlo
+						dato1 = getHijoIzq().getAlmacenamiento();
+						dato2 = getHijoDer().getAlmacenamiento();
+						comAssembler.addMsg("MOV " + regEAX + ", " + dato1);
+						comAssembler.addMsg("IMUL " + regEAX + ", " + dato2);
+						setAlmacenamiento(RegisterTable.NAME_EAX);
+						registros.freeReg(RegisterTable.EDX);
+						setAlmacenamiento(regEAX);
+					}
+				}else { //si no es operacion de multiplicacion
+					String reg;
+					if(symbolTable.get(dato1.substring(1)).getTipoAtributo().equals(ElementoTS.INT))
+						reg = registros.getRegFreeInt(this);
+>>>>>>> 1375c5c... arreglos varios
 					else
 						reg = registros.getRegFreeLong(this);//obtener algun registro long libre
 
@@ -464,7 +500,11 @@ public class SyntacticTreeCommon extends SyntacticTree {
 	}
 
 	public boolean esHoja(String dato) {
+<<<<<<< HEAD
 		return ((dato.charAt(0) == '_') || ((dato.charAt(0) <= '9')&&(dato.charAt(0) >= '0')));
+=======
+		return ((dato.charAt(0) == '_') || ((dato.charAt(0) <= '9') && (dato.charAt(0) >= '0'))); //TODO: ??????????
+>>>>>>> 1375c5c... arreglos varios
 	}
 >>>>>>> 9acbfaf... comentario
 }

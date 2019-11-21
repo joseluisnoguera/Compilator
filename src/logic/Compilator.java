@@ -11,6 +11,7 @@ import utils.ElementoTS;
 
 /*
  *TODO: Antes de entregar sacar las ventanas de token y estructura sintáctica
+<<<<<<< HEAD
  *TODO: En recorre árbol que agregue blancos según profundidad
  *TODO: Llevar códigos de errores dinámicos y la funcion de print al objeto que junta todo el assembler
  *TODO: Revisar Nodo common
@@ -23,6 +24,10 @@ import utils.ElementoTS;
 =======
  *TODO: Dejar siempre libre EAX (PREGUNTAR SI ES CORRECTO, EN CASO TAL HABRIA QUE DEJAR LIBRE DX TAMBIEN)
 >>>>>>> 9acbfaf... comentario
+=======
+ *TODO: Revisar Nodo common
+ *TODO: Revisar si gramática es correcta
+>>>>>>> 1375c5c... arreglos varios
  */
 
 public class Compilator {
@@ -34,7 +39,7 @@ public class Compilator {
 	private SyntacticTreeCtrl nodoRaiz;
 	private RegisterTable registros;
 	private MsgStack assemblerCode;
-	private MsgStack syntaticTree;
+	private MsgStack syntacticTree;
 
 
 <<<<<<< HEAD
@@ -58,7 +63,7 @@ public class Compilator {
 		semanticStructStack = new MsgStack();
 		tokenStack = new MsgStack();
 		assemblerCode = new MsgStack();
-		syntaticTree = new MsgStack();
+		syntacticTree = new MsgStack();
 		symbolTable = new Hashtable<String, ElementoTS>();
 		lexicon = new Lexicon(programBuffer, msgStack, tokenStack, symbolTable);
 		parser = new Parser(lexicon, symbolTable, msgStack, semanticStructStack);
@@ -74,10 +79,19 @@ public class Compilator {
 		int i = parser.yyparse();
 		if (i == 0) {
 			System.out.println("Parser correcto");
+<<<<<<< HEAD
 			//TODO: Ver si no hubieron errores
 			nodoRaiz = ((SyntacticTreeCtrl)parser.getRaiz());
 			nodoRaiz.recorreArbol(registros, assemblerCode, syntaticTree, symbolTable, "");
 //			assemblerCode = AssemblerGenerator.getAssembler(symbolTable, assemblerCode);
+=======
+			if (!parser.hasErrors()) {
+				nodoRaiz = ((SyntacticTreeCtrl)parser.getRaiz());
+				registros = new RegisterTable();
+				nodoRaiz.recorreArbol(registros, assemblerCode, syntacticTree, symbolTable, "");
+//				assemblerCode = AssemblerGenerator.getAssembler(symbolTable, assemblerCode);
+			}
+>>>>>>> 1375c5c... arreglos varios
 		}
 		else
 			System.out.println("Error en parser");
@@ -91,7 +105,7 @@ public class Compilator {
 	
 	public MsgStack getAssemblerCode() { return assemblerCode; }
 	
-	public MsgStack getSyntacticTree() { return syntaticTree; }
+	public MsgStack getSyntacticTree() { return syntacticTree; }
 
 	public Hashtable<String, ElementoTS> getSymbTable() { return symbolTable; }
 }

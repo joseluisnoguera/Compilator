@@ -118,9 +118,9 @@ public class Window {
 		frmCompilator = new JFrame();
 		frmCompilator.setResizable(false);
 		frmCompilator.setTitle("Compilador");
-		frmCompilator.setBounds(100, 100, 1024, 700);
+		frmCompilator.setBounds(100, 100, 1100, 700);
 		frmCompilator.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmCompilator.setMinimumSize(new Dimension(1024, 700));
+		frmCompilator.setMinimumSize(new Dimension(1100, 700));
 		SpringLayout springLayout = new SpringLayout();
 		frmCompilator.getContentPane().setLayout(springLayout);
 		
@@ -281,24 +281,24 @@ public class Window {
 					loadSymbolTable(compilator.getSymbTable());
 					
 					// Guardado del archivo Assembler (.ASM)
-					String path_to_file = file_selected.getAbsolutePath().trim();
-					String nombre_archivo = path_to_file.substring(path_to_file.lastIndexOf("\\")+1);
-					if (nombre_archivo.contains("."))
-						nombre_archivo = nombre_archivo.substring(0, nombre_archivo.lastIndexOf(".")+1);
-					String nombre_archivo_asm = nombre_archivo + ".asm";
-					path_to_file = path_to_file.substring(0, path_to_file.lastIndexOf("\\")+1); //Path queda con el último slash previo el nombre
-					File file = new File(path_to_file + nombre_archivo_asm);
-					FileUtils.saveFile(file, compilator.getAssemblerCode().toString());
-					
-					if (askMakeExecutable()) { // Pregunta si quiere el ejecutable
-						if (masm32_path == null) // Si no está definida la ubicación de masm32
-							masm32_path = askMasmPath();
-						if (isMasmPath(masm32_path)) // Verifica que existan los ejecutables ml y link
-//							generateExecutable(path_to_file, nombre_archivo, masm32_path);
-							System.out.println("generando");
-						else
-							JOptionPane.showMessageDialog(new JFrame(), FILE_NOT_STORED, "Warning", JOptionPane.ERROR_MESSAGE);
-					}
+//					String path_to_file = file_selected.getAbsolutePath().trim();
+//					String nombre_archivo = path_to_file.substring(path_to_file.lastIndexOf("\\")+1);
+//					if (nombre_archivo.contains("."))
+//						nombre_archivo = nombre_archivo.substring(0, nombre_archivo.lastIndexOf(".")+1);
+//					String nombre_archivo_asm = nombre_archivo + ".asm";
+//					path_to_file = path_to_file.substring(0, path_to_file.lastIndexOf("\\")+1); //Path queda con el último slash previo el nombre
+//					File file = new File(path_to_file + nombre_archivo_asm);
+//					FileUtils.saveFile(file, compilator.getAssemblerCode().toString());
+//					
+//					if (askMakeExecutable()) { // Pregunta si quiere el ejecutable
+//						if (masm32_path == null) // Si no está definida la ubicación de masm32
+//							masm32_path = askMasmPath();
+//						if (isMasmPath(masm32_path)) // Verifica que existan los ejecutables ml y link
+////							generateExecutable(path_to_file, nombre_archivo, masm32_path);
+//							System.out.println("generando");
+//						else
+//							JOptionPane.showMessageDialog(new JFrame(), FILE_NOT_STORED, "Warning", JOptionPane.ERROR_MESSAGE);
+//					}
 										
 				} else
 					JOptionPane.showMessageDialog(new JFrame(), FILE_NOT_STORED, "Warning", JOptionPane.ERROR_MESSAGE);
@@ -317,7 +317,7 @@ public class Window {
 		frmCompilator.getContentPane().add(lblNumberLine);
 		
 		JScrollPane scrollPane_Codigo = new JScrollPane();
-		springLayout.putConstraint(SpringLayout.EAST, scrollPane_Codigo, 474, SpringLayout.WEST, frmCompilator.getContentPane());
+		springLayout.putConstraint(SpringLayout.EAST, scrollPane_Codigo, 380, SpringLayout.WEST, frmCompilator.getContentPane());
 		scrollPane_Codigo.setAlignmentY(Component.TOP_ALIGNMENT);
 		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_Codigo, 6, SpringLayout.SOUTH, lblNumberLine);
 		springLayout.putConstraint(SpringLayout.WEST, scrollPane_Codigo, 10, SpringLayout.WEST, frmCompilator.getContentPane());
@@ -396,11 +396,11 @@ public class Window {
 		lblTokens.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		
 		scrollPane_EstructurasSemanticas = new JScrollPane();
+		springLayout.putConstraint(SpringLayout.WEST, scrollPane_EstructurasSemanticas, 100, SpringLayout.EAST, scrollPane_Codigo);
+		springLayout.putConstraint(SpringLayout.EAST, scrollPane_EstructurasSemanticas, -273, SpringLayout.EAST, frmCompilator.getContentPane());
 		springLayout.putConstraint(SpringLayout.WEST, scrollPane_Tokens, 6, SpringLayout.EAST, scrollPane_EstructurasSemanticas);
 		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_EstructurasSemanticas, 0, SpringLayout.SOUTH, scrollPane_Tokens);
 		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_EstructurasSemanticas, 0, SpringLayout.NORTH, scrollPane_Tokens);
-		springLayout.putConstraint(SpringLayout.WEST, scrollPane_EstructurasSemanticas, 6, SpringLayout.EAST, scrollPane_Codigo);
-		springLayout.putConstraint(SpringLayout.EAST, scrollPane_EstructurasSemanticas, -273, SpringLayout.EAST, frmCompilator.getContentPane());
 		scrollPane_EstructurasSemanticas.setMinimumSize(new Dimension(403, 162));
 		scrollPane_EstructurasSemanticas.setMaximumSize(new Dimension(403, 162));
 		scrollPane_EstructurasSemanticas.setAlignmentX(Component.RIGHT_ALIGNMENT);
@@ -415,10 +415,10 @@ public class Window {
 		scrollPane_EstructurasSemanticas.setColumnHeaderView(lblEstructurasDetectas);
 		
 		JScrollPane scrollPane_TS = new JScrollPane();
+		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_TS, 166, SpringLayout.NORTH, frmCompilator.getContentPane());
+		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_Tokens, -6, SpringLayout.NORTH, scrollPane_TS);
 		springLayout.putConstraint(SpringLayout.WEST, scrollPane_TS, 6, SpringLayout.EAST, scrollPane_Codigo);
 		springLayout.putConstraint(SpringLayout.EAST, scrollPane_TS, -7, SpringLayout.EAST, frmCompilator.getContentPane());
-		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_Tokens, -6, SpringLayout.NORTH, scrollPane_TS);
-		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_TS, 166, SpringLayout.NORTH, frmCompilator.getContentPane());
 		scrollPane_TS.setMaximumSize(new Dimension(403, 162));
 		scrollPane_TS.setMinimumSize(new Dimension(403, 162));
 		scrollPane_TS.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -438,9 +438,9 @@ public class Window {
 		
 		JScrollPane scrollPane_WarningYErrores = new JScrollPane();
 		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_WarningYErrores, 287, SpringLayout.NORTH, frmCompilator.getContentPane());
+		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_TS, -6, SpringLayout.NORTH, scrollPane_WarningYErrores);
 		springLayout.putConstraint(SpringLayout.WEST, scrollPane_WarningYErrores, 6, SpringLayout.EAST, scrollPane_Codigo);
 		springLayout.putConstraint(SpringLayout.EAST, scrollPane_WarningYErrores, -7, SpringLayout.EAST, frmCompilator.getContentPane());
-		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_TS, -6, SpringLayout.NORTH, scrollPane_WarningYErrores);
 		scrollPane_WarningYErrores.setMinimumSize(new Dimension(403, 162));
 		scrollPane_WarningYErrores.setMaximumSize(new Dimension(403, 162));
 		scrollPane_WarningYErrores.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -459,11 +459,11 @@ public class Window {
 		lblWarningsYErrores.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		
 		JScrollPane scrollPane_ArbolSintactico = new JScrollPane();
+		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_WarningYErrores, -6, SpringLayout.NORTH, scrollPane_ArbolSintactico);
 		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_ArbolSintactico, 408, SpringLayout.NORTH, frmCompilator.getContentPane());
 		springLayout.putConstraint(SpringLayout.WEST, scrollPane_ArbolSintactico, 6, SpringLayout.EAST, scrollPane_Codigo);
 		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_ArbolSintactico, -10, SpringLayout.SOUTH, frmCompilator.getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, scrollPane_ArbolSintactico, -7, SpringLayout.EAST, frmCompilator.getContentPane());
-		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_WarningYErrores, -6, SpringLayout.NORTH, scrollPane_ArbolSintactico);
 		frmCompilator.getContentPane().add(scrollPane_ArbolSintactico);
 		
 		editorPaneSintacticTree = new JTextPane();
@@ -482,7 +482,7 @@ public class Window {
 					" - Lexema: " + key + " - Valor: " + elem.getValue() + " - Repeticiones: " + elem.getCantidad() +
 					" - Declarada: " + elem.isDeclarada() + " - Estructura: " + elem.getEstructuraID() +
 					" - Tamaño en Bytes(Colecciones): " + elem.getCSizeBytes() + " - Elementos en colección: " + elem.getElemsCollection() +
-					" - Id único(Cadenas y variables auxiliares): " + elem.getId() + "\n";
+					" - Id único(Cadenas y variables auxiliares): " + elem.getId() + " - Es puntero: " + elem.isPointer() + "\n";
 		}
 		editorPaneSymbolTable.setText(text);
 	}

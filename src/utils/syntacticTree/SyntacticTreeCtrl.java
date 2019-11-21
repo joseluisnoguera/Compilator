@@ -35,6 +35,7 @@ public class SyntacticTreeCtrl extends SyntacticTree {
 			etiquetas.add("_label" + contEtiquetas);//etiqueta de inicio de condicion de foreach
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		String op = super.getHijoIzq().recorreArbol(registros, comAssembler, comInterm,symbolTable, deep+1);
 =======
 		super.getHijoIzq().recorreArbol(registros, comAssembler, comInterm,symbolTable, blankPrefix + " ");
@@ -42,6 +43,15 @@ public class SyntacticTreeCtrl extends SyntacticTree {
 >>>>>>> 154a393... comentario
 		switch(super.getElem()){
 		case "Cond":{//condicion de if
+=======
+		String op = "";
+		if (getHijoIzq() != null) {
+			getHijoIzq().recorreArbol(registros, comAssembler, comInterm,symbolTable, blankPrefix + "  ");
+			op = getHijoIzq().getAlmacenamiento();
+		}
+		switch(getElem()){
+		case "COND_IF":{ //condicion de if
+>>>>>>> 1375c5c... arreglos varios
 			contEtiquetas++;
 			switch(op) {//se agrega el salto por falso segun la instruccion hacia el final del if (y se agrega su etiqueta)
 

@@ -12,7 +12,7 @@ public class ElementoTS{
 	private String elemsCollection; //Elementos de la colección separados por ','
 	private static int idCounter = 0; //Generador de ID único
 	private int id; // Id para identificar variables
-	private boolean accmemory;
+	private boolean isPointer;
 	
 	// Tipos de variables:
 	public static final String INT = "int";
@@ -31,19 +31,19 @@ public class ElementoTS{
 		this.tipoToken = tipoToken;
 		this.tipoAtributo = tipoAtributo;
 		cantidad = 1;
-		this.declarada=false;
-		this.estructuraID=null;
-		this.cSize = 0;
+		declarada=false;
+		estructuraID=null;
+		cSize = 0;
 		id = -1;
 		cSizeBytes = -1;
-		this.accmemory=false;
+		isPointer=false;
 	}
 
 	public String getElemsCollection() {return elemsCollection;}
 	
-	public Boolean getAccMemory() {return this.accmemory;}
+	public Boolean isPointer() { return isPointer; }
 	
-	public void setAccMemory() {this.accmemory=!this.accmemory;}
+	public void setHasPointer() { isPointer = true; }
 	
 	public void setElemsCollection(String elems) { elemsCollection = elems;}
 
