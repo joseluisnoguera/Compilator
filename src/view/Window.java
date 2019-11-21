@@ -50,7 +50,7 @@ public class Window {
 	private static String SEARCH_MSG = "Ingrese el nombre para su archivo.";
 	private static String FILE_LOAD_ERROR_MSG = "Error al cargar el archivo.";
 	private static String FILE_NOT_FOUND_MSG = "Archivo no encontrado.";
-	private static String FILE_NOT_STORED = "El archivo debe ser guardado antes de compilar.";
+	private static String FILE_NOT_STORED = "El archivo debe ser cargado o guardado antes de compilar.";
 	private static String SAVE_CORRECT_MSG = "Archivo guardado con éxito.";
 	private static String SAVE_ERROR_MSG = "Error al guardar el archivo.";
 	private static String LINE_COUNTER_MSG = "Línea seleccionada: ";

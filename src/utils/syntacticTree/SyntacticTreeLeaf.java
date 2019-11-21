@@ -126,6 +126,7 @@ public class SyntacticTreeLeaf extends SyntacticTree{
 			registros.freeReg(registros.getRegPos(regIndex));
 			dato = regCollection;
 		} else {
+<<<<<<< HEAD
 			System.out.println("Lexema completo: " + dato);
 			System.out.println("Lexema: " + dato.substring(1));
 			System.out.println("En TS: " + symbolTable.get(dato.substring(1)));
@@ -140,6 +141,18 @@ public class SyntacticTreeLeaf extends SyntacticTree{
 				comAssembler.addMsg("mov "+reg+", dword ptr ["+dato+"]");//mueve a reg el dato almacenado en la direccion de memoria guardada en dato.
 				dato=reg;
 			}
+=======
+			if (dato.charAt(0) == '_')
+				if(symbolTable.get(dato.substring(1)).isPointer()) { //Si el id es indice del foreach
+					String reg = "";
+					if(symbolTable.get(dato).getTipoAtributo().equals(ElementoTS.INT)) //chequea tipo del indice
+						reg = registros.getRegFreeInt(this);
+					else
+						reg = registros.getRegFreeLong(this);
+					comAssembler.addMsg("mov " + reg + ", dword ptr [" + dato + "]");//mueve a reg el dato almacenado en la direccion de memoria guardada en dato.
+					dato = reg;
+				}
+>>>>>>> a091e6e... arreglos por punteros null
 		}
 <<<<<<< HEAD
 >>>>>>> df1f095... Update ElementoTS/AssGen/Leaf/Unary
@@ -205,5 +218,8 @@ public class SyntacticTreeLeaf extends SyntacticTree{
 		
 >>>>>>> e149002... Update SyntacticTreeLeaf.java
 	}
+	
+	public boolean isVariableOrConst() { return (getElem().charAt(0) == '_' || (int)(getElem().charAt(0)) >= 48 || (int)(getElem().charAt(0)) <= 57); }
+	
 }
 
