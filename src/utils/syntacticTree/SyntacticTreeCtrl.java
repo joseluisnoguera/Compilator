@@ -14,12 +14,12 @@ public class SyntacticTreeCtrl extends SyntacticTree {
 
 	public SyntacticTreeCtrl(String lexeme, SyntacticTree nodo) {
 		super(lexeme);
-		
 		super.setHijoIzq(nodo);
 	}
 
 	@Override
 	public String recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm,
+<<<<<<< HEAD
 			Hashtable<String, ElementoTS> symbolTable, int deep) {
 		//TODO: Agregar blancos
 		comInterm.addMsg("Nodo: " + super.getElem());
@@ -93,6 +93,82 @@ public class SyntacticTreeCtrl extends SyntacticTree {
 			etiquetas.remove(etiquetas.size()-1);
 		}
 		}
+=======
+			Hashtable<String, ElementoTS> symbolTable, String blankPrefix) {
+		comInterm.addMsg(blankPrefix + "Nodo: " + super.getElem());
+//		if(super.getElem() == "cond") {//cond del foreach
+//			contEtiquetas++;
+//			comAssembler.addMsg("_label" + contEtiquetas + ":");
+//			etiquetas.add("_label" + contEtiquetas);//etiqueta de inicio de condicion de foreach
+//		}
+		String op;
+		if (getHijoIzq() != null)
+			op = super.getHijoIzq().recorreArbol(registros, comAssembler, comInterm,symbolTable, blankPrefix + " ");
+//		switch(super.getElem()){
+//		case "Cond":{//condicion de if
+//			contEtiquetas++;
+//			switch(op) {//se agrega el salto por falso segun la instruccion hacia el final del if (y se agrega su etiqueta)
+//
+//			case "<":{
+//				comAssembler.addMsg("JGE _label" + contEtiquetas);
+//				etiquetas.add("_label" + contEtiquetas);
+//			}
+//			case ">":{
+//				comAssembler.addMsg("JLE _label" + contEtiquetas);
+//				etiquetas.add("_label" + contEtiquetas);
+//			}
+//			case "LET":{
+//				comAssembler.addMsg("JG _label" + contEtiquetas);
+//				etiquetas.add("_label" + contEtiquetas);
+//			}
+//			case "GET":{
+//				comAssembler.addMsg("JL _label" + contEtiquetas);
+//				etiquetas.add("_label" + contEtiquetas);
+//			}
+//			case "DIF":{
+//				comAssembler.addMsg("JE _label" + contEtiquetas);
+//				etiquetas.add("_label" + contEtiquetas);
+//			}
+//			case "EQ":{
+//				comAssembler.addMsg("JNE _label" + contEtiquetas);
+//				etiquetas.add("_label" + contEtiquetas);
+//			}
+//
+//			}
+//		}
+//
+//		case "cond": {//cond del foreach
+//			contEtiquetas++;
+//			comAssembler.addMsg("JGE _label" + contEtiquetas);//salto por false en caso de que se termine el arreglo
+//			etiquetas.add("_label" + contEtiquetas);//etiqueta de fin de foreach
+//		}
+//
+//		case "Then":{//then que no tendra else
+//			comAssembler.addMsg(etiquetas.get(etiquetas.size()-1) + ":");//se agrega la etiqueta de fin de if
+//			etiquetas.remove(etiquetas.size()-1);
+//		}
+//
+//		case "then":{//then que tendra else
+//			contEtiquetas++;
+//			comAssembler.addMsg("JMP _label" + contEtiquetas);//se agrega el salto al fin del if (y se agrega despues su etiqueta)
+//			comAssembler.addMsg(etiquetas.get(etiquetas.size()-1) + ":");//se agrega etiqueta de inicio de else
+//			etiquetas.remove(etiquetas.size()-1);
+//			etiquetas.add("_label" + contEtiquetas);
+//		}
+//
+//		case "else":{
+//			comAssembler.addMsg(etiquetas.get(etiquetas.size()-1) + ":");//se agrega la etiqueta de fin de if
+//			etiquetas.remove(etiquetas.size()-1);
+//		}
+//
+//		case "CuerpoAvance":{
+//			comAssembler.addMsg("JMP " + etiquetas.get(etiquetas.size()-2));//salto al principio de la condicion de foreach
+//			comAssembler.addMsg(etiquetas.get(etiquetas.size()-1) + ":");//creacion de etiqueta de fin de foreach
+//			etiquetas.remove(etiquetas.size()-1);
+//			etiquetas.remove(etiquetas.size()-1);
+//		}
+//		}
+>>>>>>> 45299ea... visualización de árbol sintáctico
 		return "";
 	}	
 }

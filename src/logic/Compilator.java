@@ -57,6 +57,8 @@ public class Compilator {
 		msgStack = new MsgStack();
 		semanticStructStack = new MsgStack();
 		tokenStack = new MsgStack();
+		assemblerCode = new MsgStack();
+		syntaticTree = new MsgStack();
 		symbolTable = new Hashtable<String, ElementoTS>();
 		lexicon = new Lexicon(programBuffer, msgStack, tokenStack, symbolTable);
 		parser = new Parser(lexicon, symbolTable, msgStack, semanticStructStack);
@@ -72,9 +74,10 @@ public class Compilator {
 		int i = parser.yyparse();
 		if (i == 0) {
 			System.out.println("Parser correcto");
+			//TODO: Ver si no hubieron errores
 			nodoRaiz = ((SyntacticTreeCtrl)parser.getRaiz());
 			nodoRaiz.recorreArbol(registros, assemblerCode, syntaticTree, symbolTable, "");
-			assemblerCode = AssemblerGenerator.getAssembler(symbolTable, assemblerCode);
+//			assemblerCode = AssemblerGenerator.getAssembler(symbolTable, assemblerCode);
 		}
 		else
 			System.out.println("Error en parser");

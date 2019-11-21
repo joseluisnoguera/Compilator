@@ -824,6 +824,7 @@ final static String yyrule[] = {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 //#line 222 "gramatica_2.y"
 =======
 //#line 213 "gramatica_2.y"
@@ -858,6 +859,9 @@ final static String yyrule[] = {
 =======
 //#line 457 "gramatica (12).y"
 >>>>>>> cf97fd0... Arreglos en ventana
+=======
+//#line 492 "gramatica (12).y"
+>>>>>>> 45299ea... visualización de árbol sintáctico
 
 private Lexicon lex;
 private Hashtable<String,ElementoTS> symbolTable;
@@ -1097,7 +1101,7 @@ boolean doaction;
 //########## USER-SUPPLIED ACTIONS ##########
 case 1:
 //#line 27 "gramatica (12).y"
-{ nodoRaiz = new SyntacticTreeCtrl("_Programa",(SyntacticTree)val_peek(0)); }
+{ if (val_peek(0) != null) nodoRaiz = new SyntacticTreeCtrl("_Programa",(SyntacticTree)val_peek(0)); else nodoRaiz = null; }
 break;
 case 2:
 //#line 30 "gramatica (12).y"
@@ -1105,11 +1109,11 @@ case 2:
 break;
 case 3:
 //#line 31 "gramatica (12).y"
-{ yyval=null; msgStack.addMsg("Warning: Programa sin codigo ejecutable"); }
+{ yyval = null; msgStack.addMsg("Warning: Programa sin codigo ejecutable"); }
 break;
 case 4:
 //#line 32 "gramatica (12).y"
-{ yyval=val_peek(0); }
+{ yyval = val_peek(0); }
 break;
 case 7:
 //#line 39 "gramatica (12).y"
@@ -1323,15 +1327,15 @@ case 23:
 break;
 case 24:
 //#line 142 "gramatica (12).y"
-{ yyval=val_peek(2); semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() +": Bloque de ejecuci?n"); }
+{ yyval = val_peek(2); semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() +": Bloque de ejecuci?n"); }
 break;
 case 25:
 //#line 145 "gramatica (12).y"
-{ yyval = new SyntacticTreeCommon("_S", (SyntacticTree)val_peek(1),(SyntacticTree)val_peek(0)); }
+{ yyval = new SyntacticTreeCommon("_S", (SyntacticTree)val_peek(1), (SyntacticTree)val_peek(0));	}
 break;
 case 26:
 //#line 146 "gramatica (12).y"
-{ yyval=new SyntacticTreeCommon("_S",(SyntacticTree)val_peek(0),null); }
+{ yyval = new SyntacticTreeCommon("_S", (SyntacticTree)val_peek(0), null); }
 break;
 case 27:
 //#line 149 "gramatica (12).y"
@@ -1339,7 +1343,7 @@ case 27:
 break;
 case 28:
 //#line 152 "gramatica (12).y"
-{ yyval=val_peek(1); }
+{ yyval = val_peek(1); }
 break;
 case 29:
 <<<<<<< HEAD
@@ -1369,17 +1373,27 @@ case 29:
 //#line 154 "gramatica (12).y"
 =======
 //#line 153 "gramatica (12).y"
+<<<<<<< HEAD
 >>>>>>> cf97fd0... Arreglos en ventana
 { yyval=val_peek(0); }
 >>>>>>> 4269743... generador de datos
+=======
+{ yyval = val_peek(0); }
+>>>>>>> 45299ea... visualización de árbol sintáctico
 break;
 case 30:
 //#line 154 "gramatica (12).y"
-{ yyval=val_peek(1); }
+{ yyval = val_peek(1); }
 break;
 case 31:
 //#line 155 "gramatica (12).y"
-{ yyval=val_peek(1); }
+{ yyval = val_peek(1); }
+break;
+case 32:
+//#line 156 "gramatica (12).y"
+{
+				yyval = new SyntacticTreeCommon("_", null, null);
+			}
 break;
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -1415,10 +1429,14 @@ case 37:
 >>>>>>> f75def1... comentario
 =======
 case 33:
-//#line 157 "gramatica (12).y"
-{ msgStack.addMsg("Error gen?rico no contemplado cerca de l?nea " + lex.getNewLineCounter()); }
+//#line 159 "gramatica (12).y"
+{ 
+				msgStack.addMsg("Error gen?rico no contemplado cerca de l?nea " + lex.getNewLineCounter());
+				yyval = new SyntacticTreeCommon("_", null, null);
+			}
 break;
 case 34:
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -1433,10 +1451,13 @@ case 34:
 =======
 //#line 160 "gramatica (12).y"
 >>>>>>> cf97fd0... Arreglos en ventana
+=======
+//#line 165 "gramatica (12).y"
+>>>>>>> 45299ea... visualización de árbol sintáctico
 {
                     semanticStructStack.addMsg("L?nea " + stackOfLines.peek().intValue() + ": Sentencia IF ");
                     stackOfLines.pop();
-					SyntacticTreeCtrl nodothen = new SyntacticTreeCtrl("Then",(SyntacticTree)val_peek(1));
+					SyntacticTreeCtrl nodothen = new SyntacticTreeCtrl("Then", (SyntacticTree)val_peek(1));
 					yyval = new SyntacticTreeCommon("IF",(SyntacticTree)val_peek(3),nodothen);
                 }
 break;
@@ -1471,6 +1492,7 @@ case 38:
 case 35:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 //#line 152 "gramatica.y"
 >>>>>>> fcadff2... coment
 =======
@@ -1485,13 +1507,16 @@ case 35:
 =======
 //#line 166 "gramatica (12).y"
 >>>>>>> cf97fd0... Arreglos en ventana
+=======
+//#line 174 "gramatica (12).y"
+>>>>>>> 45299ea... visualización de árbol sintáctico
 {
                     semanticStructStack.addMsg("L?nea " + stackOfLines.peek().intValue() + ": Sentencia IF ");
                     stackOfLines.pop();
-					SyntacticTree nodothen = new SyntacticTreeCtrl("then",(SyntacticTree)val_peek(3));
-					SyntacticTree nodoelse = new SyntacticTreeCtrl("else",(SyntacticTree)val_peek(1));
+					SyntacticTreeCtrl nodothen = new SyntacticTreeCtrl("Then", (SyntacticTree)val_peek(3));
+					SyntacticTreeCtrl nodoelse = new SyntacticTreeCtrl("Else", (SyntacticTree)val_peek(1));
 					SyntacticTree nodoCuerpo = new SyntacticTreeCommon("CUERPO",nodothen,nodoelse);
-					yyval=new SyntacticTreeCommon("IF",(SyntacticTree)val_peek(5),nodoCuerpo);
+					yyval = new SyntacticTreeCommon("IF",(SyntacticTree)val_peek(5),nodoCuerpo);
                 }
 break;
 <<<<<<< HEAD
@@ -1520,14 +1545,15 @@ case 41:
 //#line 149 "gramatica.y"
 =======
 case 36:
-//#line 178 "gramatica (12).y"
+//#line 192 "gramatica (12).y"
 { yyval = val_peek(0); }
 break;
 case 37:
-//#line 181 "gramatica (12).y"
+//#line 195 "gramatica (12).y"
 { yyval = val_peek(0); }
 break;
 case 38:
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -1546,77 +1572,85 @@ case 38:
 =======
 //#line 184 "gramatica (12).y"
 >>>>>>> cf97fd0... Arreglos en ventana
+=======
+//#line 198 "gramatica (12).y"
+>>>>>>> 45299ea... visualización de árbol sintáctico
 { stackOfLines.push(lex.getNewLineCounter()); }
 break;
 case 39:
-//#line 187 "gramatica (12).y"
+//#line 201 "gramatica (12).y"
 { yyval = new SyntacticTreeCommon(val_peek(1).sval, (SyntacticTree)val_peek(2), (SyntacticTree)val_peek(0)); }
 break;
 case 40:
-//#line 190 "gramatica (12).y"
+//#line 204 "gramatica (12).y"
 { yyval = val_peek(0); }
 break;
 case 41:
-//#line 191 "gramatica (12).y"
+//#line 205 "gramatica (12).y"
 { yyval = val_peek(0); }
 break;
 case 42:
-//#line 192 "gramatica (12).y"
+//#line 206 "gramatica (12).y"
 { yyval = val_peek(0); }
 break;
 case 43:
-//#line 193 "gramatica (12).y"
+//#line 207 "gramatica (12).y"
 { yyval = val_peek(0); }
 break;
 case 44:
-//#line 194 "gramatica (12).y"
+//#line 208 "gramatica (12).y"
 { yyval = val_peek(0); }
 break;
 case 45:
-//#line 195 "gramatica (12).y"
+//#line 209 "gramatica (12).y"
 { yyval = val_peek(0); }
 break;
 case 46:
-//#line 198 "gramatica (12).y"
+//#line 212 "gramatica (12).y"
 { 
+		SyntacticTreeCommon nodo = null;
         semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() + ": Sentencia foreach");
         stackOfLines.pop();
-		if(!(symbolTable.get(val_peek(3).sval).isDeclarada() == false) || !(symbolTable.get(val_peek(1).sval).isDeclarada()) || !(symbolTable.get(val_peek(1).sval).getTipoAtributo().equals(ElementoTS.INT)))
+		if(!(symbolTable.get(val_peek(3).sval).isDeclarada()) || !(symbolTable.get(val_peek(1).sval).isDeclarada())){
 			if(!(symbolTable.get(val_peek(3).sval).isDeclarada()))
-						msgStack.addMsg("ERROR: Variable "+val_peek(3).sval +" no declarada.");
-						else
-							if(!symbolTable.get(val_peek(1).sval).getTipoAtributo().equals(ElementoTS.INT))
-								msgStack.addMsg("ERROR: Variable "+val_peek(3).sval +" no es entero.");
-							else
-								msgStack.addMsg("ERROR: Coleccion  "+val_peek(1).sval +" no declarada.");
-		else{
-			SyntacticTree nodoAux1 = new SyntacticTreeLeaf(val_peek(3).sval);
-			SyntacticTree nodoMax1 = new SyntacticTreeLeaf(val_peek(1).sval);
-			SyntacticTree nodoInic = new SyntacticTreeMemory("::=",nodoAux1,nodoMax1);
-			SyntacticTree nodoAux2 = new SyntacticTreeLeaf(val_peek(3).sval);
-			SyntacticTree nodoMax2 = new SyntacticTreeLeaf(val_peek(1).sval);
-			SyntacticTree nodoComp = new SyntacticTreeMemory("<<",nodoAux2,nodoMax2);
-			SyntacticTree nodoCond = new SyntacticTreeCtrl("cond",nodoComp);
-			SyntacticTree nodoBucle = new SyntacticTreeCommon("Bucle", nodoInic,nodoCond);
-			SyntacticTree nodoAux3 = new SyntacticTreeLeaf(val_peek(3).sval);
-			SyntacticTree nodoMax3 = new SyntacticTreeLeaf(val_peek(1).sval);
-			SyntacticTree nodoSuma = new SyntacticTreeMemory("+=", nodoAux3,nodoMax3);
-			SyntacticTree nodoCuerpo = new SyntacticTreeCommon("Cuerpo", (SyntacticTree)val_peek(0), nodoSuma);
-			SyntacticTree nodoCuerpoAvance = new SyntacticTreeCtrl("CuerpoAvance", nodoCuerpo);
-			yyval = new SyntacticTreeCommon("Foreach", nodoBucle,nodoCuerpoAvance);
-			
+				msgStack.addMsg("ERROR: Variable "+val_peek(3).sval +" no declarada.");
+			else
+				msgStack.addMsg("ERROR: Coleccion  "+val_peek(1).sval +" no declarada.");
+			nodo = new SyntacticTreeCommon("_", null, null);
+		}else{
+			if ((symbolTable.get(val_peek(3).sval).getTipoAtributo().equals(ElementoTS.LONG) && (symbolTable.get(val_peek(1).sval).getTipoAtributo().equals(ElementoTS.INT)))) {
+				msgStack.addMsg("ERROR: Tipos no compatibles.");
+				nodo = new SyntacticTreeCommon("_", null, null);
+			} else {
+				SyntacticTree nodoAux1 = new SyntacticTreeLeaf(val_peek(3).sval);
+				SyntacticTree nodoMax1 = new SyntacticTreeLeaf(val_peek(1).sval);
+				SyntacticTree nodoInic = new SyntacticTreeMemory("::=",nodoAux1,nodoMax1);
+				SyntacticTree nodoAux2 = new SyntacticTreeLeaf(val_peek(3).sval);
+				SyntacticTree nodoMax2 = new SyntacticTreeLeaf(val_peek(1).sval);
+				SyntacticTree nodoComp = new SyntacticTreeMemory("<<",nodoAux2,nodoMax2);
+				SyntacticTree nodoCond = new SyntacticTreeCtrl("cond",nodoComp);
+				SyntacticTree nodoBucle = new SyntacticTreeCommon("Bucle", nodoInic,nodoCond);
+				SyntacticTree nodoAux3 = new SyntacticTreeLeaf(val_peek(3).sval);
+				SyntacticTree nodoMax3 = new SyntacticTreeLeaf(val_peek(1).sval);
+				SyntacticTree nodoSuma = new SyntacticTreeMemory("+=", nodoAux3,nodoMax3);
+				SyntacticTree nodoCuerpo = new SyntacticTreeCommon("Cuerpo", (SyntacticTree)val_peek(0), nodoSuma);
+				SyntacticTree nodoCuerpoAvance = new SyntacticTreeCtrl("CuerpoAvance", nodoCuerpo);
+				nodo = new SyntacticTreeCommon("Foreach", nodoBucle,nodoCuerpoAvance);
+			}
 		}
+		yyval = nodo;
 	}
 break;
 case 47:
-//#line 229 "gramatica (12).y"
+//#line 247 "gramatica (12).y"
 { yyval = val_peek(0); }
 break;
 case 48:
-//#line 230 "gramatica (12).y"
+//#line 248 "gramatica (12).y"
 { yyval = val_peek(0); }
 break;
 case 49:
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -1673,12 +1707,25 @@ case 50:
                 semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() + ": Asignaci�n"); 
                 stackOfLines.pop();
 				if(((SyntacticTree) val_peek(0)).getTipo() == "LONG" && ((SyntacticTree) val_peek(2)).getTipo().equals(ElementoTS.INT))
+=======
+//#line 251 "gramatica (12).y"
+{ stackOfLines.push(lex.getNewLineCounter()); }
+break;
+case 50:
+//#line 254 "gramatica (12).y"
+{
+				SyntacticTree nodo = null;
+				semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() + ": Asignaci�n"); 
+				stackOfLines.pop();
+				if(((SyntacticTree) val_peek(0)).getTipo() == "LONG" && ((SyntacticTree) val_peek(2)).getTipo().equals(ElementoTS.INT)){
+>>>>>>> 45299ea... visualización de árbol sintáctico
 					msgStack.addMsg("ERROR: incompatibilidad de tipos");
-				else
-					{SyntacticTree nodo = new SyntacticTreeCommon(":=",(SyntacticTree)val_peek(2),(SyntacticTree)val_peek(0));
+					nodo = new SyntacticTreeCommon(":=", null, null);
+				}else{
+					nodo = new SyntacticTreeCommon(":=",(SyntacticTree)val_peek(2),(SyntacticTree)val_peek(0));
 					nodo.setTipo( ((SyntacticTree) val_peek(2)).getTipo());
-					yyval= nodo;
 				}
+				yyval = nodo;
 			}
 break;
 <<<<<<< HEAD
@@ -1705,39 +1752,44 @@ case 49:
 =======
 =======
 case 51:
-//#line 249 "gramatica (12).y"
+//#line 269 "gramatica (12).y"
 { 
+						SyntacticTree nodo = null;
 						stackOfLines.push(lex.getNewLineCounter()); 
-						if(!symbolTable.get(val_peek(0).sval).isDeclarada())
+						if(!symbolTable.get(val_peek(0).sval).isDeclarada()){
 							msgStack.addMsg("ERROR: Variable no declarada.");
-						else {
-							SyntacticTree nodo  = new SyntacticTreeLeaf("_" + val_peek(0).sval);
+							nodo = new SyntacticTreeLeaf("_");
+						}else {
+							nodo = new SyntacticTreeLeaf("_" + val_peek(0).sval);
 							nodo.setTipo(symbolTable.get(val_peek(0).sval).getTipoAtributo());
-							yyval = nodo;
 						}
+						yyval = nodo;
 					}
 break;
 >>>>>>> fcadff2... coment
 case 52:
-//#line 259 "gramatica (12).y"
+//#line 281 "gramatica (12).y"
 { 
+				   		SyntacticTree nodo = null;
 						stackOfLines.push(lex.getNewLineCounter());
-						if(!symbolTable.get(val_peek(3).sval).isDeclarada())
+						if(!symbolTable.get(val_peek(3).sval).isDeclarada()) {
 							msgStack.addMsg("ERROR: Variable no declarada.");
-						else{
+							nodo  = new SyntacticTreeLeaf("_");
+						}else{
 							long pos = Long.valueOf(val_peek(1).sval);
-							if((long)symbolTable.get(val_peek(3).sval).getCSize() <= pos)
+							if((long)symbolTable.get(val_peek(3).sval).getCSize() <= pos){
 								msgStack.addMsg("ERROR: Posicion de coleccion superada.");
-							else{
-								SyntacticTree nodo  = new SyntacticTreeLeaf("_" + val_peek(3).sval + "[" + val_peek(1).sval + "]");
+								nodo  = new SyntacticTreeLeaf("_");
+							}else{
+								nodo = new SyntacticTreeLeaf("_" + val_peek(3).sval + "[" + val_peek(1).sval + "]");
 								nodo.setTipo(symbolTable.get(val_peek(3).sval).getTipoAtributo());
-								yyval = nodo;
 							}
-							
 						}
+						yyval = nodo;
 					}
 break;
 case 53:
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -1798,16 +1850,24 @@ case 53:
 =======
 //#line 275 "gramatica (12).y"
 { 
+=======
+//#line 299 "gramatica (12).y"
+{
+						SyntacticTree nodo = null;
+>>>>>>> 45299ea... visualización de árbol sintáctico
 						stackOfLines.push(lex.getNewLineCounter());
-						if(!symbolTable.get(val_peek(3).sval).isDeclarada() || !symbolTable.get(val_peek(1).sval).isDeclarada())
+						if(!symbolTable.get(val_peek(3).sval).isDeclarada() || !symbolTable.get(val_peek(1).sval).isDeclarada()) {
 							msgStack.addMsg("ERROR: Una o ambas variables no fueron declaradas.");
-						else {
+							nodo  = new SyntacticTreeLeaf("_");
+						}else {
 							if (symbolTable.get(val_peek(1).sval).getEstructuraID().equals(ElementoTS.VAR)) {
-								SyntacticTree nodo  = new SyntacticTreeLeaf("_" + val_peek(3).sval + "[" + "_" + val_peek(1).sval + "]");
+								nodo  = new SyntacticTreeLeaf("_" + val_peek(3).sval + "[" + "_" + val_peek(1).sval + "]");
 								nodo.setTipo(symbolTable.get(val_peek(3).sval).getTipoAtributo());
-								yyval=nodo;
-							} else
+								yyval = nodo;
+							} else{
 								msgStack.addMsg("ERROR: El subíndice es distinto a una variable o constante.");
+								nodo  = new SyntacticTreeLeaf("_");
+							}
 						}
 					}
 >>>>>>> cf97fd0... Arreglos en ventana
@@ -1818,6 +1878,7 @@ case 51:
 //#line 157 "gramatica.y"
 =======
 case 54:
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -1856,19 +1917,22 @@ if(symbolTable.get(val_peek(0).sval).getDeclaracion() == false)
 =======
 //#line 290 "gramatica (12).y"
 >>>>>>> cf97fd0... Arreglos en ventana
+=======
+//#line 318 "gramatica (12).y"
+>>>>>>> 45299ea... visualización de árbol sintáctico
 {
-					SyntacticTree nodo;
+					SyntacticTree nodo = null;
 					if(((SyntacticTree) val_peek(2)).getTipo() != ((SyntacticTree) val_peek(0)).getTipo()) {
 						if(((SyntacticTree) val_peek(2)).getTipo().equals(ElementoTS.INT))
-							nodo = new SyntacticTreeCommon("+",new SyntacticTreeConver("itol",(SyntacticTree)val_peek(2)),(SyntacticTree)val_peek(0));
+							nodo = new SyntacticTreeCommon("+",new SyntacticTreeConver("itol",(SyntacticTree)val_peek(2)), (SyntacticTree)val_peek(0));
 						else
-							nodo = new SyntacticTreeCommon("+",(SyntacticTree)val_peek(2),new SyntacticTreeConver("itol",(SyntacticTree)val_peek(0)));
+							nodo = new SyntacticTreeCommon("+",(SyntacticTree)val_peek(2),new SyntacticTreeConver("itol", (SyntacticTree)val_peek(0)));
 						nodo.setTipo(ElementoTS.LONG);
 					} else {
 						nodo = new SyntacticTreeCommon("+",(SyntacticTree)val_peek(2),(SyntacticTree)val_peek(0));
 						nodo.setTipo(((SyntacticTree) val_peek(2)).getTipo());
 					}
-					yyval=nodo;
+					yyval = nodo;
 				}
 <<<<<<< HEAD
 			yyval=nodo;
@@ -1878,9 +1942,9 @@ if(symbolTable.get(val_peek(0).sval).getDeclaracion() == false)
 >>>>>>> 4269743... generador de datos
 break;
 case 55:
-//#line 304 "gramatica (12).y"
+//#line 332 "gramatica (12).y"
 {
-					SyntacticTree nodo;
+					SyntacticTree nodo = null;
 					if(((SyntacticTree) val_peek(2)).getTipo() != ((SyntacticTree) val_peek(0)).getTipo()) {
 						if(((SyntacticTree) val_peek(2)).getTipo().equals(ElementoTS.INT))
 							nodo = new SyntacticTreeCommon("-",new SyntacticTreeConver("itol",(SyntacticTree)val_peek(2)),(SyntacticTree)val_peek(0));
@@ -1928,13 +1992,13 @@ case 62:
 >>>>>>> f75def1... comentario
 =======
 case 56:
-//#line 318 "gramatica (12).y"
+//#line 346 "gramatica (12).y"
 { yyval =val_peek(0); }
 break;
 case 57:
-//#line 321 "gramatica (12).y"
+//#line 349 "gramatica (12).y"
 {
-			SyntacticTree nodo;
+			SyntacticTree nodo = null;
 			if(((SyntacticTree) val_peek(2)).getTipo() != ((SyntacticTree) val_peek(0)).getTipo()) {
 				if(((SyntacticTree) val_peek(2)).getTipo().equals(ElementoTS.INT))
 					nodo = new SyntacticTreeCommon("*",new SyntacticTreeConver("itol",(SyntacticTree)val_peek(2)),(SyntacticTree)val_peek(0));
@@ -1944,28 +2008,28 @@ case 57:
 				nodo = new SyntacticTreeCommon("*",(SyntacticTree)val_peek(2),(SyntacticTree)val_peek(0));
 			}
 			nodo.setTipo(ElementoTS.LONG);
-			yyval = nodo;
+			yyval = nodo; /*En caso de venir con error nodo queda en null*/
 		}
 break;
 case 58:
-//#line 334 "gramatica (12).y"
+//#line 362 "gramatica (12).y"
 {
-			SyntacticTree nodo;
+			SyntacticTree nodo = null;
 			if(((SyntacticTree) val_peek(2)).getTipo() != ((SyntacticTree) val_peek(0)).getTipo()) {
 				if(((SyntacticTree) val_peek(2)).getTipo().equals(ElementoTS.INT))
-					nodo = new SyntacticTreeCommon("/",new SyntacticTreeConver("itol",(SyntacticTree)val_peek(2)),(SyntacticTree)val_peek(0));
+					nodo = new SyntacticTreeCommon("/", new SyntacticTreeConver("itol",(SyntacticTree)val_peek(2)),(SyntacticTree)val_peek(0));
 				else
-					nodo = new SyntacticTreeCommon("/",(SyntacticTree)val_peek(2),new SyntacticTreeConver("itol",(SyntacticTree)val_peek(0)));
+					nodo = new SyntacticTreeCommon("/", (SyntacticTree)val_peek(2),new SyntacticTreeConver("itol",(SyntacticTree)val_peek(0)));
 				nodo.setTipo(ElementoTS.LONG);
-				yyval = nodo;
 			}else{
 				nodo = new SyntacticTreeCommon("/",(SyntacticTree)val_peek(2),(SyntacticTree)val_peek(0));
 				nodo.setTipo(((SyntacticTree)val_peek(2)).getTipo());
-				yyval = nodo;
 			}
+			yyval = nodo;
 		}
 break;
 case 59:
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -1992,14 +2056,23 @@ break;
 case 60:
 //#line 352 "gramatica (12).y"
 >>>>>>> cf97fd0... Arreglos en ventana
+=======
+//#line 376 "gramatica (12).y"
+{ yyval = val_peek(0); }
+break;
+case 60:
+//#line 379 "gramatica (12).y"
+>>>>>>> 45299ea... visualización de árbol sintáctico
 {
-				if(!symbolTable.get(val_peek(0).sval).isDeclarada())
-							msgStack.addMsg("ERROR: Variable no declarada.");
-				else {
-					SyntacticTree nodo = new SyntacticTreeLeaf("_" + val_peek(0).sval);
+				SyntacticTree nodo = null;
+				if(!symbolTable.get(val_peek(0).sval).isDeclarada()){
+					msgStack.addMsg("ERROR: Variable no declarada.");
+					nodo = new SyntacticTreeLeaf("_");
+				}else{
+					nodo = new SyntacticTreeLeaf("_" + val_peek(0).sval);
 					nodo.setTipo(symbolTable.get(val_peek(0).sval).getTipoAtributo());
-					yyval = nodo;
 				}
+				yyval = nodo;
 			}
 break;
 <<<<<<< HEAD
@@ -2050,30 +2123,34 @@ case 60:
 >>>>>>> 4269743... generador de datos
 =======
 case 61:
+<<<<<<< HEAD
 //#line 361 "gramatica (12).y"
 >>>>>>> cf97fd0... Arreglos en ventana
+=======
+//#line 390 "gramatica (12).y"
+>>>>>>> 45299ea... visualización de árbol sintáctico
 {
-					String lexeme = val_peek(0).sval;
-					ElementoTS tts = symbolTable.get(lexeme);
-					if(lexeme == "32768"){
-						tts.setTipoAtributo(ElementoTS.LONG);
+				String lexeme = val_peek(0).sval;
+				ElementoTS tts = symbolTable.get(lexeme);
+				if(lexeme == "32768"){
+					tts.setTipoAtributo(ElementoTS.LONG);
+				}
+				if (lexeme == "2147483648"){
+					String lexnuevo = "2147483647";
+					val_peek(0).sval = lexnuevo;
+					symbolTable.get(lexeme).decreaseCounter();
+					if(symbolTable.containsKey(lexnuevo)){
+						symbolTable.get(lexnuevo).increaseCounter();
+					}else {
+						ElementoTS ttsnuevo = new ElementoTS(tts.getTipoAtributo(),tts.getValue(),"");
+						symbolTable.put(lexnuevo,ttsnuevo);
 					}
-					if (lexeme == "2147483648"){
-						String lexnuevo = "2147483647";
-						val_peek(0).sval = lexnuevo;
-						symbolTable.get(lexeme).decreaseCounter();
-						if(symbolTable.containsKey(lexnuevo)){
-							symbolTable.get(lexnuevo).increaseCounter();
-						}else {
-							ElementoTS ttsnuevo = new ElementoTS(tts.getTipoAtributo(),tts.getValue(),"");
-							symbolTable.put(lexnuevo,ttsnuevo);
-						}
-					lexeme = lexnuevo;
-						msgStack.addMsg("Warning: Constante positiva fuera de rango.");
-					}
+				lexeme = lexnuevo;
+					msgStack.addMsg("Warning: Constante positiva fuera de rango.");
+				}
 				SyntacticTree nodo = new SyntacticTreeLeaf(lexeme);
 				nodo.setTipo(symbolTable.get(lexeme).getTipoAtributo());
-				yyval= nodo;
+				yyval = nodo;
 	        }
 break;
 <<<<<<< HEAD
@@ -2124,20 +2201,28 @@ case 61:
 >>>>>>> 4269743... generador de datos
 =======
 case 62:
+<<<<<<< HEAD
 //#line 384 "gramatica (12).y"
 >>>>>>> cf97fd0... Arreglos en ventana
+=======
+//#line 413 "gramatica (12).y"
+>>>>>>> 45299ea... visualización de árbol sintáctico
 {
-					if(!symbolTable.get(val_peek(3).sval).isDeclarada())
-								msgStack.addMsg("ERROR: Variable no declarada.");
-					else{
+					SyntacticTree nodo = null;
+					if(!symbolTable.get(val_peek(3).sval).isDeclarada()){
+						msgStack.addMsg("ERROR: Variable no declarada.");
+						nodo = new SyntacticTreeLeaf("_");
+					}else{
 						long pos = Integer.valueOf(val_peek(1).sval);
-						if(symbolTable.get(val_peek(3).sval).getCSize() <= pos)
+						if(symbolTable.get(val_peek(3).sval).getCSize() <= pos) {
 							msgStack.addMsg("ERROR: Posicion de coleccion superada.");
-						SyntacticTree nodo = new SyntacticTreeLeaf("_" + val_peek(3).sval + "[" + val_peek(1).sval + "]");
+							nodo = new SyntacticTreeLeaf("_");
+						}
+						nodo = new SyntacticTreeLeaf("_" + val_peek(3).sval + "[" + val_peek(1).sval + "]");
 						nodo.setTipo(symbolTable.get(val_peek(3).sval).getTipoAtributo());
-						yyval = nodo;
+					}
+					yyval = nodo;
 				}
-			}
 break;
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -2179,23 +2264,31 @@ case 62:
 >>>>>>> 4269743... generador de datos
 =======
 case 63:
-//#line 396 "gramatica (12).y"
+//#line 429 "gramatica (12).y"
 {
-					if(!symbolTable.get(val_peek(3).sval).isDeclarada() || !symbolTable.get(val_peek(1).sval).isDeclarada())
-								msgStack.addMsg("ERROR: Una o ambas variables no fueron declaradas.");
-					else{
+					SyntacticTree nodo = null;
+					if(!symbolTable.get(val_peek(3).sval).isDeclarada() || !symbolTable.get(val_peek(1).sval).isDeclarada()){
+						msgStack.addMsg("ERROR: Una o ambas variables no fueron declaradas.");
+						nodo = new SyntacticTreeLeaf("_");
+					}else{
 						if (symbolTable.get(val_peek(1).sval).getEstructuraID().equals(ElementoTS.VAR)) {
-							SyntacticTree nodo = new SyntacticTreeLeaf("_" + val_peek(3).sval + "[" + "_" + val_peek(1).sval + "]");
+							nodo = new SyntacticTreeLeaf("_" + val_peek(3).sval + "[" + "_" + val_peek(1).sval + "]");
 							nodo.setTipo(symbolTable.get(val_peek(3).sval).getTipoAtributo());
-							yyval = nodo;
-						} else
+						} else{
 							msgStack.addMsg("ERROR: El subíndice es distinto a una variable o constante.");
+							nodo = new SyntacticTreeLeaf("_");
+						}
 					}
+					yyval = nodo;
 				}
 break;
 case 64:
+<<<<<<< HEAD
 //#line 408 "gramatica (12).y"
 >>>>>>> cf97fd0... Arreglos en ventana
+=======
+//#line 445 "gramatica (12).y"
+>>>>>>> 45299ea... visualización de árbol sintáctico
 {
 					String lexeme = val_peek(0).sval;
 					ElementoTS tts = symbolTable.get(lexeme);
@@ -2204,16 +2297,14 @@ case 64:
 					if(!symbolTable.containsKey(lexnuevo)){
 						ElementoTS ttsneg = new ElementoTS(tts.getTipoAtributo(),tts.getValue(),"");
 						symbolTable.put(lexnuevo,ttsneg);
-					}else{
+					}else
 						symbolTable.get(lexnuevo).increaseCounter();
-					}
-					if (tts.getCantidad() == 0){
+					if (tts.getCantidad() == 0)
 						symbolTable.remove(lexeme);
-					}
-				symbolTable.get(lexeme).decreaseCounter();
-				SyntacticTree nodo=new SyntacticTreeLeaf(lexnuevo);
-				nodo.setTipo(symbolTable.get(lexnuevo).getTipoAtributo());
-				yyval = nodo;
+					symbolTable.get(lexeme).decreaseCounter();
+					SyntacticTree nodo = new SyntacticTreeLeaf(lexnuevo);
+					nodo.setTipo(symbolTable.get(lexnuevo).getTipoAtributo());
+					yyval = nodo;
 	        }
 break;
 <<<<<<< HEAD
@@ -2264,8 +2355,12 @@ case 63:
 >>>>>>> 4269743... generador de datos
 =======
 case 65:
+<<<<<<< HEAD
 //#line 429 "gramatica (12).y"
 >>>>>>> cf97fd0... Arreglos en ventana
+=======
+//#line 464 "gramatica (12).y"
+>>>>>>> 45299ea... visualización de árbol sintáctico
 {
                 semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() +": Sentencia print");
                 stackOfLines.pop();
@@ -2314,56 +2409,60 @@ case 64:
 >>>>>>> 4269743... generador de datos
 =======
 case 66:
+<<<<<<< HEAD
 //#line 436 "gramatica (12).y"
 >>>>>>> cf97fd0... Arreglos en ventana
+=======
+//#line 471 "gramatica (12).y"
+>>>>>>> 45299ea... visualización de árbol sintáctico
 { stackOfLines.push(lex.getNewLineCounter()); }
 break;
 case 67:
-//#line 439 "gramatica (12).y"
+//#line 474 "gramatica (12).y"
 { msgStack.addMsg("Warning: Declaraci?n de bloque sin contenido"); }
 break;
 case 68:
-//#line 440 "gramatica (12).y"
+//#line 475 "gramatica (12).y"
 { msgStack.addMsg("Error: Comparaci?n incompleta"); }
 break;
 case 69:
-//#line 441 "gramatica (12).y"
+//#line 476 "gramatica (12).y"
 { msgStack.addMsg("Error: Declaraci?n de IF sin condici?n"); }
 break;
 case 70:
-//#line 442 "gramatica (12).y"
+//#line 477 "gramatica (12).y"
 { msgStack.addMsg("Error: Declaracion de FOREACH sin ?ndice y sin colecci?n"); }
 break;
 case 71:
-//#line 443 "gramatica (12).y"
+//#line 478 "gramatica (12).y"
 { msgStack.addMsg("Error: Declaracion de FOREACH sin colecci?n"); }
 break;
 case 72:
-//#line 444 "gramatica (12).y"
+//#line 479 "gramatica (12).y"
 { msgStack.addMsg("Error: Declaracion de FOREACH sin ?ndice"); }
 break;
 case 73:
-//#line 445 "gramatica (12).y"
+//#line 480 "gramatica (12).y"
 { msgStack.addMsg("Error: Nombre y valor de posicion de coleccion faltante"); }
 break;
 case 74:
-//#line 446 "gramatica (12).y"
+//#line 481 "gramatica (12).y"
 { msgStack.addMsg("Error: Nombre de coleccion faltante"); }
 break;
 case 75:
-//#line 447 "gramatica (12).y"
+//#line 482 "gramatica (12).y"
 { msgStack.addMsg("Error: Corchete de apertura faltante"); }
 break;
 case 76:
-//#line 448 "gramatica (12).y"
+//#line 483 "gramatica (12).y"
 { msgStack.addMsg("Error: Corchete de cierre faltante"); }
 break;
 case 77:
-//#line 449 "gramatica (12).y"
+//#line 484 "gramatica (12).y"
 { msgStack.addMsg("Error: Constante a la izquierda de una asignaci?n"); }
 break;
 case 78:
-//#line 450 "gramatica (12).y"
+//#line 485 "gramatica (12).y"
 { msgStack.addMsg("Error: Sentencia inv?lida"); }
 break;
 <<<<<<< HEAD
@@ -2489,18 +2588,23 @@ case 80:
 >>>>>>> 4269743... generador de datos
 =======
 case 79:
+<<<<<<< HEAD
 //#line 451 "gramatica (12).y"
 >>>>>>> cf97fd0... Arreglos en ventana
+=======
+//#line 486 "gramatica (12).y"
+>>>>>>> 45299ea... visualización de árbol sintáctico
 { msgStack.addMsg("Error: Constantes declaradas con tipo"); }
 break;
 case 80:
-//#line 452 "gramatica (12).y"
+//#line 487 "gramatica (12).y"
 { msgStack.addMsg("Error: Falta de separador entre valores constantes"); }
 break;
 case 81:
-//#line 453 "gramatica (12).y"
+//#line 488 "gramatica (12).y"
 { msgStack.addMsg("Error: Sentencia de asignaci?n inv?lida"); }
 break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -2543,6 +2647,9 @@ break;
 =======
 //#line 1164 "Parser.java"
 >>>>>>> cf97fd0... Arreglos en ventana
+=======
+//#line 1203 "Parser.java"
+>>>>>>> 45299ea... visualización de árbol sintáctico
 //########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####

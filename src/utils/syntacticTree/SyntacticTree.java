@@ -18,6 +18,7 @@ public abstract class SyntacticTree extends ParserVal {
 		this.lexeme=lexeme;
 		this.der=null;
 		this.izq=null;
+		tipo = ""; //Sin tipo
 	}
 
 	public String getTipo() {return this.tipo;}

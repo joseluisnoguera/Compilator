@@ -14,10 +14,16 @@ public class SyntacticTreeUnary extends SyntacticTree{
 	}
 
 	@Override
+<<<<<<< HEAD
 	public String recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm, Hashtable<String, ElementoTS> symbolTable, int deep) {
 		//TODO: Agregar blancos
 		comInterm.addMsg("Nodo: " + super.getElem());
 		comAssembler.addMsg("invoke StdOut, addr " + super.getElem());
+=======
+	public String recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm, Hashtable<String, ElementoTS> symbolTable, String blankPrefix) {
+		comInterm.addMsg(blankPrefix + "Nodo: " + super.getElem());
+//		comAssembler.addMsg("invoke StdOut, addr " + super.getElem());
+>>>>>>> 45299ea... visualización de árbol sintáctico
 		return "";
 	}
 }

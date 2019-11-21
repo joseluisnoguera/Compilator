@@ -37,6 +37,7 @@ public class SyntacticTreeConver extends SyntacticTree{
 			//TODO: Agregar blancos
 			comInterm.addMsg("Nodo: " + super.getElem());
 			//transforma un int en long
+<<<<<<< HEAD
 			String dato = super.getHijoIzq().recorreArbol(registros,comAssembler,comInterm,symbolTable, deep+1);
 			if((dato != "AX")&&(dato != "BX")&&(dato != "CX")&&(dato != "DX")) {//no es un registro
 				if (dato.charAt(0) == '_') {//es id
@@ -62,6 +63,33 @@ public class SyntacticTreeConver extends SyntacticTree{
 				return regAux;
 			}
 >>>>>>> 7eacf2b... _
+=======
+			String dato = super.getHijoIzq().recorreArbol(registros,comAssembler,comInterm,symbolTable, blankPrefix + " ");
+//			if((dato != "AX")&&(dato != "BX")&&(dato != "CX")&&(dato != "DX")) {//no es un registro
+//				if (dato.charAt(0) == '_') {//es id
+//					String regDato = registros.getRegAX();
+//					comAssembler.addMsg("MOV " + regDato + ", " + dato);
+//					comAssembler.addMsg("CWDE");
+//					String regAux = registros.getRegFreeLong();
+//					comAssembler.addMsg("MOV " + regAux + ", " + regDato);
+//					registros.setRegTable("AX",false);
+//					return regAux;
+//				}else {//es cte
+//					String regDato = registros.getRegFreeLong();
+//					comAssembler.addMsg("MOV " + regDato + ", " + dato);
+//					return regDato;
+//				}
+//			}else {//es un registro de 16b
+//				String regAX = registros.getRegAX();
+//				comAssembler.addMsg("MOV " + regAX + ", " + dato);
+//				comAssembler.addMsg("CWDE");
+//				String regAux = registros.getRegFreeLong();
+//				comAssembler.addMsg("MOV " + regAux + ", " + regAX);
+//				registros.setRegTable("AX",false);
+//				return regAux;
+//			}
+			return "";
+>>>>>>> 45299ea... visualización de árbol sintáctico
 		}
 		String regAux = registros.getRegFreeLong();
 		comAssembler.addMsg("MOV " + regAux + ", " + super.getElem());
