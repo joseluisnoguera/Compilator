@@ -28,6 +28,7 @@ public class SyntacticTreeConver extends SyntacticTree{
 	public String recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm,Hashtable<String, ElementoTS> symbolTable) {
 		//transforma un int en long
 <<<<<<< HEAD
+<<<<<<< HEAD
 		String dato = super.getHijoIzq().recorreArbol(registros,comAssembler,comInterm,symbolTable);
 		if((dato != "AX")&&(dato != "BX")&&(dato != "CX")&&(dato != "DX")) {
 			String regDato = registros.getRegFreeInt();
@@ -75,14 +76,39 @@ public class SyntacticTreeConver extends SyntacticTree{
 		if((dato != RegisterTable.NAME_AX) && (dato != RegisterTable.NAME_BX) && (dato != RegisterTable.NAME_CX)
 				&& (dato != RegisterTable.NAME_DX)) { //no es un registro
 			if (dato.charAt(0) == '_') { //es id
-				String regDato = registros.getReg(RegisterTable.NAME_AX, this, comAssembler);
+				String regDato = registros.getReg(RegisterTable.NAME_AX, this, comAssembler,symbolTable);
 				comAssembler.addMsg("MOV " + regDato + ", " + dato);
 >>>>>>> 1375c5c... arreglos varios
+=======
+		String data = "";
+		getHijoIzq().recorreArbol(registros,comAssembler,comInterm,symbolTable, blankPrefix + "  ");
+		data = getHijoIzq().getAlmacenamiento();
+		if((data != RegisterTable.NAME_AX) && (data != RegisterTable.NAME_BX) && (data != RegisterTable.NAME_CX)
+				&& (data != RegisterTable.NAME_DX)) { //no es un registro
+			if (data.charAt(0) == '_') { //es id
+<<<<<<< HEAD
+				String regDato = registros.getReg(RegisterTable.NAME_AX, this, comAssembler);
+=======
+				String regDato = registros.getReg(RegisterTable.NAME_AX, getHijoIzq(), comAssembler, symbolTable);
+>>>>>>> 88b2c34... _
+				comAssembler.addMsg("MOV " + regDato + ", " + data);
+>>>>>>> bca257b... resueltos problemas en common
 				comAssembler.addMsg("CWDE");
+<<<<<<< HEAD
+<<<<<<< HEAD
 				String regAux = registros.getRegFreeLong(this);
 				comAssembler.addMsg("MOV " + regAux + ", " + regAX);
 				registros.setRegTable("AX",false);
+=======
+				String regAux = registros.getRegFreeLong(this,symbolTable,comAssembler);
+=======
+				String regAux = registros.getRegFreeLong(getHijoIzq(),symbolTable,comAssembler);
+>>>>>>> 88b2c34... _
+				comAssembler.addMsg("MOV " + regAux + ", " + regDato);
+				registros.freeReg(RegisterTable.AX);
+>>>>>>> 39b95a0... Update RegisterTable-VarAUX
 				setAlmacenamiento(regAux);
+<<<<<<< HEAD
 			}
 >>>>>>> 7eacf2b... _
 =======
@@ -112,6 +138,39 @@ public class SyntacticTreeConver extends SyntacticTree{
 //			}
 			return "";
 >>>>>>> 45299ea... visualización de árbol sintáctico
+=======
+			}else {//es cte
+<<<<<<< HEAD
+<<<<<<< HEAD
+				String regDato = registros.getRegFreeLong(this);
+=======
+				String regDato = registros.getRegFreeLong(getHijoIzq(), symbolTable, comAssembler);
+>>>>>>> 88b2c34... _
+				comAssembler.addMsg("MOV " + regDato + ", " + data);
+				setAlmacenamiento(regDato);
+			}
+		}else {//es un registro de 16b
+<<<<<<< HEAD
+			String regAX = registros.getReg(RegisterTable.NAME_AX, this, comAssembler);
+=======
+			String regAX = registros.getReg(RegisterTable.NAME_AX, getHijoIzq(), comAssembler, symbolTable);
+>>>>>>> 88b2c34... _
+			comAssembler.addMsg("MOV " + regAX + ", " + data);
+=======
+				String regDato = registros.getRegFreeLong(this,symbolTable,comAssembler);
+				comAssembler.addMsg("MOV " + regDato + ", " + dato);
+				setAlmacenamiento(regDato);
+			}
+		}else {//es un registro de 16b
+			String regAX = registros.getReg(RegisterTable.NAME_AX, this, comAssembler,symbolTable);
+			comAssembler.addMsg("MOV " + regAX + ", " + dato);
+>>>>>>> 39b95a0... Update RegisterTable-VarAUX
+			comAssembler.addMsg("CWDE");
+			String regAux = registros.getRegFreeLong(getHijoIzq(),symbolTable,comAssembler);
+			comAssembler.addMsg("MOV " + regAux + ", " + regAX);
+			registros.freeReg(RegisterTable.AX);
+			setAlmacenamiento(regAux);
+>>>>>>> bca257b... resueltos problemas en common
 		}
 		String regAux = registros.getRegFreeLong();
 		comAssembler.addMsg("MOV " + regAux + ", " + super.getElem());

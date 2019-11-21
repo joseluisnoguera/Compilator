@@ -43,22 +43,23 @@ public class SyntacticTreeMemory extends SyntacticTree{
 		String reg = registros.getRegFreeLong(this);//usa un registro
 =======
 		comInterm.addMsg(blankPrefix + "Nodo: " + getElem());
-		String dato1 = "";
-		String dato2 = "";
-		if (getHijoIzq() != null) {
-			getHijoIzq().recorreArbol(registros, comAssembler, comInterm, symbolTable, blankPrefix + "  ");
-			dato1 = getHijoIzq().getAlmacenamiento();
-		}
-		if (getHijoDer() != null) {
-			getHijoDer().recorreArbol(registros, comAssembler, comInterm, symbolTable, blankPrefix + "  ");
-			dato2 = getHijoDer().getAlmacenamiento();
-		}
+		String dataFromLeft = "";
+		String dataFromRight = "";
+		getHijoIzq().recorreArbol(registros, comAssembler, comInterm, symbolTable, blankPrefix + "  ");
+		getHijoDer().recorreArbol(registros, comAssembler, comInterm, symbolTable, blankPrefix + "  ");
+		dataFromLeft = getHijoIzq().getAlmacenamiento();
+		dataFromRight = getHijoDer().getAlmacenamiento(); 
 		String op = getElem();
+<<<<<<< HEAD
 		String reg = registros.getRegFreeLong(this);
 >>>>>>> 1375c5c... arreglos varios
+=======
+		String reg = registros.getRegFreeLong(this,symbolTable,comAssembler);
+>>>>>>> 20a16f7... Update -
 		switch(op) {
 <<<<<<< HEAD
 		case "::=":{
+<<<<<<< HEAD
 			comAssembler.addMsg("mov " + reg + ", offset " + dato2);
 			comAssembler.addMsg("mov " + dato1 + ", " + reg);
 		}
@@ -86,19 +87,44 @@ public class SyntacticTreeMemory extends SyntacticTree{
 			if (symbolTable.get(lexico).getTipoAtributo() == "int") {
 =======
 			comAssembler.addMsg("mov " + reg + ", " + dato1); //reg tiene la direccion del arreglo a la que apunta i
+<<<<<<< HEAD
+=======
+			comAssembler.addMsg("mov " + reg + ", offset " + dataFromRight); //posicion inicial del arreglo
+			comAssembler.addMsg("mov " + dataFromLeft + ", " + reg);
+		}
+		case "<<":{
+			comAssembler.addMsg("mov " + reg + ", " + dataFromLeft); //reg tiene la direccion del arreglo a la que apunta i
+<<<<<<< HEAD
+>>>>>>> bca257b... resueltos problemas en common
 			String reg2 = registros.getRegFreeLong(this);
-			comAssembler.addMsg("mov " + reg2 + ", " + symbolTable.get(dato1.substring(1)).getCSizeBytes()); //reg 2 tiene el largo del arreglo en bytes
+			comAssembler.addMsg("mov " + reg2 + ", " + symbolTable.get(dataFromLeft.substring(1)).getCSizeBytes()); //reg 2 tiene el largo del arreglo en bytes
 			String reg3 = registros.getRegFreeLong(this);
+=======
+			String reg2 = registros.getRegFreeLong(getHijoIzq(), symbolTable, comAssembler);
+			comAssembler.addMsg("mov " + reg2 + ", " + symbolTable.get(dataFromLeft.substring(1)).getCSizeBytes()); //reg 2 tiene el largo del arreglo en bytes
+			String reg3 = registros.getRegFreeLong(getHijoDer(), symbolTable, comAssembler);
+>>>>>>> 88b2c34... _
+			comAssembler.addMsg("mov " + reg3 + ", offset " + dataFromRight); //reg3 tiene la direccion inicial del arreglo
+=======
+			String reg2 = registros.getRegFreeLong(this,symbolTable,comAssembler);
+			comAssembler.addMsg("mov " + reg2 + ", " + symbolTable.get(dato1.substring(1)).getCSizeBytes()); //reg 2 tiene el largo del arreglo en bytes
+			String reg3 = registros.getRegFreeLong(this,symbolTable,comAssembler);
 			comAssembler.addMsg("mov " + reg3 + ", offset " + dato2); //reg3 tiene la direccion inicial del arreglo
+>>>>>>> 39b95a0... Update RegisterTable-VarAUX
 			comAssembler.addMsg("add " + reg2 + ", " + reg3); //reg2 tiene la direccion fin del arreglo
 			comAssembler.addMsg("cmp " + reg + ", " + reg2); //se compara la direccion a la que apunta i con direccion fin del arreglo
 			registros.freeReg(registros.getRegPos(reg2));
 			registros.freeReg(registros.getRegPos(reg3));
 		}
 		case "+=":{
+<<<<<<< HEAD
 			comAssembler.addMsg("mov " + reg + ", " + dato1);
 			if (symbolTable.get(dato2.substring(1)).getTipoAtributo().equals(ElementoTS.INT)) {
 >>>>>>> 1375c5c... arreglos varios
+=======
+			comAssembler.addMsg("mov " + reg + ", " + dataFromLeft);
+			if (symbolTable.get(dataFromRight.substring(1)).getTipoAtributo().equals(ElementoTS.INT)) {
+>>>>>>> bca257b... resueltos problemas en common
 				comAssembler.addMsg("add " + reg + ", 2");
 			}else {
 				comAssembler.addMsg("add " + reg + ", 4");
@@ -130,7 +156,7 @@ public class SyntacticTreeMemory extends SyntacticTree{
 				comAssembler.addMsg("mov " + dato1 + ", " + reg);
 >>>>>>> 3c084f9... Update SyntacticTreeMemory-Leaf
 			}
-			comAssembler.addMsg("mov " + dato1 + ", " + reg);
+			comAssembler.addMsg("mov " + dataFromLeft + ", " + reg);
 		}
 		}
 		registros.setRegTable(reg,false);//libera el registro usado

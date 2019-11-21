@@ -1,8 +1,6 @@
 package utils.syntacticTree;
 
 import java.util.Hashtable;
-
-
 import utils.ElementoTS;
 import utils.MsgStack;
 import utils.RegisterTable;
@@ -178,63 +176,96 @@ public class SyntacticTreeCommon extends SyntacticTree {
 		comInterm.addMsg(blankPrefix + "Nodo: " + getElem());
 		String dataFromLeft = "";
 		String dataFromRight = "";
-		if (getHijoIzq() != null) {
-			getHijoIzq().recorreArbol(registros, comAssembler, comInterm, symbolTable, blankPrefix + "  ");
-			dataFromLeft = getHijoIzq().getAlmacenamiento();
-		}
-		if (getHijoDer() != null) {
-			getHijoDer().recorreArbol(registros, comAssembler, comInterm, symbolTable, blankPrefix + "  ");
-			dataFromRight = getHijoDer().getAlmacenamiento();
-		}
-		
-		/////////////
+		getHijoIzq().recorreArbol(registros, comAssembler, comInterm, symbolTable, blankPrefix + "  ");
+		getHijoDer().recorreArbol(registros, comAssembler, comInterm, symbolTable, blankPrefix + "  ");
+		dataFromLeft = getHijoIzq().getAlmacenamiento();
+		dataFromRight = getHijoDer().getAlmacenamiento();
+
+		///// OBTENER OPERACIÓN /////
 		String operation = "";
 		switch(getElem()){
-			case "+": operation = "ADD";
-			case "-": operation = "SUB";
-			case "*": operation = "IMUL";
-			case "/": {
-				operation = "IDIV";
-				comAssembler.addMsg("CMP " + dataFromRight + ", " + 0);
-				comAssembler.addMsg("JZ _DivisionPorCero"); //Salto a la subrutina de programa si el divisor es 0
-			}
-			case ":=": operation = "MOV";
-			default: operation = "CMP"; //si los dos son hojas -- en cualquier otro caso
+		case "+": operation = "ADD";
+		case "-": operation = "SUB";
+		case "*": operation = "IMUL";
+		case "/": {
+			operation = "IDIV";
+			comAssembler.addMsg("CMP " + dataFromRight + ", " + 0);
+			comAssembler.addMsg("JZ _DivisionPorCero"); //Salto a la subrutina de programa si el divisor es 0
 		}
-		
-		////////////
+		case ":=": operation = "MOV";
+		default: operation = "CMP"; //si los dos son hojas -- en cualquier otro caso
+		}
+
+		///// GENERAR CÓDIGO ADECUADO A CADA OPERACIÓN /////
 		if(getElem() == "+" || getElem() == "*" || getElem() == "-" || getElem() == ":=" || getElem() == "/") {
+<<<<<<< HEAD
 			if((getHijoIzq() != null) && ((((SyntacticTreeLeaf)getHijoIzq()).isVariableOrConst())) && (getHijoDer() != null) && ((((SyntacticTreeLeaf)getHijoDer()).isVariableOrConst()))) {//si los dos son hojas
 				if((operation == "IMUL")) {//si es operacion de multiplicacion TODO: Si el elemento de la izquierda es const ¿no se rompe?
 					if(symbolTable.get(dataFromLeft.substring(1)).getTipoAtributo().equals(ElementoTS.INT)) {
+<<<<<<< HEAD
 >>>>>>> a091e6e... arreglos por punteros null
+=======
+			if(((((SyntacticTreeLeaf)getHijoIzq()).isVariableOrConst()) && (((SyntacticTreeLeaf)getHijoDer()).isVariableOrConst()))) { ///// AMBOS SON CONST O VAR /////
+<<<<<<< HEAD
+				///// OPERACIÓN MILTIPLICACIÓN /////
+				if((operation == "IMUL")) {
+					if(isInt(dataFromLeft, symbolTable)) {
+>>>>>>> bca257b... resueltos problemas en common
 						String regAX = registros.getReg(RegisterTable.NAME_AX, this, comAssembler);
 						@SuppressWarnings("unused")
-						String regDX = registros.getReg(RegisterTable.NAME_DX, this, comAssembler); //Se reserva para, si tiene algo, no pisarlo
+						String regDX = registros.getReg(RegisterTable.NAME_DX, this, comAssembler); // Se reserva para, si tiene algo, no pisarlo
+=======
+						String regAX = registros.getReg(RegisterTable.NAME_AX, this, comAssembler,symbolTable);
+						@SuppressWarnings("unused")
+						String regDX = registros.getReg(RegisterTable.NAME_DX, this, comAssembler,symbolTable); //Se reserva para, si tiene algo, no pisarlo
 						dataFromLeft = getHijoIzq().getAlmacenamiento();
 						dataFromRight = getHijoDer().getAlmacenamiento();
+>>>>>>> 050f179... Update -
+=======
+				if((operation == "IMUL")) { ///// OPERACIÓN MULTIPLICACIÓN /////
+					if(isInt(dataFromLeft, symbolTable)) { ///// ENTERO /////
+						String regAX = registros.getReg(RegisterTable.NAME_AX, getHijoIzq(), comAssembler, symbolTable);
+						@SuppressWarnings("unused")
+						String regDX = registros.getReg(RegisterTable.NAME_DX, getHijoIzq(), comAssembler, symbolTable); // Se reserva para, si tiene algo, no pisarlo
+>>>>>>> 88b2c34... _
 						comAssembler.addMsg("MOV " + regAX + ", " + dataFromLeft);
 						comAssembler.addMsg("IMUL " + regAX + ", " + dataFromRight);
-						String reg = registros.getRegFreeLong(this);
+						String reg = registros.getRegFreeLong(getHijoIzq(),symbolTable,comAssembler); // -----
 						comAssembler.addMsg("MOV " + reg + ", DX:AX");
 						registros.freeReg(RegisterTable.AX);
 						registros.freeReg(RegisterTable.DX);
 						setAlmacenamiento(reg);
-					}else {
+<<<<<<< HEAD
+<<<<<<< HEAD
+					} else {
 						String regEAX = registros.getReg(RegisterTable.NAME_EAX,this, comAssembler);
 						@SuppressWarnings("unused")
-						String regEDX = registros.getReg(RegisterTable.NAME_EDX,this, comAssembler); //Se reserva para, si tiene algo, no pisarlo
+						String regEDX = registros.getReg(RegisterTable.NAME_EDX,this, comAssembler); // Nuevamente se reserva para, si tiene algo, no pisarlo
+=======
+					}else {
+						String regEAX = registros.getReg(RegisterTable.NAME_EAX,this, comAssembler,symbolTable);
+						@SuppressWarnings("unused")
+						String regEDX = registros.getReg(RegisterTable.NAME_EDX,this, comAssembler,symbolTable); //Se reserva para, si tiene algo, no pisarlo
 						dataFromLeft = getHijoIzq().getAlmacenamiento();
 						dataFromRight = getHijoDer().getAlmacenamiento();
+>>>>>>> 39b95a0... Update RegisterTable-VarAUX
+=======
+					} else { ///// LONG /////
+						String regEAX = registros.getReg(RegisterTable.NAME_EAX, getHijoIzq(), comAssembler, symbolTable);
+						@SuppressWarnings("unused")
+						String regEDX = registros.getReg(RegisterTable.NAME_EDX, getHijoIzq(), comAssembler, symbolTable); // Nuevamente se reserva para, si tiene algo, no pisarlo
+>>>>>>> 88b2c34... _
 						comAssembler.addMsg("MOV " + regEAX + ", " + dataFromLeft);
 						comAssembler.addMsg("IMUL " + regEAX + ", " + dataFromRight);
 						setAlmacenamiento(RegisterTable.NAME_EAX);
 						registros.freeReg(RegisterTable.EDX);
 						setAlmacenamiento(regEAX);
 					}
-				}else { //si no es operación de multiplicacion
+				} else { ///// NO ES MULTIPLICACIÓN /////
 					String reg;
-					if(symbolTable.get(dataFromLeft.substring(1)).getTipoAtributo().equals(ElementoTS.INT))
+<<<<<<< HEAD
+					if(isInt(dataFromLeft, symbolTable))
+<<<<<<< HEAD
 						reg = registros.getRegFreeInt(this);
 >>>>>>> 1375c5c... arreglos varios
 					else
@@ -245,11 +276,24 @@ public class SyntacticTreeCommon extends SyntacticTree {
 					comAssembler.addMsg(op+" "+reg+", "+dato2);
 =======
 						reg = registros.getRegFreeLong(this);
+=======
+					if(symbolTable.get(dataFromLeft.substring(1)).getTipoAtributo().equals(ElementoTS.INT))
+						reg = registros.getRegFreeInt(this,symbolTable,comAssembler);
+					else
+						reg = registros.getRegFreeLong(this,symbolTable,comAssembler);
+>>>>>>> 39b95a0... Update RegisterTable-VarAUX
+=======
+						reg = registros.getRegFreeInt(getHijoIzq(), symbolTable, comAssembler);
+					else
+						reg = registros.getRegFreeLong(getHijoIzq(),symbolTable,comAssembler);
+>>>>>>> 88b2c34... _
 					comAssembler.addMsg("MOV " + reg + ", " + dataFromLeft);
 					comAssembler.addMsg(operation +" " + reg + ", " + dataFromRight);
 >>>>>>> a091e6e... arreglos por punteros null
 					setAlmacenamiento(reg);
 				}
+<<<<<<< HEAD
+<<<<<<< HEAD
 			}
 			else
 <<<<<<< HEAD
@@ -319,62 +363,136 @@ public class SyntacticTreeCommon extends SyntacticTree {
 				if((getHijoIzq() != null) && ((((SyntacticTreeLeaf)getHijoIzq()).isVariableOrConst())))
 					if(operation.equals("ADD") || operation.equals("MOV")) { //es operacion conmutativa
 						comAssembler.addMsg(operation + " " + dataFromRight + ", " + dataFromLeft); //operacion sobre el mismo registro
+=======
+			} else
+				if((((SyntacticTreeLeaf)getHijoIzq()).isVariableOrConst())) ///// HIJO IZQ ES CONST O VAR /////
+=======
+			} else { ///// UNO DE LOS HIJOS NO ES CONST O VAR /////
+				if((((SyntacticTreeLeaf)getHijoIzq()).isVariableOrConst())) { ///// HIJO IZQ ES CONST O VAR /////
+>>>>>>> 88b2c34... _
+					if(operation.equals("ADD") || operation.equals("MOV")) { ///// OPERACIÓN CONMUTATIVA /////
+						comAssembler.addMsg(operation + " " + dataFromRight + ", " + dataFromLeft);
+>>>>>>> bca257b... resueltos problemas en common
 						setAlmacenamiento(dataFromRight);
-					} else {
+					} else { ///// OPERACIÓN NO CONMUTATIVA /////
+<<<<<<< HEAD
 						if (operation.equals("IMUL")) {
 							if(dataFromRight.length() == 2) {
+<<<<<<< HEAD
 								registros.getReg(RegisterTable.NAME_AX,this, comAssembler);
 								registros.getReg(RegisterTable.NAME_DX,this, comAssembler);
+=======
+								registros.getReg(RegisterTable.NAME_AX,this, comAssembler,symbolTable);
+								registros.getReg(RegisterTable.NAME_DX,this, comAssembler,symbolTable);
 								dataFromLeft = getHijoIzq().getAlmacenamiento();
+>>>>>>> 39b95a0... Update RegisterTable-VarAUX
+=======
+						if (operation.equals("IMUL")) { ///// MULTIPLICACIÓN /////
+							if(dataFromRight == RegisterTable.NAME_AX || dataFromRight == RegisterTable.NAME_BX || dataFromRight == RegisterTable.NAME_CX || dataFromRight == RegisterTable.NAME_DX) { ///// ES ENTERA /////
+								registros.getReg(RegisterTable.NAME_AX, getHijoIzq(), comAssembler,symbolTable);
+								registros.getReg(RegisterTable.NAME_DX, getHijoIzq(), comAssembler,symbolTable);
+>>>>>>> 88b2c34... _
 								dataFromRight = getHijoDer().getAlmacenamiento();
 								comAssembler.addMsg("MOV AX, " + dataFromRight);
 								comAssembler.addMsg("IMUL AX, " + dataFromLeft);
-								String reg = registros.getRegFreeLong(this);
+								String reg = registros.getRegFreeLong(getHijoIzq(), symbolTable, comAssembler);
 								comAssembler.addMsg("MOV " + reg + ", DX:AX");
 								registros.freeReg(RegisterTable.AX);
 								registros.freeReg(RegisterTable.DX);
+								if (!(((SyntacticTreeLeaf)getHijoDer()).isVariableOrConst()))
+									registros.freeReg(registros.getRegPos(dataFromRight));
 								setAlmacenamiento(reg);
-							}else {
+<<<<<<< HEAD
+<<<<<<< HEAD
+							} else {
 								registros.getReg(RegisterTable.NAME_EAX,this, comAssembler);
 								registros.getReg(RegisterTable.NAME_EDX,this, comAssembler);
+=======
+							}else {
+								registros.getReg(RegisterTable.NAME_EAX,this, comAssembler,symbolTable);
+								registros.getReg(RegisterTable.NAME_EDX,this, comAssembler,symbolTable);
 								dataFromLeft = getHijoIzq().getAlmacenamiento();
+>>>>>>> 39b95a0... Update RegisterTable-VarAUX
+=======
+							} else { ///// ES LONG /////
+								registros.getReg(RegisterTable.NAME_EAX, getHijoIzq(), comAssembler,symbolTable);
+								registros.getReg(RegisterTable.NAME_EDX, getHijoIzq(), comAssembler,symbolTable);
+>>>>>>> 88b2c34... _
 								dataFromRight = getHijoDer().getAlmacenamiento();
 								comAssembler.addMsg("MOV EAX, " + dataFromRight);
 								comAssembler.addMsg("IMUL EAX, " + dataFromLeft);
 								setAlmacenamiento(RegisterTable.NAME_EAX);
+								if (!(((SyntacticTreeLeaf)getHijoDer()).isVariableOrConst()))
+									registros.freeReg(registros.getRegPos(dataFromRight));
 								registros.freeReg(RegisterTable.EDX);
 							}
-						}else {
+						} else { ///// NO ES MULTIPLICACIÓN /////
 							String reg;
-							if(dataFromRight.length() == 2)
+<<<<<<< HEAD
+<<<<<<< HEAD
+							if(!(dataFromRight == RegisterTable.NAME_AX || dataFromRight == RegisterTable.NAME_BX || dataFromRight == RegisterTable.NAME_CX || dataFromRight == RegisterTable.NAME_DX))
 								reg = registros.getRegFreeInt(this);
-							else {
+							else
 								reg = registros.getRegFreeLong(this);
+=======
+							if(dataFromRight == RegisterTable.NAME_AX || dataFromRight == RegisterTable.NAME_BX || dataFromRight == RegisterTable.NAME_CX || dataFromRight == RegisterTable.NAME_DX)
+								reg = registros.getRegFreeInt(getHijoIzq(), symbolTable, comAssembler);
+							else
+								reg = registros.getRegFreeLong(getHijoIzq(), symbolTable, comAssembler);
+>>>>>>> 88b2c34... _
+							dataFromRight = getHijoDer().getAlmacenamiento();
+							comAssembler.addMsg("MOV " + reg + ", " + dataFromLeft);
+							comAssembler.addMsg(operation + " " + reg + ", " + dataFromRight);
+							setAlmacenamiento(reg);
+							registros.freeReg(registros.getRegPos(dataFromRight));
+						}
+=======
+							if(dataFromRight.length() == 2)
+								reg = registros.getRegFreeInt(this,symbolTable,comAssembler);
+							else {
+								reg = registros.getRegFreeLong(this,symbolTable,comAssembler);
 								comAssembler.addMsg("MOV " + reg + ", " + dataFromLeft);
 								comAssembler.addMsg(operation + " " + reg + ", " + dataFromRight);
 								setAlmacenamiento(reg);
 								registros.freeReg(registros.getRegPos(dataFromRight));
 							}
 						}	
+>>>>>>> 39b95a0... Update RegisterTable-VarAUX
 					}
-				else
-				{
-					if((getHijoDer() != null) && ((((SyntacticTreeLeaf)getHijoDer()).isVariableOrConst())))	//si el derecho es hoja;
-						if(operation == "IMUL") {
-							if(dataFromLeft.length() == 2) {
-								registros.getReg(RegisterTable.NAME_AX,this, comAssembler);
-								registros.getReg(RegisterTable.NAME_DX,this, comAssembler);
+				} else { ///// HIJO IZQ NO ES VAR O CONST
+					if (((SyntacticTreeLeaf)getHijoDer()).isVariableOrConst()) { ///// EL HIJO DER ES CONST O VAR /////
+						if(operation == "IMUL") { ///// MULTIPLICACIÓN /////
+							if(dataFromLeft == RegisterTable.NAME_AX || dataFromLeft == RegisterTable.NAME_BX || dataFromLeft == RegisterTable.NAME_CX || dataFromLeft == RegisterTable.NAME_DX) { ///// ENTERO /////
+								registros.getReg(RegisterTable.NAME_AX,getHijoIzq(), comAssembler,symbolTable);
+								registros.getReg(RegisterTable.NAME_DX,getHijoIzq(), comAssembler,symbolTable);
 								dataFromLeft = getHijoIzq().getAlmacenamiento();
-								dataFromRight = getHijoDer().getAlmacenamiento();
 								comAssembler.addMsg("MOV AX, " + dataFromLeft);
 								comAssembler.addMsg("IMUL AX, " + dataFromRight);
+<<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> a091e6e... arreglos por punteros null
 								String reg = registros.getRegFreeLong(this);
+=======
+								String reg = registros.getRegFreeLong(this,symbolTable,comAssembler);
+>>>>>>> 39b95a0... Update RegisterTable-VarAUX
 								comAssembler.addMsg("MOV " + reg + ", DX:AX");
+<<<<<<< HEAD
 								registros.setRegTable("AX",false);
 								registros.setRegTable("DX",false);
+=======
+=======
+								String reg = registros.getRegFreeLong(getHijoIzq(),symbolTable,comAssembler); // -----
+								comAssembler.addMsg("MOV " + reg + ", DX:AX"); 
+>>>>>>> 88b2c34... _
+								registros.freeReg(RegisterTable.AX);
+								registros.freeReg(RegisterTable.DX);
+								if (!(((SyntacticTreeLeaf)getHijoIzq()).isVariableOrConst()))
+									registros.freeReg(registros.getRegPos(dataFromLeft));
+>>>>>>> bca257b... resueltos problemas en common
 								setAlmacenamiento(reg);
+<<<<<<< HEAD
 							}else {
+<<<<<<< HEAD
 <<<<<<< HEAD
 								registros.getReg("EAX",this, comAssembler);
 								registros.getReg("EDX",this, comAssembler);
@@ -387,18 +505,33 @@ public class SyntacticTreeCommon extends SyntacticTree {
 =======
 								registros.getReg(RegisterTable.NAME_EAX,this, comAssembler);
 								registros.getReg(RegisterTable.NAME_EDX,this, comAssembler);
+=======
+								registros.getReg(RegisterTable.NAME_EAX,this, comAssembler,symbolTable);
+								registros.getReg(RegisterTable.NAME_EDX,this, comAssembler,symbolTable);
+>>>>>>> 39b95a0... Update RegisterTable-VarAUX
+=======
+							} else { ///// LONG /////
+								registros.getReg(RegisterTable.NAME_EAX,getHijoIzq(), comAssembler,symbolTable);
+								registros.getReg(RegisterTable.NAME_EDX,getHijoIzq(), comAssembler,symbolTable);
+>>>>>>> 88b2c34... _
 								dataFromLeft = getHijoIzq().getAlmacenamiento();
-								dataFromRight = getHijoDer().getAlmacenamiento();
 								comAssembler.addMsg("MOV EAX, " + dataFromLeft);
 								comAssembler.addMsg("IMUL EAX, " + dataFromRight);
 								setAlmacenamiento(RegisterTable.NAME_EAX);
 								registros.freeReg(RegisterTable.EDX);
+<<<<<<< HEAD
 >>>>>>> a091e6e... arreglos por punteros null
+=======
+								if (!(((SyntacticTreeLeaf)getHijoIzq()).isVariableOrConst()))
+									registros.freeReg(registros.getRegPos(dataFromLeft));
+>>>>>>> bca257b... resueltos problemas en common
 							}
-						}else {
+						} else { ///// NO ES MULTIPLICACIÓN /////
 							comAssembler.addMsg(operation+" "+dataFromLeft+", "+dataFromRight);
 							setAlmacenamiento(dataFromLeft);
 						}
+<<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 154a393... comentario
 					else//ninguno es hoja
 					{
@@ -412,21 +545,41 @@ public class SyntacticTreeCommon extends SyntacticTree {
 								comAssembler.addMsg("MOV AX, " + dato1);
 								comAssembler.addMsg("IMUL AX, " + dato2);
 =======
+=======
+					else { ///// NINGUNO DE SUS HIJOS ES CONST O VAR /////
+>>>>>>> bca257b... resueltos problemas en common
+=======
+					} else { ///// NINGUNO DE SUS HIJOS ES CONST O VAR /////
+>>>>>>> 88b2c34... _
 						if(operation == "IMUL") {
 							if(dataFromLeft.length() == 2) {
-								registros.getReg(RegisterTable.NAME_AX,this, comAssembler);
-								registros.getReg(RegisterTable.NAME_DX,this, comAssembler);
+								registros.getReg(RegisterTable.NAME_AX, getHijoIzq(), comAssembler,symbolTable);
+								registros.getReg(RegisterTable.NAME_DX, getHijoIzq(), comAssembler,symbolTable);
 								dataFromLeft = getHijoIzq().getAlmacenamiento();
 								dataFromRight = getHijoDer().getAlmacenamiento();
 								comAssembler.addMsg("MOV AX, " + dataFromLeft);
 								comAssembler.addMsg("IMUL AX, " + dataFromRight);
+<<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> a091e6e... arreglos por punteros null
 								String reg = registros.getRegFreeLong(this);
+=======
+								String reg = registros.getRegFreeLong(this,symbolTable,comAssembler);
+>>>>>>> 39b95a0... Update RegisterTable-VarAUX
+=======
+								String reg = registros.getRegFreeLong(getHijoIzq(), symbolTable, comAssembler); // ----
+>>>>>>> 88b2c34... _
 								comAssembler.addMsg("MOV " + reg + ", DX:AX");
 								registros.setRegTable("AX",false);
 								registros.setRegTable("DX",false);
 								setAlmacenamiento(reg);
+								if (!(((SyntacticTreeLeaf)getHijoIzq()).isVariableOrConst()))
+									registros.freeReg(registros.getRegPos(dataFromLeft));
+								if (!(((SyntacticTreeLeaf)getHijoDer()).isVariableOrConst()))
+									registros.freeReg(registros.getRegPos(dataFromRight));
 							}else {
+<<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< HEAD
 								registros.getReg("EAX",this, comAssembler);
 								registros.getReg("EDX",this, comAssembler);
@@ -444,12 +597,24 @@ public class SyntacticTreeCommon extends SyntacticTree {
 =======
 								registros.getReg(RegisterTable.NAME_EAX,this, comAssembler);
 								registros.getReg(RegisterTable.NAME_EDX,this, comAssembler);
+=======
+								registros.getReg(RegisterTable.NAME_EAX,this, comAssembler,symbolTable);
+								registros.getReg(RegisterTable.NAME_EDX,this, comAssembler,symbolTable);
+>>>>>>> 39b95a0... Update RegisterTable-VarAUX
+=======
+								registros.getReg(RegisterTable.NAME_EAX, getHijoIzq(), comAssembler,symbolTable);
+								registros.getReg(RegisterTable.NAME_EDX, getHijoIzq(), comAssembler,symbolTable);
+>>>>>>> 88b2c34... _
 								dataFromLeft = getHijoIzq().getAlmacenamiento();
 								dataFromRight = getHijoDer().getAlmacenamiento();
 								comAssembler.addMsg("MOV EAX, " + dataFromLeft);
 								comAssembler.addMsg("IMUL EAX, " + dataFromRight);
 								setAlmacenamiento(RegisterTable.NAME_EAX);
 								registros.freeReg(RegisterTable.EDX);
+								if (!(((SyntacticTreeLeaf)getHijoIzq()).isVariableOrConst()))
+									registros.freeReg(registros.getRegPos(dataFromLeft));
+								if (!(((SyntacticTreeLeaf)getHijoDer()).isVariableOrConst()))
+									registros.freeReg(registros.getRegPos(dataFromRight));
 							}
 						} else {
 							comAssembler.addMsg(operation + " " + dataFromLeft + ", " + dataFromRight);
@@ -459,6 +624,8 @@ public class SyntacticTreeCommon extends SyntacticTree {
 						}
 					}
 				}
+<<<<<<< HEAD
+<<<<<<< HEAD
 		}
 		else 
 		{
@@ -624,30 +791,66 @@ public class SyntacticTreeCommon extends SyntacticTree {
 			if((getElem() == "<")||(getElem() == ">")||(getElem() == "<=")||(getElem() == ">=")||(getElem() == "==")||(getElem() == "!=")) {
 				if((getHijoIzq() != null) && (((SyntacticTreeLeaf)getHijoIzq()).isVariableOrConst())) {
 					if(symbolTable.get(dataFromLeft.substring(1)).getTipoAtributo().equals(ElementoTS.INT)) 
+<<<<<<< HEAD
 						dataFromLeft = registros.getRegFreeInt(this);
 >>>>>>> a091e6e... arreglos por punteros null
+=======
+=======
+			}
+>>>>>>> 88b2c34... _
+		} else { ///// OPERACIÓN DE COMPARACIÓN /////
+			if((getElem() == "<") || (getElem() == ">") || (getElem() == "<=") || (getElem() == ">=") || (getElem() == "==") || (getElem() == "!=")) {
+				if ((int)(dataFromLeft.charAt(0)) >= 48 && (int)(dataFromLeft.charAt(0)) <= 57) {
+					String regAux;
+					if(isInt(dataFromLeft, symbolTable)) 
+<<<<<<< HEAD
+						regAux = registros.getRegFreeInt(this);
+>>>>>>> bca257b... resueltos problemas en common
 					else
-						dataFromLeft = registros.getRegFreeLong(this);
+						regAux = registros.getRegFreeLong(this);
+=======
+						regAux = registros.getRegFreeInt(getHijoIzq(), symbolTable, comAssembler);
+					else
+						regAux = registros.getRegFreeLong(getHijoIzq(), symbolTable, comAssembler);
+>>>>>>> 88b2c34... _
+					comAssembler.addMsg("MOV " + regAux + ", " + dataFromLeft);
+					dataFromLeft = regAux;
 				}
+<<<<<<< HEAD
 <<<<<<< HEAD
 				comAssembler.addMsg("CMP " + dato1 +", " + dato2);
 				registros.setRegTable(dato1,false);
 				if(!esHoja(dato2)) {
 					registros.setRegTable(dato2,false);
+=======
+						dataFromLeft = registros.getRegFreeInt(this,symbolTable,comAssembler);
+					else
+						dataFromLeft = registros.getRegFreeLong(this,symbolTable,comAssembler);
+>>>>>>> 39b95a0... Update RegisterTable-VarAUX
 				}
 				setAlmacenamiento(super.getElem());//_S, IF, Cuerpo, comparadores, 
 =======
+=======
+				dataFromRight = getHijoDer().getAlmacenamiento();
+>>>>>>> bca257b... resueltos problemas en common
 				comAssembler.addMsg("CMP " + dataFromLeft +", " + dataFromRight); 
 				registros.freeReg(registros.getRegPos(dataFromLeft));
-				if((getHijoDer() != null) && !((((SyntacticTreeLeaf)getHijoDer()).isVariableOrConst())))
+				if(!(((SyntacticTreeLeaf)getHijoDer()).isVariableOrConst()))
 					registros.freeReg(registros.getRegPos(dataFromRight));
+<<<<<<< HEAD
 				setAlmacenamiento(getElem());//_S, IF, Cuerpo, comparadores, 
 >>>>>>> a091e6e... arreglos por punteros null
+=======
+				if(!((((SyntacticTreeLeaf)getHijoIzq()).isVariableOrConst())))
+					registros.freeReg(registros.getRegPos(dataFromLeft));
+				setAlmacenamiento(getElem()); //_S, IF, Cuerpo, comparadores, 
+>>>>>>> bca257b... resueltos problemas en common
 			}
 		}
 >>>>>>> 154a393... comentario
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	public boolean esHoja(String dato) {
 <<<<<<< HEAD
@@ -662,4 +865,14 @@ public class SyntacticTreeCommon extends SyntacticTree {
 //		return ((dato.charAt(0) == '_') || ((dato.charAt(0) <= '9') && (dato.charAt(0) >= '0')));
 //	}
 >>>>>>> a091e6e... arreglos por punteros null
+=======
+	private boolean isInt(String data, Hashtable<String, ElementoTS> symbolTable) {
+		boolean result = (data == RegisterTable.NAME_AX) || (data == RegisterTable.NAME_BX) || (data == RegisterTable.NAME_CX) || (data == RegisterTable.NAME_DX);
+		if (symbolTable.get(data) != null)
+			result = result || (symbolTable.get(data).getTipoAtributo().equals(ElementoTS.INT));
+		if (symbolTable.get(data.substring(1)) != null)
+			result = result || (symbolTable.get(data.substring(1)).getTipoAtributo().equals(ElementoTS.INT));
+		return result;
+	}
+>>>>>>> bca257b... resueltos problemas en common
 }

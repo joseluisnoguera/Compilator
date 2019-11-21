@@ -89,7 +89,7 @@ public class Compilator {
 				nodoRaiz = ((SyntacticTreeCtrl)parser.getRaiz());
 				registros = new RegisterTable();
 				nodoRaiz.recorreArbol(registros, assemblerCode, syntacticTree, symbolTable, "");
-//				assemblerCode = AssemblerGenerator.getAssembler(symbolTable, assemblerCode);
+				assemblerCode = AssemblerGenerator.getAssembler(symbolTable, assemblerCode);
 			}
 >>>>>>> 1375c5c... arreglos varios
 		}

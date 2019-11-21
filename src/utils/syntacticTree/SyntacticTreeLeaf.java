@@ -109,23 +109,44 @@ public class SyntacticTreeLeaf extends SyntacticTree{
 				}
 =======
 			String index = dato.substring(finColec+2,dato.length()-2);//contiene nombre de subindice
+<<<<<<< HEAD
+<<<<<<< HEAD
 			String regIndex = registros.getRegFreeLong(this);
-			String subindice = dato.substring(finColec+2,finColec+2);
-			if(subindice.charAt(0) == '_') // El subíndice es un id
-				comAssembler.addMsg("mov " + regIndex + ", " + index);
+			comAssembler.addMsg("mov " + regIndex + ", " + index);
 			String regCollection = registros.getRegFreeLong(this);//guarda un registro para contener la coleccion
+=======
+			String regIndex = registros.getRegFreeLong(this,symbolTable,comAssembler);
+=======
+			String regIndex = registros.getRegFreeLong(getHijoIzq(), symbolTable, comAssembler);
+>>>>>>> 88b2c34... _
+			comAssembler.addMsg("mov " + regIndex + ", " + index);
+			String regCollection = registros.getRegFreeLong(this,symbolTable,comAssembler);//guarda un registro para contener la coleccion
+<<<<<<< HEAD
+>>>>>>> 39b95a0... Update RegisterTable-VarAUX
 			String collectionName = dato.substring(0,finColec); //Comienza en 1 para quitar el _ ya que en la TS no lo tiene
+=======
+			String collectionName = dato.substring(1,finColec); //Comienza en 1 para quitar el _ ya que en la TS no lo tiene
+>>>>>>> 050f179... Update -
 
-			if(symbolTable.get(collectionName.substring(1)).getTipoAtributo().equals(ElementoTS.INT))
+			if(symbolTable.get(collectionName).getTipoAtributo().equals("int"))
 				comAssembler.addMsg("mul " + regIndex + ", 2");//guardo en regI la direccion de memoria del registro
 			else
 				comAssembler.addMsg("mul " + regIndex + ", 4");
 			comAssembler.addMsg("mov " + regCollection + ", offset " + collectionName); //guarda inicio de arreglo
 			comAssembler.addMsg("add " + regIndex + ", " + regCollection); //guarda direc de memoria que se posiciona index
+			//chequeo en tiempo de ejecución
+			String regEndCollection = registros.getRegFreeLong(this,symbolTable,comAssembler);
+			comAssembler.addMsg("MOV " + regEndCollection + ", " + symbolTable.get(collectionName).getCSizeBytes());//guarda el tamaño en bytes del arreglo
+			comAssembler.addMsg("ADD " + regEndCollection + ", " + regCollection);//guarda la direccion final del arreglo
+			comAssembler.addMsg("CMP " + regIndex + ", " + regEndCollection);//compara direccion final del arreglo con direccion a la que se desea acceder del arreglo
+			comAssembler.addMsg("JG _ArregloSuperado");
+			//fin chequeo en tiempo de ejecucion
 			comAssembler.addMsg("mov " + regCollection + ", dword ptr [" + regIndex + "]"); //guarda en regColec el valor almacenado en la direccion de memoria guardada en regI
 			registros.freeReg(registros.getRegPos(regIndex));
 			dato = regCollection;
+			
 		} else {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			System.out.println("Lexema completo: " + dato);
 			System.out.println("Lexema: " + dato.substring(1));
@@ -144,16 +165,21 @@ public class SyntacticTreeLeaf extends SyntacticTree{
 =======
 			if (dato.charAt(0) == '_')
 				if(symbolTable.get(dato.substring(1)).isPointer()) { //Si el id es indice del foreach
+=======
+			if (dato.charAt(0) == '_' && symbolTable.get(dato.substring(1)).isPointer()) { //Si el id es indice del foreach
+>>>>>>> 050f179... Update -
 					String reg = "";
-					if(symbolTable.get(dato).getTipoAtributo().equals(ElementoTS.INT)) //chequea tipo del indice
-						reg = registros.getRegFreeInt(this);
+					if(symbolTable.get(dato).getTipoAtributo().equals("int")) //chequea tipo del indice
+						reg = registros.getRegFreeInt(this,symbolTable,comAssembler);
 					else
-						reg = registros.getRegFreeLong(this);
+						reg = registros.getRegFreeLong(this,symbolTable,comAssembler);
 					comAssembler.addMsg("mov " + reg + ", dword ptr [" + dato + "]");//mueve a reg el dato almacenado en la direccion de memoria guardada en dato.
 					dato = reg;
 				}
 >>>>>>> a091e6e... arreglos por punteros null
 		}
+<<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> df1f095... Update ElementoTS/AssGen/Leaf/Unary
 		return dato;
@@ -217,9 +243,15 @@ public class SyntacticTreeLeaf extends SyntacticTree{
 		
 		
 >>>>>>> e149002... Update SyntacticTreeLeaf.java
+=======
+		setAlmacenamiento(dato);
+>>>>>>> bca257b... resueltos problemas en common
+=======
+		setAlmacenamiento(dato);
+>>>>>>> 050f179... Update -
 	}
 	
-	public boolean isVariableOrConst() { return (getElem().charAt(0) == '_' || (int)(getElem().charAt(0)) >= 48 || (int)(getElem().charAt(0)) <= 57); }
+	public boolean isVariableOrConst() { return (getElem().charAt(0) == '_' || (int)(getElem().charAt(0)) >= 48 && (int)(getElem().charAt(0)) <= 57); }
 	
 }
 

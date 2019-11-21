@@ -38,9 +38,14 @@ public class SyntacticTreeUnary extends SyntacticTree{
 =======
 	public void recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm, Hashtable<String, ElementoTS> symbolTable, String blankPrefix) {
 		comInterm.addMsg(blankPrefix + "Nodo: " + getElem());
-		String reg= registros.getReg(RegisterTable.NAME_EAX, this, comAssembler);
+<<<<<<< HEAD
+		String reg= registros.getReg(RegisterTable.NAME_EAX, this, comAssembler,symbolTable);
 		comAssembler.addMsg("lea " + reg + ", " + getElem());
 >>>>>>> 1375c5c... arreglos varios
+=======
+		String reg= registros.getReg(RegisterTable.NAME_EAX, getHijoIzq(), comAssembler,symbolTable);
+		comAssembler.addMsg("lea " + reg + ", " + "@_cad" + symbolTable.get(getElem()).getId());
+>>>>>>> 88b2c34... _
 		comAssembler.addMsg("call _print");
 		
 >>>>>>> df1f095... Update ElementoTS/AssGen/Leaf/Unary

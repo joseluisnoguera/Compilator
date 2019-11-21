@@ -85,6 +85,10 @@ public class AssemblerGenerator {
 		extra.addMsg("JMP _FinDelPrograma"); //salto al final del programa
 >>>>>>> 1375c5c... arreglos varios
 		
+		extra.addMsg("_ArregloSuperado:");
+		extra.addMsg("invoke StdOut, addr _@ErrorArregloSuperado");//revisar como hacer!!!!!!!!!!!!!!!!!!!!
+		extra.addMsg("JMP _FinDelPrograma"); //salto al final del programa
+		
 		extra.addMsg("_FinDelPrograma:");
 		extra.addMsg("invoke ExitProcess, 0");
 		return extra;

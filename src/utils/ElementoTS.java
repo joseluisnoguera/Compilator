@@ -10,7 +10,7 @@ public class ElementoTS{
 	private int cSize; // Tamaño de la coleccion
 	private int cSizeBytes; // Tamaño de la colección en bytes para no multiplicar en el foreach
 	private String elemsCollection; //Elementos de la colección separados por ','
-	private static int idCounter = 0; //Generador de ID único
+	private static int idCounter = 0; //Generador de ID único para cadenas
 	private int id; // Id para identificar variables
 	private boolean isPointer;
 	
@@ -88,11 +88,11 @@ public class ElementoTS{
 		idCounter++;
 	}
 	
-	// Para obtener id único para variables auxiliares
-	public static int getNewId() {
+	// Para obtener id único para cadenas
+/*	public static int getNewId() {
 		idCounter++;
 		return idCounter-1;
-	}
+	}*/
 	
 	public int getId() { return id; }
 }

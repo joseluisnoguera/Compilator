@@ -36,6 +36,7 @@ public class SyntacticTreeCtrl extends SyntacticTree {
 		}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		String op = super.getHijoIzq().recorreArbol(registros, comAssembler, comInterm,symbolTable, deep+1);
 =======
 		super.getHijoIzq().recorreArbol(registros, comAssembler, comInterm,symbolTable, blankPrefix + " ");
@@ -49,6 +50,10 @@ public class SyntacticTreeCtrl extends SyntacticTree {
 			getHijoIzq().recorreArbol(registros, comAssembler, comInterm,symbolTable, blankPrefix + "  ");
 			op = getHijoIzq().getAlmacenamiento();
 		}
+=======
+		getHijoIzq().recorreArbol(registros, comAssembler, comInterm,symbolTable, blankPrefix + "  ");
+		String op = getHijoIzq().getAlmacenamiento();
+>>>>>>> 88b2c34... _
 		switch(getElem()){
 		case "COND_IF":{ //condicion de if
 >>>>>>> 1375c5c... arreglos varios
@@ -89,12 +94,20 @@ public class SyntacticTreeCtrl extends SyntacticTree {
 			etiquetas.add("_label" + contEtiquetas);//etiqueta de fin de foreach
 		}
 
+<<<<<<< HEAD
 		case "Then":{//then que no tendra else
+=======
+		case "THEN":{ //then que no tendra else
+>>>>>>> bca257b... resueltos problemas en common
 			comAssembler.addMsg(etiquetas.get(etiquetas.size()-1) + ":");//se agrega la etiqueta de fin de if
 			etiquetas.remove(etiquetas.size()-1);
 		}
 
+<<<<<<< HEAD
 		case "then":{//then que tendra else
+=======
+		case "THEN_ELSE":{ //then que tendra else
+>>>>>>> bca257b... resueltos problemas en common
 			contEtiquetas++;
 			comAssembler.addMsg("JMP _label" + contEtiquetas);//se agrega el salto al fin del if (y se agrega despues su etiqueta)
 			comAssembler.addMsg(etiquetas.get(etiquetas.size()-1) + ":");//se agrega etiqueta de inicio de else
