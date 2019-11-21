@@ -127,7 +127,6 @@ public class RegisterTable {
 			contadorVarAUX++;
 			String nombreVarAux = "_@varAux" + contadorVarAUX;
 			reg = regState.get(CX); // Siempre se le asigna a CX
-			System.out.println(reg.nodoAsociado.getElem());
 			ElementoTS tupla = new ElementoTS(ElementoTS.ID, "", ElementoTS.INT); //agrego la variable auxiliar a la tabla de simbolos
 			symbolTable.put(nombreVarAux, tupla);
 			reg.nodoAsociado.setAlmacenamiento(nombreVarAux); // setea el nodo del registro almacenado en var

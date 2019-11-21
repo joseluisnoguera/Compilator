@@ -40,6 +40,7 @@ public class Compilator {
 	private RegisterTable registros;
 	private MsgStack assemblerCode;
 	private MsgStack syntacticTree;
+	private boolean hasErrors;
 
 
 <<<<<<< HEAD
@@ -67,6 +68,7 @@ public class Compilator {
 		symbolTable = new Hashtable<String, ElementoTS>();
 		lexicon = new Lexicon(programBuffer, msgStack, tokenStack, symbolTable);
 		parser = new Parser(lexicon, symbolTable, msgStack, semanticStructStack);
+		hasErrors = true;
 	}
 >>>>>>> 04b8288... agregado parte del comportamiento de ventana y TODO's
 
@@ -86,16 +88,24 @@ public class Compilator {
 //			assemblerCode = AssemblerGenerator.getAssembler(symbolTable, assemblerCode);
 =======
 			if (!parser.hasErrors()) {
+				hasErrors = false;
 				nodoRaiz = ((SyntacticTreeCtrl)parser.getRaiz());
 				registros = new RegisterTable();
 				nodoRaiz.recorreArbol(registros, assemblerCode, syntacticTree, symbolTable, "");
 				assemblerCode = AssemblerGenerator.getAssembler(symbolTable, assemblerCode);
+<<<<<<< HEAD
 			}
 >>>>>>> 1375c5c... arreglos varios
+=======
+			} else
+				hasErrors = true;
+>>>>>>> 67de6b7... _
 		}
 		else
 			System.out.println("Error en parser");
 	}
+	
+	public boolean hasErrors() { return hasErrors; }
 
 	public MsgStack getMsgStack() { return msgStack; }
 

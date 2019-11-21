@@ -134,13 +134,19 @@ public class SyntacticTreeLeaf extends SyntacticTree{
 				comAssembler.addMsg("mul " + regIndex + ", 4");
 			comAssembler.addMsg("mov " + regCollection + ", offset " + collectionName); //guarda inicio de arreglo
 			comAssembler.addMsg("add " + regIndex + ", " + regCollection); //guarda direc de memoria que se posiciona index
+			///////////////////////////////////////////////////////////////////////////////////////////////
 			//chequeo en tiempo de ejecución
+			//chequeo por arreglo superado
 			String regEndCollection = registros.getRegFreeLong(this,symbolTable,comAssembler);
 			comAssembler.addMsg("MOV " + regEndCollection + ", " + symbolTable.get(collectionName).getCSizeBytes());//guarda el tamaño en bytes del arreglo
 			comAssembler.addMsg("ADD " + regEndCollection + ", " + regCollection);//guarda la direccion final del arreglo
 			comAssembler.addMsg("CMP " + regIndex + ", " + regEndCollection);//compara direccion final del arreglo con direccion a la que se desea acceder del arreglo
-			comAssembler.addMsg("JG _ArregloSuperado");
+			comAssembler.addMsg("JG _ArregloFueraDeRango");
+			//chequeo por direccion de memoria menor
+			comAssembler.addMsg("CMP " + regIndex + ", " + regCollection);//compara direccion final del arreglo con direccion a la que se desea acceder del arreglo
+			comAssembler.addMsg("JL _ArregloFueraDeRango");
 			//fin chequeo en tiempo de ejecucion
+			/////////////////////////////////////////////////////////////////////////////////////////
 			comAssembler.addMsg("mov " + regCollection + ", dword ptr [" + regIndex + "]"); //guarda en regColec el valor almacenado en la direccion de memoria guardada en regI
 			registros.freeReg(registros.getRegPos(regIndex));
 			dato = regCollection;

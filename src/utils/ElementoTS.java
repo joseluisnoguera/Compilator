@@ -31,12 +31,27 @@ public class ElementoTS{
 		this.tipoToken = tipoToken;
 		this.tipoAtributo = tipoAtributo;
 		cantidad = 1;
+<<<<<<< HEAD
 		declarada=false;
 		estructuraID=null;
 		cSize = 0;
+=======
+		declarada = false;
+		estructuraID = "";
+		cSize = -1;
+>>>>>>> 67de6b7... _
 		id = -1;
 		cSizeBytes = -1;
+<<<<<<< HEAD
 		isPointer=false;
+=======
+		isPointer = false;
+<<<<<<< HEAD
+		estructuraID = "";
+>>>>>>> 6bb5a8f... _
+=======
+		elemsCollection = "";
+>>>>>>> 67de6b7... _
 	}
 
 	public String getElemsCollection() {return elemsCollection;}
@@ -77,7 +92,7 @@ public class ElementoTS{
 			cSizeBytes = cSize * 4;
 	}
 	
-	public void setEstructuraID(String tipo) { estructuraID=tipo; }
+	public void setEstructuraID(String estructura) { estructuraID = estructura; }
 	
 	public String getEstructuraID() { return estructuraID; }
 	

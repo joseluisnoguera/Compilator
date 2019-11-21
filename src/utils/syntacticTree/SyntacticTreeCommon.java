@@ -177,9 +177,11 @@ public class SyntacticTreeCommon extends SyntacticTree {
 		String dataFromLeft = "";
 		String dataFromRight = "";
 		getHijoIzq().recorreArbol(registros, comAssembler, comInterm, symbolTable, blankPrefix + "  ");
-		getHijoDer().recorreArbol(registros, comAssembler, comInterm, symbolTable, blankPrefix + "  ");
+		if (getHijoDer() != null)
+			getHijoDer().recorreArbol(registros, comAssembler, comInterm, symbolTable, blankPrefix + "  ");
 		dataFromLeft = getHijoIzq().getAlmacenamiento();
-		dataFromRight = getHijoDer().getAlmacenamiento();
+		if (getHijoDer() != null)
+			dataFromRight = getHijoDer().getAlmacenamiento();
 
 		///// OBTENER OPERACIÓN /////
 		String operation = "";
@@ -843,8 +845,12 @@ public class SyntacticTreeCommon extends SyntacticTree {
 =======
 				if(!((((SyntacticTreeLeaf)getHijoIzq()).isVariableOrConst())))
 					registros.freeReg(registros.getRegPos(dataFromLeft));
+<<<<<<< HEAD
 				setAlmacenamiento(getElem()); //_S, IF, Cuerpo, comparadores, 
 >>>>>>> bca257b... resueltos problemas en common
+=======
+				setAlmacenamiento(getElem()); //_S, If, Cuerpo, Comparadores, 
+>>>>>>> 6bb5a8f... _
 			}
 		}
 >>>>>>> 154a393... comentario

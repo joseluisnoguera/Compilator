@@ -58,8 +58,9 @@ public class Window {
 	private static String FILE_ALREADY_EXIST_MSG = "El archivo especificado ya existe.";
 	private static String FILE_CREATE_ERROR_MSG = "Hubo algún error al crear el archivo.";
 	private static String ASK_TO_MAKE_EXECUTABLE = "¿Desea crear el ejecutable además del archivo asm?";
-	private static String SELECT_FOLDER = "Seleccione el directorio donde se encuentran los archivos \"ml.exe\" y \"link.exe\" de Masm32";
+	private static String SELECT_FOLDER = "Seleccione el directorio donde se encuentran los archivos \"ml.exe\" y \"link.exe\" de Masm32.";
 	private static String INVALID_SELECTION = "Selección inválida";
+	private static String INCORRECT_PATH = "El carpeta seleccionada no contiene \"ml.exe\" o \"link.exe\".";
 	private static int END_OF_TEXT = 3;
 	
 	final UndoManager undo;
@@ -70,16 +71,12 @@ public class Window {
 	private JButton btnLoad;
 	private JLabel lblProgramName;
 	private JTextArea editorPaneProgram;
-	private JTextPane editorPaneTokens;
 	private JTextPane editorPaneSymbolTable;
 	private JTextPane editorPaneMsgs;
 	
 	private File file_selected;
 	private JLabel lblNumberLine;
 	private JButton btnNew;
-	private JScrollPane scrollPane_EstructurasSemanticas;
-	private JEditorPane editorPaneSemanticStruct;
-	private JLabel lblEstructurasDetectas;
 	private JTextPane editorPaneSintacticTree;
 	
 	private String masm32_path;
@@ -275,31 +272,31 @@ public class Window {
 					Compilator compilator = Compilator.getInstance(programBuffer);
 					compilator.compilate();
 					editorPaneMsgs.setText(compilator.getMsgStack().toString());
-					editorPaneTokens .setText(compilator.getTokenStack().toString());
-					editorPaneSemanticStruct.setText(compilator.getSemanticStructStack().toString());
-					editorPaneSintacticTree.setText(compilator.getSyntacticTree().toString());
+//					editorPaneTokens .setText(compilator.getTokenStack().toString());
+//					editorPaneSemanticStruct.setText(compilator.getSemanticStructStack().toString());
 					loadSymbolTable(compilator.getSymbTable());
-					
-					// Guardado del archivo Assembler (.ASM)
-//					String path_to_file = file_selected.getAbsolutePath().trim();
-//					String nombre_archivo = path_to_file.substring(path_to_file.lastIndexOf("\\")+1);
-//					if (nombre_archivo.contains("."))
-//						nombre_archivo = nombre_archivo.substring(0, nombre_archivo.lastIndexOf(".")+1);
-//					String nombre_archivo_asm = nombre_archivo + ".asm";
-//					path_to_file = path_to_file.substring(0, path_to_file.lastIndexOf("\\")+1); //Path queda con el último slash previo el nombre
-//					File file = new File(path_to_file + nombre_archivo_asm);
-//					FileUtils.saveFile(file, compilator.getAssemblerCode().toString());
-//					
-//					if (askMakeExecutable()) { // Pregunta si quiere el ejecutable
-//						if (masm32_path == null) // Si no está definida la ubicación de masm32
-//							masm32_path = askMasmPath();
-//						if (isMasmPath(masm32_path)) // Verifica que existan los ejecutables ml y link
-////							generateExecutable(path_to_file, nombre_archivo, masm32_path);
-//							System.out.println("generando");
-//						else
-//							JOptionPane.showMessageDialog(new JFrame(), FILE_NOT_STORED, "Warning", JOptionPane.ERROR_MESSAGE);
-//					}
-										
+					if (!compilator.hasErrors()) {
+						editorPaneSintacticTree.setText(compilator.getSyntacticTree().toString());
+						// Guardado del archivo Assembler (.ASM)
+						String path_to_file = file_selected.getAbsolutePath().trim();
+						String nombre_archivo = path_to_file.substring(path_to_file.lastIndexOf("\\")+1);
+						if (nombre_archivo.contains("."))
+							nombre_archivo = nombre_archivo.substring(0, nombre_archivo.lastIndexOf(".")+1);
+						String nombre_archivo_asm = nombre_archivo + ".asm";
+						path_to_file = path_to_file.substring(0, path_to_file.lastIndexOf("\\")+1); //Path queda con el último slash previo el nombre
+						File file = new File(path_to_file + nombre_archivo_asm);
+						FileUtils.saveFile(file, compilator.getAssemblerCode().toString());
+						//TODO: Trabajando en esto
+						if (askMakeExecutable()) { // Pregunta si quiere el ejecutable
+							if (masm32_path == null || !isMasmPath(masm32_path)) // Si no está definida la ubicación de masm32
+								masm32_path = askMasmPath();
+							if (isMasmPath(masm32_path)) // Verifica que existan los ejecutables ml y link
+	//							generateExecutable(path_to_file, nombre_archivo, masm32_path);
+								System.out.println("generando");
+							else
+								JOptionPane.showMessageDialog(new JFrame(), INCORRECT_PATH, "Warning", JOptionPane.ERROR_MESSAGE);
+						}
+					}			
 				} else
 					JOptionPane.showMessageDialog(new JFrame(), FILE_NOT_STORED, "Warning", JOptionPane.ERROR_MESSAGE);
 			}
@@ -317,10 +314,9 @@ public class Window {
 		frmCompilator.getContentPane().add(lblNumberLine);
 		
 		JScrollPane scrollPane_Codigo = new JScrollPane();
-		springLayout.putConstraint(SpringLayout.EAST, scrollPane_Codigo, 380, SpringLayout.WEST, frmCompilator.getContentPane());
-		scrollPane_Codigo.setAlignmentY(Component.TOP_ALIGNMENT);
 		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_Codigo, 6, SpringLayout.SOUTH, lblNumberLine);
 		springLayout.putConstraint(SpringLayout.WEST, scrollPane_Codigo, 10, SpringLayout.WEST, frmCompilator.getContentPane());
+		scrollPane_Codigo.setAlignmentY(Component.TOP_ALIGNMENT);
 		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_Codigo, -10, SpringLayout.SOUTH, frmCompilator.getContentPane());
 		frmCompilator.getContentPane().add(scrollPane_Codigo);
 		
@@ -374,51 +370,12 @@ public class Window {
 		
 		scrollPane_Codigo.setViewportView(editorPaneProgram);
 		
-		JScrollPane scrollPane_Tokens = new JScrollPane();
-		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_Tokens, 6, SpringLayout.SOUTH, panel);
-		springLayout.putConstraint(SpringLayout.EAST, scrollPane_Tokens, -10, SpringLayout.EAST, frmCompilator.getContentPane());
-		scrollPane_Tokens.setMaximumSize(new Dimension(403, 162));
-		scrollPane_Tokens.setMinimumSize(new Dimension(403, 162));
-		scrollPane_Tokens.setAutoscrolls(true);
-		scrollPane_Tokens.setAlignmentY(Component.TOP_ALIGNMENT);
-		scrollPane_Tokens.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		frmCompilator.getContentPane().add(scrollPane_Tokens);
-		
-		editorPaneTokens = new JTextPane();
-		editorPaneTokens.setEditable(false);
-		editorPaneTokens.setAlignmentY(Component.TOP_ALIGNMENT);
-		editorPaneTokens.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		scrollPane_Tokens.setViewportView(editorPaneTokens);
-		
-		JLabel lblTokens = new JLabel("Tokens detectados");
-		scrollPane_Tokens.setColumnHeaderView(lblTokens);
-		lblTokens.setAlignmentY(Component.TOP_ALIGNMENT);
-		lblTokens.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		
-		scrollPane_EstructurasSemanticas = new JScrollPane();
-		springLayout.putConstraint(SpringLayout.WEST, scrollPane_EstructurasSemanticas, 100, SpringLayout.EAST, scrollPane_Codigo);
-		springLayout.putConstraint(SpringLayout.EAST, scrollPane_EstructurasSemanticas, -273, SpringLayout.EAST, frmCompilator.getContentPane());
-		springLayout.putConstraint(SpringLayout.WEST, scrollPane_Tokens, 6, SpringLayout.EAST, scrollPane_EstructurasSemanticas);
-		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_EstructurasSemanticas, 0, SpringLayout.SOUTH, scrollPane_Tokens);
-		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_EstructurasSemanticas, 0, SpringLayout.NORTH, scrollPane_Tokens);
-		scrollPane_EstructurasSemanticas.setMinimumSize(new Dimension(403, 162));
-		scrollPane_EstructurasSemanticas.setMaximumSize(new Dimension(403, 162));
-		scrollPane_EstructurasSemanticas.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		scrollPane_EstructurasSemanticas.setAlignmentY(Component.TOP_ALIGNMENT);
-		frmCompilator.getContentPane().add(scrollPane_EstructurasSemanticas);
-		
-		editorPaneSemanticStruct = new JEditorPane();
-		editorPaneSemanticStruct.setEditable(false);
-		scrollPane_EstructurasSemanticas.setViewportView(editorPaneSemanticStruct);
-		
-		lblEstructurasDetectas = new JLabel("Estructuras detectas");
-		scrollPane_EstructurasSemanticas.setColumnHeaderView(lblEstructurasDetectas);
-		
 		JScrollPane scrollPane_TS = new JScrollPane();
-		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_TS, 166, SpringLayout.NORTH, frmCompilator.getContentPane());
-		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_Tokens, -6, SpringLayout.NORTH, scrollPane_TS);
-		springLayout.putConstraint(SpringLayout.WEST, scrollPane_TS, 6, SpringLayout.EAST, scrollPane_Codigo);
-		springLayout.putConstraint(SpringLayout.EAST, scrollPane_TS, -7, SpringLayout.EAST, frmCompilator.getContentPane());
+		springLayout.putConstraint(SpringLayout.EAST, scrollPane_Codigo, -6, SpringLayout.WEST, scrollPane_TS);
+		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_TS, 13, SpringLayout.SOUTH, panel);
+		springLayout.putConstraint(SpringLayout.WEST, scrollPane_TS, 424, SpringLayout.WEST, frmCompilator.getContentPane());
+		springLayout.putConstraint(SpringLayout.EAST, scrollPane_TS, -10, SpringLayout.EAST, frmCompilator.getContentPane());
+		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_TS, -472, SpringLayout.SOUTH, frmCompilator.getContentPane());
 		scrollPane_TS.setMaximumSize(new Dimension(403, 162));
 		scrollPane_TS.setMinimumSize(new Dimension(403, 162));
 		scrollPane_TS.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -437,10 +394,9 @@ public class Window {
 		labelTablaSimbolos.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		
 		JScrollPane scrollPane_WarningYErrores = new JScrollPane();
-		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_WarningYErrores, 287, SpringLayout.NORTH, frmCompilator.getContentPane());
-		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_TS, -6, SpringLayout.NORTH, scrollPane_WarningYErrores);
+		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_WarningYErrores, 6, SpringLayout.SOUTH, scrollPane_TS);
 		springLayout.putConstraint(SpringLayout.WEST, scrollPane_WarningYErrores, 6, SpringLayout.EAST, scrollPane_Codigo);
-		springLayout.putConstraint(SpringLayout.EAST, scrollPane_WarningYErrores, -7, SpringLayout.EAST, frmCompilator.getContentPane());
+		springLayout.putConstraint(SpringLayout.EAST, scrollPane_WarningYErrores, -10, SpringLayout.EAST, frmCompilator.getContentPane());
 		scrollPane_WarningYErrores.setMinimumSize(new Dimension(403, 162));
 		scrollPane_WarningYErrores.setMaximumSize(new Dimension(403, 162));
 		scrollPane_WarningYErrores.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -459,11 +415,11 @@ public class Window {
 		lblWarningsYErrores.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		
 		JScrollPane scrollPane_ArbolSintactico = new JScrollPane();
-		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_WarningYErrores, -6, SpringLayout.NORTH, scrollPane_ArbolSintactico);
-		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_ArbolSintactico, 408, SpringLayout.NORTH, frmCompilator.getContentPane());
+		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_ArbolSintactico, 362, SpringLayout.NORTH, frmCompilator.getContentPane());
 		springLayout.putConstraint(SpringLayout.WEST, scrollPane_ArbolSintactico, 6, SpringLayout.EAST, scrollPane_Codigo);
-		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_ArbolSintactico, -10, SpringLayout.SOUTH, frmCompilator.getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, scrollPane_ArbolSintactico, -7, SpringLayout.EAST, frmCompilator.getContentPane());
+		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_WarningYErrores, -6, SpringLayout.NORTH, scrollPane_ArbolSintactico);
+		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_ArbolSintactico, -10, SpringLayout.SOUTH, frmCompilator.getContentPane());
 		frmCompilator.getContentPane().add(scrollPane_ArbolSintactico);
 		
 		editorPaneSintacticTree = new JTextPane();
@@ -517,8 +473,8 @@ public class Window {
 	
 	private String askMasmPath() {
 		String masm_path = "";
-		JFileChooser chooser = new JFileChooser(); 
-	    chooser.setCurrentDirectory(new java.io.File("."));
+		JFileChooser chooser = new JFileChooser("C:\\"); 
+//	    chooser.setCurrentDirectory(new java.io.File("."));
 	    chooser.setDialogTitle(SELECT_FOLDER);
 	    chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 	    chooser.setAcceptAllFileFilterUsed(false);
@@ -530,9 +486,10 @@ public class Window {
 	}
 	
 	private boolean isMasmPath(String masm32_path) {
-		File f_ml = new File(masm32_path + "ml.exe");
-		File f_linker = new File(masm32_path + "ml.exe");
-		return f_ml.exists() && !f_ml.isDirectory() && f_linker.exists() && !f_linker.isDirectory();
+		File f_ml = new File(masm32_path + "\\ml.exe");
+		File f_linker = new File(masm32_path + "\\link.exe");
+		System.out.println(f_ml.getAbsolutePath());
+		return (f_ml.exists() && !f_ml.isDirectory() && f_linker.exists() && !f_linker.isDirectory());
 	}
 	
 	private boolean askMakeExecutable() {
