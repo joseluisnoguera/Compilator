@@ -95,7 +95,18 @@ public class SyntacticTreeLeaf extends SyntacticTree{
 =======
 		else
 		{
-			
+			if(symbolTable.get(dato).getAccMemory())//chequea si el id es indice del foreach
+			{
+				String reg="";
+				if(symbolTable.get(dato).getTipoAtributo()=="int")//chequea tipo del indice
+				{
+					reg=registros.getRegFreeInt();
+				}
+				else
+					reg=registros.getRegFreeLong();
+				comAssembler.addMsg("mov "+reg+", dword ptr ["+dato+"]");//mueve a reg el dato almacenado en la direccion de memoria guardada en dato.
+				dato=reg;
+			}
 		}
 >>>>>>> df1f095... Update ElementoTS/AssGen/Leaf/Unary
 		return dato;

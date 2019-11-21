@@ -24,10 +24,15 @@ public class SyntacticTreeUnary extends SyntacticTree{
 	public String recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm, Hashtable<String, ElementoTS> symbolTable, String blankPrefix) {
 		comInterm.addMsg(blankPrefix + "Nodo: " + super.getElem());
 <<<<<<< HEAD
+<<<<<<< HEAD
 //		comAssembler.addMsg("invoke StdOut, addr " + super.getElem());
 >>>>>>> 45299ea... visualización de árbol sintáctico
 =======
 		String reg=registros.getRegEAX();
+=======
+
+		String reg=((Object) registros).getRegEAX();
+>>>>>>> a3a7142... Update SyntacticTreeLeaf | Indice accMemory y dato
 		comAssembler.addMsg("mov "+reg+", " + super.getElem());
 		comAssembler.addMsg("call _print");
 		
