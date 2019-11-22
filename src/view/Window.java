@@ -482,6 +482,7 @@ public class Window {
 	    	masm_path = chooser.getCurrentDirectory().getAbsolutePath();
 	    else
 	    	JOptionPane.showMessageDialog(new JFrame(), INVALID_SELECTION, "Warning", JOptionPane.ERROR_MESSAGE);
+	    System.out.println(masm_path);
 		return masm_path;
 	}
 	
