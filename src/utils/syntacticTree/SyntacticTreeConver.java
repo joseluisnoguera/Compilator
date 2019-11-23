@@ -81,11 +81,11 @@ public class SyntacticTreeConver extends SyntacticTree{
 >>>>>>> 1375c5c... arreglos varios
 =======
 		String data = "";
-		getHijoIzq().recorreArbol(registros,comAssembler,comInterm,symbolTable, blankPrefix + "  ");
+		getHijoIzq().recorreArbol(registros,comAssembler,comInterm,symbolTable, blankPrefix + getBlankSpace());
 		data = getHijoIzq().getAlmacenamiento();
-		if((data != RegisterTable.NAME_AX) && (data != RegisterTable.NAME_BX) && (data != RegisterTable.NAME_CX)
-				&& (data != RegisterTable.NAME_DX)) { //no es un registro
+		if(getHijoIzq().isVariableOrConst()) {
 			if (data.charAt(0) == '_') { //es id
+<<<<<<< HEAD
 <<<<<<< HEAD
 				String regDato = registros.getReg(RegisterTable.NAME_AX, this, comAssembler);
 =======
@@ -148,12 +148,26 @@ public class SyntacticTreeConver extends SyntacticTree{
 >>>>>>> 88b2c34... _
 				comAssembler.addMsg("MOV " + regDato + ", " + data);
 				setAlmacenamiento(regDato);
+=======
+				String regData = registros.getReg(RegisterTable.NAME_AX, getHijoIzq(), comAssembler, symbolTable);
+				comAssembler.addMsg("mov " + regData + ", " + data);
+				comAssembler.addMsg("cwde");
+				String regConverted = registros.getRegFreeLong(getHijoIzq(),symbolTable,comAssembler);
+				comAssembler.addMsg("mov " + regConverted + ", " + regData);
+				registros.freeReg(RegisterTable.AX);
+				setAlmacenamiento(regConverted);
+			}else { //es cte
+				String regConverted = registros.getRegFreeLong(getHijoIzq(), symbolTable, comAssembler);
+				comAssembler.addMsg("mov " + regConverted + ", " + data);
+				setAlmacenamiento(regConverted);
+>>>>>>> 51f241d... arreglos varios
 			}
 		}else {//es un registro de 16b
 <<<<<<< HEAD
 			String regAX = registros.getReg(RegisterTable.NAME_AX, this, comAssembler);
 =======
 			String regAX = registros.getReg(RegisterTable.NAME_AX, getHijoIzq(), comAssembler, symbolTable);
+<<<<<<< HEAD
 >>>>>>> 88b2c34... _
 			comAssembler.addMsg("MOV " + regAX + ", " + data);
 =======
@@ -171,6 +185,14 @@ public class SyntacticTreeConver extends SyntacticTree{
 			registros.freeReg(RegisterTable.AX);
 			setAlmacenamiento(regAux);
 >>>>>>> bca257b... resueltos problemas en common
+=======
+			comAssembler.addMsg("mov " + regAX + ", " + data);
+			comAssembler.addMsg("cwde");
+			String regConverted = registros.getRegFreeLong(getHijoIzq(),symbolTable,comAssembler);
+			comAssembler.addMsg("mov " + regConverted + ", " + regAX);
+			registros.freeReg(RegisterTable.AX);
+			setAlmacenamiento(regConverted);
+>>>>>>> 51f241d... arreglos varios
 		}
 		String regAux = registros.getRegFreeLong();
 		comAssembler.addMsg("MOV " + regAux + ", " + super.getElem());

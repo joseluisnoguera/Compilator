@@ -26,6 +26,8 @@ public class SyntacticTreeLeaf extends SyntacticTree{
 	@Override
 	public void recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm, Hashtable<String,
 			ElementoTS> symbolTable, String blankPrefix) {
+<<<<<<< HEAD
+<<<<<<< HEAD
 		comInterm.addMsg(blankPrefix + "Nodo: " + super.getElem());
 >>>>>>> 154a393... comentario
 		String dato=super.getElem();
@@ -128,29 +130,45 @@ public class SyntacticTreeLeaf extends SyntacticTree{
 			String collectionName = dato.substring(1,finColec); //Comienza en 1 para quitar el _ ya que en la TS no lo tiene
 >>>>>>> 050f179... Update -
 
+=======
+=======
+		System.out.println(getElem());
+>>>>>>> d209296... comentario
+		comInterm.addMsg(blankPrefix + "Nodo: " + getElem());
+		String data = getElem();
+		if(data.charAt(data.length() - 1) == ']' ) { // Si es una colección
+			int subIndexNameStart = 0;
+			while (data.charAt(subIndexNameStart) != '[')
+				subIndexNameStart++;
+			subIndexNameStart += 1; // Salta el corchete inicial
+			String subIndexName = data.substring(subIndexNameStart, data.length() - 1);
+			String regIndex = registros.getRegFreeLong(getHijoIzq(), symbolTable, comAssembler);
+			comAssembler.addMsg("mov " + regIndex + ", " + subIndexName);
+			String regCollectionOffset = registros.getRegFreeLong(this, symbolTable, comAssembler);//guarda un registro para contener la coleccion
+			String collectionName = data.substring(1, subIndexNameStart - 2);
+>>>>>>> 51f241d... arreglos varios
 			if(symbolTable.get(collectionName).getTipoAtributo().equals("int"))
-				comAssembler.addMsg("mul " + regIndex + ", 2");//guardo en regI la direccion de memoria del registro
+				comAssembler.addMsg("mul " + regIndex + ", 2");
 			else
 				comAssembler.addMsg("mul " + regIndex + ", 4");
-			comAssembler.addMsg("mov " + regCollection + ", offset " + collectionName); //guarda inicio de arreglo
-			comAssembler.addMsg("add " + regIndex + ", " + regCollection); //guarda direc de memoria que se posiciona index
-			///////////////////////////////////////////////////////////////////////////////////////////////
-			//chequeo en tiempo de ejecución
+			comAssembler.addMsg("lea " + regCollectionOffset + ", " + collectionName);
+			comAssembler.addMsg("add " + regIndex + ", " + regCollectionOffset); //guarda dirección de memoria del elemento pedido por subíndice
 			//chequeo por arreglo superado
 			String regEndCollection = registros.getRegFreeLong(this,symbolTable,comAssembler);
-			comAssembler.addMsg("MOV " + regEndCollection + ", " + symbolTable.get(collectionName).getCSizeBytes());//guarda el tamaño en bytes del arreglo
-			comAssembler.addMsg("ADD " + regEndCollection + ", " + regCollection);//guarda la direccion final del arreglo
-			comAssembler.addMsg("CMP " + regIndex + ", " + regEndCollection);//compara direccion final del arreglo con direccion a la que se desea acceder del arreglo
-			comAssembler.addMsg("JG _ArregloFueraDeRango");
-			//chequeo por direccion de memoria menor
-			comAssembler.addMsg("CMP " + regIndex + ", " + regCollection);//compara direccion final del arreglo con direccion a la que se desea acceder del arreglo
-			comAssembler.addMsg("JL _ArregloFueraDeRango");
-			//fin chequeo en tiempo de ejecucion
-			/////////////////////////////////////////////////////////////////////////////////////////
-			comAssembler.addMsg("mov " + regCollection + ", dword ptr [" + regIndex + "]"); //guarda en regColec el valor almacenado en la direccion de memoria guardada en regI
+			comAssembler.addMsg("mov " + regEndCollection + ", " + symbolTable.get(collectionName).getCSizeBytes()); //guarda el tamaño en bytes del arreglo
+			comAssembler.addMsg("add " + regEndCollection + ", " + regCollectionOffset);//guarda la direccion final del arreglo
+			comAssembler.addMsg("cmp " + regIndex + ", " + regEndCollection);//compara direccion final del arreglo con direccion a la que se desea acceder del arreglo
+			comAssembler.addMsg("jge _msgArregloFueraDeRango");
+			//chequeo por direccion de memoria menor (por subíndices negativos)
+			comAssembler.addMsg("cmp " + regIndex + ", " + regCollectionOffset);//compara direccion final del arreglo con direccion a la que se desea acceder del arreglo
+			comAssembler.addMsg("jl _msgArregloFueraDeRango");
+			comAssembler.addMsg("mov " + regCollectionOffset + ", dword ptr [" + regIndex + "]"); //guarda en regColec el valor almacenado en la direccion de memoria guardada en regI
 			registros.freeReg(registros.getRegPos(regIndex));
-			dato = regCollection;
+			registros.freeReg(registros.getRegPos(regEndCollection));
+			data = regCollectionOffset;
+<<<<<<< HEAD
 			
+<<<<<<< HEAD
 		} else {
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -174,14 +192,21 @@ public class SyntacticTreeLeaf extends SyntacticTree{
 =======
 			if (dato.charAt(0) == '_' && symbolTable.get(dato.substring(1)).isPointer()) { //Si el id es indice del foreach
 >>>>>>> 050f179... Update -
+=======
+		}
+		// Si es variable o constante no se hace nada, pasa directo, las colecciones ya se tomaron arriba
+		/* else {
+			if (data.charAt(0) == '_') {
+>>>>>>> 51f241d... arreglos varios
 					String reg = "";
-					if(symbolTable.get(dato).getTipoAtributo().equals("int")) //chequea tipo del indice
+					if(symbolTable.get(data).getTipoAtributo().equals("int")) //chequea tipo del indice
 						reg = registros.getRegFreeInt(this,symbolTable,comAssembler);
 					else
 						reg = registros.getRegFreeLong(this,symbolTable,comAssembler);
-					comAssembler.addMsg("mov " + reg + ", dword ptr [" + dato + "]");//mueve a reg el dato almacenado en la direccion de memoria guardada en dato.
-					dato = reg;
+					comAssembler.addMsg("mov " + reg + ", dword ptr [" + data + "]");//mueve a reg el dato almacenado en la direccion de memoria guardada en dato.
+					data = reg;
 				}
+<<<<<<< HEAD
 >>>>>>> a091e6e... arreglos por punteros null
 		}
 <<<<<<< HEAD
@@ -255,9 +280,16 @@ public class SyntacticTreeLeaf extends SyntacticTree{
 =======
 		setAlmacenamiento(dato);
 >>>>>>> 050f179... Update -
+=======
+		}*/
+=======
+		}
+>>>>>>> d209296... comentario
+		setAlmacenamiento(data);
+>>>>>>> 51f241d... arreglos varios
 	}
 	
-	public boolean isVariableOrConst() { return (getElem().charAt(0) == '_' || (int)(getElem().charAt(0)) >= 48 && (int)(getElem().charAt(0)) <= 57); }
+
 	
 }
 

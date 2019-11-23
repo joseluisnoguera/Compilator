@@ -20,6 +20,7 @@ public class AssemblerGenerator {
 		asm.addMsg(".code");
 		asm.addMsg("start:");
 		asm.addAll(code);
+		asm.addMsg("jmp _finDelPrograma");
 		asm.addAll(getExtraFunctions(symbolTable));
 		asm.addMsg("end start");
 		return asm;
@@ -33,13 +34,13 @@ public class AssemblerGenerator {
 			if (element.getTipoToken().equals(ElementoTS.ID)) { 
 				String word = "";
 				// Define tamaño a usar DW 16 bits para int - DD 32 bits para long
-				if (element.getTipoAtributo().equals(ElementoTS.INT))
+				if (element.getTipoAtributo().equals(ElementoTS.INT) && !element.isPointer())
 					word = "dw";
-				if (element.getTipoAtributo().equals(ElementoTS.LONG))
+				if (element.getTipoAtributo().equals(ElementoTS.LONG) || element.isPointer())
 					word = "dd";
 				if (element.getEstructuraID().equals(ElementoTS.VAR)) // Si es variable 
 					data.addMsg( "_" + key + " " + word + " ?");
-				if (element.getEstructuraID().equals(ElementoTS.COL)) { //Sino es una colección
+				else if (element.getEstructuraID().equals(ElementoTS.COL)) { //Sino es una colección
 					String cadElements = element.getElemsCollection();
 					cadElements = cadElements.replace('_', '?');
 					data.addMsg( "_" + key + " " + word + " " + element.getCSize() + " dup " + cadElements);
@@ -49,13 +50,14 @@ public class AssemblerGenerator {
 				data.addMsg("_@cad" + element.getId() + " db \"" + key + "\"" + ", 0" );
 			}	
 		}
-		data.addMsg("_@ErrorDivisionPorCero" + " db \"Error: Se dividio por cero\",0");
-		data.addMsg("_@ErrorArregloFueraDeRango" + " db \"Error: Arreglo fuera de rango\",0");
+		data.addMsg("_@ErrorDivisionPorCero" + " db \"Error: Se dividio por cero\", 0");
+		data.addMsg("_@ErrorArregloFueraDeRango" + " db \"Error: Arreglo fuera de rango\", 0");
 		return data;
 	}
 
 	private static MsgStack getExtraFunctions(Hashtable<String, ElementoTS> symbolTable) {
 		MsgStack extra = new MsgStack();
+<<<<<<< HEAD
 <<<<<<< HEAD
 		//TODO: Agregar funciones de control dinámico
 //		extra.addMsg("_");
@@ -101,8 +103,21 @@ public class AssemblerGenerator {
 		extra.addMsg("_ArregloFueraDeRango:");
 		extra.addMsg("invoke StdOut, addr _@ErrorArregloFueraDeRango");//revisar como hacer!!!!!!!!!!!!!!!!!!!!
 		extra.addMsg("JMP _FinDelPrograma"); //salto al final del programa
+=======
+		extra.addMsg("_print:");
+		extra.addMsg("invoke MessageBox, NULL, eax, eax, MB_OK");
+		extra.addMsg("ret");
 
-		extra.addMsg("_FinDelPrograma:");
+		extra.addMsg("_msgDivisionPorCero:");
+		extra.addMsg("invoke MessageBox, NULL, addr _@ErrorDivisionPorCero, addr _@ErrorDivisionPorCero, MB_OK");
+		extra.addMsg("jmp _finDelPrograma");
+
+		extra.addMsg("_msgArregloFueraDeRango:");
+		extra.addMsg("invoke MessageBox, NULL, addr _@ErrorArregloFueraDeRango, addr _@ErrorArregloFueraDeRango, MB_OK");
+		extra.addMsg("jmp _finDelPrograma");
+>>>>>>> 51f241d... arreglos varios
+
+		extra.addMsg("_finDelPrograma:");
 		extra.addMsg("invoke ExitProcess, 0");
 		return extra;
 	}

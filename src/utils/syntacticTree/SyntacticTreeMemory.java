@@ -45,10 +45,11 @@ public class SyntacticTreeMemory extends SyntacticTree{
 		comInterm.addMsg(blankPrefix + "Nodo: " + getElem());
 		String dataFromLeft = "";
 		String dataFromRight = "";
-		getHijoIzq().recorreArbol(registros, comAssembler, comInterm, symbolTable, blankPrefix + "  ");
-		getHijoDer().recorreArbol(registros, comAssembler, comInterm, symbolTable, blankPrefix + "  ");
+		getHijoIzq().recorreArbol(registros, comAssembler, comInterm, symbolTable, blankPrefix + getBlankSpace());
+		getHijoDer().recorreArbol(registros, comAssembler, comInterm, symbolTable, blankPrefix + getBlankSpace());
 		dataFromLeft = getHijoIzq().getAlmacenamiento();
 		dataFromRight = getHijoDer().getAlmacenamiento(); 
+<<<<<<< HEAD
 		String op = getElem();
 <<<<<<< HEAD
 		String reg = registros.getRegFreeLong(this);
@@ -155,10 +156,40 @@ public class SyntacticTreeMemory extends SyntacticTree{
 				}
 				comAssembler.addMsg("mov " + dato1 + ", " + reg);
 >>>>>>> 3c084f9... Update SyntacticTreeMemory-Leaf
+=======
+		String collectionPtr = registros.getRegFreeLong(this, symbolTable, comAssembler);
+		switch(getElem()) {
+		case "::=": {
+			comAssembler.addMsg("lea " + collectionPtr + ", " + dataFromRight); //offset del arreglo en i
+			comAssembler.addMsg("mov " + dataFromLeft + ", " + collectionPtr);
+			break;
+		}
+		case "<<": {
+			comAssembler.addMsg("mov " + collectionPtr + ", " + dataFromLeft); // lado izq tiene la direccion del arreglo
+			String collectionSize = registros.getRegFreeLong(getHijoIzq(), symbolTable, comAssembler);
+			System.out.println(dataFromLeft.substring(1));
+			comAssembler.addMsg("mov " + collectionSize + ", " + symbolTable.get(dataFromLeft.substring(1)).getCSizeBytes()); // obtiene el largo del arreglo en bytes
+			String collectionOffset = registros.getRegFreeLong(getHijoDer(), symbolTable, comAssembler);
+			comAssembler.addMsg("lea " + collectionOffset + ", " + dataFromRight); // obtiene el offset del arreglo
+			comAssembler.addMsg("add " + collectionSize + ", " + collectionOffset); //direccion final del arreglo
+			comAssembler.addMsg("cmp " + collectionPtr + ", " + collectionSize); //se compara la direccion a la que apunta i con direccion fin del arreglo
+			registros.freeReg(registros.getRegPos(collectionSize));
+			registros.freeReg(registros.getRegPos(collectionOffset));
+			break;
+		}
+		case "+=": {
+			comAssembler.addMsg("mov " + collectionPtr + ", " + dataFromLeft);
+			if (symbolTable.get(dataFromRight.substring(1)).getTipoAtributo().equals(ElementoTS.INT)) {
+				comAssembler.addMsg("add " + collectionPtr + ", 2");
+			} else {
+				comAssembler.addMsg("add " + collectionPtr + ", 4");
+>>>>>>> 51f241d... arreglos varios
 			}
-			comAssembler.addMsg("mov " + dataFromLeft + ", " + reg);
+			comAssembler.addMsg("mov " + dataFromLeft + ", " + collectionPtr);
+			break;
 		}
 		}
+<<<<<<< HEAD
 		registros.setRegTable(reg,false);//libera el registro usado
 <<<<<<< HEAD
 		return op;
@@ -205,5 +236,13 @@ public class SyntacticTreeMemory extends SyntacticTree{
 =======
 		setAlmacenamiento(op);
 >>>>>>> 154a393... comentario
+=======
+		registros.freeReg(registros.getRegPos(collectionPtr));
+<<<<<<< HEAD
+		setAlmacenamiento("?");
+>>>>>>> 51f241d... arreglos varios
+=======
+		setAlmacenamiento(getElem());
+>>>>>>> 446d784... comentario
 	}
 }

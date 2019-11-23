@@ -32,12 +32,20 @@ public class RegisterTable {
 		public Registro() { is_busy = false; }
 		public String toString() { return "Nombre: " + nombre + " - Estado: " + is_busy + " - Nodo: " + nodoAsociado; }
 	}
+<<<<<<< HEAD
 	
+<<<<<<< HEAD
 >>>>>>> 88b2c34... _
 	private ArrayList<Registro> regState; 
 	
 	private static final int CANT_REGISTROS = 4; //Cantidad de registros en procesador
 	private static int varAUX = 0;
+=======
+=======
+
+>>>>>>> bbb6d5a... commit para pull
+	private static final int CANT_REGISTROS = 4; //Cantidad de registros en procesador
+>>>>>>> 51f241d... arreglos varios
 	public static final int AX = 0;
 	public static final String NAME_AX = "AX";
 	public static final int BX = 1;
@@ -54,8 +62,12 @@ public class RegisterTable {
 	public static final String NAME_ECX = "ECX";
 	public static final int EDX = 3;
 	public static final String NAME_EDX = "EDX";
-	
+
+	private int contadorVarAUX;
+	private ArrayList<Registro> regState;
+
 	public RegisterTable() {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		regState = new ArrayList<Registro>(CANT_REGISTROS);
 		for(int i = 0; i < regState.size(); i++) {
@@ -63,6 +75,9 @@ public class RegisterTable {
 			Registro reg = new Registro();
 			this.regState.set(i, reg);
 =======
+=======
+		contadorVarAUX = 0;
+>>>>>>> 51f241d... arreglos varios
 		regState = new ArrayList<Registro>();
 		for(int i = 0; i < CANT_REGISTROS; i++) {
 			Registro reg = new Registro();
@@ -78,10 +93,17 @@ public class RegisterTable {
 =======
 	public String getRegFreeInt(SyntacticTree nodoAsociado, Hashtable<String, ElementoTS> symbolTable, MsgStack comAssembler) {
 		Registro reg = null;
+<<<<<<< HEAD
 		Boolean encontrado=false;
 		for(int i=0; i < this.regState.size(); i++) {
 >>>>>>> 39b95a0... Update RegisterTable-VarAUX
+=======
+		boolean encontrado = false;
+		int i = 0;
+		while (i < regState.size() && !encontrado) {
+>>>>>>> 51f241d... arreglos varios
 			reg = regState.get(i);
+<<<<<<< HEAD
 			if(!reg.ocupado) {
 				switch(i){
 					case 0: reg.nombre="AX";
@@ -103,10 +125,18 @@ public class RegisterTable {
 		for(int i=0; i<this.regState.size();i++)  
 		{
 =======
+=======
+			if(!reg.is_busy) {
+				if(i == AX) reg.nombre = NAME_AX;
+				else if(i == BX) reg.nombre = NAME_BX;
+				else if(i == CX) reg.nombre = NAME_CX;
+				else reg.nombre = NAME_DX;
+>>>>>>> 507ee97... comentario
 				reg.nodoAsociado = nodoAsociado;
 				reg.is_busy = true;
 				encontrado=true;
 			}
+			i++;
 		}
 <<<<<<< HEAD
 		//TODO: codear logica para asignar variable auxiliar
@@ -124,23 +154,31 @@ public class RegisterTable {
 		
 =======
 		if(!encontrado) {
-			contadorVarAUX++;
-			String nombreVarAux = "_@varAux" + contadorVarAUX;
-			reg = regState.get(CX); // Siempre se le asigna a CX
+			String nombreVarAux = "_@varAux" + contadorVarAUX++;
+			int regPos = (int)((Math.random()*2 + 1)); //devueve como valor 1 o 2
+			reg = regState.get(regPos); // Siempre se le asigna a BX o CX
 			ElementoTS tupla = new ElementoTS(ElementoTS.ID, "", ElementoTS.INT); //agrego la variable auxiliar a la tabla de simbolos
 			symbolTable.put(nombreVarAux, tupla);
 			reg.nodoAsociado.setAlmacenamiento(nombreVarAux); // setea el nodo del registro almacenado en var
 			comAssembler.addMsg("mov " + nombreVarAux + ", " + reg.nombre);// mueve lo que contiene CX a var
 			reg.nodoAsociado = nodoAsociado;
+<<<<<<< HEAD
 			reg.nombre = NAME_CX;
 >>>>>>> 88b2c34... _
+=======
+			if (regPos == BX)
+				reg.nombre = NAME_BX;
+			if (regPos == CX)
+				reg.nombre = NAME_CX;
+>>>>>>> 51f241d... arreglos varios
 		}
 		return reg.nombre;
-		
+
 	}
 
 	public String getRegFreeLong(SyntacticTree nodoAsociado, Hashtable<String, ElementoTS> symbolTable, MsgStack comAssembler) {
 		Registro reg = null;
+<<<<<<< HEAD
 		Boolean encontrado=false;
 		for(int i=0; i<this.regState.size() && !encontrado ;i++) {
 >>>>>>> 39b95a0... Update RegisterTable-VarAUX
@@ -152,6 +190,19 @@ public class RegisterTable {
 				case 1: reg.nombre="EBX";
 				case 2: reg.nombre="ECX";
 				case 3: reg.nombre="EDX";
+=======
+		boolean encontrado = false;
+		int i = 0;
+		while (i < regState.size() && !encontrado) {
+			reg = regState.get(i);
+			if(!reg.is_busy) {
+<<<<<<< HEAD
+				switch(i){
+				case EAX: reg.nombre = NAME_EAX;
+				case EBX: reg.nombre = NAME_EBX;
+				case ECX: reg.nombre = NAME_ECX;
+				case EDX: reg.nombre = NAME_EDX;
+>>>>>>> 51f241d... arreglos varios
 				}
 <<<<<<< HEAD
 				reg.ocupado = true;
@@ -161,10 +212,17 @@ public class RegisterTable {
 		}
 		//codear logica para asignar variable auxiliar
 =======
+=======
+				if(i == EAX) reg.nombre = NAME_EAX;
+				else if(i == EBX) reg.nombre = NAME_EBX;
+				else if(i == ECX) reg.nombre = NAME_ECX;
+				else reg.nombre = NAME_EDX;
+>>>>>>> 507ee97... comentario
 				reg.nodoAsociado = nodoAsociado;
 				reg.is_busy = true;
 				encontrado=true;
 			}
+			i++;
 		}
 <<<<<<< HEAD
 		//TODO: codear logica para asignar variable auxiliar
@@ -181,21 +239,35 @@ public class RegisterTable {
 			reg.nombre=NAME_ECX;
 =======
 		if(!encontrado) {
-			contadorVarAUX++;
-			String nombreVarAux = "_@varAux" + contadorVarAUX;
-			reg = regState.get(ECX); // Asigna siempre ECX 
+			String nombreVarAux = "_@varAux" + contadorVarAUX++;
+			int regPos = (int)((Math.random()*2 + 1)); //devuelve como valor 1 o 2
+			reg = regState.get(regPos); // Asigna siempre EBX o ECX 
 			ElementoTS tupla = new ElementoTS(ElementoTS.ID, "",  ElementoTS.LONG);//agrego la variable auxiliar a la tabla de simbolos
 			symbolTable.put(nombreVarAux,tupla);
 			reg.nodoAsociado.setAlmacenamiento(nombreVarAux);//setea el nodo del registro almacenado en var
 			comAssembler.addMsg("mov " + nombreVarAux + ", " + reg.nombre);//mueve lo que contiene ECX a var
 			reg.nodoAsociado = nodoAsociado;
+<<<<<<< HEAD
 			reg.nombre = NAME_ECX;
 >>>>>>> 88b2c34... _
+=======
+			if (regPos == EBX)
+				reg.nombre = NAME_EBX;
+			if (regPos == ECX)
+				reg.nombre = NAME_ECX;
+<<<<<<< HEAD
+>>>>>>> 51f241d... arreglos varios
 		
 		}
 		return reg.nombre;
 		
 >>>>>>> 39b95a0... Update RegisterTable-VarAUX
+=======
+
+		}
+		return reg.nombre;
+
+>>>>>>> bbb6d5a... commit para pull
 	}
 
 	public void setRegTable(String reg, boolean state) {
@@ -210,18 +282,19 @@ public class RegisterTable {
 					index=3;
 		this.regState.get(index).ocupado = state;
 	}
+<<<<<<< HEAD
 	
 <<<<<<< HEAD
 	public String getReg(String dato, SyntacticTree nodo, MsgStack comAssembler) {
 =======
+=======
+
+>>>>>>> bbb6d5a... commit para pull
 	public int getRegPos(String nameReg) {
-		switch (nameReg) {
-			case NAME_AX: case NAME_EAX: return AX;
-			case NAME_BX: case NAME_EBX: return BX;
-			case NAME_CX: case NAME_ECX: return CX;
-			case NAME_DX: case NAME_EDX: return DX;
-		}
-		return -1;
+		if(nameReg == NAME_AX || nameReg == NAME_EAX) return AX;
+		else if(nameReg == NAME_BX || nameReg == NAME_EBX) return BX;
+		else if(nameReg == NAME_CX || nameReg == NAME_ECX) return CX;
+		else return DX;
 	}
 
 	// Para pedir un registro en específico
@@ -266,7 +339,7 @@ public class RegisterTable {
 		}
 		return dato;
 	}
-	
+
 	public String toString() {
 		return regState.toString();
 	}

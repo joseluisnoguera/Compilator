@@ -10,7 +10,8 @@ import utils.RegisterTable;
 
 public class SyntacticTreeCtrl extends SyntacticTree {
 
-	protected static List<String> etiquetas = new ArrayList<String>();
+	private static List<String> etiquetas = new ArrayList<String>();
+	private static int contEtiquetas = 0;
 
 	public SyntacticTreeCtrl(String lexeme, SyntacticTree nodo) {
 		super(lexeme);
@@ -27,13 +28,20 @@ public class SyntacticTreeCtrl extends SyntacticTree {
 =======
 	public void recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm,
 			Hashtable<String, ElementoTS> symbolTable, String blankPrefix) {
+<<<<<<< HEAD
 		comInterm.addMsg(blankPrefix + "Nodo: " + super.getElem());
 >>>>>>> 154a393... comentario
 		if(super.getElem() == "cond") {//cond del foreach
+=======
+		System.out.println("entro a ctrl " + getElem());
+		comInterm.addMsg(blankPrefix + "Nodo: " + getElem());
+		if(getElem() == "COND_FOREACH") { //cond del foreach
+>>>>>>> d209296... comentario
 			contEtiquetas++;
 			comAssembler.addMsg("_label" + contEtiquetas + ":");
 			etiquetas.add("_label" + contEtiquetas);//etiqueta de inicio de condicion de foreach
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -54,45 +62,66 @@ public class SyntacticTreeCtrl extends SyntacticTree {
 		getHijoIzq().recorreArbol(registros, comAssembler, comInterm,symbolTable, blankPrefix + "  ");
 		String op = getHijoIzq().getAlmacenamiento();
 >>>>>>> 88b2c34... _
+=======
+		getHijoIzq().recorreArbol(registros, comAssembler, comInterm,symbolTable, blankPrefix + getBlankSpace());
+<<<<<<< HEAD
+		
+>>>>>>> 51f241d... arreglos varios
 		switch(getElem()){
 		case "COND_IF":{ //condicion de if
 >>>>>>> 1375c5c... arreglos varios
 			contEtiquetas++;
+<<<<<<< HEAD
 			switch(op) {//se agrega el salto por falso segun la instruccion hacia el final del if (y se agrega su etiqueta)
 
+=======
+			switch(getHijoIzq().getAlmacenamiento()) { //se agrega el salto por falso segun la instruccion hacia el final del if (y se agrega su etiqueta)
+>>>>>>> 51f241d... arreglos varios
 			case "<":{
-				comAssembler.addMsg("JGE _label" + contEtiquetas);
+=======
+		System.out.println("resuelve a ctrl " + getElem());
+		if(getElem() == "COND_IF") {
+			contEtiquetas++;
+			if(getHijoIzq().getAlmacenamiento() == "<") {
+>>>>>>> d209296... comentario
+				comAssembler.addMsg("jge _label" + contEtiquetas);
 				etiquetas.add("_label" + contEtiquetas);
 			}
-			case ">":{
-				comAssembler.addMsg("JLE _label" + contEtiquetas);
+			else if(getHijoIzq().getAlmacenamiento() == ">") {
+				comAssembler.addMsg("jle _label" + contEtiquetas);
 				etiquetas.add("_label" + contEtiquetas);
 			}
-			case "LET":{
-				comAssembler.addMsg("JG _label" + contEtiquetas);
+			else if(getHijoIzq().getAlmacenamiento() == "LET") {
+				comAssembler.addMsg("jg _label" + contEtiquetas);
 				etiquetas.add("_label" + contEtiquetas);
 			}
-			case "GET":{
-				comAssembler.addMsg("JL _label" + contEtiquetas);
+			else if(getHijoIzq().getAlmacenamiento() == "GET") {
+				comAssembler.addMsg("jl _label" + contEtiquetas);
 				etiquetas.add("_label" + contEtiquetas);
 			}
-			case "DIF":{
-				comAssembler.addMsg("JE _label" + contEtiquetas);
+			else if(getHijoIzq().getAlmacenamiento() == "EQ") {
+				comAssembler.addMsg("jne _label" + contEtiquetas);
 				etiquetas.add("_label" + contEtiquetas);
 			}
-			case "EQ":{
-				comAssembler.addMsg("JNE _label" + contEtiquetas);
-				etiquetas.add("_label" + contEtiquetas);
-			}
+<<<<<<< HEAD
 
 			}
 		}
 
 		case "cond": {//cond del foreach
+=======
+			else if(getHijoIzq().getAlmacenamiento() == "DIF") {
+				comAssembler.addMsg("je _label" + contEtiquetas);
+				etiquetas.add("_label" + contEtiquetas);
+			}
+		}
+		else if(getElem() == "COND_FOREACH") {
+>>>>>>> d209296... comentario
 			contEtiquetas++;
-			comAssembler.addMsg("JGE _label" + contEtiquetas);//salto por false en caso de que se termine el arreglo
+			comAssembler.addMsg("jge _label" + contEtiquetas); //salto en caso de que se termine el arreglo
 			etiquetas.add("_label" + contEtiquetas);//etiqueta de fin de foreach
 		}
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 		case "Then":{//then que no tendra else
@@ -108,24 +137,45 @@ public class SyntacticTreeCtrl extends SyntacticTree {
 =======
 		case "THEN_ELSE":{ //then que tendra else
 >>>>>>> bca257b... resueltos problemas en common
+=======
+		else if(getElem() == "THEN") {
+			comAssembler.addMsg(etiquetas.get(etiquetas.size()-1) + ":");//se agrega la etiqueta de fin de if
+			etiquetas.remove(etiquetas.size()-1);
+		}
+		else if(getElem() == "THEN_ELSE") {
+>>>>>>> d209296... comentario
 			contEtiquetas++;
-			comAssembler.addMsg("JMP _label" + contEtiquetas);//se agrega el salto al fin del if (y se agrega despues su etiqueta)
+			comAssembler.addMsg("jmp _label" + contEtiquetas);//se agrega el salto al fin del if (y se agrega despues su etiqueta)
 			comAssembler.addMsg(etiquetas.get(etiquetas.size()-1) + ":");//se agrega etiqueta de inicio de else
 			etiquetas.remove(etiquetas.size()-1);
 			etiquetas.add("_label" + contEtiquetas);
 		}
+<<<<<<< HEAD
 
 		case "else":{
 			comAssembler.addMsg(etiquetas.get(etiquetas.size()-1) + ":");//se agrega la etiqueta de fin de if
 			etiquetas.remove(etiquetas.size()-1);
 		}
 
+<<<<<<< HEAD
 		case "CuerpoAvance":{
 			comAssembler.addMsg("JMP " + etiquetas.get(etiquetas.size()-2));//salto al principio de la condicion de foreach
+=======
+		case "CUERPOAVANCE":{
+=======
+		else if(getElem() == "ELSE") {
+			comAssembler.addMsg(etiquetas.get(etiquetas.size()-1) + ":");//se agrega la etiqueta de fin de if
+			etiquetas.remove(etiquetas.size()-1);
+		}
+		else if(getElem() == "CUERPOAVANCE") {
+>>>>>>> d209296... comentario
+			comAssembler.addMsg("jmp " + etiquetas.get(etiquetas.size()-2));//salto al principio de la condicion de foreach
+>>>>>>> 51f241d... arreglos varios
 			comAssembler.addMsg(etiquetas.get(etiquetas.size()-1) + ":");//creacion de etiqueta de fin de foreach
 			etiquetas.remove(etiquetas.size()-1);
 			etiquetas.remove(etiquetas.size()-1);
 		}
+<<<<<<< HEAD
 		}
 <<<<<<< HEAD
 =======
@@ -206,6 +256,8 @@ public class SyntacticTreeCtrl extends SyntacticTree {
 >>>>>>> 45299ea... visualización de árbol sintáctico
 		return "";
 =======
+=======
+>>>>>>> d209296... comentario
 		setAlmacenamiento("");
 >>>>>>> 154a393... comentario
 	}	

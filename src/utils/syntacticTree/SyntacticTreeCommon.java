@@ -1,3 +1,407 @@
+//package utils.syntacticTree;
+//
+//import java.util.Hashtable;
+//import utils.ElementoTS;
+//import utils.MsgStack;
+//import utils.RegisterTable;
+//
+//public class SyntacticTreeCommon extends SyntacticTree {
+//
+//	public SyntacticTreeCommon(String lexeme, SyntacticTree nodoIzq, SyntacticTree nodoDer) {
+//		super(lexeme);
+//		super.setHijoIzq(nodoIzq);
+//		super.setHijoDer(nodoDer);
+//	}
+//
+//	public void recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm,
+//			Hashtable<String, ElementoTS> symbolTable, String blankPrefix) {
+//		comInterm.addMsg(blankPrefix + "Nodo: " + getElem());
+//		String dataFromLeft = "";
+//		String dataFromRight = "";
+//		getHijoIzq().recorreArbol(registros, comAssembler, comInterm, symbolTable, blankPrefix + "  ");
+//		if (getHijoDer() != null)
+//			getHijoDer().recorreArbol(registros, comAssembler, comInterm, symbolTable, blankPrefix + "  ");
+//		dataFromLeft = getHijoIzq().getAlmacenamiento();
+//		if (getHijoDer() != null)
+//			dataFromRight = getHijoDer().getAlmacenamiento();
+//
+//		///// OBTENER OPERACIÓN /////
+//		String operation = "";
+//		switch(getElem()){
+//		case "+": operation = "add";
+//		case "-": operation = "sub";
+//		case "*": operation = "imul";
+//		case "/": {
+//			operation = "idiv";
+//			comAssembler.addMsg("cmp " + dataFromRight + ", " + 0);
+//			comAssembler.addMsg("jz _DivisionPorCero"); //Salto a la subrutina de programa si el divisor es 0
+//		}
+//		case ":=": operation = "mov";
+//		default: operation = "cmp"; //si los dos son hojas -- en cualquier otro caso
+//		}
+//
+//		///// GENERAR CÓDIGO ADECUADO A CADA OPERACIÓN /////
+//		if(getElem() == "+" || getElem() == "*" || getElem() == "-" || getElem() == ":=" || getElem() == "/") {
+//			if(((((SyntacticTreeLeaf)getHijoIzq()).isVariableOrConst()) && (((SyntacticTreeLeaf)getHijoDer()).isVariableOrConst()))) { ///// AMBOS SON CONST O VAR ///// S1
+//				
+//				if((operation == "imul")) { ///// OPERACIÓN MULTIPLICACIÓN /////
+//					if(isInt(dataFromLeft, symbolTable)) { ///// ENTERO /////
+//						String regAX = registros.getReg(RegisterTable.NAME_AX, getHijoIzq(), comAssembler, symbolTable);
+//						@SuppressWarnings("unused")
+//						String regDX = registros.getReg(RegisterTable.NAME_DX, getHijoIzq(), comAssembler, symbolTable); 
+//						comAssembler.addMsg("mov " + regAX + ", " + dataFromLeft);
+//						comAssembler.addMsg("imul " + regAX + ", " + dataFromRight);
+//						String reg = registros.getRegFreeLong(getHijoIzq(),symbolTable,comAssembler); // -----
+//						comAssembler.addMsg("mov " + reg + ", DX:AX");
+//						registros.freeReg(RegisterTable.AX);
+//						registros.freeReg(RegisterTable.DX);
+//						setAlmacenamiento(reg);
+//					} else { ///// LONG /////
+//						String regEAX = registros.getReg(RegisterTable.NAME_EAX, getHijoIzq(), comAssembler, symbolTable);
+//						@SuppressWarnings("unused")
+//						String regEDX = registros.getReg(RegisterTable.NAME_EDX, getHijoIzq(), comAssembler, symbolTable); // Nuevamente se reserva para, si tiene algo, no pisarlo
+//						comAssembler.addMsg("mov " + regEAX + ", " + dataFromLeft);
+//						comAssembler.addMsg("imul " + regEAX + ", " + dataFromRight);
+//						setAlmacenamiento(RegisterTable.NAME_EAX);
+//						registros.freeReg(RegisterTable.EDX);
+//						setAlmacenamiento(regEAX);
+//					}
+//					
+//				} else { ///// NO ES MULTIPLICACIÓN /////
+//					if(operation == "idiv")//ES DIVISION
+//					{	
+//						if(isInt(dataFromLeft, symbolTable)) {//ES ENTERO
+//							//pide registros para contener al dividendo
+//							String regAX = registros.getReg(RegisterTable.NAME_AX, getHijoIzq(), comAssembler, symbolTable);
+//							@SuppressWarnings("unused")
+//							String regDX = registros.getReg(RegisterTable.NAME_DX, getHijoIzq(), comAssembler, symbolTable); // Se reserva para, si tiene algo, no pisarlo
+//							comAssembler.addMsg("mov "+regAX+", " + dataFromLeft);//divendo en AX
+//							comAssembler.addMsg("cwd");//extension de signo
+//							String regCX= registros.getReg(RegisterTable.NAME_CX, getHijoDer(), comAssembler, symbolTable);
+//							comAssembler.addMsg("mov " + regCX + ", " + dataFromRight);//guarda divisor
+//							comAssembler.addMsg("idiv " + regCX);//DIVISION DX:AX / CX
+//							registros.freeReg(RegisterTable.CX);//LIBERA 
+//							registros.freeReg(RegisterTable.AX);//LIBERA COCIENTE
+//							setAlmacenamiento(regDX);//DEVUELVE RESTO
+//						}
+//						else////ES LONG
+//						{
+//							String regEAX = registros.getReg(RegisterTable.NAME_EAX, getHijoIzq(), comAssembler, symbolTable);
+//							@SuppressWarnings("unused")
+//							String regEDX = registros.getReg(RegisterTable.NAME_EDX, getHijoIzq(), comAssembler, symbolTable); // Se reserva para, si tiene algo, no pisarlo
+//							comAssembler.addMsg("mov "+regEAX+", " + dataFromLeft);//divendo en EAX
+//							comAssembler.addMsg("cwd");//extension de signo
+//							String regECX= registros.getReg(RegisterTable.NAME_ECX, getHijoDer(), comAssembler, symbolTable);
+//							comAssembler.addMsg("mov " + regECX + ", " + dataFromRight);//guarda divisor
+//							comAssembler.addMsg("idiv " + regECX);//DIVISION EDX:EAX / ECX
+//							registros.freeReg(RegisterTable.ECX);//LIBERA 
+//							registros.freeReg(RegisterTable.EAX);//LIBERA COCIENTE
+//							setAlmacenamiento(regEDX);//DEVUELVE RESTO
+//						}
+//					}
+//					else//NO ES DIVISION
+//					{
+//						String reg;
+//						if(isInt(dataFromLeft, symbolTable))///ES ENTERO
+//							reg = registros.getRegFreeInt(getHijoIzq(), symbolTable, comAssembler);
+//						else
+//							reg = registros.getRegFreeLong(getHijoIzq(),symbolTable,comAssembler);
+//						comAssembler.addMsg("mov " + reg + ", " + dataFromLeft);
+//						comAssembler.addMsg(operation +" " + reg + ", " + dataFromRight);
+//						setAlmacenamiento(reg);
+//					}
+//				}
+//				
+//			} else { ///// UNO DE LOS HIJOS NO ES CONST O VAR /////
+//				
+//				if((((SyntacticTreeLeaf)getHijoIzq()).isVariableOrConst())) { ///// HIJO IZQ ES CONST O VAR ///// S4
+//					
+//					if(operation.equals("ADD") || operation.equals("imul")) { ///// OPERACIÓN CONMUTATIVA /////S4.A
+//						
+//						if (operation.equals("imul")) { ///// MULTIPLICACIÓN /////
+//						
+//							if(dataFromRight == RegisterTable.NAME_AX || dataFromRight == RegisterTable.NAME_BX || dataFromRight == RegisterTable.NAME_CX || dataFromRight == RegisterTable.NAME_DX) { ///// ES ENTERA /////
+//								registros.getReg(RegisterTable.NAME_AX, getHijoIzq(), comAssembler,symbolTable);
+//								registros.getReg(RegisterTable.NAME_DX, getHijoIzq(), comAssembler,symbolTable);
+//								dataFromRight = getHijoDer().getAlmacenamiento();
+//								comAssembler.addMsg("mov AX, " + dataFromRight);
+//								comAssembler.addMsg("imul AX, " + dataFromLeft);
+//								String reg = registros.getRegFreeLong(getHijoIzq(), symbolTable, comAssembler);
+//								comAssembler.addMsg("mov " + reg + ", DX:AX");
+//								registros.freeReg(RegisterTable.AX);
+//								registros.freeReg(RegisterTable.DX);
+//								if (!(((SyntacticTreeLeaf)getHijoDer()).isVariableOrConst()))
+//									registros.freeReg(registros.getRegPos(dataFromRight));
+//								setAlmacenamiento(reg);
+//							} else { ///// ES LONG /////
+//								registros.getReg(RegisterTable.NAME_EAX, getHijoIzq(), comAssembler,symbolTable);
+//								registros.getReg(RegisterTable.NAME_EDX, getHijoIzq(), comAssembler,symbolTable);
+//								dataFromRight = getHijoDer().getAlmacenamiento();
+//								comAssembler.addMsg("mov EAX, " + dataFromRight);
+//								comAssembler.addMsg("imul EAX, " + dataFromLeft);
+//								setAlmacenamiento(RegisterTable.NAME_EAX);
+//								if (!(((SyntacticTreeLeaf)getHijoDer()).isVariableOrConst()))
+//									registros.freeReg(registros.getRegPos(dataFromRight));
+//								registros.freeReg(RegisterTable.EDX);
+//							}
+//							
+//						} else { ///// NO ES MULTIPLICACIÓN ///// ADD
+//							
+//							comAssembler.addMsg(operation + " " + dataFromRight + ", " + dataFromLeft);
+//							setAlmacenamiento(dataFromRight);
+//
+//						}
+//					} else { ///// OPERACIÓN NO CONMUTATIVA ///// DIV - S4.B
+//						if(operation == "idiv")//ES DIVISION
+//						{	
+//							if(isInt(dataFromLeft, symbolTable)) {//ES ENTERO
+//								//pide registros para contener al dividendo
+//								String regAX = registros.getReg(RegisterTable.NAME_AX, getHijoIzq(), comAssembler, symbolTable);
+//								String regDX = registros.getReg(RegisterTable.NAME_DX, getHijoIzq(), comAssembler, symbolTable); // Se reserva para, si tiene algo, no pisarlo
+//								comAssembler.addMsg("mov "+regAX+", " + dataFromLeft);//divendo en AX
+//								comAssembler.addMsg("cwd");//extension de signo
+//								String regCX= registros.getReg(RegisterTable.NAME_CX, getHijoDer(), comAssembler, symbolTable);
+//								comAssembler.addMsg("mov " + regCX + ", " + dataFromRight);//guarda divisor
+//								comAssembler.addMsg("idiv " + regCX);//DIVISION DX:AX / CX
+//								registros.freeReg(RegisterTable.CX);//LIBERA 
+//								registros.freeReg(RegisterTable.AX);//LIBERA COCIENTE
+//								if (!(((SyntacticTreeLeaf)getHijoDer()).isVariableOrConst()))
+//									registros.freeReg(registros.getRegPos(dataFromRight));
+//								setAlmacenamiento(regDX);//DEVUELVE RESTO
+//							}
+//							else////ES LONG
+//							{
+//								String regEAX = registros.getReg(RegisterTable.NAME_EAX, getHijoIzq(), comAssembler, symbolTable);
+//								String regEDX = registros.getReg(RegisterTable.NAME_EDX, getHijoIzq(), comAssembler, symbolTable); // Se reserva para, si tiene algo, no pisarlo
+//								comAssembler.addMsg("mov "+regEAX+", " + dataFromLeft);//divendo en EAX
+//								comAssembler.addMsg("cwd");//extension de signo
+//								String regECX= registros.getReg(RegisterTable.NAME_ECX, getHijoDer(), comAssembler, symbolTable);
+//								comAssembler.addMsg("mov " + regECX + ", " + dataFromRight);//guarda divisor
+//								comAssembler.addMsg("idiv " + regECX);//DIVISION EDX:EAX / ECX
+//								registros.freeReg(RegisterTable.ECX);//LIBERA 
+//								registros.freeReg(RegisterTable.EAX);//LIBERA COCIENTE
+//								if (!(((SyntacticTreeLeaf)getHijoDer()).isVariableOrConst()))
+//									registros.freeReg(registros.getRegPos(dataFromRight));
+//								setAlmacenamiento(regEDX);//DEVUELVE RESTO
+//							}
+//						}
+//						else//ES RESTA
+//						{
+//							String reg;
+//							if(dataFromRight == RegisterTable.NAME_AX || dataFromRight == RegisterTable.NAME_BX || dataFromRight == RegisterTable.NAME_CX || dataFromRight == RegisterTable.NAME_DX)
+//								reg = registros.getRegFreeInt(getHijoIzq(), symbolTable, comAssembler);
+//							else
+//								reg = registros.getRegFreeLong(getHijoIzq(), symbolTable, comAssembler);
+//							dataFromRight = getHijoDer().getAlmacenamiento();
+//							comAssembler.addMsg("mov " + reg + ", " + dataFromLeft);
+//							comAssembler.addMsg(operation + " " + reg + ", " + dataFromRight);
+//							setAlmacenamiento(reg);
+//							registros.freeReg(registros.getRegPos(dataFromRight));
+//						}
+//					}
+//					
+//					
+//				} else { ///// HIJO IZQ NO ES VAR O CONST
+//					if (((SyntacticTreeLeaf)getHijoDer()).isVariableOrConst()) { ///// EL HIJO DER ES CONST O VAR /////
+//						
+//						if(operation == "imul") { ///// MULTIPLICACIÓN /////
+//							if(dataFromLeft == RegisterTable.NAME_AX || dataFromLeft == RegisterTable.NAME_BX || dataFromLeft == RegisterTable.NAME_CX || dataFromLeft == RegisterTable.NAME_DX) { ///// ENTERO /////
+//								registros.getReg(RegisterTable.NAME_AX,getHijoIzq(), comAssembler,symbolTable);
+//								registros.getReg(RegisterTable.NAME_DX,getHijoIzq(), comAssembler,symbolTable);
+//								dataFromLeft = getHijoIzq().getAlmacenamiento();
+//								comAssembler.addMsg("mov AX, " + dataFromLeft);
+//								comAssembler.addMsg("imul AX, " + dataFromRight);
+//								String reg = registros.getRegFreeLong(getHijoIzq(),symbolTable,comAssembler); // -----
+//								comAssembler.addMsg("mov " + reg + ", DX:AX"); 
+//								registros.freeReg(RegisterTable.AX);
+//								registros.freeReg(RegisterTable.DX);
+//								if (!(((SyntacticTreeLeaf)getHijoIzq()).isVariableOrConst()))
+//									registros.freeReg(registros.getRegPos(dataFromLeft));
+//								setAlmacenamiento(reg);
+//							} else { ///// LONG /////
+//								registros.getReg(RegisterTable.NAME_EAX,getHijoIzq(), comAssembler,symbolTable);
+//								registros.getReg(RegisterTable.NAME_EDX,getHijoIzq(), comAssembler,symbolTable);
+//								dataFromLeft = getHijoIzq().getAlmacenamiento();
+//								comAssembler.addMsg("mov EAX, " + dataFromLeft);
+//								comAssembler.addMsg("imul EAX, " + dataFromRight);
+//								setAlmacenamiento(RegisterTable.NAME_EAX);
+//								registros.freeReg(RegisterTable.EDX);
+//								if (!(((SyntacticTreeLeaf)getHijoIzq()).isVariableOrConst()))
+//									registros.freeReg(registros.getRegPos(dataFromLeft));
+//							}
+//							
+//						} else { ///// NO ES MULTIPLICACIÓN /////
+//							if(operation == "idiv")//ES DIVISION
+//							{	
+//								if(isInt(dataFromLeft, symbolTable)) {//ES ENTERO
+//									//pide registros para contener al dividendo
+//									String regAX = registros.getReg(RegisterTable.NAME_AX, getHijoIzq(), comAssembler, symbolTable);
+//									String regDX = registros.getReg(RegisterTable.NAME_DX, getHijoIzq(), comAssembler, symbolTable); // Se reserva para, si tiene algo, no pisarlo
+//									comAssembler.addMsg("mov "+regAX+", " + dataFromLeft);//divendo en AX
+//									comAssembler.addMsg("cwd");//extension de signo
+//									String regCX= registros.getReg(RegisterTable.NAME_CX, getHijoDer(), comAssembler, symbolTable);
+//									comAssembler.addMsg("mov " + regCX + ", " + dataFromRight);//guarda divisor
+//									comAssembler.addMsg("idiv " + regCX);//DIVISION DX:AX / CX
+//									registros.freeReg(RegisterTable.CX);//LIBERA 
+//									registros.freeReg(RegisterTable.AX);//LIBERA COCIENTE
+//									if (!(((SyntacticTreeLeaf)getHijoDer()).isVariableOrConst()))
+//										registros.freeReg(registros.getRegPos(dataFromLeft));
+//									setAlmacenamiento(regDX);//DEVUELVE RESTO
+//								}
+//								else////ES LONG
+//								{
+//									String regEAX = registros.getReg(RegisterTable.NAME_EAX, getHijoIzq(), comAssembler, symbolTable);
+//									String regEDX = registros.getReg(RegisterTable.NAME_EDX, getHijoIzq(), comAssembler, symbolTable); // Se reserva para, si tiene algo, no pisarlo
+//									comAssembler.addMsg("mov "+regEAX+", " + dataFromLeft);//divendo en EAX
+//									comAssembler.addMsg("cwd");//extension de signo
+//									String regECX= registros.getReg(RegisterTable.NAME_ECX, getHijoDer(), comAssembler, symbolTable);
+//									comAssembler.addMsg("mov " + regECX + ", " + dataFromRight);//guarda divisor
+//									comAssembler.addMsg("idiv " + regECX);//DIVISION EDX:EAX / ECX
+//									registros.freeReg(RegisterTable.ECX);//LIBERA 
+//									registros.freeReg(RegisterTable.EAX);//LIBERA COCIENTE
+//									if (!(((SyntacticTreeLeaf)getHijoDer()).isVariableOrConst()))
+//										registros.freeReg(registros.getRegPos(dataFromLeft));
+//									setAlmacenamiento(regEDX);//DEVUELVE RESTO
+//								}
+//							}
+//							else {//ES RESTA O SUMA
+//								comAssembler.addMsg(operation+" "+dataFromLeft+", "+dataFromRight);
+//								setAlmacenamiento(dataFromLeft);
+//							}
+//						}
+//						
+//			
+//					} else { ///// NINGUNO DE SUS HIJOS ES CONST O VAR /////
+//						
+//						if(operation == "imul") {//ES MULTIPLICACION
+//							if(dataFromLeft.length() == 2) {
+//								registros.getReg(RegisterTable.NAME_AX, getHijoIzq(), comAssembler,symbolTable);
+//								registros.getReg(RegisterTable.NAME_DX, getHijoIzq(), comAssembler,symbolTable);
+//								dataFromLeft = getHijoIzq().getAlmacenamiento();
+//								dataFromRight = getHijoDer().getAlmacenamiento();
+//								comAssembler.addMsg("mov AX, " + dataFromLeft);
+//								comAssembler.addMsg("imul AX, " + dataFromRight);
+//								String reg = registros.getRegFreeLong(getHijoIzq(), symbolTable, comAssembler); // ----
+//								comAssembler.addMsg("mov " + reg + ", DX:AX");
+//								registros.freeReg(RegisterTable.AX);
+//								registros.freeReg(RegisterTable.DX);
+//								setAlmacenamiento(reg);
+//								if (!(((SyntacticTreeLeaf)getHijoIzq()).isVariableOrConst()))
+//									registros.freeReg(registros.getRegPos(dataFromLeft));
+//								if (!(((SyntacticTreeLeaf)getHijoDer()).isVariableOrConst()))
+//									registros.freeReg(registros.getRegPos(dataFromRight));
+//							}else {
+//								registros.getReg(RegisterTable.NAME_EAX, getHijoIzq(), comAssembler,symbolTable);
+//								registros.getReg(RegisterTable.NAME_EDX, getHijoIzq(), comAssembler,symbolTable);
+//								dataFromLeft = getHijoIzq().getAlmacenamiento();
+//								dataFromRight = getHijoDer().getAlmacenamiento();
+//								comAssembler.addMsg("mov EAX, " + dataFromLeft);
+//								comAssembler.addMsg("imul EAX, " + dataFromRight);
+//								setAlmacenamiento(RegisterTable.NAME_EAX);
+//								registros.freeReg(RegisterTable.EDX);
+//								if (!(((SyntacticTreeLeaf)getHijoIzq()).isVariableOrConst()))
+//									registros.freeReg(registros.getRegPos(dataFromLeft));
+//								if (!(((SyntacticTreeLeaf)getHijoDer()).isVariableOrConst()))
+//									registros.freeReg(registros.getRegPos(dataFromRight));
+//							}
+//						} else {///// NO ES MULTIPLICACIÓN /////
+//							if(operation == "idiv")//ES DIVISION
+//							{	
+//								if(isInt(dataFromLeft, symbolTable)) {//ES ENTERO
+//									//pide registros para contener al dividendo
+//									String regAX = registros.getReg(RegisterTable.NAME_AX, getHijoIzq(), comAssembler, symbolTable);
+//									String regDX = registros.getReg(RegisterTable.NAME_DX, getHijoIzq(), comAssembler, symbolTable); // Se reserva para, si tiene algo, no pisarlo
+//									comAssembler.addMsg("mov "+regAX+", " + dataFromLeft);//divendo en AX
+//									comAssembler.addMsg("cwd");//extension de signo
+//									String regCX= registros.getReg(RegisterTable.NAME_CX, getHijoDer(), comAssembler, symbolTable);
+//									comAssembler.addMsg("mov " + regCX + ", " + dataFromRight);//guarda divisor
+//									comAssembler.addMsg("idiv " + regCX);//DIVISION DX:AX / CX
+//									registros.freeReg(RegisterTable.CX);//LIBERA 
+//									registros.freeReg(RegisterTable.AX);//LIBERA COCIENTE
+//									if (!(((SyntacticTreeLeaf)getHijoIzq()).isVariableOrConst()))
+//										registros.freeReg(registros.getRegPos(dataFromLeft));
+//									if (!(((SyntacticTreeLeaf)getHijoDer()).isVariableOrConst()))
+//										registros.freeReg(registros.getRegPos(dataFromRight));
+//									setAlmacenamiento(regDX);//DEVUELVE RESTO
+//								}
+//								else////ES LONG
+//								{
+//									String regEAX = registros.getReg(RegisterTable.NAME_EAX, getHijoIzq(), comAssembler, symbolTable);
+//									String regEDX = registros.getReg(RegisterTable.NAME_EDX, getHijoIzq(), comAssembler, symbolTable); // Se reserva para, si tiene algo, no pisarlo
+//									comAssembler.addMsg("mov "+regEAX+", " + dataFromLeft);//divendo en EAX
+//									comAssembler.addMsg("cwd");//extension de signo
+//									String regECX= registros.getReg(RegisterTable.NAME_ECX, getHijoDer(), comAssembler, symbolTable);
+//									comAssembler.addMsg("mov " + regECX + ", " + dataFromRight);//guarda divisor
+//									comAssembler.addMsg("idiv " + regECX);//DIVISION EDX:EAX / ECX
+//									registros.freeReg(RegisterTable.ECX);//LIBERA 
+//									registros.freeReg(RegisterTable.EAX);//LIBERA COCIENTE
+//									if (!(((SyntacticTreeLeaf)getHijoIzq()).isVariableOrConst()))
+//										registros.freeReg(registros.getRegPos(dataFromLeft));
+//									if (!(((SyntacticTreeLeaf)getHijoDer()).isVariableOrConst()))
+//										registros.freeReg(registros.getRegPos(dataFromRight));
+//									setAlmacenamiento(regEDX);//DEVUELVE RESTO
+//								}
+//							}
+//							else {//ES RESTA O SUMA
+//								comAssembler.addMsg(operation + " " + dataFromLeft + ", " + dataFromRight);
+//								setAlmacenamiento(dataFromLeft);
+//								registros.freeReg(registros.getRegPos(dataFromRight)); //datoDer es un String de la forma R1 , hay que transformarlo a numero no mas
+//								}	
+//						}	
+//					}
+//				}
+//			}
+//		}
+//		else { ///// OPERACIÓN DE COMPARACIÓN /////
+//			if((getElem() == "<") || (getElem() == ">") || (getElem() == "<=") || (getElem() == ">=") || (getElem() == "==") || (getElem() == "!=")) {
+//				if ((int)(dataFromLeft.charAt(0)) >= 48 && (int)(dataFromLeft.charAt(0)) <= 57) {
+//					String regAux;
+//					if(isInt(dataFromLeft, symbolTable)) 
+//						regAux = registros.getRegFreeInt(getHijoIzq(), symbolTable, comAssembler);
+//					else
+//						regAux = registros.getRegFreeLong(getHijoIzq(), symbolTable, comAssembler);
+//					comAssembler.addMsg("mov " + regAux + ", " + dataFromLeft);
+//					dataFromLeft = regAux;
+//				}
+//				dataFromRight = getHijoDer().getAlmacenamiento();
+//				comAssembler.addMsg("cmp " + dataFromLeft +", " + dataFromRight); 
+//				registros.freeReg(registros.getRegPos(dataFromLeft));
+//				if(!(((SyntacticTreeLeaf)getHijoDer()).isVariableOrConst()))
+//					registros.freeReg(registros.getRegPos(dataFromRight));
+//				if(!((((SyntacticTreeLeaf)getHijoIzq()).isVariableOrConst())))
+//					registros.freeReg(registros.getRegPos(dataFromLeft));
+//				setAlmacenamiento(getElem()); //_S, If, Cuerpo, Comparadores, 
+//			} 
+//			/* else {//ASIGNACION
+//				String regAux=dataFromLeft;
+//				comAssembler.addMsg("mov " + dataFromLeft + ", " + dataFromRight);
+//				if(((((SyntacticTreeLeaf)getHijoIzq()).isVariableOrConst())))//Si es hoja la parte izquierda, toma un registro para almacenar el valor de dataFromLeft 
+//				{
+//					if(isInt(dataFromLeft, symbolTable))
+//						regAux = registros.getRegFreeInt(getHijoIzq(), symbolTable, comAssembler);
+//					else
+//						regAux = registros.getRegFreeLong(getHijoIzq(), symbolTable, comAssembler);
+//					comAssembler.addMsg("mov " + regAux + ", " + dataFromLeft);//mueve la cte o variable a un nuevo registro
+//				}
+//				if(!((((SyntacticTreeLeaf)getHijoIzq()).isVariableOrConst())))
+//				{
+//					registros.freeReg(registros.getRegPos(dataFromRight));
+//				}
+//				setAlmacenamiento(regAux);
+//			}*/
+//		}
+//	}
+//
+//	private boolean isInt(String data, Hashtable<String, ElementoTS> symbolTable) {
+//		boolean result = (data == RegisterTable.NAME_AX) || (data == RegisterTable.NAME_BX) || (data == RegisterTable.NAME_CX) || (data == RegisterTable.NAME_DX);
+//		if (symbolTable.get(data) != null)
+//			result = result || (symbolTable.get(data).getTipoAtributo().equals(ElementoTS.INT));
+//		if (symbolTable.get(data.substring(1)) != null)
+//			result = result || (symbolTable.get(data.substring(1)).getTipoAtributo().equals(ElementoTS.INT));
+//		return result;
+//	}
+//}
+
 package utils.syntacticTree;
 
 import java.util.Hashtable;
@@ -174,31 +578,81 @@ public class SyntacticTreeCommon extends SyntacticTree {
 					if(symbolTable.get(dato1.substring(1)).getTipoAtributo().equals(ElementoTS.INT)) {
 =======
 		comInterm.addMsg(blankPrefix + "Nodo: " + getElem());
-		String dataFromLeft = "";
-		String dataFromRight = "";
-		getHijoIzq().recorreArbol(registros, comAssembler, comInterm, symbolTable, blankPrefix + "  ");
+		System.out.println("entro a common " + getElem());
+		getHijoIzq().recorreArbol(registros, comAssembler, comInterm, symbolTable, blankPrefix + getBlankSpace());
 		if (getHijoDer() != null)
-			getHijoDer().recorreArbol(registros, comAssembler, comInterm, symbolTable, blankPrefix + "  ");
-		dataFromLeft = getHijoIzq().getAlmacenamiento();
-		if (getHijoDer() != null)
+			getHijoDer().recorreArbol(registros, comAssembler, comInterm, symbolTable, blankPrefix + getBlankSpace());
+		System.out.println("resuelve a common " + getElem());
+		String op = getElem();
+		if(op == "+") suma(registros,comAssembler,symbolTable);
+		else if(op == "-") resta(registros,comAssembler,symbolTable);
+		else if(op == "*") multiplicacion(registros,comAssembler,symbolTable);
+		else if(op == "/") division(registros,comAssembler,symbolTable);
+		else if(op == ":=") asignacion(registros, comAssembler);
+		else if((op == "<") || (op == ">") || (op == "LET") || (op == "GET") || (op == "EQ") || (op == "DIF"))
+			comparacion(registros,comAssembler,symbolTable);
+	}
+
+	private void asignacion(RegisterTable registros, MsgStack comAssembler) {
+		String dataFromLeft = getHijoIzq().getAlmacenamiento();
+		String dataFromRight = getHijoDer().getAlmacenamiento();
+		comAssembler.addMsg("mov " + dataFromLeft + ", " + dataFromRight);
+		setAlmacenamiento(dataFromLeft);
+		if(!(getHijoDer().isVariableOrConst()))
+			registros.freeReg(registros.getRegPos(dataFromRight));
+	}
+
+	private void comparacion(RegisterTable registros, MsgStack comAssembler, Hashtable<String, ElementoTS> symbolTable) {
+		String dataFromLeft = getHijoIzq().getAlmacenamiento();
+		String dataFromRight;
+		if ((int)(dataFromLeft.charAt(0)) >= 48 && (int)(dataFromLeft.charAt(0)) <= 57) { //// Izq Constante ////
+			String regAux;
+			if(isInt(dataFromLeft, symbolTable))
+				regAux = registros.getRegFreeInt(getHijoIzq(), symbolTable, comAssembler);
+			else
+				regAux = registros.getRegFreeLong(getHijoIzq(), symbolTable, comAssembler);
+			comAssembler.addMsg("mov " + regAux + ", " + dataFromLeft);
+			dataFromLeft = regAux;
+		}
+		dataFromRight = getHijoDer().getAlmacenamiento();
+		comAssembler.addMsg("cmp " + dataFromLeft +", " + dataFromRight);
+		registros.freeReg(registros.getRegPos(dataFromLeft));
+		if(!(getHijoDer().isVariableOrConst()))
+			registros.freeReg(registros.getRegPos(dataFromRight));
+		setAlmacenamiento(getElem());
+	}
+
+	private void suma(RegisterTable registros, MsgStack comAssembler, Hashtable<String, ElementoTS> symbolTable) {
+		String reg;
+		String dataFromLeft = getHijoIzq().getAlmacenamiento();
+		String dataFromRight =  getHijoDer().getAlmacenamiento();
+		if(getHijoIzq().isVariableOrConst() && getHijoDer().isVariableOrConst()) {
+			if(isInt(dataFromLeft, symbolTable))///ES ENTERO
+				reg = registros.getRegFreeInt(getHijoIzq(), symbolTable, comAssembler);
+			else
+				reg = registros.getRegFreeLong(getHijoIzq(), symbolTable, comAssembler);
 			dataFromRight = getHijoDer().getAlmacenamiento();
-
-		///// OBTENER OPERACIÓN /////
-		String operation = "";
-		switch(getElem()){
-		case "+": operation = "ADD";
-		case "-": operation = "SUB";
-		case "*": operation = "IMUL";
-		case "/": {
-			operation = "IDIV";
-			comAssembler.addMsg("CMP " + dataFromRight + ", " + 0);
-			comAssembler.addMsg("JZ _DivisionPorCero"); //Salto a la subrutina de programa si el divisor es 0
+			comAssembler.addMsg("mov " + reg + ", " + dataFromLeft);
+			comAssembler.addMsg("add " + reg + ", " + dataFromRight);
+		} else {
+			if(getHijoIzq().isVariableOrConst()) { // HIJO DER ES REG
+				comAssembler.addMsg("add " + dataFromRight + ", " + dataFromLeft);
+				reg = dataFromRight;
+				if (!getHijoIzq().isVariableOrConst())
+					registros.freeReg(registros.getRegPos(dataFromLeft));
+			} else { // HIJO IZQ ES REG (Puede que el derecho también sea registro)
+				comAssembler.addMsg("add " + dataFromLeft + ", " + dataFromRight);
+				reg = dataFromLeft;
+				if (!getHijoDer().isVariableOrConst())
+					registros.freeReg(registros.getRegPos(dataFromRight));
+			}
 		}
-		case ":=": operation = "MOV";
-		default: operation = "CMP"; //si los dos son hojas -- en cualquier otro caso
-		}
+		setAlmacenamiento(reg);
+	}
 
+<<<<<<< HEAD
 		///// GENERAR CÓDIGO ADECUADO A CADA OPERACIÓN /////
+<<<<<<< HEAD
 		if(getElem() == "+" || getElem() == "*" || getElem() == "-" || getElem() == ":=" || getElem() == "/") {
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -232,6 +686,9 @@ public class SyntacticTreeCommon extends SyntacticTree {
 						String regDX = registros.getReg(RegisterTable.NAME_DX, getHijoIzq(), comAssembler, symbolTable); // Se reserva para, si tiene algo, no pisarlo
 >>>>>>> 88b2c34... _
 =======
+=======
+		if(getElem() == "+" || getElem() == "*" || getElem() == "-"  || getElem() == "/") {
+>>>>>>> a030643... Up common
 			if(((((SyntacticTreeLeaf)getHijoIzq()).isVariableOrConst()) && (((SyntacticTreeLeaf)getHijoDer()).isVariableOrConst()))) { ///// AMBOS SON CONST O VAR ///// S1
 				
 				if((operation == "IMUL")) { ///// OPERACIÓN MULTIPLICACIÓN /////
@@ -1080,6 +1537,120 @@ public class SyntacticTreeCommon extends SyntacticTree {
 				}
 				setAlmacenamiento(regAux);
 			}
+=======
+	private void resta(RegisterTable registros, MsgStack comAssembler, Hashtable<String, ElementoTS> symbolTable) {
+		String reg;
+		String dataFromLeft = getHijoIzq().getAlmacenamiento();
+		if (getHijoIzq().isVariableOrConst()) {
+			if(isInt(dataFromLeft, symbolTable)) ///ES ENTERO
+				reg = registros.getRegFreeInt(this, symbolTable, comAssembler);
+			else
+				reg = registros.getRegFreeLong(this,symbolTable,comAssembler);
+			comAssembler.addMsg("mov " + reg + ", " + dataFromLeft);
+		} else { reg = dataFromLeft; }
+		String dataFromRight = getHijoDer().getAlmacenamiento();
+		comAssembler.addMsg("sub " + reg + ", " + dataFromRight);
+		setAlmacenamiento(reg);
+		if (!getHijoDer().isVariableOrConst())
+			registros.freeReg(registros.getRegPos(dataFromRight));
+	}
+
+	private void multiplicacion(RegisterTable registros, MsgStack comAssembler, Hashtable<String, ElementoTS> symbolTable) {
+		String dataFromLeft = getHijoIzq().getAlmacenamiento();
+		String dataFromRight = getHijoDer().getAlmacenamiento();
+		if(isInt(dataFromLeft, symbolTable)) {//ENTERO
+			String regAX = registros.getReg(RegisterTable.NAME_AX, getHijoIzq(), comAssembler, symbolTable);
+			@SuppressWarnings("unused")
+			String regDX = registros.getReg(RegisterTable.NAME_DX, getHijoIzq(), comAssembler, symbolTable); // Se reserva para que, si tiene algo, no sea pisado
+			dataFromLeft = getHijoIzq().getAlmacenamiento();
+			dataFromRight = getHijoDer().getAlmacenamiento();
+			comAssembler.addMsg("mov " + regAX + ", " + dataFromLeft);
+			comAssembler.addMsg("imul " + regAX + ", " + dataFromRight);
+			String reg = registros.getRegFreeLong(this, symbolTable, comAssembler);
+			comAssembler.addMsg("mov " + reg + ", DX:AX");
+			registros.freeReg(RegisterTable.AX);
+			registros.freeReg(RegisterTable.DX);
+			setAlmacenamiento(reg);
+		} else {//LONG
+			String regEAX = registros.getReg(RegisterTable.NAME_EAX, getHijoIzq(), comAssembler, symbolTable);
+			@SuppressWarnings("unused")
+			String regEDX = registros.getReg(RegisterTable.NAME_EDX, getHijoIzq(), comAssembler, symbolTable); // Nuevamente se reserva para, si tiene algo, no pisarlo
+			dataFromLeft = getHijoIzq().getAlmacenamiento();
+			dataFromRight = getHijoDer().getAlmacenamiento();
+			comAssembler.addMsg("mov " + regEAX + ", " + dataFromLeft);
+			comAssembler.addMsg("imul " + regEAX + ", " + dataFromRight);
+			registros.freeReg(RegisterTable.EDX);
+			setAlmacenamiento(regEAX);
+		}
+		if (!getHijoIzq().isVariableOrConst()) {
+			registros.freeReg(registros.getRegPos(dataFromLeft));
+		}
+		if (!getHijoDer().isVariableOrConst()) {
+			registros.freeReg(registros.getRegPos(dataFromRight));
+		}
+	}
+
+	private void division(RegisterTable registros, MsgStack comAssembler,Hashtable<String, ElementoTS> symbolTable) {
+		String dataFromLeft = getHijoIzq().getAlmacenamiento();
+		String dataFromRight = getHijoDer().getAlmacenamiento();
+		String regAuxControlZero = "";
+		if ((int)(dataFromRight.charAt(0)) >= 48 && (int)(dataFromRight.charAt(0)) <= 57) { // Con constantes a izquierda se rompe la comparación
+			if (symbolTable.get(dataFromRight).getTipoAtributo().equals(ElementoTS.INT))
+				regAuxControlZero = registros.getRegFreeInt(getHijoDer(), symbolTable, comAssembler);
+			else
+				regAuxControlZero = registros.getRegFreeLong(getHijoDer(), symbolTable, comAssembler);
+			comAssembler.addMsg("mov " + regAuxControlZero + ", " + dataFromRight);
+			comAssembler.addMsg("cmp " + regAuxControlZero + ", " + 0);
+		} else
+			comAssembler.addMsg("cmp " + dataFromRight + ", " + 0);
+		comAssembler.addMsg("jz _msgDivisionPorCero"); //Salto a la subrutina de programa si el divisor es 0
+		if (regAuxControlZero != "")
+			registros.freeReg(registros.getRegPos(regAuxControlZero));
+
+		if(isInt(dataFromLeft, symbolTable)) { //// ES ENTERO
+			//pide registros para contener al dividendo
+			String regAX = registros.getReg(RegisterTable.NAME_AX, getHijoIzq(), comAssembler, symbolTable);
+			@SuppressWarnings("unused")
+			String regDX = registros.getReg(RegisterTable.NAME_DX, getHijoIzq(), comAssembler, symbolTable);
+			dataFromLeft = getHijoIzq().getAlmacenamiento();
+			comAssembler.addMsg("mov " + regAX + ", " + dataFromLeft); //divendo en AX
+			comAssembler.addMsg("cwd"); //extensión de signo para 16 bits
+			String divider;
+			if (getHijoDer().isVariableOrConst()) {
+				divider = registros.getRegFreeInt(getHijoDer(), symbolTable, comAssembler);
+				dataFromRight = getHijoDer().getAlmacenamiento();
+				comAssembler.addMsg("mov " + divider + ", " + dataFromRight);//guarda divisor
+			} else
+				divider = getHijoDer().getAlmacenamiento();
+			comAssembler.addMsg("idiv " + divider);//DIVISION DX:AX / CX
+			registros.freeReg(registros.getRegPos(divider));//LIBERA
+			registros.freeReg(RegisterTable.DX);//LIBERA COCIENTE
+			setAlmacenamiento(regAX);//DEVUELVE RESTO
+		} else { //// ES LONG
+			String regEAX = registros.getReg(RegisterTable.NAME_EAX, getHijoIzq(), comAssembler, symbolTable);
+			@SuppressWarnings("unused")
+			String regEDX = registros.getReg(RegisterTable.NAME_EDX, getHijoIzq(), comAssembler, symbolTable);
+			dataFromLeft = getHijoIzq().getAlmacenamiento();
+			comAssembler.addMsg("mov " + regEAX + ", " + dataFromLeft); //divendo en EAX
+			comAssembler.addMsg("cdq"); //extension de signo para 32 bits
+			String divider;
+			if (getHijoDer().isVariableOrConst()) {
+				divider = registros.getRegFreeLong(getHijoDer(), symbolTable, comAssembler);
+				dataFromRight = getHijoDer().getAlmacenamiento();
+				comAssembler.addMsg("mov " + divider + ", " + dataFromRight);//guarda divisor
+			} else
+				divider = getHijoDer().getAlmacenamiento();
+			comAssembler.addMsg("idiv " + divider);//DIVISION EDX:EAX / ECX
+			registros.freeReg(registros.getRegPos(divider));
+			registros.freeReg(RegisterTable.EDX);//libera resto
+			setAlmacenamiento(regEAX);// devuelve cociente
+		}
+		if (!getHijoIzq().isVariableOrConst()) {
+			registros.freeReg(registros.getRegPos(dataFromLeft));
+		}
+		if (!getHijoDer().isVariableOrConst()) {
+			registros.freeReg(registros.getRegPos(dataFromRight));
+>>>>>>> 51f241d... arreglos varios
 		}
 >>>>>>> 154a393... comentario
 	}
@@ -1104,9 +1675,13 @@ public class SyntacticTreeCommon extends SyntacticTree {
 		boolean result = (data == RegisterTable.NAME_AX) || (data == RegisterTable.NAME_BX) || (data == RegisterTable.NAME_CX) || (data == RegisterTable.NAME_DX);
 		if (symbolTable.get(data) != null)
 			result = result || (symbolTable.get(data).getTipoAtributo().equals(ElementoTS.INT));
-		if (symbolTable.get(data.substring(1)) != null)
+		if (data.charAt(0) == '_')
 			result = result || (symbolTable.get(data.substring(1)).getTipoAtributo().equals(ElementoTS.INT));
 		return result;
 	}
+<<<<<<< HEAD
 >>>>>>> bca257b... resueltos problemas en common
 }
+=======
+}
+>>>>>>> 51f241d... arreglos varios

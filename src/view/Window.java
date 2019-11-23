@@ -41,7 +41,6 @@ import java.util.Set;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
@@ -58,13 +57,16 @@ public class Window {
 	private static String FILE_ALREADY_EXIST_MSG = "El archivo especificado ya existe.";
 	private static String FILE_CREATE_ERROR_MSG = "Hubo algún error al crear el archivo.";
 	private static String ASK_TO_MAKE_EXECUTABLE = "¿Desea crear el ejecutable además del archivo asm?";
-	private static String SELECT_FOLDER = "Seleccione el directorio donde se encuentran los archivos \"ml.exe\" y \"link.exe\" de Masm32.";
+	private static String SELECT_FOLDER = "Seleccione el archivo \"ml.exe\" de Masm32.";
 	private static String INVALID_SELECTION = "Selección inválida";
-	private static String INCORRECT_PATH = "El carpeta seleccionada no contiene \"ml.exe\" o \"link.exe\".";
+	private static String INCORRECT_PATH = "El archivo seleccionado no es el necesario o la carpeta no contiene a el archivo \\\"link.exe\\\" que acompaña al indicado.";
+	private static String CORRECT_COMPILATION = "La compilación fue un éxito.";
+	private static String INCORRECT_COMPILATION = "Hubo un problema en la compilación.";
+	private static String ASSEMBLER_GENERATED = "Ensamblador generado con éxito.";
 	private static int END_OF_TEXT = 3;
-	
+
 	final UndoManager undo;
-	
+
 	private JFrame frmCompilator;
 	private JButton btnSave;
 	private JButton btnCompile;
@@ -73,12 +75,12 @@ public class Window {
 	private JTextArea editorPaneProgram;
 	private JTextPane editorPaneSymbolTable;
 	private JTextPane editorPaneMsgs;
-	
+
 	private File file_selected;
 	private JLabel lblNumberLine;
 	private JButton btnNew;
 	private JTextPane editorPaneSintacticTree;
-	
+
 	private String masm32_path;
 
 	/**
@@ -120,13 +122,13 @@ public class Window {
 		frmCompilator.setMinimumSize(new Dimension(1100, 700));
 		SpringLayout springLayout = new SpringLayout();
 		frmCompilator.getContentPane().setLayout(springLayout);
-		
+
 		lblProgramName = new JLabel("Cree un nuevo documento o cargue su programa");
 		springLayout.putConstraint(SpringLayout.NORTH, lblProgramName, 10, SpringLayout.NORTH, frmCompilator.getContentPane());
 		springLayout.putConstraint(SpringLayout.WEST, lblProgramName, 10, SpringLayout.WEST, frmCompilator.getContentPane());
 		lblProgramName.setAlignmentY(Component.TOP_ALIGNMENT);
 		frmCompilator.getContentPane().add(lblProgramName);
-		
+
 		JPanel panel = new JPanel();
 		springLayout.putConstraint(SpringLayout.EAST, panel, -10, SpringLayout.EAST, frmCompilator.getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, lblProgramName, -64, SpringLayout.WEST, panel);
@@ -135,7 +137,7 @@ public class Window {
 		panel.setAlignmentY(Component.TOP_ALIGNMENT);
 		panel.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		frmCompilator.getContentPane().add(panel);
-		
+
 		btnNew = new JButton("Nuevo");
 		btnNew.addMouseListener(new MouseAdapter() {
 			@Override
@@ -176,7 +178,7 @@ public class Window {
 		});
 		panel.add(btnNew);
 		btnNew.setAlignmentY(Component.TOP_ALIGNMENT);
-		
+
 		btnLoad = new JButton("Cargar");
 		panel.add(btnLoad);
 		btnLoad.addMouseListener(new MouseAdapter() {
@@ -201,13 +203,13 @@ public class Window {
 						JOptionPane.showMessageDialog(new JFrame(), FILE_NOT_FOUND_MSG, "Warning", JOptionPane.ERROR_MESSAGE);
 					else
 						JOptionPane.showMessageDialog(new JFrame(), FILE_LOAD_ERROR_MSG, "Warning", JOptionPane.ERROR_MESSAGE);
-					
+
 				}
 			}
 		});
 		btnLoad.setAlignmentY(Component.TOP_ALIGNMENT);
 		btnLoad.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		
+
 		btnSave = new JButton("Guardar");
 		panel.add(btnSave);
 		btnSave.addMouseListener(new MouseAdapter() {
@@ -257,7 +259,7 @@ public class Window {
 		});
 		btnSave.setAlignmentY(Component.TOP_ALIGNMENT);
 		btnSave.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		
+
 		btnCompile = new JButton("Compilar");
 		panel.add(btnCompile);
 		btnCompile.addMouseListener(new MouseAdapter() {
@@ -272,27 +274,30 @@ public class Window {
 					Compilator compilator = Compilator.getInstance(programBuffer);
 					compilator.compilate();
 					editorPaneMsgs.setText(compilator.getMsgStack().toString());
-//					editorPaneTokens .setText(compilator.getTokenStack().toString());
-//					editorPaneSemanticStruct.setText(compilator.getSemanticStructStack().toString());
 					loadSymbolTable(compilator.getSymbTable());
 					if (!compilator.hasErrors()) {
 						editorPaneSintacticTree.setText(compilator.getSyntacticTree().toString());
 						// Guardado del archivo Assembler (.ASM)
 						String path_to_file = file_selected.getAbsolutePath().trim();
-						String nombre_archivo = path_to_file.substring(path_to_file.lastIndexOf("\\")+1);
+						String nombre_archivo = path_to_file.substring(path_to_file.lastIndexOf("\\") + 1);
 						if (nombre_archivo.contains("."))
-							nombre_archivo = nombre_archivo.substring(0, nombre_archivo.lastIndexOf(".")+1);
-						String nombre_archivo_asm = nombre_archivo + ".asm";
-						path_to_file = path_to_file.substring(0, path_to_file.lastIndexOf("\\")+1); //Path queda con el último slash previo el nombre
-						File file = new File(path_to_file + nombre_archivo_asm);
+							nombre_archivo = nombre_archivo.substring(0, nombre_archivo.lastIndexOf("."));
+						path_to_file = path_to_file.substring(0, path_to_file.lastIndexOf("\\") + 1); //Path queda con el último slash previo el nombre
+						File file = new File(path_to_file + nombre_archivo + ".asm");
 						FileUtils.saveFile(file, compilator.getAssemblerCode().toString());
+						JOptionPane.showMessageDialog(new JFrame(), ASSEMBLER_GENERATED, "Ensamblador generado", JOptionPane.PLAIN_MESSAGE);
+						System.out.println(file.getAbsolutePath());
 						//TODO: Trabajando en esto
-						if (askMakeExecutable()) { // Pregunta si quiere el ejecutable
-							if (masm32_path == null || !isMasmPath(masm32_path)) // Si no está definida la ubicación de masm32
+						if (askMakeExecutable()) {
+							if (masm32_path == null || !isMasmPath(masm32_path)) 
 								masm32_path = askMasmPath();
-							if (isMasmPath(masm32_path)) // Verifica que existan los ejecutables ml y link
-	//							generateExecutable(path_to_file, nombre_archivo, masm32_path);
-								System.out.println("generando");
+							if (isMasmPath(masm32_path)) { 
+								boolean result = generateExecutable(path_to_file, nombre_archivo, masm32_path);
+								if (result)
+									JOptionPane.showMessageDialog(new JFrame(), CORRECT_COMPILATION, "Felicitaciones", JOptionPane.PLAIN_MESSAGE);
+								else
+									JOptionPane.showMessageDialog(new JFrame(), INCORRECT_COMPILATION, "Warning", JOptionPane.ERROR_MESSAGE);
+							}
 							else
 								JOptionPane.showMessageDialog(new JFrame(), INCORRECT_PATH, "Warning", JOptionPane.ERROR_MESSAGE);
 						}
@@ -304,7 +309,7 @@ public class Window {
 		});
 		btnCompile.setAlignmentY(Component.TOP_ALIGNMENT);
 		btnCompile.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		
+
 		lblNumberLine = new JLabel("L\u00EDnea seleccionada:");
 		springLayout.putConstraint(SpringLayout.WEST, panel, 11, SpringLayout.EAST, lblNumberLine);
 		springLayout.putConstraint(SpringLayout.WEST, lblNumberLine, 10, SpringLayout.WEST, frmCompilator.getContentPane());
@@ -312,27 +317,27 @@ public class Window {
 		springLayout.putConstraint(SpringLayout.NORTH, lblNumberLine, 6, SpringLayout.SOUTH, lblProgramName);
 		lblNumberLine.setAlignmentY(Component.TOP_ALIGNMENT);
 		frmCompilator.getContentPane().add(lblNumberLine);
-		
+
 		JScrollPane scrollPane_Codigo = new JScrollPane();
 		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_Codigo, 6, SpringLayout.SOUTH, lblNumberLine);
 		springLayout.putConstraint(SpringLayout.WEST, scrollPane_Codigo, 10, SpringLayout.WEST, frmCompilator.getContentPane());
 		scrollPane_Codigo.setAlignmentY(Component.TOP_ALIGNMENT);
 		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_Codigo, -10, SpringLayout.SOUTH, frmCompilator.getContentPane());
 		frmCompilator.getContentPane().add(scrollPane_Codigo);
-		
+
 		editorPaneProgram = new JTextArea();
 		editorPaneProgram.setTabSize(2);
 		editorPaneProgram.addCaretListener(new CaretListener() {
 			public void caretUpdate(CaretEvent e) {
 				int pos = e.getDot();
-		        int row = 1;
+				int row = 1;
 				String text = editorPaneProgram.getText().replaceAll("\r", "");
 				for(int i = 0; i < pos; i++){
 					if(text.charAt(i) == '\n'){ //new line
 						row++;
 					}
 				}
-                lblNumberLine.setText(LINE_COUNTER_MSG + row);
+				lblNumberLine.setText(LINE_COUNTER_MSG + row);
 			}
 		});
 		Document doc = editorPaneProgram.getDocument();
@@ -341,35 +346,35 @@ public class Window {
 			public void undoableEditHappened(UndoableEditEvent e) {
 				undo.addEdit(e.getEdit());
 			}
-	    });
+		});
 		editorPaneProgram.getActionMap().put("Undo",
-	        new AbstractAction("Undo") {
-	            public void actionPerformed(ActionEvent evt) {
-	                try {
-	                    if (undo.canUndo()) {
-	                        undo.undo();
-	                    }
-	                } catch (CannotUndoException e) {
-	                }
-	            }
-	       });
+				new AbstractAction("Undo") {
+			public void actionPerformed(ActionEvent evt) {
+				try {
+					if (undo.canUndo()) {
+						undo.undo();
+					}
+				} catch (CannotUndoException e) {
+				}
+			}
+		});
 		editorPaneProgram.getInputMap().put(KeyStroke.getKeyStroke("control Z"), "Undo");
-	    
-	    editorPaneProgram.getActionMap().put("Redo",
-	        new AbstractAction("Redo") {
-	            public void actionPerformed(ActionEvent evt) {
-	                try {
-	                    if (undo.canRedo()) {
-	                        undo.redo();
-	                    }
-	                } catch (CannotRedoException e) {
-	                }
-	            }
-	        });
-	    editorPaneProgram.getInputMap().put(KeyStroke.getKeyStroke("control shift Z"), "Redo");
-		
+
+		editorPaneProgram.getActionMap().put("Redo",
+				new AbstractAction("Redo") {
+			public void actionPerformed(ActionEvent evt) {
+				try {
+					if (undo.canRedo()) {
+						undo.redo();
+					}
+				} catch (CannotRedoException e) {
+				}
+			}
+		});
+		editorPaneProgram.getInputMap().put(KeyStroke.getKeyStroke("control shift Z"), "Redo");
+
 		scrollPane_Codigo.setViewportView(editorPaneProgram);
-		
+
 		JScrollPane scrollPane_TS = new JScrollPane();
 		springLayout.putConstraint(SpringLayout.EAST, scrollPane_Codigo, -6, SpringLayout.WEST, scrollPane_TS);
 		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_TS, 13, SpringLayout.SOUTH, panel);
@@ -381,18 +386,18 @@ public class Window {
 		scrollPane_TS.setAlignmentY(Component.TOP_ALIGNMENT);
 		scrollPane_TS.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		frmCompilator.getContentPane().add(scrollPane_TS);
-		
+
 		editorPaneSymbolTable = new JTextPane();
 		editorPaneSymbolTable.setAlignmentY(Component.TOP_ALIGNMENT);
 		editorPaneSymbolTable.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		scrollPane_TS.setViewportView(editorPaneSymbolTable);
 		editorPaneSymbolTable.setEditable(false);
-		
+
 		JLabel labelTablaSimbolos = new JLabel("Tabla de s\u00EDmbolos");
 		scrollPane_TS.setColumnHeaderView(labelTablaSimbolos);
 		labelTablaSimbolos.setAlignmentY(Component.TOP_ALIGNMENT);
 		labelTablaSimbolos.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		
+
 		JScrollPane scrollPane_WarningYErrores = new JScrollPane();
 		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_WarningYErrores, 6, SpringLayout.SOUTH, scrollPane_TS);
 		springLayout.putConstraint(SpringLayout.WEST, scrollPane_WarningYErrores, 6, SpringLayout.EAST, scrollPane_Codigo);
@@ -402,18 +407,18 @@ public class Window {
 		scrollPane_WarningYErrores.setAlignmentY(Component.TOP_ALIGNMENT);
 		scrollPane_WarningYErrores.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		frmCompilator.getContentPane().add(scrollPane_WarningYErrores);
-		
+
 		editorPaneMsgs = new JTextPane();
 		editorPaneMsgs.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		editorPaneMsgs.setAlignmentY(Component.TOP_ALIGNMENT);
 		scrollPane_WarningYErrores.setViewportView(editorPaneMsgs);
 		editorPaneMsgs.setEditable(false);
-		
+
 		JLabel lblWarningsYErrores = new JLabel("Warnings y errores");
 		scrollPane_WarningYErrores.setColumnHeaderView(lblWarningsYErrores);
 		lblWarningsYErrores.setAlignmentY(Component.TOP_ALIGNMENT);
 		lblWarningsYErrores.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		
+
 		JScrollPane scrollPane_ArbolSintactico = new JScrollPane();
 		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_ArbolSintactico, 362, SpringLayout.NORTH, frmCompilator.getContentPane());
 		springLayout.putConstraint(SpringLayout.WEST, scrollPane_ArbolSintactico, 6, SpringLayout.EAST, scrollPane_Codigo);
@@ -421,14 +426,14 @@ public class Window {
 		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_WarningYErrores, -6, SpringLayout.NORTH, scrollPane_ArbolSintactico);
 		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_ArbolSintactico, -10, SpringLayout.SOUTH, frmCompilator.getContentPane());
 		frmCompilator.getContentPane().add(scrollPane_ArbolSintactico);
-		
+
 		editorPaneSintacticTree = new JTextPane();
 		scrollPane_ArbolSintactico.setViewportView(editorPaneSintacticTree);
-		
+
 		JLabel lblrbolSintctico = new JLabel("\u00C1rbol sint\u00E1ctico");
 		scrollPane_ArbolSintactico.setColumnHeaderView(lblrbolSintctico);
 	}
-	
+
 	private void loadSymbolTable(Hashtable<String, ElementoTS> symbolTable) {
 		String text = "";
 		Set<String> keys = symbolTable.keySet();
@@ -442,60 +447,61 @@ public class Window {
 		}
 		editorPaneSymbolTable.setText(text);
 	}
-	
-	private void generateExecutable(String path, String file_name, String masm32_path) {
+
+	private boolean generateExecutable(String path, String file_name, String masm32_path) {
 		ProcessBuilder processBuilder = new ProcessBuilder();
-		processBuilder.command("cmd.exe", "/c", "cd " + path + "&& " + masm32_path + "\\ml.exe /c /coff " + file_name + ".asm && " +
-				masm32_path + "\\link.exe /subsystem:windows " + file_name + ".obj");
+		String command = "cd " + path + " && " 
+				+ masm32_path + "\\ml.exe /c /coff " + file_name + ".asm &&"
+				+ " " + masm32_path + "\\link.exe /subsystem:windows " + file_name + ".obj";
+		System.out.println(command);
+		processBuilder.command("cmd.exe", "/c", command);
 		try {
+			//// ML ////
 			Process process = processBuilder.start();
-			StringBuilder output = new StringBuilder();
 			BufferedReader reader = new BufferedReader(
 					new InputStreamReader(process.getInputStream()));
+			StringBuilder output = new StringBuilder();
 			String line;
-			while ((line = reader.readLine()) != null) {
+			while ((line = reader.readLine()) != null)
 				output.append(line + "\n");
-			}
 			int exitVal = process.waitFor();
 			if (exitVal == 0) {
 				System.out.println("Success!");
 				System.out.println(output);
-				System.exit(0);
+				return true;
 			} else {
 				System.out.println("Abnormal termination");
+				System.out.println(output);
+				return false;
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		return false;
 	}
-	
+
 	private String askMasmPath() {
 		String masm_path = "";
-		JFileChooser chooser = new JFileChooser("C:\\"); 
-//	    chooser.setCurrentDirectory(new java.io.File("."));
-	    chooser.setDialogTitle(SELECT_FOLDER);
-	    chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-	    chooser.setAcceptAllFileFilterUsed(false);
-	    if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
-	    	masm_path = chooser.getCurrentDirectory().getAbsolutePath();
-	    else
-	    	JOptionPane.showMessageDialog(new JFrame(), INVALID_SELECTION, "Warning", JOptionPane.ERROR_MESSAGE);
-	    System.out.println(masm_path);
+		JFileChooser chooser = new JFileChooser("C:\\mas32\\bin\\"); 
+		chooser.setDialogTitle(SELECT_FOLDER);
+		if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
+			masm_path = chooser.getCurrentDirectory().getAbsolutePath();
+		else
+			JOptionPane.showMessageDialog(new JFrame(), INVALID_SELECTION, "Warning", JOptionPane.ERROR_MESSAGE);
 		return masm_path;
 	}
-	
+
 	private boolean isMasmPath(String masm32_path) {
 		File f_ml = new File(masm32_path + "\\ml.exe");
 		File f_linker = new File(masm32_path + "\\link.exe");
-		System.out.println(f_ml.getAbsolutePath());
 		return (f_ml.exists() && !f_ml.isDirectory() && f_linker.exists() && !f_linker.isDirectory());
 	}
-	
+
 	private boolean askMakeExecutable() {
 		int i = JOptionPane.showOptionDialog(new JFrame(), ASK_TO_MAKE_EXECUTABLE, "Selecciona una opción",
-		        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 		if (i == 0)
 			return true;
 		else
