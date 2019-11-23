@@ -3,20 +3,21 @@ package utils.semanticActions;
 import logic.Lexicon;
 import utils.ElementoTS;
 
-public class SemanticActionReturnAndAdd implements SemanticAction{
+public class SA_ReturnAndAddToTS implements SemanticAction{
 //Acción semántica asociada a la devolución del último carácter leído al buffer de programa
 // y al alta en la tabla de símbolos (Para cadenas)
-	public SemanticActionReturnAndAdd() {}
+	
+	SA_ReturnChar returnChar = new SA_ReturnChar();
 	
 	@Override
-	public void action(Lexicon Lex) {
-		Lex.returnCharacter();
+	public void action(Lexicon lex) {
+		returnChar.action(lex);
 		//alta en TS
-		if(Lex.getSymbolTable().containsKey(Lex.getCurrentLexeme())) 
-			Lex.increaseCounterSymbolTable();
+		if(lex.getSymbolTable().containsKey(lex.getCurrentLexeme())) 
+			lex.increaseCounterSymbolTable();
 		else {
 			ElementoTS tupla = new ElementoTS(ElementoTS.CAD,"","");
-			Lex.putSymbolTable(Lex.getCurrentLexeme(), tupla);
+			lex.putSymbolTable(lex.getCurrentLexeme(), tupla);
 		}
 	}
 }

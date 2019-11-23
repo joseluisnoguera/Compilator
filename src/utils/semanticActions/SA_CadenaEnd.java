@@ -3,11 +3,8 @@ package utils.semanticActions;
 import logic.Lexicon;
 import utils.ElementoTS;
 
-public class SemanticActionCADend implements SemanticAction{
+public class SA_CadenaEnd implements SemanticAction{
 	//Acción semántica cuando se cierra una cadena con '}'
-	
-	
-	public SemanticActionCADend() { }
 	
 	@Override
 	public void action(Lexicon Lex) {

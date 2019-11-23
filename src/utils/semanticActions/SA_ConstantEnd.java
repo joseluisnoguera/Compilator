@@ -3,9 +3,7 @@ package utils.semanticActions;
 import logic.Lexicon;
 import utils.ElementoTS;
 
-public class SemanticActionConstEnd implements SemanticAction{
-
-	public SemanticActionConstEnd() {}
+public class SA_ConstantEnd implements SemanticAction{
 	
 	@Override
 	public void action(Lexicon Lex) {

@@ -7,11 +7,18 @@ import utils.MsgStack;
 import utils.RegisterTable;
 
 public class SyntacticTreeLeaf extends SyntacticTree{
+	
+	private boolean forLeftSideInAssignment;
 
 	public SyntacticTreeLeaf(String lex)
 	{
 		super(lex);
+		forLeftSideInAssignment = false;
 	}
+	
+	public void setLeftSideAssignment() { forLeftSideInAssignment = true; }
+	
+	public boolean isCollectionPointer() { return forLeftSideInAssignment; }
 
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -24,7 +31,7 @@ public class SyntacticTreeLeaf extends SyntacticTree{
 	public String recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm, Hashtable<String, ElementoTS> symbolTable) {
 =======
 	@Override
-	public void recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm, Hashtable<String,
+	public void recorreArbol(RegisterTable registros, MsgStack assemblerCode, MsgStack comInterm, Hashtable<String,
 			ElementoTS> symbolTable, String blankPrefix) {
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -142,29 +149,63 @@ public class SyntacticTreeLeaf extends SyntacticTree{
 				subIndexNameStart++;
 			subIndexNameStart += 1; // Salta el corchete inicial
 			String subIndexName = data.substring(subIndexNameStart, data.length() - 1);
+<<<<<<< HEAD
 			String regIndex = registros.getRegFreeLong(getHijoIzq(), symbolTable, comAssembler);
 			comAssembler.addMsg("mov " + regIndex + ", " + subIndexName);
 			String regCollectionOffset = registros.getRegFreeLong(this, symbolTable, comAssembler);//guarda un registro para contener la coleccion
+<<<<<<< HEAD
 			String collectionName = data.substring(1, subIndexNameStart - 2);
 >>>>>>> 51f241d... arreglos varios
+=======
+			String collectionName = data.substring(1, subIndexNameStart - 1);
+			System.out.println(collectionName);
+			System.out.println(subIndexName);
+>>>>>>> 2974fd5... arreglos varios
 			if(symbolTable.get(collectionName).getTipoAtributo().equals("int"))
 				comAssembler.addMsg("mul " + regIndex + ", 2");
+=======
+			String regIndex = registros.getReg(RegisterTable.NAME_EAX, getHijoIzq(), symbolTable, assemblerCode);
+			assemblerCode.addMsg("mov " + regIndex + ", " + subIndexName); // Valor de índice en EAX
+			String collectionName = data.substring(1, subIndexNameStart - 1);
+			String regSizeByType = registros.getRegFreeLong(null, symbolTable, assemblerCode);
+			int size;
+			if(symbolTable.get(collectionName).getVariableType().equals("int"))
+<<<<<<< HEAD
+				assemblerCode.addMsg("mul " + regIndex + ", 2");
+>>>>>>> 0fcca1b... varios
+=======
+				size = 2;
+>>>>>>> fde7cdb... varios
 			else
-				comAssembler.addMsg("mul " + regIndex + ", 4");
-			comAssembler.addMsg("lea " + regCollectionOffset + ", " + collectionName);
-			comAssembler.addMsg("add " + regIndex + ", " + regCollectionOffset); //guarda dirección de memoria del elemento pedido por subíndice
+				size = 4;
+			assemblerCode.addMsg("mov " + regSizeByType + ", " + size);
+			assemblerCode.addMsg("mul " + regSizeByType); // Calcula el índice en Bytes (EDX:EAX = EAX * regSizeByType)
+			registros.freeReg(registros.getRegPos(regSizeByType));
+			String regCollectionOffset = registros.getRegFreeLong(this, symbolTable, assemblerCode);
+			assemblerCode.addMsg("lea " + regCollectionOffset + ", " + "_" + collectionName); // Base de la colección
+			assemblerCode.addMsg("add " + regIndex + ", " + regCollectionOffset); // Calcula posición del índice en memoria (Base + Desplazamiento)
 			//chequeo por arreglo superado
-			String regEndCollection = registros.getRegFreeLong(this,symbolTable,comAssembler);
-			comAssembler.addMsg("mov " + regEndCollection + ", " + symbolTable.get(collectionName).getCSizeBytes()); //guarda el tamaño en bytes del arreglo
-			comAssembler.addMsg("add " + regEndCollection + ", " + regCollectionOffset);//guarda la direccion final del arreglo
-			comAssembler.addMsg("cmp " + regIndex + ", " + regEndCollection);//compara direccion final del arreglo con direccion a la que se desea acceder del arreglo
-			comAssembler.addMsg("jge _msgArregloFueraDeRango");
+			String regEndCollection = registros.getRegFreeLong(this,symbolTable,assemblerCode);
+			assemblerCode.addMsg("mov " + regEndCollection + ", " + symbolTable.get(collectionName).getCSizeBytes()); //guarda el tamaño en bytes del arreglo
+			assemblerCode.addMsg("add " + regEndCollection + ", " + regCollectionOffset); //guarda la direccion final del arreglo
+			assemblerCode.addMsg("cmp " + regIndex + ", " + regEndCollection); //compara direccion final del arreglo con direccion a la que se desea acceder del arreglo
+			assemblerCode.addMsg("jge _msgArregloFueraDeRango");
 			//chequeo por direccion de memoria menor (por subíndices negativos)
-			comAssembler.addMsg("cmp " + regIndex + ", " + regCollectionOffset);//compara direccion final del arreglo con direccion a la que se desea acceder del arreglo
-			comAssembler.addMsg("jl _msgArregloFueraDeRango");
-			comAssembler.addMsg("mov " + regCollectionOffset + ", dword ptr [" + regIndex + "]"); //guarda en regColec el valor almacenado en la direccion de memoria guardada en regI
+			assemblerCode.addMsg("cmp " + regIndex + ", " + regCollectionOffset); //compara direccion final del arreglo con direccion a la que se desea acceder del arreglo
+			assemblerCode.addMsg("jl _msgArregloFueraDeRango");
+			if (forLeftSideInAssignment) { // Si es para el lado izquierdo se devuelve el puntero
+				data = regIndex;
+				registros.freeReg(registros.getRegPos(regCollectionOffset));
+			} else { // Para el lado derecho se devuelve el valor apuntado
+				if (getType().equals(ElementoTS.INT))
+					assemblerCode.addMsg("mov " + regCollectionOffset + ", word ptr [" + regIndex + "]"); //guarda en regColec el valor almacenado en la direccion de memoria guardada en regI
+				else
+					assemblerCode.addMsg("mov " + regCollectionOffset + ", dword ptr [" + regIndex + "]");
+				data = regCollectionOffset;
+			}
 			registros.freeReg(registros.getRegPos(regIndex));
 			registros.freeReg(registros.getRegPos(regEndCollection));
+<<<<<<< HEAD
 			data = regCollectionOffset;
 <<<<<<< HEAD
 			
@@ -283,6 +324,8 @@ public class SyntacticTreeLeaf extends SyntacticTree{
 =======
 		}*/
 =======
+=======
+>>>>>>> fde7cdb... varios
 		}
 >>>>>>> d209296... comentario
 		setAlmacenamiento(data);

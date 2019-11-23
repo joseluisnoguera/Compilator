@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class AssemblerGenerator {
 
-	public static MsgStack getAssembler(Hashtable<String, ElementoTS> symbolTable, MsgStack code) {
+	public static MsgStack getAssembler(Hashtable<String, ElementoTS> symbolTable, MsgStack programCode) {
 		MsgStack asm = new MsgStack();
 		asm.addMsg(".386");
 		asm.addMsg(".model flat, stdcall");
@@ -19,7 +19,7 @@ public class AssemblerGenerator {
 		asm.addAll(getDataAssembler(symbolTable));
 		asm.addMsg(".code");
 		asm.addMsg("start:");
-		asm.addAll(code);
+		asm.addAll(programCode);
 		asm.addMsg("jmp _finDelPrograma");
 		asm.addAll(getExtraFunctions(symbolTable));
 		asm.addMsg("end start");
@@ -31,22 +31,24 @@ public class AssemblerGenerator {
 		Set<String> keys = symbolTable.keySet();
 		for(String key: keys){
 			ElementoTS element = symbolTable.get(key);
-			if (element.getTipoToken().equals(ElementoTS.ID)) { 
+			if (element.getTokenClass().equals(ElementoTS.ID)) { 
 				String word = "";
 				// Define tamaño a usar DW 16 bits para int - DD 32 bits para long
-				if (element.getTipoAtributo().equals(ElementoTS.INT) && !element.isPointer())
+				if (element.getVariableType().equals(ElementoTS.INT) && !element.isPointer())
 					word = "dw";
-				if (element.getTipoAtributo().equals(ElementoTS.LONG) || element.isPointer())
+				if (element.getVariableType().equals(ElementoTS.LONG) || element.isPointer())
 					word = "dd";
-				if (element.getEstructuraID().equals(ElementoTS.VAR)) // Si es variable 
+				if (element.getIdentifierClass().equals(ElementoTS.VAR)) // Si es variable 
 					data.addMsg( "_" + key + " " + word + " ?");
-				else if (element.getEstructuraID().equals(ElementoTS.COL)) { //Sino es una colección
+				else if (element.getIdentifierClass().equals(ElementoTS.COL)) { //Sino es una colección
 					String cadElements = element.getElemsCollection();
 					cadElements = cadElements.replace('_', '?');
-					data.addMsg( "_" + key + " " + word + " " + element.getCSize() + " dup " + cadElements);
+					data.addMsg( "_" + key + " " + word + " " + element.getCSize() + " dup (" + cadElements + ")");
 				}	
 			}
-			if (element.getTipoToken().equals(ElementoTS.CAD)) {
+			if (element.getTokenClass().equals(ElementoTS.CAD)) {
+				//TODO: Tratamiento para multilínea
+				key = key.replaceAll("\n", "\", 10, 13,\"");
 				data.addMsg("_@cad" + element.getId() + " db \"" + key + "\"" + ", 0" );
 			}	
 		}

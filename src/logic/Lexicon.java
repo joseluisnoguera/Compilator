@@ -6,15 +6,16 @@ import java.util.List;
 import utils.MsgStack;
 import utils.StateAndSemAction;
 import utils.Token;
-import utils.semanticActions.SemanticActionAddCharacter;
-import utils.semanticActions.SemanticActionCADend;
-import utils.semanticActions.SemanticActionConstEnd;
-import utils.semanticActions.SemanticActionCountLine;
-import utils.semanticActions.SemanticActionFinID;
-import utils.semanticActions.SemanticActionInvalidAndReturn;
-import utils.semanticActions.SemanticActionInvalidChar;
-import utils.semanticActions.SemanticActionReturnAndAdd;
-import utils.semanticActions.SemanticActionReturnCharacter;
+import utils.semanticActions.SA_AddChar;
+import utils.semanticActions.SA_CadenaEnd;
+import utils.semanticActions.SA_ConstantEnd;
+import utils.semanticActions.SA_CountLine;
+import utils.semanticActions.SA_CountLineAndAdd;
+import utils.semanticActions.SA_IdentifierEnd;
+import utils.semanticActions.SA_InvalidAndReturnChar;
+import utils.semanticActions.SA_InvalidChar;
+import utils.semanticActions.SA_ReturnAndAddToTS;
+import utils.semanticActions.SA_ReturnChar;
 import utils.ElementoTS;
 
 public class Lexicon {
@@ -64,21 +65,21 @@ public class Lexicon {
 	}
 
 	private int range(int i) {
-		return  (i >= 65 && i <= 90 || i>= 97 && i <= 122)? 0 : 			// Letras
-			( i >= 48 && i <= 57)? 1 : 									// Digitos
-				(i == 95)? 2 : 												// '_'
-					(i == 3)? 3 :												// 'ETX' Reemplaza al fin de archivo, no viene en un texto normal, se agrega artificialmente al final del buffer de programa
+		return  (i >= 65 && i <= 90 || i>= 97 && i <= 122)? 0 : 					// Letras
+			( i >= 48 && i <= 57)? 1 : 												// Digitos
+				(i == 95)? 2 : 														// '_'
+					(i == 3)? 3 :													// 'ETX' Reemplaza al fin de archivo, no viene en un texto normal, se agrega artificialmente al final del buffer de programa
 						((i>=40 && i<=45) || i==47 || i==91 || i==93 || i==59)? 4 :	// Símbolos literales aceptados
-							(i==123)? 5 :												// '{'
-								(i==125)? 6 :												// '}'
-									(i==60)? 7 :												// '<'
-										(i==62)? 8 :												// '>'
-											(i==61)? 9 :												// '='
-												(i==10)? 10 :												// Salto de línea
-													(i==35)? 11 :												// '#'
-														(i==9 || i==32)? 12 :										// Espacio y TAB
-															(i==58)? 14 :												// ':'
-																13;															// Otros (está dando error de carácter inválido)
+							(i==123)? 5 :											// '{'
+								(i==125)? 6 :										// '}'
+									(i==60)? 7 :									// '<'
+										(i==62)? 8 :								// '>'
+											(i==61)? 9 :							// '='
+												(i==10)? 10 :						// Salto de línea
+													(i==35)? 11 :					// '#'
+														(i==9 || i==32)? 12 :		// Espacio y TAB
+															(i==58)? 14 :			// ':'
+																13;					// Otros
 	}
 
 	public Token getNewToken() {
@@ -321,7 +322,7 @@ public class Lexicon {
 			}
 		case 1:
 			//Ver si el lexema es un PR, sino es un ID
-			if (symbolTable.get(currentLexeme).getTipoToken().equals(ElementoTS.PR)) {
+			if (symbolTable.get(currentLexeme).getTokenClass().equals(ElementoTS.PR)) {
 				tokenStack.addMsg("Palabra reservada " + currentLexeme);
 				return new Token(Integer.valueOf(symbolTable.get(currentLexeme).getValue()));
 			}
@@ -359,14 +360,16 @@ public class Lexicon {
 			}
 		case 6:
 			tokenStack.addMsg("=="); //Si es = solo, lo completa como comparación
+			if (getCurrentLexeme() != "==")
+				msgStack.addMsg("Warning: Se asume que en línea " + getNewLineCounter() + " se quiso poner \"==\"");
 			return new Token(EQ);
 		case 8:
-			if (currentLexeme.length() == 1) { // Solo :
+			if (currentLexeme.length() == 1) { // Solo : (ya no se asume que : sea para poner :=)
 				tokenStack.addMsg(currentLexeme);
 				return new Token((int)(currentLexeme.charAt(0)));
 			}
 			else if (currentLexeme.equals(":=")) {
-				tokenStack.addMsg("Asignación"); //Si es :, lo completa como asignación
+				tokenStack.addMsg("Asignación");
 				return new Token(ASSIGN);
 			}
 >>>>>>> 34ec829... _
@@ -411,163 +414,163 @@ public class Lexicon {
 	}
 
 	public void increaseCounterSymbolTable() {
-		symbolTable.get(currentLexeme).increaseCounter();
+		symbolTable.get(currentLexeme).increaseVariableRepetitions();
 	}
 
 	private void initStateMachine () {
 		//Carga de maquina de estados [Estado,Caracteres] [Fila,Columna] de la matriz de transición
 
-		stateMachine[0][0]  = new StateAndSemAction(1, new SemanticActionAddCharacter());
-		stateMachine[0][1]  = new StateAndSemAction(2, new SemanticActionAddCharacter());
+		stateMachine[0][0]  = new StateAndSemAction(1, new SA_AddChar());
+		stateMachine[0][1]  = new StateAndSemAction(2, new SA_AddChar());
 		stateMachine[0][2]  = new StateAndSemAction(-1, null);
 		stateMachine[0][3]  = new StateAndSemAction(-1, null);
 		stateMachine[0][4]  = new StateAndSemAction(-1, null);
 		stateMachine[0][5]  = new StateAndSemAction(3, null);
-		stateMachine[0][6]  = new StateAndSemAction(0, new SemanticActionInvalidChar());
-		stateMachine[0][7]  = new StateAndSemAction(5, new SemanticActionAddCharacter());
-		stateMachine[0][8]  = new StateAndSemAction(4, new SemanticActionAddCharacter());
-		stateMachine[0][9]  = new StateAndSemAction(6, new SemanticActionAddCharacter());
-		stateMachine[0][10] = new StateAndSemAction(0, new SemanticActionCountLine());
+		stateMachine[0][6]  = new StateAndSemAction(0, new SA_InvalidChar());
+		stateMachine[0][7]  = new StateAndSemAction(5, new SA_AddChar());
+		stateMachine[0][8]  = new StateAndSemAction(4, new SA_AddChar());
+		stateMachine[0][9]  = new StateAndSemAction(6, new SA_AddChar());
+		stateMachine[0][10] = new StateAndSemAction(0, new SA_CountLine());
 		stateMachine[0][11] = new StateAndSemAction(7, null);
 		stateMachine[0][12] = new StateAndSemAction(0, null);
-		stateMachine[0][13] = new StateAndSemAction(0, new SemanticActionInvalidChar());
-		stateMachine[0][14] = new StateAndSemAction(8, new SemanticActionAddCharacter());
+		stateMachine[0][13] = new StateAndSemAction(0, new SA_InvalidChar());
+		stateMachine[0][14] = new StateAndSemAction(8, new SA_AddChar());
 
 		//////////////Nuevo estado //////////////
-		stateMachine[1][0]  = new StateAndSemAction(1, new SemanticActionAddCharacter());
-		stateMachine[1][1]  = new StateAndSemAction(1, new SemanticActionAddCharacter());
-		stateMachine[1][2]  = new StateAndSemAction(1, new SemanticActionAddCharacter());
-		stateMachine[1][3]  = new StateAndSemAction(-1, new SemanticActionFinID() );
-		stateMachine[1][4]  = new StateAndSemAction(-1, new SemanticActionFinID() );
-		stateMachine[1][5]  = new StateAndSemAction(-1, new SemanticActionFinID() );
-		stateMachine[1][6]  = new StateAndSemAction(-1, new SemanticActionFinID() );
-		stateMachine[1][7]  = new StateAndSemAction(-1, new SemanticActionFinID() );
-		stateMachine[1][8]  = new StateAndSemAction(-1, new SemanticActionFinID() );
-		stateMachine[1][9]  = new StateAndSemAction(-1, new SemanticActionFinID() );
-		stateMachine[1][10] = new StateAndSemAction(-1, new SemanticActionFinID() );
-		stateMachine[1][11] = new StateAndSemAction(-1, new SemanticActionFinID() );
-		stateMachine[1][12] = new StateAndSemAction(-1, new SemanticActionFinID() );
-		stateMachine[1][13] = new StateAndSemAction(-1, new SemanticActionFinID() );
-		stateMachine[1][14] = new StateAndSemAction(-1, new SemanticActionFinID());
+		stateMachine[1][0]  = new StateAndSemAction(1, new SA_AddChar());
+		stateMachine[1][1]  = new StateAndSemAction(1, new SA_AddChar());
+		stateMachine[1][2]  = new StateAndSemAction(1, new SA_AddChar());
+		stateMachine[1][3]  = new StateAndSemAction(-1, new SA_IdentifierEnd() );
+		stateMachine[1][4]  = new StateAndSemAction(-1, new SA_IdentifierEnd() );
+		stateMachine[1][5]  = new StateAndSemAction(-1, new SA_IdentifierEnd() );
+		stateMachine[1][6]  = new StateAndSemAction(-1, new SA_IdentifierEnd() );
+		stateMachine[1][7]  = new StateAndSemAction(-1, new SA_IdentifierEnd() );
+		stateMachine[1][8]  = new StateAndSemAction(-1, new SA_IdentifierEnd() );
+		stateMachine[1][9]  = new StateAndSemAction(-1, new SA_IdentifierEnd() );
+		stateMachine[1][10] = new StateAndSemAction(-1, new SA_IdentifierEnd() );
+		stateMachine[1][11] = new StateAndSemAction(-1, new SA_IdentifierEnd() );
+		stateMachine[1][12] = new StateAndSemAction(-1, new SA_IdentifierEnd() );
+		stateMachine[1][13] = new StateAndSemAction(-1, new SA_IdentifierEnd() );
+		stateMachine[1][14] = new StateAndSemAction(-1, new SA_IdentifierEnd());
 
 		//////////////Nuevo estado //////////////
-		stateMachine[2][0]  = new StateAndSemAction(-1, new SemanticActionConstEnd());
-		stateMachine[2][1]  = new StateAndSemAction(2, new SemanticActionAddCharacter());
-		stateMachine[2][2]  = new StateAndSemAction(-1, new SemanticActionConstEnd());
-		stateMachine[2][3]  = new StateAndSemAction(-1, new SemanticActionConstEnd());
-		stateMachine[2][4]  = new StateAndSemAction(-1, new SemanticActionConstEnd());
-		stateMachine[2][5]  = new StateAndSemAction(-1, new SemanticActionConstEnd());
-		stateMachine[2][6]  = new StateAndSemAction(-1, new SemanticActionConstEnd());
-		stateMachine[2][7]  = new StateAndSemAction(-1, new SemanticActionConstEnd());
-		stateMachine[2][8]  = new StateAndSemAction(-1, new SemanticActionConstEnd());
-		stateMachine[2][9]  = new StateAndSemAction(-1, new SemanticActionConstEnd());
-		stateMachine[2][10] = new StateAndSemAction(-1, new SemanticActionConstEnd());
-		stateMachine[2][11] = new StateAndSemAction(-1, new SemanticActionConstEnd());
-		stateMachine[2][12] = new StateAndSemAction(-1, new SemanticActionConstEnd());
-		stateMachine[2][13] = new StateAndSemAction(-1, new SemanticActionConstEnd());
-		stateMachine[2][14] = new StateAndSemAction(-1, new SemanticActionConstEnd());
+		stateMachine[2][0]  = new StateAndSemAction(-1, new SA_ConstantEnd());
+		stateMachine[2][1]  = new StateAndSemAction(2, new SA_AddChar());
+		stateMachine[2][2]  = new StateAndSemAction(-1, new SA_ConstantEnd());
+		stateMachine[2][3]  = new StateAndSemAction(-1, new SA_ConstantEnd());
+		stateMachine[2][4]  = new StateAndSemAction(-1, new SA_ConstantEnd());
+		stateMachine[2][5]  = new StateAndSemAction(-1, new SA_ConstantEnd());
+		stateMachine[2][6]  = new StateAndSemAction(-1, new SA_ConstantEnd());
+		stateMachine[2][7]  = new StateAndSemAction(-1, new SA_ConstantEnd());
+		stateMachine[2][8]  = new StateAndSemAction(-1, new SA_ConstantEnd());
+		stateMachine[2][9]  = new StateAndSemAction(-1, new SA_ConstantEnd());
+		stateMachine[2][10] = new StateAndSemAction(-1, new SA_ConstantEnd());
+		stateMachine[2][11] = new StateAndSemAction(-1, new SA_ConstantEnd());
+		stateMachine[2][12] = new StateAndSemAction(-1, new SA_ConstantEnd());
+		stateMachine[2][13] = new StateAndSemAction(-1, new SA_ConstantEnd());
+		stateMachine[2][14] = new StateAndSemAction(-1, new SA_ConstantEnd());
 
 		//////////////Nuevo estado //////////////
-		stateMachine[3][0]  = new StateAndSemAction(3, new SemanticActionAddCharacter());
-		stateMachine[3][1]  = new StateAndSemAction(3, new SemanticActionAddCharacter());
-		stateMachine[3][2]  = new StateAndSemAction(3, new SemanticActionAddCharacter());
-		stateMachine[3][3]  = new StateAndSemAction(-1, new SemanticActionReturnAndAdd());
-		stateMachine[3][4]  = new StateAndSemAction(3, new SemanticActionAddCharacter());
-		stateMachine[3][5]  = new StateAndSemAction(3, new SemanticActionAddCharacter());
-		stateMachine[3][6]  = new StateAndSemAction(-1, new SemanticActionCADend());
-		stateMachine[3][7]  = new StateAndSemAction(3, new SemanticActionAddCharacter());
-		stateMachine[3][8]  = new StateAndSemAction(3, new SemanticActionAddCharacter());
-		stateMachine[3][9]  = new StateAndSemAction(3, new SemanticActionAddCharacter());
-		stateMachine[3][10] = new StateAndSemAction(3, new SemanticActionCountLine());
-		stateMachine[3][11] = new StateAndSemAction(3, new SemanticActionAddCharacter());
-		stateMachine[3][12] = new StateAndSemAction(3, new SemanticActionAddCharacter());
-		stateMachine[3][13] = new StateAndSemAction(3, new SemanticActionAddCharacter());
-		stateMachine[3][14] = new StateAndSemAction(3, new SemanticActionAddCharacter());
+		stateMachine[3][0]  = new StateAndSemAction(3, new SA_AddChar());
+		stateMachine[3][1]  = new StateAndSemAction(3, new SA_AddChar());
+		stateMachine[3][2]  = new StateAndSemAction(3, new SA_AddChar());
+		stateMachine[3][3]  = new StateAndSemAction(-1, new SA_ReturnAndAddToTS());
+		stateMachine[3][4]  = new StateAndSemAction(3, new SA_AddChar());
+		stateMachine[3][5]  = new StateAndSemAction(3, new SA_AddChar());
+		stateMachine[3][6]  = new StateAndSemAction(-1, new SA_CadenaEnd());
+		stateMachine[3][7]  = new StateAndSemAction(3, new SA_AddChar());
+		stateMachine[3][8]  = new StateAndSemAction(3, new SA_AddChar());
+		stateMachine[3][9]  = new StateAndSemAction(3, new SA_AddChar());
+		stateMachine[3][10] = new StateAndSemAction(3, new SA_CountLineAndAdd());
+		stateMachine[3][11] = new StateAndSemAction(3, new SA_AddChar());
+		stateMachine[3][12] = new StateAndSemAction(3, new SA_AddChar());
+		stateMachine[3][13] = new StateAndSemAction(3, new SA_AddChar());
+		stateMachine[3][14] = new StateAndSemAction(3, new SA_AddChar());
 
 		//////////////Nuevo estado //////////////
-		stateMachine[4][0]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[4][1]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[4][2]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[4][3]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[4][4]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[4][5]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[4][6]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[4][7]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[4][8]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[4][9]  = new StateAndSemAction(-1, new SemanticActionAddCharacter());
-		stateMachine[4][10] = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[4][11] = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[4][12] = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[4][13] = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[4][14] = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
+		stateMachine[4][0]  = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[4][1]  = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[4][2]  = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[4][3]  = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[4][4]  = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[4][5]  = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[4][6]  = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[4][7]  = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[4][8]  = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[4][9]  = new StateAndSemAction(-1, new SA_AddChar());
+		stateMachine[4][10] = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[4][11] = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[4][12] = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[4][13] = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[4][14] = new StateAndSemAction(-1, new SA_ReturnChar());
 
 		//Nuevo estado//
-		stateMachine[5][0]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[5][1]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[5][2]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[5][3]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[5][4]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[5][5]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[5][6]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[5][7]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[5][8]  = new StateAndSemAction(-1, new SemanticActionAddCharacter());
-		stateMachine[5][9]  = new StateAndSemAction(-1, new SemanticActionAddCharacter());
-		stateMachine[5][10] = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[5][11] = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[5][12] = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[5][13] = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[5][14] = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
+		stateMachine[5][0]  = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[5][1]  = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[5][2]  = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[5][3]  = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[5][4]  = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[5][5]  = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[5][6]  = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[5][7]  = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[5][8]  = new StateAndSemAction(-1, new SA_AddChar());
+		stateMachine[5][9]  = new StateAndSemAction(-1, new SA_AddChar());
+		stateMachine[5][10] = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[5][11] = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[5][12] = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[5][13] = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[5][14] = new StateAndSemAction(-1, new SA_ReturnChar());
 
 		//////////////Nuevo estado //////////////
-		stateMachine[6][0]  = new StateAndSemAction(-1, new SemanticActionInvalidAndReturn());
-		stateMachine[6][1]  = new StateAndSemAction(-1, new SemanticActionInvalidAndReturn());
-		stateMachine[6][2]  = new StateAndSemAction(-1, new SemanticActionInvalidAndReturn());
-		stateMachine[6][3]  = new StateAndSemAction(-1, new SemanticActionInvalidAndReturn());
-		stateMachine[6][4]  = new StateAndSemAction(-1, new SemanticActionInvalidAndReturn());
-		stateMachine[6][5]  = new StateAndSemAction(-1, new SemanticActionInvalidAndReturn());
-		stateMachine[6][6]  = new StateAndSemAction(-1, new SemanticActionInvalidAndReturn());
-		stateMachine[6][7]  = new StateAndSemAction(-1, new SemanticActionInvalidAndReturn());
-		stateMachine[6][8]  = new StateAndSemAction(-1, new SemanticActionInvalidAndReturn());
-		stateMachine[6][9]  = new StateAndSemAction(-1, new SemanticActionAddCharacter());
-		stateMachine[6][10] = new StateAndSemAction(-1, new SemanticActionInvalidAndReturn());
-		stateMachine[6][11] = new StateAndSemAction(-1, new SemanticActionInvalidAndReturn());
-		stateMachine[6][12] = new StateAndSemAction(-1, new SemanticActionInvalidAndReturn());
-		stateMachine[6][13] = new StateAndSemAction(-1, new SemanticActionInvalidAndReturn());
-		stateMachine[6][14] = new StateAndSemAction(-1, new SemanticActionInvalidAndReturn());
+		stateMachine[6][0]  = new StateAndSemAction(-1, new SA_InvalidAndReturnChar());
+		stateMachine[6][1]  = new StateAndSemAction(-1, new SA_InvalidAndReturnChar());
+		stateMachine[6][2]  = new StateAndSemAction(-1, new SA_InvalidAndReturnChar());
+		stateMachine[6][3]  = new StateAndSemAction(-1, new SA_InvalidAndReturnChar());
+		stateMachine[6][4]  = new StateAndSemAction(-1, new SA_InvalidAndReturnChar());
+		stateMachine[6][5]  = new StateAndSemAction(-1, new SA_InvalidAndReturnChar());
+		stateMachine[6][6]  = new StateAndSemAction(-1, new SA_InvalidAndReturnChar());
+		stateMachine[6][7]  = new StateAndSemAction(-1, new SA_InvalidAndReturnChar());
+		stateMachine[6][8]  = new StateAndSemAction(-1, new SA_InvalidAndReturnChar());
+		stateMachine[6][9]  = new StateAndSemAction(-1, new SA_AddChar());
+		stateMachine[6][10] = new StateAndSemAction(-1, new SA_InvalidAndReturnChar());
+		stateMachine[6][11] = new StateAndSemAction(-1, new SA_InvalidAndReturnChar());
+		stateMachine[6][12] = new StateAndSemAction(-1, new SA_InvalidAndReturnChar());
+		stateMachine[6][13] = new StateAndSemAction(-1, new SA_InvalidAndReturnChar());
+		stateMachine[6][14] = new StateAndSemAction(-1, new SA_InvalidAndReturnChar());
 
 		//////////////Nuevo estado //////////////
 		stateMachine[7][0]  = new StateAndSemAction(7, null);
 		stateMachine[7][1]  = new StateAndSemAction(7, null);
 		stateMachine[7][2]  = new StateAndSemAction(7, null);
-		stateMachine[7][3]  = new StateAndSemAction(0, new SemanticActionReturnCharacter());
+		stateMachine[7][3]  = new StateAndSemAction(0, new SA_ReturnChar());
 		stateMachine[7][4]  = new StateAndSemAction(7, null);
 		stateMachine[7][5]  = new StateAndSemAction(7, null);
 		stateMachine[7][6]  = new StateAndSemAction(7, null);
 		stateMachine[7][7]  = new StateAndSemAction(7, null);
 		stateMachine[7][8]  = new StateAndSemAction(7, null);
 		stateMachine[7][9]  = new StateAndSemAction(7, null);
-		stateMachine[7][10] = new StateAndSemAction(0, new SemanticActionCountLine());
+		stateMachine[7][10] = new StateAndSemAction(0, new SA_CountLine());
 		stateMachine[7][11] = new StateAndSemAction(7, null);
 		stateMachine[7][12] = new StateAndSemAction(7, null);
 		stateMachine[7][13] = new StateAndSemAction(7, null);
 		stateMachine[7][14] = new StateAndSemAction(7, null);
 
 		////////////// Nuevo estado //////////////
-		stateMachine[8][0]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[8][1]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[8][2]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[8][3]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[8][4]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[8][5]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[8][6]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[8][7]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[8][8]  = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[8][9]  = new StateAndSemAction(-1, new SemanticActionAddCharacter());
-		stateMachine[8][10] = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[8][11] = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[8][12] = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[8][13] = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
-		stateMachine[8][14] = new StateAndSemAction(-1, new SemanticActionReturnCharacter());
+		stateMachine[8][0]  = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[8][1]  = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[8][2]  = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[8][3]  = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[8][4]  = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[8][5]  = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[8][6]  = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[8][7]  = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[8][8]  = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[8][9]  = new StateAndSemAction(-1, new SA_AddChar());
+		stateMachine[8][10] = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[8][11] = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[8][12] = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[8][13] = new StateAndSemAction(-1, new SA_ReturnChar());
+		stateMachine[8][14] = new StateAndSemAction(-1, new SA_ReturnChar());
 	}
 
 	public boolean isReady(){ return (ready == 0); }

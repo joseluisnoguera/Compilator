@@ -117,7 +117,7 @@ public class Window {
 		frmCompilator = new JFrame();
 		frmCompilator.setResizable(false);
 		frmCompilator.setTitle("Compilador");
-		frmCompilator.setBounds(100, 100, 1100, 700);
+		frmCompilator.setBounds(100, 100, 1200, 700);
 		frmCompilator.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmCompilator.setMinimumSize(new Dimension(1100, 700));
 		SpringLayout springLayout = new SpringLayout();
@@ -287,7 +287,6 @@ public class Window {
 						FileUtils.saveFile(file, compilator.getAssemblerCode().toString());
 						JOptionPane.showMessageDialog(new JFrame(), ASSEMBLER_GENERATED, "Ensamblador generado", JOptionPane.PLAIN_MESSAGE);
 						System.out.println(file.getAbsolutePath());
-						//TODO: Trabajando en esto
 						if (askMakeExecutable()) {
 							if (masm32_path == null || !isMasmPath(masm32_path)) 
 								masm32_path = askMasmPath();
@@ -377,8 +376,8 @@ public class Window {
 
 		JScrollPane scrollPane_TS = new JScrollPane();
 		springLayout.putConstraint(SpringLayout.EAST, scrollPane_Codigo, -6, SpringLayout.WEST, scrollPane_TS);
+		springLayout.putConstraint(SpringLayout.WEST, scrollPane_TS, 519, SpringLayout.WEST, frmCompilator.getContentPane());
 		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_TS, 13, SpringLayout.SOUTH, panel);
-		springLayout.putConstraint(SpringLayout.WEST, scrollPane_TS, 424, SpringLayout.WEST, frmCompilator.getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, scrollPane_TS, -10, SpringLayout.EAST, frmCompilator.getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_TS, -472, SpringLayout.SOUTH, frmCompilator.getContentPane());
 		scrollPane_TS.setMaximumSize(new Dimension(403, 162));
@@ -400,7 +399,7 @@ public class Window {
 
 		JScrollPane scrollPane_WarningYErrores = new JScrollPane();
 		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_WarningYErrores, 6, SpringLayout.SOUTH, scrollPane_TS);
-		springLayout.putConstraint(SpringLayout.WEST, scrollPane_WarningYErrores, 6, SpringLayout.EAST, scrollPane_Codigo);
+		springLayout.putConstraint(SpringLayout.WEST, scrollPane_WarningYErrores, 0, SpringLayout.WEST, scrollPane_TS);
 		springLayout.putConstraint(SpringLayout.EAST, scrollPane_WarningYErrores, -10, SpringLayout.EAST, frmCompilator.getContentPane());
 		scrollPane_WarningYErrores.setMinimumSize(new Dimension(403, 162));
 		scrollPane_WarningYErrores.setMaximumSize(new Dimension(403, 162));
@@ -420,10 +419,10 @@ public class Window {
 		lblWarningsYErrores.setAlignmentX(Component.RIGHT_ALIGNMENT);
 
 		JScrollPane scrollPane_ArbolSintactico = new JScrollPane();
-		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_ArbolSintactico, 362, SpringLayout.NORTH, frmCompilator.getContentPane());
-		springLayout.putConstraint(SpringLayout.WEST, scrollPane_ArbolSintactico, 6, SpringLayout.EAST, scrollPane_Codigo);
-		springLayout.putConstraint(SpringLayout.EAST, scrollPane_ArbolSintactico, -7, SpringLayout.EAST, frmCompilator.getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_WarningYErrores, -6, SpringLayout.NORTH, scrollPane_ArbolSintactico);
+		springLayout.putConstraint(SpringLayout.WEST, scrollPane_ArbolSintactico, 0, SpringLayout.WEST, scrollPane_TS);
+		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_ArbolSintactico, 362, SpringLayout.NORTH, frmCompilator.getContentPane());
+		springLayout.putConstraint(SpringLayout.EAST, scrollPane_ArbolSintactico, -7, SpringLayout.EAST, frmCompilator.getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_ArbolSintactico, -10, SpringLayout.SOUTH, frmCompilator.getContentPane());
 		frmCompilator.getContentPane().add(scrollPane_ArbolSintactico);
 
@@ -439,15 +438,17 @@ public class Window {
 		Set<String> keys = symbolTable.keySet();
 		for(String key:keys) {
 			ElementoTS elem = symbolTable.get(key);
-			text += "Token: " + elem.getTipoToken() + " - Tipo:" + elem.getTipoAtributo() + 
-					" - Lexema: " + key + " - Valor: " + elem.getValue() + " - Repeticiones: " + elem.getCantidad() +
-					" - Declarada: " + elem.isDeclarada() + " - Estructura: " + elem.getEstructuraID() +
+			text += "Token: " + elem.getTokenClass() + " - Tipo: " + elem.getVariableType() + 
+					" - Lexema: " + key + " - Valor: " + elem.getValue() + " - Repeticiones: " + elem.getVariableRepetitions() +
+					" - Declarada: " + elem.isDeclared() + " - Estructura: " + elem.getIdentifierClass() +
 					" - Tamaño en Bytes(Colecciones): " + elem.getCSizeBytes() + " - Elementos en colección: " + elem.getElemsCollection() +
-					" - Id único(Cadenas y variables auxiliares): " + elem.getId() + " - Es puntero: " + elem.isPointer() + "\n";
+					" - Id único(Cadenas): " + elem.getId() + " - Es puntero: " + elem.isPointer() + "\n";
+			text += "------------------------------------------------- \n"; // Separación
 		}
 		editorPaneSymbolTable.setText(text);
 	}
 
+	
 	private boolean generateExecutable(String path, String file_name, String masm32_path) {
 		ProcessBuilder processBuilder = new ProcessBuilder();
 		String command = "cd " + path + " && " 
@@ -484,7 +485,7 @@ public class Window {
 
 	private String askMasmPath() {
 		String masm_path = "";
-		JFileChooser chooser = new JFileChooser("C:\\mas32\\bin\\"); 
+		JFileChooser chooser = new JFileChooser("C:\\"); 
 		chooser.setDialogTitle(SELECT_FOLDER);
 		if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
 			masm_path = chooser.getCurrentDirectory().getAbsolutePath();

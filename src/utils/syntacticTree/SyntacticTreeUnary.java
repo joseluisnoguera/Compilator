@@ -17,6 +17,7 @@ public class SyntacticTreeUnary extends SyntacticTree{
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public String recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm, Hashtable<String, ElementoTS> symbolTable, int deep) {
 		//TODO: Agregar blancos
 		comInterm.addMsg("Nodo: " + super.getElem());
@@ -37,6 +38,9 @@ public class SyntacticTreeUnary extends SyntacticTree{
 		comAssembler.addMsg("mov "+reg+", " + super.getElem());
 =======
 	public void recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm, Hashtable<String, ElementoTS> symbolTable, String blankPrefix) {
+=======
+	public void recorreArbol(RegisterTable registros, MsgStack assemblerCode, MsgStack comInterm, Hashtable<String, ElementoTS> symbolTable, String blankPrefix) {
+>>>>>>> 0fcca1b... varios
 		comInterm.addMsg(blankPrefix + "Nodo: " + getElem());
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -49,6 +53,7 @@ public class SyntacticTreeUnary extends SyntacticTree{
 >>>>>>> 88b2c34... _
 =======
 		comInterm.addMsg(blankPrefix + getBlankSpace() + "Nodo: " + getHijoIzq().getElem());
+<<<<<<< HEAD
 		String reg= registros.getReg(RegisterTable.NAME_EAX, getHijoIzq(), comAssembler,symbolTable);
 		comAssembler.addMsg("lea " + reg + ", " + getHijoIzq().getElem());
 >>>>>>> 51f241d... arreglos varios
@@ -62,5 +67,11 @@ public class SyntacticTreeUnary extends SyntacticTree{
 		comAssembler.addMsg("invoke StdOut, addr " + super.getElem());
 		setAlmacenamiento("");
 >>>>>>> 154a393... comentario
+=======
+		String reg= registros.getReg(RegisterTable.NAME_EAX, getHijoIzq(), symbolTable, assemblerCode);
+		assemblerCode.addMsg("lea " + reg + ", " + getHijoIzq().getElem());
+		assemblerCode.addMsg("call _print");
+		registros.freeReg(RegisterTable.EAX);
+>>>>>>> 0fcca1b... varios
 	}
 }

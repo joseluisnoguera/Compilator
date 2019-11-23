@@ -47,21 +47,21 @@ public class RegisterTable {
 	private static final int CANT_REGISTROS = 4; //Cantidad de registros en procesador
 >>>>>>> 51f241d... arreglos varios
 	public static final int AX = 0;
-	public static final String NAME_AX = "AX";
+	public static final String NAME_AX = "ax";
 	public static final int BX = 1;
-	public static final String NAME_BX = "BX";
+	public static final String NAME_BX = "bx";
 	public static final int CX = 2;
-	public static final String NAME_CX = "CX";
+	public static final String NAME_CX = "cx";
 	public static final int DX = 3;
-	public static final String NAME_DX = "DX";
+	public static final String NAME_DX = "dx";
 	public static final int EAX = 0;
-	public static final String NAME_EAX = "EAX";
+	public static final String NAME_EAX = "eax";
 	public static final int EBX = 1;
-	public static final String NAME_EBX = "EBX";
+	public static final String NAME_EBX = "ebx";
 	public static final int ECX = 2;
-	public static final String NAME_ECX = "ECX";
+	public static final String NAME_ECX = "ecx";
 	public static final int EDX = 3;
-	public static final String NAME_EDX = "EDX";
+	public static final String NAME_EDX = "edx";
 
 	private int contadorVarAUX;
 	private ArrayList<Registro> regState;
@@ -87,11 +87,15 @@ public class RegisterTable {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public String getRegFreeInt(SyntacticTree nodo) {
 		Registro reg = null;
 		for(int i=0; i<this.regState.size();i++){
 =======
 	public String getRegFreeInt(SyntacticTree nodoAsociado, Hashtable<String, ElementoTS> symbolTable, MsgStack comAssembler) {
+=======
+	public String getRegFreeInt(SyntacticTree nodoAsociado, Hashtable<String, ElementoTS> symbolTable, MsgStack assemblerCode) {
+>>>>>>> 0fcca1b... varios
 		Registro reg = null;
 <<<<<<< HEAD
 		Boolean encontrado=false;
@@ -157,10 +161,11 @@ public class RegisterTable {
 			String nombreVarAux = "_@varAux" + contadorVarAUX++;
 			int regPos = (int)((Math.random()*2 + 1)); //devueve como valor 1 o 2
 			reg = regState.get(regPos); // Siempre se le asigna a BX o CX
-			ElementoTS tupla = new ElementoTS(ElementoTS.ID, "", ElementoTS.INT); //agrego la variable auxiliar a la tabla de simbolos
-			symbolTable.put(nombreVarAux, tupla);
+			ElementoTS nuevoElemento = new ElementoTS(ElementoTS.ID, "", reg.nodoAsociado.getType()); //agrego la variable auxiliar a la tabla de simbolos
+			nuevoElemento.setIdentifierClass(ElementoTS.VAR);
+			symbolTable.put(nombreVarAux.substring(1), nuevoElemento);
 			reg.nodoAsociado.setAlmacenamiento(nombreVarAux); // setea el nodo del registro almacenado en var
-			comAssembler.addMsg("mov " + nombreVarAux + ", " + reg.nombre);// mueve lo que contiene CX a var
+			assemblerCode.addMsg("mov " + nombreVarAux + ", " + reg.nombre);// mueve lo que contiene CX a var
 			reg.nodoAsociado = nodoAsociado;
 <<<<<<< HEAD
 			reg.nombre = NAME_CX;
@@ -176,7 +181,7 @@ public class RegisterTable {
 
 	}
 
-	public String getRegFreeLong(SyntacticTree nodoAsociado, Hashtable<String, ElementoTS> symbolTable, MsgStack comAssembler) {
+	public String getRegFreeLong(SyntacticTree nodoAsociado, Hashtable<String, ElementoTS> symbolTable, MsgStack assemblerCode) {
 		Registro reg = null;
 <<<<<<< HEAD
 		Boolean encontrado=false;
@@ -242,10 +247,11 @@ public class RegisterTable {
 			String nombreVarAux = "_@varAux" + contadorVarAUX++;
 			int regPos = (int)((Math.random()*2 + 1)); //devuelve como valor 1 o 2
 			reg = regState.get(regPos); // Asigna siempre EBX o ECX 
-			ElementoTS tupla = new ElementoTS(ElementoTS.ID, "",  ElementoTS.LONG);//agrego la variable auxiliar a la tabla de simbolos
-			symbolTable.put(nombreVarAux,tupla);
+			ElementoTS nuevoElemento = new ElementoTS(ElementoTS.ID, "", reg.nodoAsociado.getType()); //agrego la variable auxiliar a la tabla de simbolos
+			nuevoElemento.setIdentifierClass(ElementoTS.VAR);
+			symbolTable.put(nombreVarAux.substring(1), nuevoElemento);
 			reg.nodoAsociado.setAlmacenamiento(nombreVarAux);//setea el nodo del registro almacenado en var
-			comAssembler.addMsg("mov " + nombreVarAux + ", " + reg.nombre);//mueve lo que contiene ECX a var
+			assemblerCode.addMsg("mov " + nombreVarAux + ", " + reg.nombre);//mueve lo que contiene ECX a var
 			reg.nodoAsociado = nodoAsociado;
 <<<<<<< HEAD
 			reg.nombre = NAME_ECX;
@@ -270,6 +276,7 @@ public class RegisterTable {
 >>>>>>> bbb6d5a... commit para pull
 	}
 
+<<<<<<< HEAD
 	public void setRegTable(String reg, boolean state) {
 		int index=0;
 		if(reg == "EBX" || reg=="BX")
@@ -300,6 +307,18 @@ public class RegisterTable {
 	// Para pedir un registro en específico
 	public String getReg(String nameReg, SyntacticTree nodo, MsgStack comAssembler,Hashtable<String, ElementoTS> symbolTable) {
 >>>>>>> 39b95a0... Update RegisterTable-VarAUX
+=======
+	public void freeReg(int reg) { regState.get(reg).is_busy = false; }
+
+	public int getRegPos(String regName) {
+		return  (regName == NAME_AX || regName == NAME_EAX)? AX :
+			(regName == NAME_BX || regName == NAME_EBX)? BX :
+				(regName == NAME_CX || regName == NAME_ECX)? CX : DX;
+	}
+
+	// Para pedir un registro en específico
+	public String getReg(String nameReg, SyntacticTree nodo, Hashtable<String, ElementoTS> symbolTable, MsgStack assemblerCode) {
+>>>>>>> 0fcca1b... varios
 		//chequeo si esta libre, sino llama al cambiaRegistro() del nodo al que apunta el registro y agrega comando de cambio de registro
 		int index=0;
 		if(dato == "EBX" || dato=="BX")
@@ -313,6 +332,8 @@ public class RegisterTable {
 		Registro reg = regState.get(index);
 		if(reg.ocupado) {
 			String regNuevo;
+<<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< HEAD
 			if(reg.nombre.length() == 2) {
 				regNuevo = getRegFreeInt(reg.nodo);
@@ -336,12 +357,25 @@ public class RegisterTable {
 			reg.ocupado = true;
 			reg.nodo = nodo;
 			reg.nombre = dato;
+=======
+			if(reg.nombre == NAME_AX || reg.nombre == NAME_BX || reg.nombre == NAME_CX || reg.nombre == NAME_DX)
+=======
+			if(reg.nodoAsociado.getType() == ElementoTS.INT)
+>>>>>>> fde7cdb... varios
+				regNuevo = getRegFreeInt(reg.nodoAsociado, symbolTable, assemblerCode);
+			else
+				regNuevo = getRegFreeLong(reg.nodoAsociado, symbolTable, assemblerCode);
+			assemblerCode.addMsg("mov " + regNuevo + ", " + reg.nombre);
+			reg.nodoAsociado.setAlmacenamiento(regNuevo);
+			reg.nodoAsociado = nodo;
+			reg.nombre = nameReg;
+		} else {
+			reg.is_busy = true;
+			reg.nodoAsociado = nodo;
+			reg.nombre = nameReg;
+>>>>>>> 0fcca1b... varios
 		}
 		return dato;
-	}
-
-	public String toString() {
-		return regState.toString();
 	}
 }
 

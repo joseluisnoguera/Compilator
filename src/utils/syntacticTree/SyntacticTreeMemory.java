@@ -179,7 +179,7 @@ public class SyntacticTreeMemory extends SyntacticTree{
 		}
 		case "+=": {
 			comAssembler.addMsg("mov " + collectionPtr + ", " + dataFromLeft);
-			if (symbolTable.get(dataFromRight.substring(1)).getTipoAtributo().equals(ElementoTS.INT)) {
+			if (getHijoDer().getType().equals(ElementoTS.INT)) {
 				comAssembler.addMsg("add " + collectionPtr + ", 2");
 			} else {
 				comAssembler.addMsg("add " + collectionPtr + ", 4");

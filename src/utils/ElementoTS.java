@@ -1,6 +1,7 @@
 package utils;
 
 public class ElementoTS{
+<<<<<<< HEAD
 	private String value; //Para valores númericos (CONST o PR)
 	private String tipoToken; //ID CONST PR CAD
 	private String tipoAtributo; //int long
@@ -47,8 +48,42 @@ public class ElementoTS{
 		isPointer=false;
 =======
 =======
+=======
+	private String value; 				// Para valores númericos que requieren ser guardados (CONST o PR)
+	private String tokenClass; 			// ID CONST PR CAD
+	private String variableType; 		// int long
+	private int variableRepatitions; // Cantidad de repeticiones de la variable/constante
+	private boolean declared; 		  	// Para control de declaración de variables
+	private String identifierClass;	  	// Define si un ID es una colección (COL) o una variable (VAR)
+	private int cSize; 				  	// Tamaño de la coleccion
+	private int cSizeBytes; 		  	// Tamaño de la colección en bytes
+	private String elemsCollection;   	//Elementos de la colección separados por ','
+	private static int idCounter = 0; 	//Generador de ID único para cadenas
+	private int idCadena; 			  	// Id para identificar cadenas
+	private boolean isPointer; 		  	// Define si un ID variable es puntero (32 bits sin tipo)
+
+			//// Tipos de variables ////
+	public static final String INT = "int";
+	public static final String LONG = "long";
+			//// Clases de tokens ////
+	public static final String ID = "Identifier";
+	public static final String CONST = "Constant";
+	public static final String PR = "Reserved word";
+	public static final String CAD = "Cadena";
+			//// Clases de ID ////
+	public static final String VAR = "Variable";
+	public static final String COL = "Collection";
+
+	public ElementoTS(String tokenClass, String value, String variableType) {
+		this.value = value;
+		this.tokenClass = tokenClass;
+		this.variableType = variableType;
+		variableRepatitions = 1;
+		declared = false;
+		identifierClass = "";
+>>>>>>> 0fcca1b... varios
 		cSize = 0;
-		id = -1;
+		idCadena = -1;
 		cSizeBytes = 0;
 >>>>>>> 944a2e1... nothing
 		isPointer = false;
@@ -70,46 +105,49 @@ public class ElementoTS{
 
 	public String getValue(){ return value; }
 
-	public String getTipoAtributo(){ return tipoAtributo; }
+	public String getVariableType(){ return variableType; }
 
-	public String getTipoToken() { return tipoToken; }
+	public String getTokenClass() { return tokenClass; }
 
-	public int getCantidad(){ return cantidad; }
+	public int getVariableRepetitions(){ return variableRepatitions; }
 
 	public int getCSize() { return cSize; }
 
-	public void increaseCounter(){ cantidad = cantidad + 1; }
+	public void increaseVariableRepetitions(){ variableRepatitions = variableRepatitions + 1; }
 
-	public void decreaseCounter(){ cantidad = cantidad - 1; }
+	public void decreaseVariableRepetitions(){ variableRepatitions = variableRepatitions - 1; }
 
-	public void setDeclarada(boolean dato) {
-		this.declarada=dato;
-	}
+	public void setDeclared() { this.declared = true; }
 
-	public void setCSize(int dato) { cSize = dato;}
+	public void setCSize(int cSize) { this.cSize = cSize;}
 
-	public boolean isDeclarada(){ return declarada; }
+	public boolean isDeclared(){ return declared; }
 
-	public void setTipoAtributo(String tipo){ 
-		tipoAtributo = tipo;
-		if (tipo == INT)
+	/*
+	 * En las colecciones, el cSize (tamaño de colección) debe definirse previo al tipo
+	 */
+	public void setVariableType(String type){
+		variableType = type;
+		if (type == INT)
 			cSizeBytes = cSize * 2;
+<<<<<<< HEAD
 		else //sino es long
+=======
+		else
+>>>>>>> 0fcca1b... varios
 			cSizeBytes = cSize * 4;
 	}
 
-	public void setEstructuraID(String estructura) { estructuraID = estructura; }
+	public void setIdentifierClass(String identifierClass) { this.identifierClass = identifierClass; }
 
-	public String getEstructuraID() { return estructuraID; }
+	public String getIdentifierClass() { return identifierClass; }
 
 	public int getCSizeBytes() { return cSizeBytes; }
 
-	public void setId() {
-		id = idCounter;
-		idCounter++;
-	}
+	public void setId() { idCadena = idCounter; idCounter++; }
 
 	// Para obtener id único para cadenas
+<<<<<<< HEAD
 /*	public static int getNewId() {
 		idCounter++;
 		return idCounter-1;
@@ -121,4 +159,13 @@ public class ElementoTS{
 
 >>>>>>> bbb6d5a... commit para pull
 	public int getId() { return id; }
+=======
+	public static int getNewId() { idCounter++; return idCounter-1; }
+
+<<<<<<< HEAD
+	public int getId() { return id_cadena; }
+>>>>>>> 0fcca1b... varios
+=======
+	public int getId() { return idCadena; }
+>>>>>>> fde7cdb... varios
 }

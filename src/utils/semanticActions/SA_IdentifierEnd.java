@@ -3,7 +3,7 @@ package utils.semanticActions;
 import logic.Lexicon;
 import utils.ElementoTS;
 
-public class SemanticActionFinID implements SemanticAction{
+public class SA_IdentifierEnd implements SemanticAction{
 	// Acción semántica asociado al final de un Identificador o una Palabra reservada
 	private static int MAX_CANT_ID = 25;
 	

@@ -8,10 +8,11 @@ import utils.ParserVal;
 import utils.RegisterTable;
 
 public abstract class SyntacticTree extends ParserVal {
-	private String blankSpace = " "; // Para poder cambiar el espaciado en el árbol de manera más rápida
+	private String blankSpace = "  "; // Para poder cambiar el espaciado en el árbol de manera más rápida
 	private SyntacticTree izq;
 	private SyntacticTree der;
 	private String lexeme;
+<<<<<<< HEAD
 	private String tipo;
 <<<<<<< HEAD
 	protected static int contEtiquetas = 0;
@@ -23,18 +24,25 @@ public abstract class SyntacticTree extends ParserVal {
 		this.izq=null;
 		tipo = ""; //Sin tipo
 =======
+=======
+	private String type;
+>>>>>>> fde7cdb... varios
 	protected String almacenamiento;
 	
 	public SyntacticTree(String lexeme){
 		this.lexeme = lexeme;
 		der = null;
 		izq = null;
+<<<<<<< HEAD
 		tipo = ""; //Sin tipo por defecto
 >>>>>>> 51f241d... arreglos varios
+=======
+		type = ""; //Sin tipo por defecto
+>>>>>>> fde7cdb... varios
 	}
 
-	public String getTipo() { return tipo; }
-	public void setTipo(String tipo) { this.tipo = tipo; }
+	public String getType() { return type; }
+	public void setType(String type) { this.type = type; }
 	public SyntacticTree getHijoIzq(){ return izq; }
 	public SyntacticTree getHijoDer() { return der; }
 	public String getElem() { return lexeme; } 
@@ -52,9 +60,12 @@ public abstract class SyntacticTree extends ParserVal {
 	}
 =======
 	
+<<<<<<< HEAD
 	public void cambiaRegistro(String almacenamientoNuevo) { almacenamiento = almacenamientoNuevo; }
 >>>>>>> 51f241d... arreglos varios
 	
+=======
+>>>>>>> 0fcca1b... varios
 	public String getAlmacenamiento() { return almacenamiento; }
 	
 <<<<<<< HEAD
@@ -66,8 +77,12 @@ public abstract class SyntacticTree extends ParserVal {
 =======
 	public void setAlmacenamiento(String almacenamiento) { this.almacenamiento = almacenamiento; }
 	
-	public boolean isVariableOrConst() { return (getElem().charAt(0) == '_' || (int)(getElem().charAt(0)) >= 48 && (int)(getElem().charAt(0)) <= 57); }
+	public boolean isVariableOrConst() { return (isVariable() || isConstant()); }
 
+	public boolean isVariable() { return getElem().charAt(0) == '_'; }
+	
+	public boolean isConstant() { return ((int)(getElem().charAt(0)) >= 48 && (int)(getElem().charAt(0)) <= 57); }
+	
 	public String getBlankSpace() { return blankSpace; }
 }
 >>>>>>> 51f241d... arreglos varios
