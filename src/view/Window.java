@@ -379,7 +379,6 @@ public class Window {
 		springLayout.putConstraint(SpringLayout.WEST, scrollPane_TS, 519, SpringLayout.WEST, frmCompilator.getContentPane());
 		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_TS, 13, SpringLayout.SOUTH, panel);
 		springLayout.putConstraint(SpringLayout.EAST, scrollPane_TS, -10, SpringLayout.EAST, frmCompilator.getContentPane());
-		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_TS, -472, SpringLayout.SOUTH, frmCompilator.getContentPane());
 		scrollPane_TS.setMaximumSize(new Dimension(403, 162));
 		scrollPane_TS.setMinimumSize(new Dimension(403, 162));
 		scrollPane_TS.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -398,9 +397,10 @@ public class Window {
 		labelTablaSimbolos.setAlignmentX(Component.RIGHT_ALIGNMENT);
 
 		JScrollPane scrollPane_WarningYErrores = new JScrollPane();
-		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_WarningYErrores, 6, SpringLayout.SOUTH, scrollPane_TS);
-		springLayout.putConstraint(SpringLayout.WEST, scrollPane_WarningYErrores, 0, SpringLayout.WEST, scrollPane_TS);
+		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_WarningYErrores, 248, SpringLayout.NORTH, frmCompilator.getContentPane());
+		springLayout.putConstraint(SpringLayout.WEST, scrollPane_WarningYErrores, 6, SpringLayout.EAST, scrollPane_Codigo);
 		springLayout.putConstraint(SpringLayout.EAST, scrollPane_WarningYErrores, -10, SpringLayout.EAST, frmCompilator.getContentPane());
+		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_TS, -6, SpringLayout.NORTH, scrollPane_WarningYErrores);
 		scrollPane_WarningYErrores.setMinimumSize(new Dimension(403, 162));
 		scrollPane_WarningYErrores.setMaximumSize(new Dimension(403, 162));
 		scrollPane_WarningYErrores.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -419,10 +419,10 @@ public class Window {
 		lblWarningsYErrores.setAlignmentX(Component.RIGHT_ALIGNMENT);
 
 		JScrollPane scrollPane_ArbolSintactico = new JScrollPane();
-		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_WarningYErrores, -6, SpringLayout.NORTH, scrollPane_ArbolSintactico);
-		springLayout.putConstraint(SpringLayout.WEST, scrollPane_ArbolSintactico, 0, SpringLayout.WEST, scrollPane_TS);
-		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_ArbolSintactico, 362, SpringLayout.NORTH, frmCompilator.getContentPane());
+		springLayout.putConstraint(SpringLayout.WEST, scrollPane_ArbolSintactico, 6, SpringLayout.EAST, scrollPane_Codigo);
 		springLayout.putConstraint(SpringLayout.EAST, scrollPane_ArbolSintactico, -7, SpringLayout.EAST, frmCompilator.getContentPane());
+		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_WarningYErrores, -6, SpringLayout.NORTH, scrollPane_ArbolSintactico);
+		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_ArbolSintactico, 362, SpringLayout.NORTH, frmCompilator.getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane_ArbolSintactico, -10, SpringLayout.SOUTH, frmCompilator.getContentPane());
 		frmCompilator.getContentPane().add(scrollPane_ArbolSintactico);
 

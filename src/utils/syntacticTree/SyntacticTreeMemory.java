@@ -45,10 +45,12 @@ public class SyntacticTreeMemory extends SyntacticTree{
 		comInterm.addMsg(blankPrefix + "Nodo: " + getElem());
 		String dataFromLeft = "";
 		String dataFromRight = "";
+		System.out.println("en memory: " + getElem());
 		getHijoIzq().recorreArbol(registros, comAssembler, comInterm, symbolTable, blankPrefix + getBlankSpace());
 		getHijoDer().recorreArbol(registros, comAssembler, comInterm, symbolTable, blankPrefix + getBlankSpace());
 		dataFromLeft = getHijoIzq().getAlmacenamiento();
 		dataFromRight = getHijoDer().getAlmacenamiento(); 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		String op = getElem();
 <<<<<<< HEAD
@@ -158,37 +160,47 @@ public class SyntacticTreeMemory extends SyntacticTree{
 >>>>>>> 3c084f9... Update SyntacticTreeMemory-Leaf
 =======
 		String collectionPtr = registros.getRegFreeLong(this, symbolTable, comAssembler);
+=======
+
+>>>>>>> f406b63... guardado dx:ax en registro de 32 bits
 		switch(getElem()) {
 		case "::=": {
+			String collectionPtr = registros.getRegFreeLong(this, symbolTable, comAssembler);
 			comAssembler.addMsg("lea " + collectionPtr + ", " + dataFromRight); //offset del arreglo en i
 			comAssembler.addMsg("mov " + dataFromLeft + ", " + collectionPtr);
+			registros.freeReg(registros.getRegPos(collectionPtr));
 			break;
 		}
 		case "<<": {
+			String collectionPtr = registros.getRegFreeLong(this, symbolTable, comAssembler);
 			comAssembler.addMsg("mov " + collectionPtr + ", " + dataFromLeft); // lado izq tiene la direccion del arreglo
 			String collectionSize = registros.getRegFreeLong(getHijoIzq(), symbolTable, comAssembler);
-			System.out.println(dataFromLeft.substring(1));
-			comAssembler.addMsg("mov " + collectionSize + ", " + symbolTable.get(dataFromLeft.substring(1)).getCSizeBytes()); // obtiene el largo del arreglo en bytes
+			System.out.println("nombre de colección: " + dataFromRight.substring(1));
+			comAssembler.addMsg("mov " + collectionSize + ", " + symbolTable.get(dataFromRight.substring(1)).getCSizeBytes()); // obtiene el largo del arreglo en bytes
 			String collectionOffset = registros.getRegFreeLong(getHijoDer(), symbolTable, comAssembler);
 			comAssembler.addMsg("lea " + collectionOffset + ", " + dataFromRight); // obtiene el offset del arreglo
 			comAssembler.addMsg("add " + collectionSize + ", " + collectionOffset); //direccion final del arreglo
 			comAssembler.addMsg("cmp " + collectionPtr + ", " + collectionSize); //se compara la direccion a la que apunta i con direccion fin del arreglo
 			registros.freeReg(registros.getRegPos(collectionSize));
 			registros.freeReg(registros.getRegPos(collectionOffset));
+			registros.freeReg(registros.getRegPos(collectionPtr));
 			break;
 		}
 		case "+=": {
-			comAssembler.addMsg("mov " + collectionPtr + ", " + dataFromLeft);
 			if (getHijoDer().getType().equals(ElementoTS.INT)) {
-				comAssembler.addMsg("add " + collectionPtr + ", 2");
+				comAssembler.addMsg("add " + dataFromLeft + ", 2");
 			} else {
+<<<<<<< HEAD
 				comAssembler.addMsg("add " + collectionPtr + ", 4");
 >>>>>>> 51f241d... arreglos varios
+=======
+				comAssembler.addMsg("add " + dataFromLeft + ", 4");
+>>>>>>> f406b63... guardado dx:ax en registro de 32 bits
 			}
-			comAssembler.addMsg("mov " + dataFromLeft + ", " + collectionPtr);
 			break;
 		}
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		registros.setRegTable(reg,false);//libera el registro usado
 <<<<<<< HEAD
@@ -242,6 +254,8 @@ public class SyntacticTreeMemory extends SyntacticTree{
 		setAlmacenamiento("?");
 >>>>>>> 51f241d... arreglos varios
 =======
+=======
+>>>>>>> f406b63... guardado dx:ax en registro de 32 bits
 		setAlmacenamiento(getElem());
 >>>>>>> 446d784... comentario
 	}

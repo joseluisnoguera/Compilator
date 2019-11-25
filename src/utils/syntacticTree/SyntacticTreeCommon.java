@@ -586,7 +586,7 @@ public class SyntacticTreeCommon extends SyntacticTree {
 		getHijoIzq().recorreArbol(registers, assemblerCode, comInterm, symbolTable, blankPrefix + getBlankSpace());
 		if (getHijoDer() != null)
 			getHijoDer().recorreArbol(registers, assemblerCode, comInterm, symbolTable, blankPrefix + getBlankSpace());
-		System.out.println("resuelve a common " + getElem());
+		System.out.println("vuelve a common " + getElem());
 		String op = getElem();
 		if(op == "+") suma(registers,assemblerCode,symbolTable);
 		else if(op == "-") resta(registers,assemblerCode,symbolTable);
@@ -601,7 +601,7 @@ public class SyntacticTreeCommon extends SyntacticTree {
 		String dataFromLeft = getHijoIzq().getAlmacenamiento();
 		String dataFromRight = getHijoDer().getAlmacenamiento();
 		if ((((SyntacticTreeLeaf)getHijoIzq()).isCollectionPointer() && getHijoDer().isVariable()) 
-				|| (getHijoIzq().isVariable() && getHijoDer().isVariable())) {
+				|| (getHijoIzq().isVariable() && getHijoDer().isVariable())) {  //// Se mueve el lado derecho a registro ////
 			String tempReg;
 			if (isInt(dataFromRight, symbolTable))
 				tempReg = registers.getRegFreeInt(getHijoDer(), symbolTable, assemblerCode);
@@ -610,7 +610,7 @@ public class SyntacticTreeCommon extends SyntacticTree {
 			assemblerCode.addMsg("mov " + tempReg + ", " + dataFromRight);
 			dataFromRight = tempReg;
 		}
-		if (((SyntacticTreeLeaf)getHijoIzq()).isCollectionPointer())
+		if (((SyntacticTreeLeaf)getHijoIzq()).isCollectionPointer()) //// Se realiza la asignación ////
 			if (getHijoIzq().getType().equals(ElementoTS.INT))
 				assemblerCode.addMsg("mov word ptr [" + dataFromLeft + "], " + dataFromRight);
 			else
@@ -1598,13 +1598,12 @@ public class SyntacticTreeCommon extends SyntacticTree {
 				getHijoDer().setAlmacenamiento(regAux);
 			}
 			assemblerCode.addMsg("imul " + dataFromRight);
-			String regResult = registers.getRegFreeLong(this, symbolTable, assemblerCode);
-			assemblerCode.addMsg("mov " + regResult + ", dx:ax");
+			assemblerCode.addMsg("shl "  + regDX + ", 16");
+			assemblerCode.addMsg("mov " + regDX + ", " + regAX);
 			registers.freeReg(RegisterTable.AX);
-			registers.freeReg(RegisterTable.DX);
 			if (!getHijoDer().isVariableOrConst())
 				registers.freeReg(registers.getRegPos(dataFromRight));
-			setAlmacenamiento(regResult);
+			setAlmacenamiento(RegisterTable.NAME_EDX);
 		} else {//LONG
 			String regEAX = registers.getReg(RegisterTable.NAME_EAX, getHijoIzq(), symbolTable, assemblerCode);
 			@SuppressWarnings("unused")
@@ -1632,7 +1631,6 @@ public class SyntacticTreeCommon extends SyntacticTree {
 		}
 	}
 
-	//TODO Problma de tipos, esta mezclando
 	private void division(RegisterTable registers, MsgStack assemblerCode,Hashtable<String, ElementoTS> symbolTable) {
 		String dataFromLeft = getHijoIzq().getAlmacenamiento();
 		String dataFromRight = getHijoDer().getAlmacenamiento();

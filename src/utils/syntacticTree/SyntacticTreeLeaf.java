@@ -35,6 +35,7 @@ public class SyntacticTreeLeaf extends SyntacticTree{
 			ElementoTS> symbolTable, String blankPrefix) {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		comInterm.addMsg(blankPrefix + "Nodo: " + super.getElem());
 >>>>>>> 154a393... comentario
 		String dato=super.getElem();
@@ -141,6 +142,9 @@ public class SyntacticTreeLeaf extends SyntacticTree{
 =======
 		System.out.println(getElem());
 >>>>>>> d209296... comentario
+=======
+		System.out.println("en leaf: " + getElem());
+>>>>>>> f406b63... guardado dx:ax en registro de 32 bits
 		comInterm.addMsg(blankPrefix + "Nodo: " + getElem());
 		String data = getElem();
 		if(data.charAt(data.length() - 1) == ']' ) { // Si es una colección
