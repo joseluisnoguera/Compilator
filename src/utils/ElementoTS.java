@@ -52,15 +52,16 @@ public class ElementoTS{
 	private String value; 				// Para valores númericos que requieren ser guardados (CONST o PR)
 	private String tokenClass; 			// ID CONST PR CAD
 	private String variableType; 		// int long
-	private int variableRepatitions; // Cantidad de repeticiones de la variable/constante
+	private int variableRepatitions; 	// Cantidad de repeticiones de la variable/constante
 	private boolean declared; 		  	// Para control de declaración de variables
 	private String identifierClass;	  	// Define si un ID es una colección (COL) o una variable (VAR)
 	private int cSize; 				  	// Tamaño de la coleccion
 	private int cSizeBytes; 		  	// Tamaño de la colección en bytes
-	private String elemsCollection;   	//Elementos de la colección separados por ','
-	private static int idCounter = 0; 	//Generador de ID único para cadenas
+	private String elemsCollection;   	// Elementos de la colección separados por ','
+	private static int idCounter = 0; 	// Generador de ID único para cadenas
 	private int idCadena; 			  	// Id para identificar cadenas
 	private boolean isPointer; 		  	// Define si un ID variable es puntero (32 bits sin tipo)
+	private int foreachControlCounter;	// Para control en los distintos casos de variables para foreach
 
 			//// Tipos de variables ////
 	public static final String INT = "int";
@@ -167,5 +168,14 @@ public class ElementoTS{
 >>>>>>> 0fcca1b... varios
 =======
 	public int getId() { return idCadena; }
+<<<<<<< HEAD
 >>>>>>> fde7cdb... varios
+=======
+	
+	public void decreaseForeachControlCounter() { foreachControlCounter++; }
+	
+	public void increaseForeachControlCounter() { foreachControlCounter--; }
+	
+	public int getForeachControlCounter() { return foreachControlCounter; }
+>>>>>>> f58785c... arreglos para condiciones en indice de foreach
 }

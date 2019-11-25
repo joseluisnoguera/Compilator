@@ -51,6 +51,7 @@ public abstract class SyntacticTree extends ParserVal {
 	public void setElem(String elem) { lexeme = elem; }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public abstract String recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm, Hashtable<String, ElementoTS> symbolTable, int deep);
 =======
 	public abstract void recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm, Hashtable<String, ElementoTS> symbolTable, String blankPrefix);
@@ -59,6 +60,9 @@ public abstract class SyntacticTree extends ParserVal {
 		almacenamiento = regNuevo;
 	}
 =======
+=======
+	public abstract void recorreArbol(RegisterTable registers, MsgStack assemblerCode, MsgStack comInterm, Hashtable<String, ElementoTS> symbolTable, String blankPrefix);
+>>>>>>> f58785c... arreglos para condiciones en indice de foreach
 	
 <<<<<<< HEAD
 	public void cambiaRegistro(String almacenamientoNuevo) { almacenamiento = almacenamientoNuevo; }

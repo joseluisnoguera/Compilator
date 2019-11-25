@@ -6,8 +6,8 @@ import utils.ElementoTS;
 import utils.MsgStack;
 import utils.RegisterTable;
 
-public class SyntacticTreeMemory extends SyntacticTree{
-	public SyntacticTreeMemory(String lexeme, SyntacticTree nodoIzq, SyntacticTree nodoDer) {
+public class ST_Memory extends SyntacticTree{
+	public ST_Memory(String lexeme, SyntacticTree nodoIzq, SyntacticTree nodoDer) {
 		super(lexeme);
 		// TODO Auto-generated constructor stub
 		super.setHijoIzq(nodoIzq);
@@ -21,6 +21,7 @@ public class SyntacticTreeMemory extends SyntacticTree{
 =======
 	
 	@Override
+<<<<<<< HEAD:src/utils/syntacticTree/SyntacticTreeMemory.java
 <<<<<<< HEAD
 <<<<<<< HEAD
 	public String recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm, Hashtable<String, ElementoTS> symbolTable, int deep) {
@@ -31,6 +32,9 @@ public class SyntacticTreeMemory extends SyntacticTree{
 >>>>>>> 7eacf2b... _
 =======
 	public void recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm, 
+=======
+	public void recorreArbol(RegisterTable registers, MsgStack comAssembler, MsgStack comInterm, 
+>>>>>>> f58785c... arreglos para condiciones en indice de foreach:src/utils/syntacticTree/ST_Memory.java
 			Hashtable<String, ElementoTS> symbolTable, String blankPrefix) {
 <<<<<<< HEAD
 		comInterm.addMsg(blankPrefix + "Nodo: " + super.getElem());
@@ -46,8 +50,8 @@ public class SyntacticTreeMemory extends SyntacticTree{
 		String dataFromLeft = "";
 		String dataFromRight = "";
 		System.out.println("en memory: " + getElem());
-		getHijoIzq().recorreArbol(registros, comAssembler, comInterm, symbolTable, blankPrefix + getBlankSpace());
-		getHijoDer().recorreArbol(registros, comAssembler, comInterm, symbolTable, blankPrefix + getBlankSpace());
+		getHijoIzq().recorreArbol(registers, comAssembler, comInterm, symbolTable, blankPrefix + getBlankSpace());
+		getHijoDer().recorreArbol(registers, comAssembler, comInterm, symbolTable, blankPrefix + getBlankSpace());
 		dataFromLeft = getHijoIzq().getAlmacenamiento();
 		dataFromRight = getHijoDer().getAlmacenamiento(); 
 <<<<<<< HEAD
@@ -165,25 +169,25 @@ public class SyntacticTreeMemory extends SyntacticTree{
 >>>>>>> f406b63... guardado dx:ax en registro de 32 bits
 		switch(getElem()) {
 		case "::=": {
-			String collectionPtr = registros.getRegFreeLong(this, symbolTable, comAssembler);
+			String collectionPtr = registers.getRegFreeLong(this, symbolTable, comAssembler);
 			comAssembler.addMsg("lea " + collectionPtr + ", " + dataFromRight); //offset del arreglo en i
 			comAssembler.addMsg("mov " + dataFromLeft + ", " + collectionPtr);
-			registros.freeReg(registros.getRegPos(collectionPtr));
+			registers.freeReg(registers.getRegPos(collectionPtr));
 			break;
 		}
 		case "<<": {
-			String collectionPtr = registros.getRegFreeLong(this, symbolTable, comAssembler);
+			String collectionPtr = registers.getRegFreeLong(this, symbolTable, comAssembler);
 			comAssembler.addMsg("mov " + collectionPtr + ", " + dataFromLeft); // lado izq tiene la direccion del arreglo
-			String collectionSize = registros.getRegFreeLong(getHijoIzq(), symbolTable, comAssembler);
+			String collectionSize = registers.getRegFreeLong(getHijoIzq(), symbolTable, comAssembler);
 			System.out.println("nombre de colección: " + dataFromRight.substring(1));
 			comAssembler.addMsg("mov " + collectionSize + ", " + symbolTable.get(dataFromRight.substring(1)).getCSizeBytes()); // obtiene el largo del arreglo en bytes
-			String collectionOffset = registros.getRegFreeLong(getHijoDer(), symbolTable, comAssembler);
+			String collectionOffset = registers.getRegFreeLong(getHijoDer(), symbolTable, comAssembler);
 			comAssembler.addMsg("lea " + collectionOffset + ", " + dataFromRight); // obtiene el offset del arreglo
 			comAssembler.addMsg("add " + collectionSize + ", " + collectionOffset); //direccion final del arreglo
 			comAssembler.addMsg("cmp " + collectionPtr + ", " + collectionSize); //se compara la direccion a la que apunta i con direccion fin del arreglo
-			registros.freeReg(registros.getRegPos(collectionSize));
-			registros.freeReg(registros.getRegPos(collectionOffset));
-			registros.freeReg(registros.getRegPos(collectionPtr));
+			registers.freeReg(registers.getRegPos(collectionSize));
+			registers.freeReg(registers.getRegPos(collectionOffset));
+			registers.freeReg(registers.getRegPos(collectionPtr));
 			break;
 		}
 		case "+=": {

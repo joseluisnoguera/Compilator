@@ -6,14 +6,15 @@ import utils.ElementoTS;
 import utils.MsgStack;
 import utils.RegisterTable;
 
-public class SyntacticTreeUnary extends SyntacticTree{
+public class ST_Unary extends SyntacticTree{
 
-	public SyntacticTreeUnary(String lexeme, SyntacticTree nodo) {
+	public ST_Unary(String lexeme, SyntacticTree nodo) {
 		super(lexeme);
 		super.setHijoIzq(nodo);
 	}
 
 	@Override
+<<<<<<< HEAD:src/utils/syntacticTree/SyntacticTreeUnary.java
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -41,6 +42,9 @@ public class SyntacticTreeUnary extends SyntacticTree{
 =======
 	public void recorreArbol(RegisterTable registros, MsgStack assemblerCode, MsgStack comInterm, Hashtable<String, ElementoTS> symbolTable, String blankPrefix) {
 >>>>>>> 0fcca1b... varios
+=======
+	public void recorreArbol(RegisterTable registers, MsgStack assemblerCode, MsgStack comInterm, Hashtable<String, ElementoTS> symbolTable, String blankPrefix) {
+>>>>>>> f58785c... arreglos para condiciones en indice de foreach:src/utils/syntacticTree/ST_Unary.java
 		comInterm.addMsg(blankPrefix + "Nodo: " + getElem());
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -53,6 +57,7 @@ public class SyntacticTreeUnary extends SyntacticTree{
 >>>>>>> 88b2c34... _
 =======
 		comInterm.addMsg(blankPrefix + getBlankSpace() + "Nodo: " + getHijoIzq().getElem());
+<<<<<<< HEAD:src/utils/syntacticTree/SyntacticTreeUnary.java
 <<<<<<< HEAD
 		String reg= registros.getReg(RegisterTable.NAME_EAX, getHijoIzq(), comAssembler,symbolTable);
 		comAssembler.addMsg("lea " + reg + ", " + getHijoIzq().getElem());
@@ -73,5 +78,11 @@ public class SyntacticTreeUnary extends SyntacticTree{
 		assemblerCode.addMsg("call _print");
 		registros.freeReg(RegisterTable.EAX);
 >>>>>>> 0fcca1b... varios
+=======
+		String reg= registers.getReg(RegisterTable.NAME_EAX, getHijoIzq(), symbolTable, assemblerCode);
+		assemblerCode.addMsg("lea " + reg + ", " + getHijoIzq().getElem());
+		assemblerCode.addMsg("call _print");
+		registers.freeReg(RegisterTable.EAX);
+>>>>>>> f58785c... arreglos para condiciones en indice de foreach:src/utils/syntacticTree/ST_Unary.java
 	}
 }

@@ -8,17 +8,18 @@ import utils.ElementoTS;
 import utils.MsgStack;
 import utils.RegisterTable;
 
-public class SyntacticTreeCtrl extends SyntacticTree {
+public class ST_Control extends SyntacticTree {
 
 	private static List<String> etiquetas = new ArrayList<String>();
 	private static int contEtiquetas = 0;
 
-	public SyntacticTreeCtrl(String lexeme, SyntacticTree nodo) {
+	public ST_Control(String lexeme, SyntacticTree nodo) {
 		super(lexeme);
 		super.setHijoIzq(nodo);
 	}
 
 	@Override
+<<<<<<< HEAD:src/utils/syntacticTree/SyntacticTreeCtrl.java
 <<<<<<< HEAD
 	public String recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm,
 <<<<<<< HEAD
@@ -27,6 +28,9 @@ public class SyntacticTreeCtrl extends SyntacticTree {
 		comInterm.addMsg("Nodo: " + super.getElem());
 =======
 	public void recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm,
+=======
+	public void recorreArbol(RegisterTable registers, MsgStack assemblerCode, MsgStack comInterm,
+>>>>>>> f58785c... arreglos para condiciones en indice de foreach:src/utils/syntacticTree/ST_Control.java
 			Hashtable<String, ElementoTS> symbolTable, String blankPrefix) {
 <<<<<<< HEAD
 		comInterm.addMsg(blankPrefix + "Nodo: " + super.getElem());
@@ -38,6 +42,7 @@ public class SyntacticTreeCtrl extends SyntacticTree {
 		if(getElem() == "COND_FOREACH") { //cond del foreach
 >>>>>>> d209296... comentario
 			contEtiquetas++;
+<<<<<<< HEAD:src/utils/syntacticTree/SyntacticTreeCtrl.java
 			comAssembler.addMsg("_label" + contEtiquetas + ":");
 			etiquetas.add("_label" + contEtiquetas);//etiqueta de inicio de condicion de foreach
 		}
@@ -79,28 +84,38 @@ public class SyntacticTreeCtrl extends SyntacticTree {
 >>>>>>> 51f241d... arreglos varios
 			case "<":{
 =======
+=======
+			assemblerCode.addMsg("_label" + contEtiquetas + ":");
+			etiquetas.add("_label" + contEtiquetas); //etiqueta de inicio de condicion de foreach
+		}
+		getHijoIzq().recorreArbol(registers, assemblerCode, comInterm,symbolTable, blankPrefix + getBlankSpace());
+>>>>>>> f58785c... arreglos para condiciones en indice de foreach:src/utils/syntacticTree/ST_Control.java
 		System.out.println("resuelve a ctrl " + getElem());
 		if(getElem() == "COND_IF") {
 			contEtiquetas++;
 			if(getHijoIzq().getAlmacenamiento() == "<") {
+<<<<<<< HEAD:src/utils/syntacticTree/SyntacticTreeCtrl.java
 >>>>>>> d209296... comentario
 				comAssembler.addMsg("jge _label" + contEtiquetas);
+=======
+				assemblerCode.addMsg("jge _label" + contEtiquetas);
+>>>>>>> f58785c... arreglos para condiciones en indice de foreach:src/utils/syntacticTree/ST_Control.java
 				etiquetas.add("_label" + contEtiquetas);
 			}
 			else if(getHijoIzq().getAlmacenamiento() == ">") {
-				comAssembler.addMsg("jle _label" + contEtiquetas);
+				assemblerCode.addMsg("jle _label" + contEtiquetas);
 				etiquetas.add("_label" + contEtiquetas);
 			}
 			else if(getHijoIzq().getAlmacenamiento() == "LET") {
-				comAssembler.addMsg("jg _label" + contEtiquetas);
+				assemblerCode.addMsg("jg _label" + contEtiquetas);
 				etiquetas.add("_label" + contEtiquetas);
 			}
 			else if(getHijoIzq().getAlmacenamiento() == "GET") {
-				comAssembler.addMsg("jl _label" + contEtiquetas);
+				assemblerCode.addMsg("jl _label" + contEtiquetas);
 				etiquetas.add("_label" + contEtiquetas);
 			}
 			else if(getHijoIzq().getAlmacenamiento() == "EQ") {
-				comAssembler.addMsg("jne _label" + contEtiquetas);
+				assemblerCode.addMsg("jne _label" + contEtiquetas);
 				etiquetas.add("_label" + contEtiquetas);
 			}
 <<<<<<< HEAD
@@ -111,14 +126,14 @@ public class SyntacticTreeCtrl extends SyntacticTree {
 		case "cond": {//cond del foreach
 =======
 			else if(getHijoIzq().getAlmacenamiento() == "DIF") {
-				comAssembler.addMsg("je _label" + contEtiquetas);
+				assemblerCode.addMsg("je _label" + contEtiquetas);
 				etiquetas.add("_label" + contEtiquetas);
 			}
 		}
 		else if(getElem() == "COND_FOREACH") {
 >>>>>>> d209296... comentario
 			contEtiquetas++;
-			comAssembler.addMsg("jge _label" + contEtiquetas); //salto en caso de que se termine el arreglo
+			assemblerCode.addMsg("jge _label" + contEtiquetas); //salto en caso de que se termine el arreglo
 			etiquetas.add("_label" + contEtiquetas);//etiqueta de fin de foreach
 		}
 <<<<<<< HEAD
@@ -139,14 +154,14 @@ public class SyntacticTreeCtrl extends SyntacticTree {
 >>>>>>> bca257b... resueltos problemas en common
 =======
 		else if(getElem() == "THEN") {
-			comAssembler.addMsg(etiquetas.get(etiquetas.size()-1) + ":");//se agrega la etiqueta de fin de if
+			assemblerCode.addMsg(etiquetas.get(etiquetas.size()-1) + ":");//se agrega la etiqueta de fin de if
 			etiquetas.remove(etiquetas.size()-1);
 		}
 		else if(getElem() == "THEN_ELSE") {
 >>>>>>> d209296... comentario
 			contEtiquetas++;
-			comAssembler.addMsg("jmp _label" + contEtiquetas);//se agrega el salto al fin del if (y se agrega despues su etiqueta)
-			comAssembler.addMsg(etiquetas.get(etiquetas.size()-1) + ":");//se agrega etiqueta de inicio de else
+			assemblerCode.addMsg("jmp _label" + contEtiquetas);//se agrega el salto al fin del if (y se agrega despues su etiqueta)
+			assemblerCode.addMsg(etiquetas.get(etiquetas.size()-1) + ":");//se agrega etiqueta de inicio de else
 			etiquetas.remove(etiquetas.size()-1);
 			etiquetas.add("_label" + contEtiquetas);
 		}
@@ -164,14 +179,19 @@ public class SyntacticTreeCtrl extends SyntacticTree {
 		case "CUERPOAVANCE":{
 =======
 		else if(getElem() == "ELSE") {
-			comAssembler.addMsg(etiquetas.get(etiquetas.size()-1) + ":");//se agrega la etiqueta de fin de if
+			assemblerCode.addMsg(etiquetas.get(etiquetas.size()-1) + ":");//se agrega la etiqueta de fin de if
 			etiquetas.remove(etiquetas.size()-1);
 		}
 		else if(getElem() == "CUERPOAVANCE") {
+<<<<<<< HEAD:src/utils/syntacticTree/SyntacticTreeCtrl.java
 >>>>>>> d209296... comentario
 			comAssembler.addMsg("jmp " + etiquetas.get(etiquetas.size()-2));//salto al principio de la condicion de foreach
 >>>>>>> 51f241d... arreglos varios
 			comAssembler.addMsg(etiquetas.get(etiquetas.size()-1) + ":");//creacion de etiqueta de fin de foreach
+=======
+			assemblerCode.addMsg("jmp " + etiquetas.get(etiquetas.size()-2));//salto al principio de la condicion de foreach
+			assemblerCode.addMsg(etiquetas.get(etiquetas.size()-1) + ":");//creacion de etiqueta de fin de foreach
+>>>>>>> f58785c... arreglos para condiciones en indice de foreach:src/utils/syntacticTree/ST_Control.java
 			etiquetas.remove(etiquetas.size()-1);
 			etiquetas.remove(etiquetas.size()-1);
 		}

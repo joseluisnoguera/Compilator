@@ -409,9 +409,9 @@ import utils.ElementoTS;
 import utils.MsgStack;
 import utils.RegisterTable;
 
-public class SyntacticTreeCommon extends SyntacticTree {
+public class ST_Common extends SyntacticTree {
 
-	public SyntacticTreeCommon(String lexeme, SyntacticTree nodoIzq, SyntacticTree nodoDer) {
+	public ST_Common(String lexeme, SyntacticTree nodoIzq, SyntacticTree nodoDer) {
 		super(lexeme);
 		super.setHijoIzq(nodoIzq);
 		super.setHijoDer(nodoDer);
@@ -600,7 +600,7 @@ public class SyntacticTreeCommon extends SyntacticTree {
 	private void asignacion(RegisterTable registers, MsgStack assemblerCode, Hashtable<String, ElementoTS> symbolTable) {
 		String dataFromLeft = getHijoIzq().getAlmacenamiento();
 		String dataFromRight = getHijoDer().getAlmacenamiento();
-		if ((((SyntacticTreeLeaf)getHijoIzq()).isCollectionPointer() && getHijoDer().isVariable()) 
+		if ((((ST_Leaf)getHijoIzq()).isCollectionPointer() && getHijoDer().isVariable()) 
 				|| (getHijoIzq().isVariable() && getHijoDer().isVariable())) {  //// Se mueve el lado derecho a registro ////
 			String tempReg;
 			if (isInt(dataFromRight, symbolTable))
@@ -610,7 +610,7 @@ public class SyntacticTreeCommon extends SyntacticTree {
 			assemblerCode.addMsg("mov " + tempReg + ", " + dataFromRight);
 			dataFromRight = tempReg;
 		}
-		if (((SyntacticTreeLeaf)getHijoIzq()).isCollectionPointer()) //// Se realiza la asignación ////
+		if (((ST_Leaf)getHijoIzq()).isCollectionPointer()) //// Se realiza la asignación ////
 			if (getHijoIzq().getType().equals(ElementoTS.INT))
 				assemblerCode.addMsg("mov word ptr [" + dataFromLeft + "], " + dataFromRight);
 			else

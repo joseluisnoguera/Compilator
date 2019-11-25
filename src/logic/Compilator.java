@@ -5,7 +5,7 @@ import java.util.List;
 
 import utils.MsgStack;
 import utils.RegisterTable;
-import utils.syntacticTree.SyntacticTreeCtrl;
+import utils.syntacticTree.ST_Control;
 import utils.AssemblerGenerator;
 import utils.ElementoTS;
 
@@ -36,7 +36,7 @@ public class Compilator {
 	private MsgStack msgStack, semanticStructStack, tokenStack;
 	private Lexicon lexicon;
 	private Parser parser;
-	private SyntacticTreeCtrl nodoRaiz;
+	private ST_Control nodoRaiz;
 	private RegisterTable registros;
 	private MsgStack assemblerCode;
 	private MsgStack syntacticTree;
@@ -89,7 +89,7 @@ public class Compilator {
 =======
 			if (!parser.hasErrors()) {
 				hasErrors = false;
-				nodoRaiz = ((SyntacticTreeCtrl)parser.getRaiz());
+				nodoRaiz = ((ST_Control)parser.getRaiz());
 				registros = new RegisterTable();
 				nodoRaiz.recorreArbol(registros, assemblerCode, syntacticTree, symbolTable, "");
 				assemblerCode = AssemblerGenerator.getAssembler(symbolTable, assemblerCode);

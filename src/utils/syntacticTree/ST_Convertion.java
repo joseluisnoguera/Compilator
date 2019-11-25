@@ -8,9 +8,10 @@ import utils.ElementoTS;
 import utils.MsgStack;
 import utils.RegisterTable;
 
-public class SyntacticTreeConver extends SyntacticTree{
+public class ST_Convertion extends SyntacticTree{
 
 
+<<<<<<< HEAD:src/utils/syntacticTree/SyntacticTreeConver.java
 <<<<<<< HEAD:src/utils/sintacticTree/SintacticTreeConver.java
 	public SintacticTreeConver(String lexeme, SintacticTree nodo) {
 		super(lexeme);
@@ -24,13 +25,26 @@ public class SyntacticTreeConver extends SyntacticTree{
 			super.setHijoIzq(nodo);
 		}
 >>>>>>> cf97fd0... Arreglos en ventana:src/utils/syntacticTree/SyntacticTreeConver.java
+=======
+	public ST_Convertion(String lexeme, SyntacticTree nodo) {
+		super(lexeme);
+		super.setHijoIzq(nodo);
+	}
+	
+	public static final String ITOL = "itol"; 			// Para convertir int en long
+	public static final String PTOV = "pointerToVal";	// Para extraer el valor apuntado por una variable puntero
+>>>>>>> f58785c... arreglos para condiciones en indice de foreach:src/utils/syntacticTree/ST_Convertion.java
 
 <<<<<<< HEAD
 	@Override
+<<<<<<< HEAD:src/utils/syntacticTree/SyntacticTreeConver.java
 <<<<<<< HEAD
 	public String recorreArbol(RegisterTable registros, MsgStack comAssembler, MsgStack comInterm,Hashtable<String, ElementoTS> symbolTable) {
 =======
 	public void recorreArbol(RegisterTable registros, MsgStack assemblerCode, MsgStack comInterm,
+=======
+	public void recorreArbol(RegisterTable registers, MsgStack assemblerCode, MsgStack comInterm,
+>>>>>>> f58785c... arreglos para condiciones en indice de foreach:src/utils/syntacticTree/ST_Convertion.java
 			Hashtable<String, ElementoTS> symbolTable, String blankPrefix) {
 		comInterm.addMsg(blankPrefix + "Nodo: " + getElem());
 >>>>>>> 0fcca1b... varios
@@ -93,8 +107,9 @@ public class SyntacticTreeConver extends SyntacticTree{
 		System.out.println("entro a nodo conver " + getElem());
 >>>>>>> dbec3d7... comentario
 		String data = "";
-		getHijoIzq().recorreArbol(registros,assemblerCode,comInterm,symbolTable, blankPrefix + getBlankSpace());
+		getHijoIzq().recorreArbol(registers,assemblerCode,comInterm,symbolTable, blankPrefix + getBlankSpace());
 		data = getHijoIzq().getAlmacenamiento();
+<<<<<<< HEAD:src/utils/syntacticTree/SyntacticTreeConver.java
 <<<<<<< HEAD
 		if(getHijoIzq().isVariableOrConst()) {
 			if (data.charAt(0) == '_') { //es id
@@ -234,32 +249,37 @@ public class SyntacticTreeConver extends SyntacticTree{
 >>>>>>> 313c55b... extensiones a 32 bits
 =======
 		if(getElem() == "itol") {
+=======
+		if(getElem() == ITOL) {
+>>>>>>> f58785c... arreglos para condiciones en indice de foreach:src/utils/syntacticTree/ST_Convertion.java
 			if(getHijoIzq().isVariableOrConst()) {
 				if (data.charAt(0) == '_') { //es id
-					String regData = registros.getReg(RegisterTable.NAME_AX, getHijoIzq(), symbolTable, assemblerCode);
+					String regData = registers.getReg(RegisterTable.NAME_AX, getHijoIzq(), symbolTable, assemblerCode);
 					assemblerCode.addMsg("mov " + regData + ", " + data);
 					assemblerCode.addMsg("cwde");
-					regData = registros.extendTo32bits(registros.getRegPos(RegisterTable.NAME_AX));
+					regData = registers.extendTo32bits(registers.getRegPos(RegisterTable.NAME_AX));
 					setAlmacenamiento(regData);
 				}else { //es cte
-					String regConverted = registros.getRegFreeLong(getHijoIzq(), symbolTable, assemblerCode);
+					String regConverted = registers.getRegFreeLong(getHijoIzq(), symbolTable, assemblerCode);
 					assemblerCode.addMsg("mov " + regConverted + ", " + data);
 					setAlmacenamiento(regConverted);
 				}
 			}else {//es un registro de 16b
-				String regAX = registros.getReg(RegisterTable.NAME_AX, getHijoIzq(), symbolTable, assemblerCode);
+				String regAX = registers.getReg(RegisterTable.NAME_AX, getHijoIzq(), symbolTable, assemblerCode);
 				assemblerCode.addMsg("mov " + regAX + ", " + data);
 				assemblerCode.addMsg("cwde");
-				regAX = registros.extendTo32bits(registros.getRegPos(RegisterTable.NAME_AX));
+				regAX = registers.extendTo32bits(registers.getRegPos(RegisterTable.NAME_AX));
 				setAlmacenamiento(regAX);
 			}
-		}else {//extraccion de valor en memoria ("pointToVal")
+		}
+		if(getElem() == PTOV) {// extraccion de valor en memoria apuntado por una variable ("pointToVal")
 			String reg;
+			data = getHijoIzq().getElem();
 			if(symbolTable.get(data.substring(1)).getVariableType() == ElementoTS.INT) {
-				reg = registros.getRegFreeInt(getHijoIzq(), symbolTable, assemblerCode);
+				reg = registers.getRegFreeInt(getHijoIzq(), symbolTable, assemblerCode);
 				assemblerCode.addMsg("mov " + reg + ", word ptr [" + data + "]");
-			}else {
-				reg = registros.getRegFreeLong(getHijoIzq(), symbolTable, assemblerCode);
+			} else {
+				reg = registers.getRegFreeLong(getHijoIzq(), symbolTable, assemblerCode);
 				assemblerCode.addMsg("mov " + reg + ", dword ptr [" + data + "]");
 			}
 			setAlmacenamiento(reg);
