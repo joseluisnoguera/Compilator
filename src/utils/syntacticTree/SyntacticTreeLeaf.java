@@ -217,11 +217,14 @@ public class SyntacticTreeLeaf extends SyntacticTree{
 				data = regIndex;
 				registros.freeReg(registros.getRegPos(regCollectionOffset));
 			} else { // Para el lado derecho se devuelve el valor apuntado
-				if (getType().equals(ElementoTS.INT))
-					assemblerCode.addMsg("mov " + regCollectionOffset + ", word ptr [" + regIndex + "]"); //guarda en regColec el valor almacenado en la direccion de memoria guardada en regI
-				else
+				if (getType().equals(ElementoTS.INT)) {
+					registros.freeReg(registros.getRegPos(regCollectionOffset));
+					data = registros.getRegFreeInt(this, symbolTable, assemblerCode);
+					assemblerCode.addMsg("mov " + data + ", word ptr [" + regIndex + "]"); //guarda en regColec el valor almacenado en la direccion de memoria guardada en regI
+				} else {
 					assemblerCode.addMsg("mov " + regCollectionOffset + ", dword ptr [" + regIndex + "]");
-				data = regCollectionOffset;
+					data = regCollectionOffset;
+				}
 			}
 			registros.freeReg(registros.getRegPos(regIndex));
 			registros.freeReg(registros.getRegPos(regEndCollection));

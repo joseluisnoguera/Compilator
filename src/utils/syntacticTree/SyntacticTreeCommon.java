@@ -1598,12 +1598,12 @@ public class SyntacticTreeCommon extends SyntacticTree {
 				getHijoDer().setAlmacenamiento(regAux);
 			}
 			assemblerCode.addMsg("imul " + dataFromRight);
+			regDX = registers.extendTo32bits(registers.getRegPos(RegisterTable.NAME_DX));
 			assemblerCode.addMsg("shl "  + regDX + ", 16");
-			assemblerCode.addMsg("mov " + regDX + ", " + regAX);
+			assemblerCode.addMsg("mov " + RegisterTable.NAME_DX + ", " + regAX);
 			registers.freeReg(RegisterTable.AX);
 			if (!getHijoDer().isVariableOrConst())
-				registers.freeReg(registers.getRegPos(dataFromRight));
-			regDX = registers.extendTo32bits(registers.getRegPos(RegisterTable.NAME_DX));			
+				registers.freeReg(registers.getRegPos(dataFromRight));	
 			setAlmacenamiento(regDX);
 		} else {//LONG
 			String regEAX = registers.getReg(RegisterTable.NAME_EAX, getHijoIzq(), symbolTable, assemblerCode);

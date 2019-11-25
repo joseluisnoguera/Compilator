@@ -360,8 +360,6 @@ public class Lexicon {
 			}
 		case 6:
 			tokenStack.addMsg("=="); //Si es = solo, lo completa como comparación
-			if (getCurrentLexeme() != "==")
-				msgStack.addMsg("Warning: Se asume que en línea " + getNewLineCounter() + " se quiso poner \"==\"");
 			return new Token(EQ);
 		case 8:
 			if (currentLexeme.length() == 1) { // Solo : (ya no se asume que : sea para poner :=)

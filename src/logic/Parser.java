@@ -1947,6 +1947,7 @@ case 50:
 				semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() + ": Asignación"); 
 				stackOfLines.pop();
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if(((SyntacticTree) val_peek(0)).getTipo() == "LONG" && ((SyntacticTree) val_peek(2)).getTipo().equals(ElementoTS.INT)){
 <<<<<<< HEAD
 >>>>>>> 45299ea... visualización de árbol sintáctico
@@ -1955,12 +1956,15 @@ case 50:
 =======
 				if(((SyntacticTree) val_peek(0)).getType() == "LONG" && ((SyntacticTree) val_peek(2)).getType().equals(ElementoTS.INT)){
 >>>>>>> fde7cdb... varios
+=======
+				if(((SyntacticTree) val_peek(0)).getType() == ElementoTS.LONG && ((SyntacticTree) val_peek(2)).getType().equals(ElementoTS.INT)){
+>>>>>>> dbec3d7... comentario
 					msgStack.addMsg("Error: incompatibilidad de tipos en línea: " + lex.getNewLineCounter());
 >>>>>>> 0fcca1b... varios
 					hasError = true;
 					nodo = new SyntacticTreeCommon("ERROR", null, null);
 				}else{
-					if(((SyntacticTree) val_peek(2)).getType() == "LONG" && ((SyntacticTree) val_peek(0)).getType().equals(ElementoTS.INT)){
+					if(((SyntacticTree) val_peek(2)).getType() == ElementoTS.LONG && ((SyntacticTree) val_peek(0)).getType().equals(ElementoTS.INT)){
 						SyntacticTree nodoConv = new SyntacticTreeConver("itol",(SyntacticTree)val_peek(0));
 						nodo = new SyntacticTreeCommon(":=",(SyntacticTree)val_peek(2),nodoConv);
 					}else

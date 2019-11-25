@@ -37,6 +37,7 @@ public class SyntacticTreeConver extends SyntacticTree{
 		//transforma un int en long
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		String dato = super.getHijoIzq().recorreArbol(registros,comAssembler,comInterm,symbolTable);
 		if((dato != "AX")&&(dato != "BX")&&(dato != "CX")&&(dato != "DX")) {
 			String regDato = registros.getRegFreeInt();
@@ -88,9 +89,13 @@ public class SyntacticTreeConver extends SyntacticTree{
 				comAssembler.addMsg("MOV " + regDato + ", " + dato);
 >>>>>>> 1375c5c... arreglos varios
 =======
+=======
+		System.out.println("entro a nodo conver " + getElem());
+>>>>>>> dbec3d7... comentario
 		String data = "";
 		getHijoIzq().recorreArbol(registros,assemblerCode,comInterm,symbolTable, blankPrefix + getBlankSpace());
 		data = getHijoIzq().getAlmacenamiento();
+<<<<<<< HEAD
 		if(getHijoIzq().isVariableOrConst()) {
 			if (data.charAt(0) == '_') { //es id
 <<<<<<< HEAD
@@ -227,6 +232,38 @@ public class SyntacticTreeConver extends SyntacticTree{
 			regAX = registros.extendTo32bits(registros.getRegPos(RegisterTable.NAME_AX));
 			setAlmacenamiento(regAX);
 >>>>>>> 313c55b... extensiones a 32 bits
+=======
+		if(getElem() == "itol") {
+			if(getHijoIzq().isVariableOrConst()) {
+				if (data.charAt(0) == '_') { //es id
+					String regData = registros.getReg(RegisterTable.NAME_AX, getHijoIzq(), symbolTable, assemblerCode);
+					assemblerCode.addMsg("mov " + regData + ", " + data);
+					assemblerCode.addMsg("cwde");
+					regData = registros.extendTo32bits(registros.getRegPos(RegisterTable.NAME_AX));
+					setAlmacenamiento(regData);
+				}else { //es cte
+					String regConverted = registros.getRegFreeLong(getHijoIzq(), symbolTable, assemblerCode);
+					assemblerCode.addMsg("mov " + regConverted + ", " + data);
+					setAlmacenamiento(regConverted);
+				}
+			}else {//es un registro de 16b
+				String regAX = registros.getReg(RegisterTable.NAME_AX, getHijoIzq(), symbolTable, assemblerCode);
+				assemblerCode.addMsg("mov " + regAX + ", " + data);
+				assemblerCode.addMsg("cwde");
+				regAX = registros.extendTo32bits(registros.getRegPos(RegisterTable.NAME_AX));
+				setAlmacenamiento(regAX);
+			}
+		}else {//extraccion de valor en memoria ("pointToVal")
+			String reg;
+			if(symbolTable.get(data.substring(1)).getVariableType() == ElementoTS.INT) {
+				reg = registros.getRegFreeInt(getHijoIzq(), symbolTable, assemblerCode);
+				assemblerCode.addMsg("mov " + reg + ", word ptr [" + data + "]");
+			}else {
+				reg = registros.getRegFreeLong(getHijoIzq(), symbolTable, assemblerCode);
+				assemblerCode.addMsg("mov " + reg + ", dword ptr [" + data + "]");
+			}
+			setAlmacenamiento(reg);
+>>>>>>> ffe4c4b... comentario
 		}
 		String regAux = registros.getRegFreeLong();
 		comAssembler.addMsg("MOV " + regAux + ", " + super.getElem());
