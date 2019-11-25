@@ -154,6 +154,7 @@ public class SyntacticTreeLeaf extends SyntacticTree{
 			subIndexNameStart += 1; // Salta el corchete inicial
 			String subIndexName = data.substring(subIndexNameStart, data.length() - 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			String regIndex = registros.getRegFreeLong(getHijoIzq(), symbolTable, comAssembler);
 			comAssembler.addMsg("mov " + regIndex + ", " + subIndexName);
 			String regCollectionOffset = registros.getRegFreeLong(this, symbolTable, comAssembler);//guarda un registro para contener la coleccion
@@ -170,6 +171,21 @@ public class SyntacticTreeLeaf extends SyntacticTree{
 =======
 			String regIndex = registros.getReg(RegisterTable.NAME_EAX, getHijoIzq(), symbolTable, assemblerCode);
 			assemblerCode.addMsg("mov " + regIndex + ", " + subIndexName); // Valor de índice en EAX
+=======
+			String regIndex = "";
+			if (getType().equals(ElementoTS.INT)) {
+				regIndex = registros.getReg(RegisterTable.NAME_AX, this, symbolTable, assemblerCode);
+				assemblerCode.addMsg("mov " + regIndex + ", " + subIndexName); // Valor de índice en EAX
+				assemblerCode.addMsg("cwde");
+				regIndex = registros.extendTo32bits(registros.getRegPos(RegisterTable.NAME_AX));
+			} else {
+				regIndex = registros.getReg(RegisterTable.NAME_EAX, this, symbolTable, assemblerCode);
+				assemblerCode.addMsg("mov " + regIndex + ", " + subIndexName); // Valor de índice en EAX
+<<<<<<< HEAD
+>>>>>>> 313c55b... extensiones a 32 bits
+=======
+			}
+>>>>>>> 7cbc045... correcciones de lo anterior
 			String collectionName = data.substring(1, subIndexNameStart - 1);
 			String regSizeByType = registros.getRegFreeLong(null, symbolTable, assemblerCode);
 			int size;

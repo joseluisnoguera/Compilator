@@ -1603,7 +1603,8 @@ public class SyntacticTreeCommon extends SyntacticTree {
 			registers.freeReg(RegisterTable.AX);
 			if (!getHijoDer().isVariableOrConst())
 				registers.freeReg(registers.getRegPos(dataFromRight));
-			setAlmacenamiento(RegisterTable.NAME_EDX);
+			regDX = registers.extendTo32bits(registers.getRegPos(RegisterTable.NAME_DX));			
+			setAlmacenamiento(regDX);
 		} else {//LONG
 			String regEAX = registers.getReg(RegisterTable.NAME_EAX, getHijoIzq(), symbolTable, assemblerCode);
 			@SuppressWarnings("unused")

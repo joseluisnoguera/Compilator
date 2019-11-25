@@ -1,3 +1,5 @@
+
+
 package utils.syntacticTree;
 
 import java.util.Hashtable;
@@ -165,11 +167,16 @@ public class SyntacticTreeConver extends SyntacticTree{
 				String regData = registros.getReg(RegisterTable.NAME_AX, getHijoIzq(), symbolTable, assemblerCode);
 				assemblerCode.addMsg("mov " + regData + ", " + data);
 				assemblerCode.addMsg("cwde");
+<<<<<<< HEAD
 				String regConverted = registros.getRegFreeLong(getHijoIzq(),symbolTable,assemblerCode);
 				assemblerCode.addMsg("mov " + regConverted + ", " + regData);
 >>>>>>> 0fcca1b... varios
 				registros.freeReg(RegisterTable.AX);
 				setAlmacenamiento(regConverted);
+=======
+				regData = registros.extendTo32bits(registros.getRegPos(RegisterTable.NAME_AX));
+				setAlmacenamiento(regData);
+>>>>>>> 313c55b... extensiones a 32 bits
 			}else { //es cte
 				String regConverted = registros.getRegFreeLong(getHijoIzq(), symbolTable, assemblerCode);
 				assemblerCode.addMsg("mov " + regConverted + ", " + data);
@@ -209,12 +216,17 @@ public class SyntacticTreeConver extends SyntacticTree{
 			String regAX = registros.getReg(RegisterTable.NAME_AX, getHijoIzq(), symbolTable, assemblerCode);
 			assemblerCode.addMsg("mov " + regAX + ", " + data);
 			assemblerCode.addMsg("cwde");
+<<<<<<< HEAD
 			String regConverted = registros.getRegFreeLong(getHijoIzq(), symbolTable, assemblerCode);
 			assemblerCode.addMsg("mov " + regConverted + ", " + regAX);
 >>>>>>> 0fcca1b... varios
 			registros.freeReg(RegisterTable.AX);
 			setAlmacenamiento(regConverted);
 >>>>>>> 51f241d... arreglos varios
+=======
+			regAX = registros.extendTo32bits(registros.getRegPos(RegisterTable.NAME_AX));
+			setAlmacenamiento(regAX);
+>>>>>>> 313c55b... extensiones a 32 bits
 		}
 		String regAux = registros.getRegFreeLong();
 		comAssembler.addMsg("MOV " + regAux + ", " + super.getElem());

@@ -11,6 +11,7 @@ import utils.syntacticTree.SyntacticTree;
 
 public class RegisterTable {
 
+<<<<<<< HEAD
 	private class Registro{
 		public String nombre;
 <<<<<<< HEAD
@@ -26,11 +27,15 @@ public class RegisterTable {
 		{
 =======
 =======
+=======
+	private class Registro {
+		public String name;
+>>>>>>> 313c55b... extensiones a 32 bits
 		public Boolean is_busy; // False: libre, True: ocupado
 		public SyntacticTree nodoAsociado;
 
 		public Registro() { is_busy = false; }
-		public String toString() { return "Nombre: " + nombre + " - Estado: " + is_busy + " - Nodo: " + nodoAsociado; }
+		public String toString() { return "Nombre: " + name + " - Estado: " + is_busy + " - Nodo: " + nodoAsociado; }
 	}
 <<<<<<< HEAD
 	
@@ -131,11 +136,18 @@ public class RegisterTable {
 =======
 =======
 			if(!reg.is_busy) {
+<<<<<<< HEAD
 				if(i == AX) reg.nombre = NAME_AX;
 				else if(i == BX) reg.nombre = NAME_BX;
 				else if(i == CX) reg.nombre = NAME_CX;
 				else reg.nombre = NAME_DX;
 >>>>>>> 507ee97... comentario
+=======
+				if(i == AX) reg.name = NAME_AX;
+				else if(i == BX) reg.name = NAME_BX;
+				else if(i == CX) reg.name = NAME_CX;
+				else reg.name = NAME_DX;
+>>>>>>> 313c55b... extensiones a 32 bits
 				reg.nodoAsociado = nodoAsociado;
 				reg.is_busy = true;
 				encontrado=true;
@@ -165,19 +177,23 @@ public class RegisterTable {
 			nuevoElemento.setIdentifierClass(ElementoTS.VAR);
 			symbolTable.put(nombreVarAux.substring(1), nuevoElemento);
 			reg.nodoAsociado.setAlmacenamiento(nombreVarAux); // setea el nodo del registro almacenado en var
-			assemblerCode.addMsg("mov " + nombreVarAux + ", " + reg.nombre);// mueve lo que contiene CX a var
+			assemblerCode.addMsg("mov " + nombreVarAux + ", " + reg.name);// mueve lo que contiene CX a var
 			reg.nodoAsociado = nodoAsociado;
 <<<<<<< HEAD
 			reg.nombre = NAME_CX;
 >>>>>>> 88b2c34... _
 =======
 			if (regPos == BX)
-				reg.nombre = NAME_BX;
+				reg.name = NAME_BX;
 			if (regPos == CX)
+<<<<<<< HEAD
 				reg.nombre = NAME_CX;
 >>>>>>> 51f241d... arreglos varios
+=======
+				reg.name = NAME_CX;
+>>>>>>> 313c55b... extensiones a 32 bits
 		}
-		return reg.nombre;
+		return reg.name;
 
 	}
 
@@ -202,6 +218,7 @@ public class RegisterTable {
 			reg = regState.get(i);
 			if(!reg.is_busy) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				switch(i){
 				case EAX: reg.nombre = NAME_EAX;
 				case EBX: reg.nombre = NAME_EBX;
@@ -223,6 +240,12 @@ public class RegisterTable {
 				else if(i == ECX) reg.nombre = NAME_ECX;
 				else reg.nombre = NAME_EDX;
 >>>>>>> 507ee97... comentario
+=======
+				if(i == EAX) reg.name = NAME_EAX;
+				else if(i == EBX) reg.name = NAME_EBX;
+				else if(i == ECX) reg.name = NAME_ECX;
+				else reg.name = NAME_EDX;
+>>>>>>> 313c55b... extensiones a 32 bits
 				reg.nodoAsociado = nodoAsociado;
 				reg.is_busy = true;
 				encontrado=true;
@@ -251,15 +274,16 @@ public class RegisterTable {
 			nuevoElemento.setIdentifierClass(ElementoTS.VAR);
 			symbolTable.put(nombreVarAux.substring(1), nuevoElemento);
 			reg.nodoAsociado.setAlmacenamiento(nombreVarAux);//setea el nodo del registro almacenado en var
-			assemblerCode.addMsg("mov " + nombreVarAux + ", " + reg.nombre);//mueve lo que contiene ECX a var
+			assemblerCode.addMsg("mov " + nombreVarAux + ", " + reg.name);//mueve lo que contiene ECX a var
 			reg.nodoAsociado = nodoAsociado;
 <<<<<<< HEAD
 			reg.nombre = NAME_ECX;
 >>>>>>> 88b2c34... _
 =======
 			if (regPos == EBX)
-				reg.nombre = NAME_EBX;
+				reg.name = NAME_EBX;
 			if (regPos == ECX)
+<<<<<<< HEAD
 				reg.nombre = NAME_ECX;
 <<<<<<< HEAD
 >>>>>>> 51f241d... arreglos varios
@@ -269,9 +293,12 @@ public class RegisterTable {
 		
 >>>>>>> 39b95a0... Update RegisterTable-VarAUX
 =======
+=======
+				reg.name = NAME_ECX;
+>>>>>>> 313c55b... extensiones a 32 bits
 
 		}
-		return reg.nombre;
+		return reg.name;
 
 >>>>>>> bbb6d5a... commit para pull
 	}
@@ -309,6 +336,14 @@ public class RegisterTable {
 >>>>>>> 39b95a0... Update RegisterTable-VarAUX
 =======
 	public void freeReg(int reg) { regState.get(reg).is_busy = false; }
+	
+	public String extendTo32bits(int reg) { (regState.get(reg)).name = getNameRegister32b(reg); return regState.get(reg).name; }
+	
+	private String getNameRegister32b(int reg) {
+		return (reg == 0)? NAME_EAX :
+				(reg == 1)? NAME_EBX :
+				(reg == 2)? NAME_ECX : NAME_EDX;
+	}
 
 	public int getRegPos(String regName) {
 		return  (regName == NAME_AX || regName == NAME_EAX)? AX :
@@ -365,15 +400,19 @@ public class RegisterTable {
 				regNuevo = getRegFreeInt(reg.nodoAsociado, symbolTable, assemblerCode);
 			else
 				regNuevo = getRegFreeLong(reg.nodoAsociado, symbolTable, assemblerCode);
-			assemblerCode.addMsg("mov " + regNuevo + ", " + reg.nombre);
+			assemblerCode.addMsg("mov " + regNuevo + ", " + reg.name);
 			reg.nodoAsociado.setAlmacenamiento(regNuevo);
 			reg.nodoAsociado = nodo;
-			reg.nombre = nameReg;
+			reg.name = nameReg;
 		} else {
 			reg.is_busy = true;
 			reg.nodoAsociado = nodo;
+<<<<<<< HEAD
 			reg.nombre = nameReg;
 >>>>>>> 0fcca1b... varios
+=======
+			reg.name = nameReg;
+>>>>>>> 313c55b... extensiones a 32 bits
 		}
 		return dato;
 	}
