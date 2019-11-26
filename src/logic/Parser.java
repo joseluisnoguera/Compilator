@@ -18,10 +18,14 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 //#line 2 "gramatica (12).y"
 =======
 //#line 2 "gramatica.y"
 >>>>>>> 1ce0652... comentario
+=======
+//#line 2 "gramatica - copia.y"
+>>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 	package logic;
 	
 	import java.util.Hashtable;
@@ -283,17 +287,18 @@ final static short yylen[] = {                            2,
     2,    3,    3,    4,    2,    2,    2,    5,    2,
 =======
     0,    1,    1,    1,    2,    2,    4,    4,    4,    4,
-    5,    8,    8,    6,    6,    7,    7,    7,    7,    9,
-    9,    9,    9,    3,   11,   11,   10,   12,   12,   12,
-   12,   12,   12,   13,   13,   20,   21,   18,   19,   23,
-   23,   23,   23,   23,   23,   14,   25,   25,   24,   15,
-   26,   26,   26,   27,   27,   27,   28,   28,   28,   22,
-   22,   22,   22,   22,   16,   29,   17,   17,   17,   17,
+    5,    5,    6,    6,    7,    7,    7,    7,    8,    8,
+    8,    8,    3,   11,   11,   10,   12,   12,   12,   12,
+   12,   12,   13,   13,   20,   21,   18,   19,   23,   23,
+   23,   23,   23,   23,   14,   25,   25,   24,   15,   26,
+   26,   26,   27,   27,   27,   28,   28,   28,   22,   22,
+   22,   22,    9,    9,   16,   29,   17,   17,   17,   17,
    17,   17,   17,   17,   17,   17,   17,   17,   17,   17,
    17,
 };
 final static short yylen[] = {                            2,
     1,    2,    1,    1,    1,    2,    3,    3,    1,    2,
+<<<<<<< HEAD
     1,    1,    1,    1,    3,    4,    6,    6,    8,    1,
 <<<<<<< HEAD
     1,    3,    3,    1,    1,    2,    2,    1,    4,    1,
@@ -320,97 +325,106 @@ final static short yylen[] = {                            2,
 >>>>>>> f58785c... arreglos para condiciones en indice de foreach
     1,    4,    4,    3,    3,    1,    3,    3,    1,    1,
     1,    4,    4,    2,    4,    1,    2,    2,    5,    3,
+=======
+    1,    1,    1,    3,    4,    6,    6,    8,    1,    1,
+    3,    3,    4,    2,    1,    1,    2,    1,    2,    2,
+    2,    2,    6,    8,    1,    1,    1,    3,    1,    1,
+    1,    1,    1,    1,    4,    1,    1,    2,    3,    1,
+    4,    4,    3,    3,    1,    3,    3,    1,    1,    1,
+    4,    4,    1,    2,    4,    1,    2,    2,    5,    3,
+>>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
     4,    4,    2,    3,    3,    4,    2,    2,    2,    5,
     2,
 >>>>>>> cf97fd0... Arreglos en ventana
 };
 final static short yydefred[] = {                         0,
-    0,   27,   12,   13,    0,    1,    0,    4,    5,    0,
-   11,    0,   10,    2,    6,    0,    0,    0,    0,    0,
-    0,   38,    0,   66,   42,   43,   44,   45,    0,   40,
-   41,    0,    0,    0,    0,    0,   29,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    7,    0,    8,    0,
-   33,   78,    0,    0,   77,   49,    0,   73,   79,   67,
-    0,   25,   28,   30,   31,   32,    0,    0,   61,   81,
-    0,   68,    0,    0,    0,    0,   20,    0,   21,    0,
-   15,    0,   75,    0,    0,   74,   24,    0,    0,    0,
-    0,   64,    0,    0,   70,   59,    0,    0,    0,    0,
-    0,   16,    0,   53,    0,   76,   52,    0,    0,    0,
-    0,    0,   71,    0,    0,   48,   46,    0,    0,    0,
-    0,   65,    0,   22,   23,    0,    0,   80,   69,   36,
-    0,   39,   63,   62,    0,    0,   57,   58,   18,    0,
-   17,    0,   34,    0,   37,    0,   19,   35,
+    0,   26,   11,   12,    0,    1,    0,    4,    5,    0,
+    0,   10,    2,    6,    0,    0,    0,    0,    0,    0,
+   37,    0,   66,   41,   42,   43,   44,    0,   39,   40,
+    0,    0,    0,    0,    0,   28,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    7,    0,    8,    0,   32,
+   78,    0,    0,   77,   48,    0,   73,   79,   67,    0,
+   24,   27,   29,   30,   31,    0,    0,   63,   81,    0,
+   60,   68,    0,    0,    0,    0,    0,   20,    0,   19,
+   14,    0,   75,    0,    0,   74,   23,    0,    0,    0,
+    0,   64,    0,    0,   70,   58,    0,    0,    0,    0,
+    0,   15,    0,   52,    0,   76,   51,    0,    0,    0,
+    0,    0,   71,    0,    0,   47,   45,    0,    0,    0,
+    0,   65,    0,   22,   21,    0,    0,   80,   69,   35,
+    0,   38,   62,   61,    0,    0,   56,   57,   17,    0,
+   16,    0,   33,    0,   36,    0,   18,   34,
 };
 final static short yydgoto[] = {                          5,
-    6,    7,    8,    9,   10,   17,   18,   32,   80,   12,
-   34,   35,   36,   37,   38,   39,   40,   41,   89,  131,
-  146,   96,   42,   43,  117,   44,   97,   98,   45,
+    6,    7,    8,    9,   31,   16,   17,   79,   71,   11,
+   33,   34,   35,   36,   37,   38,   39,   40,   89,  131,
+  146,   96,   41,   42,  117,   43,   97,   98,   44,
 };
-final static short yysindex[] = {                      -198,
-  -11,    0,    0,    0,    0,    0, -198,    0,    0, -237,
-    0,   27,    0,    0,    0,  -47,  -16,   -8,    7,  -78,
- -201,    0, -187,    0,    0,    0,    0,    0,  -77,    0,
-    0, -177, -174, -173,   27,   29,    0,   31,   32,   35,
-   46,  -45, -225, -172,   58,  -86,    0, -160,    0, -158,
-    0,    0,   10, -184,    0,    0,   11,    0,    0,    0,
-   43,    0,    0,    0,    0,    0,  -34,   17,    0,    0,
- -151,    0, -157, -197,  -40, -159,    0,   56,    0,  -20,
-    0,   25,    0,   26,  -81,    0,    0, -137,   80,  -43,
- -182,    0, -137,   27,    0,    0,   22,   14,   81, -136,
-  -80,    0,  -85,    0,   30,    0,    0, -139,   27,  -40,
-   34,   36,    0,    0,    9,    0,    0,  -40,  -40,  -40,
-  -40,    0,   37,    0,    0,   70,  -19,    0,    0,    0,
- -185,    0,    0,    0,   14,   14,    0,    0,    0, -129,
-    0,   27,    0,   39,    0, -132,    0,    0,
+final static short yysindex[] = {                      -179,
+  -34,    0,    0,    0,    0,    0, -179,    0,    0, -230,
+   26,    0,    0,    0,  -56,   -2,    2,   -5,  -78, -225,
+    0, -193,    0,    0,    0,    0,    0,  -77,    0,    0,
+ -191, -187, -171,   26,   32,    0,   35,   43,   48,   34,
+  -33, -231, -165,   70,  -45,    0, -148,    0, -147,    0,
+    0,   21, -175,    0,    0,   23,    0,    0,    0,   56,
+    0,    0,    0,    0,    0,  -31,   27,    0,    0, -140,
+    0,    0, -146, -199,  -38, -152,   65,    0,  -17,    0,
+    0,   33,    0,   36,  -82,    0,    0, -132,   86,   30,
+ -163,    0, -132,   26,    0,    0,   22,  -23,   87, -130,
+  -36,    0,  -40,    0,   38,    0,    0, -133,   26,  -38,
+   40,   41,    0,    0,    8,    0,    0,  -38,  -38,  -38,
+  -38,    0,   42,    0,    0,   78,  -14,    0,    0,    0,
+ -184,    0,    0,    0,  -23,  -23,    0,    0,    0, -123,
+    0,   26,    0,   46,    0, -127,    0,    0,
 };
 final static short yyrindex[] = {                         0,
-    0,    0,    0,    0,    0,    0,  134,    0,    0,    1,
-    0,    0,    0,    0,    0,   -4,    0,    0,    0, -134,
+    0,    0,    0,    0,    0,    0,  140,    0,    0,    1,
+    0,    0,    0,    0,    5,    0,    0,    0, -128,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0, -211,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,  -39,    0,    0,
+    0,    0,    0, -202,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,   77,  -14,    0,    0,
+    0,    0,    0,    0,    0,    0,  -39,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,  -21,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,  -13,  -10,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,   83,  -12,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,  -19,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,  -11,   -6,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,
 };
 final static short yygindex[] = {                         0,
-    0,    0,   19,  130,    0,    0,    0,   50,   38,    2,
-  -17,   44,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,  -15,   49,    0,    0,    0,    0,  -37,    0,
+    0,    0,   15,  136,   45,    0,    0,   44,  -28,    4,
+  -16,   50,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,  -15,   55,    0,    0,    0,    0,  -18,    0,
 };
-final static int YYTABLESIZE=300;
+final static int YYTABLESIZE=303;
 static short yytable[];
 static { yytable();}
 static void yytable(){
-yytable = new short[]{                         71,
-    9,   60,   60,   60,   71,   60,   88,   60,   79,   79,
-   71,  107,   54,   33,  125,   58,   30,   62,   31,   60,
-   60,   16,   60,  101,  101,   14,   72,   48,   56,   55,
-   56,   55,   54,   73,   54,   50,   33,   72,   47,   14,
-   47,   74,   47,   46,   56,   55,   26,   13,   54,   11,
-   49,   90,   26,   26,   14,  120,   11,    1,    2,    2,
-  121,   94,    3,    4,  119,   51,  118,   55,   30,   47,
-   31,   56,  102,  141,   84,   85,  111,  112,  142,  143,
-  135,  136,   59,   60,   61,   67,   30,   63,   31,   64,
-   65,  130,   95,   66,  132,  115,   75,   76,   81,   29,
-   82,   87,   83,   86,  137,  138,  108,   91,   92,   93,
-   33,  113,  114,  100,   99,  103,   33,   29,  104,    2,
-  109,  122,  128,  123,  145,  129,  133,  140,  134,  139,
-  144,  147,  148,    3,   51,   50,   15,  116,  110,    0,
-  127,    0,    0,   33,    0,    0,    0,    0,    0,    0,
+yytable = new short[]{                         70,
+    9,   59,   59,   59,   70,   59,   70,   59,   70,   88,
+  107,   70,   53,   70,   32,   57,   80,   61,  120,   59,
+   59,   13,   59,  121,   12,   72,  101,   73,   15,  101,
+   55,   54,   55,   54,   45,   74,   53,   32,   53,   72,
+   46,   47,   46,   54,   10,   49,   55,   54,   13,   78,
+   90,   10,   53,   50,   78,   25,   46,    2,  124,   94,
+   48,   25,   25,   13,  119,   55,  118,   29,   58,   30,
+   59,   46,  125,   66,   80,  102,    1,    2,  141,  142,
+  143,    3,    4,   84,   85,   29,   60,   30,   95,   29,
+   62,   30,  130,   63,  132,  111,  112,  115,   28,  135,
+  136,   64,  108,   75,  137,  138,   65,  113,  114,   76,
+   81,   82,   32,   83,   87,   86,   28,   91,   32,   92,
+   93,   99,  100,  103,    2,  145,  109,  122,  104,  123,
+  128,  129,  133,  134,  139,  140,  144,  148,  147,    3,
+   50,   49,   14,  116,  110,   32,  127,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,   77,   77,    0,    0,    0,  105,  124,
-   52,   53,   57,    0,    0,    0,    0,  106,   78,  126,
+    0,    0,    0,    0,    0,    0,    0,  105,    0,    0,
+   51,   52,   56,    0,    0,    0,  106,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     0,    0,    0,   70,   71,    0,    0,    0,   70,   71,
@@ -560,6 +574,18 @@ yytable = new short[]{                         58,
    27,   28,   19,    2,    0,   20,   21,    3,    4,   22,
     0,    0,   23,    0,   24,    0,   25,   26,   27,   28,
 >>>>>>> f58785c... arreglos para condiciones en indice de foreach
+=======
+    0,    0,    0,    0,   68,    0,    0,    0,    0,   68,
+   67,   68,    0,   68,    0,   67,   68,   67,   68,   77,
+   59,   59,   59,   59,  126,   69,   46,   46,   46,   46,
+   46,   46,   46,   46,   46,   46,   46,    0,   46,    0,
+   46,   46,   46,   46,    0,    0,    9,    9,    0,    0,
+    0,    9,    9,   18,    2,   59,   19,   20,    3,    4,
+   21,    0,    0,   22,    0,   23,    0,   24,   25,   26,
+   27,   18,    2,    0,   19,   20,    3,    4,   21,    0,
+    0,   22,    0,   23,    0,   24,   25,   26,   27,   24,
+   25,   26,   27,
+>>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 };
 }
 static short yycheck[];
@@ -603,6 +629,7 @@ yycheck = new short[] {                         41,
 >>>>>>> 87f0bc1... cambios pre-entrega
 =======
 yycheck = new short[] {                         45,
+<<<<<<< HEAD
     0,   41,   42,   43,   45,   45,   41,   47,   95,   95,
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -672,6 +699,23 @@ yycheck = new short[] {                         45,
    41,   41,   93,  260,  142,  265,   93,   58,   93,   93,
   260,   93,  265,    0,  269,   59,    7,   94,   90,   -1,
   103,   -1,   -1,  142,   -1,   -1,   -1,   -1,   -1,   -1,
+=======
+    0,   41,   42,   43,   45,   45,   45,   47,   45,   41,
+   93,   45,   91,   45,   11,   93,   45,   34,   42,   59,
+   60,    7,   62,   47,   59,   41,   44,  259,  259,   44,
+   43,   43,   45,   45,   91,  267,   43,   34,   45,   59,
+   60,   44,   62,  269,    0,   44,   59,   59,   44,   95,
+   66,    7,   59,   59,   95,  258,   59,  257,   95,  259,
+   59,  264,  265,   59,   43,  259,   45,   60,  260,   62,
+  258,   91,  101,   40,  103,   93,  256,  257,   93,  264,
+  265,  261,  262,  259,  260,   60,  258,   62,   74,   60,
+   59,   62,  109,   59,  110,  259,  260,   94,   91,  118,
+  119,   59,   88,  269,  120,  121,   59,   93,   94,   40,
+  259,  259,  109,   93,   59,   93,   91,   91,  115,  260,
+  267,  274,   58,   91,  257,  142,   41,   41,   93,  260,
+   93,  265,   93,   93,   93,   58,  260,  265,   93,    0,
+  269,   59,    7,   94,   90,  142,  103,   -1,   -1,   -1,
+>>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
 >>>>>>> bca257b... resueltos problemas en common
 =======
@@ -692,10 +736,11 @@ yycheck = new short[] {                         45,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
 >>>>>>> 1ce0652... comentario
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
-   -1,   -1,   -1,  260,  260,   -1,   -1,   -1,  260,  260,
-  259,  260,  260,   -1,   -1,   -1,   -1,  269,  275,  275,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,  260,   -1,   -1,
+  259,  260,  260,   -1,   -1,   -1,  269,   -1,   -1,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+<<<<<<< HEAD
 <<<<<<< HEAD
    -1,   -1,   -1,   -1,   -1,   -1,  259,  260,   -1,   -1,
   259,  260,  259,  260,   -1,   -1,  269,   -1,  270,  271,
@@ -739,6 +784,18 @@ yycheck = new short[] {                         45,
   272,  273,  256,  257,   -1,  259,  260,  261,  262,  263,
    -1,   -1,  266,   -1,  268,   -1,  270,  271,  272,  273,
 >>>>>>> f58785c... arreglos para condiciones en indice de foreach
+=======
+   -1,   -1,   -1,   -1,  260,   -1,   -1,   -1,   -1,  260,
+  259,  260,   -1,  260,   -1,  259,  260,  259,  260,  275,
+  270,  271,  272,  273,  275,  269,  256,  257,  258,  259,
+  260,  261,  262,  263,  264,  265,  266,   -1,  268,   -1,
+  270,  271,  272,  273,   -1,   -1,  256,  257,   -1,   -1,
+   -1,  261,  262,  256,  257,  258,  259,  260,  261,  262,
+  263,   -1,   -1,  266,   -1,  268,   -1,  270,  271,  272,
+  273,  256,  257,   -1,  259,  260,  261,  262,  263,   -1,
+   -1,  266,   -1,  268,   -1,  270,  271,  272,  273,  270,
+  271,  272,  273,
+>>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 };
 }
 final static short YYFINAL=5;
@@ -776,18 +833,17 @@ final static String yyrule[] = {
 "sent_decl : comienzo_decl lista_colecciones ';'",
 "sent_decl : comienzo_decl",
 "sent_decl : error ';'",
-"comienzo_decl : tipo",
-"tipo : INT",
-"tipo : LONG",
+"comienzo_decl : INT",
+"comienzo_decl : LONG",
 "lista_vars : ID",
 "lista_vars : lista_vars ',' ID",
 "lista_colecciones : ID '[' lista_valores_inic ']'",
 "lista_colecciones : lista_colecciones ',' ID '[' lista_valores_inic ']'",
 "lista_colecciones : ID '[' SIZE ':' CTE ']'",
 "lista_colecciones : lista_colecciones ',' ID '[' SIZE ':' CTE ']'",
-"lista_valores_inic : CTE",
+"lista_valores_inic : constante_controlada",
 "lista_valores_inic : '_'",
-"lista_valores_inic : lista_valores_inic ',' CTE",
+"lista_valores_inic : lista_valores_inic ',' constante_controlada",
 "lista_valores_inic : lista_valores_inic ',' '_'",
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -884,10 +940,11 @@ final static String yyrule[] = {
 "term : term '/' factor",
 "term : factor",
 "factor : ID",
-"factor : CTE",
+"factor : constante_controlada",
 "factor : ID '[' CTE ']'",
 "factor : ID '[' ID ']'",
-"factor : '-' CTE",
+"constante_controlada : CTE",
+"constante_controlada : '-' CTE",
 "sent_print : comienzo_print '(' CAD ')'",
 "comienzo_print : PRINT",
 "error_p : comienzo_bloque END",
@@ -902,11 +959,12 @@ final static String yyrule[] = {
 "error_p : ID '[' CTE ASSIGN",
 "error_p : CTE ASSIGN",
 "error_p : ID ID",
-"error_p : tipo CTE",
+"error_p : comienzo_decl CTE",
 "error_p : ID '[' CTE CTE ']'",
 "error_p : comparador ASSIGN",
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -992,17 +1050,21 @@ final static String yyrule[] = {
 =======
 //#line 582 "gramatica.y"
 >>>>>>> ff6e773... uso de punteros como enteros
+=======
+//#line 596 "gramatica - copia.y"
+>>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 
 private Lexicon lex;
 private Hashtable<String,ElementoTS> symbolTable;
-private MsgStack msgStack; // Stack de mensajes de error y warning
+private MsgStack msgStack; 							// Stack de mensajes de error y warning
 private MsgStack semanticStructStack;
 Stack<Integer> stackOfLines = new Stack<Integer>(); // Stack para guardar los números de línea (para anidamiento de for/if)
-private int numLineaDecl; // Guarda el número de líneal del comienzo de declaración
-private int countSize; // Cuenta cantidad de elementos inicializados en el arreglo
-private String elems; // Guarda los elementos iniciales de la colección
-private String tipovar; // Almacena el tipo de la variable/colección para su seteo posterior en TS
-private ST_Control nodoRaiz; // Raiz del árbol sintáctico
+private int numLineaDecl; 							// Guarda el número de líneal del comienzo de declaración
+private int countSize; 								// Cuenta cantidad de elementos inicializados en el arreglo
+private String elems; 								// Guarda los elementos iniciales de la colección
+private String tipovar; 							// Almacena el tipo de la variable/colección para su seteo posterior en TS
+private String expectedVarType; 					// Para control de tipos en la declaración
+private ST_Control nodoRaiz; 						// Raiz del árbol sintáctico
 private boolean hasError;
 
 public Parser(Lexicon lex, Hashtable<String, ElementoTS> symbolTable, MsgStack msgStack, MsgStack semanticStructStack){
@@ -1012,6 +1074,7 @@ public Parser(Lexicon lex, Hashtable<String, ElementoTS> symbolTable, MsgStack m
 	this.semanticStructStack = semanticStructStack;
 	countSize = 0;
 	hasError = false;
+	expectedVarType = "";
 }
 
 private int yylex(){
@@ -1083,11 +1146,15 @@ public ST_Control getRaiz(){
 
 public boolean hasErrors() { return hasError; }
 <<<<<<< HEAD
+<<<<<<< HEAD
 //#line 425 "Parser.java"
 >>>>>>> 1375c5c... arreglos varios
 =======
 //#line 428 "Parser.java"
 >>>>>>> f58785c... arreglos para condiciones en indice de foreach
+=======
+//#line 432 "Parser.java"
+>>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 //###############################################################
 // method: yylexdebug : check lexer state
 //###############################################################
@@ -1242,36 +1309,43 @@ boolean doaction;
       {
 //########## USER-SUPPLIED ACTIONS ##########
 case 1:
-//#line 28 "gramatica.y"
+//#line 28 "gramatica - copia.y"
 { nodoRaiz = new ST_Control("PROGRAMA",(SyntacticTree)val_peek(0)); }
 break;
 case 2:
-//#line 31 "gramatica.y"
+//#line 31 "gramatica - copia.y"
 { yyval = val_peek(0); }
 break;
 case 3:
-//#line 32 "gramatica.y"
+//#line 32 "gramatica - copia.y"
 { yyval = new ST_Common("SENTENCIA", null, null); msgStack.addMsg("Warning: Programa sin codigo ejecutable"); }
 break;
 case 4:
-//#line 33 "gramatica.y"
+//#line 33 "gramatica - copia.y"
 { yyval = val_peek(0); }
 break;
 case 7:
-//#line 40 "gramatica.y"
+//#line 40 "gramatica - copia.y"
 { semanticStructStack.addMsg("Linea "+ numLineaDecl +": Sentencia declarativa"); }
 break;
 case 8:
-//#line 41 "gramatica.y"
-{ semanticStructStack.addMsg("Linea "+ numLineaDecl +": Sentencia declarativa"); }
+//#line 41 "gramatica - copia.y"
+{ 
+				semanticStructStack.addMsg("Linea "+ numLineaDecl +": Sentencia declarativa");
+				if (tipovar != expectedVarType){
+					 msgStack.addMsg("Error: uso de constante de tipo distinto al declarado en línea: " + lex.getNewLineCounter());
+					 hasError = true;
+				}
+				expectedVarType = "";
+			  }
 break;
 case 10:
-//#line 43 "gramatica.y"
+//#line 50 "gramatica - copia.y"
 { msgStack.addMsg("Error genérico en el bloque declarativo no contemplado cerca de línea " + lex.getNewLineCounter()); }
 break;
 case 11:
-//#line 46 "gramatica.y"
-{ numLineaDecl = lex.getNewLineCounter(); }
+//#line 53 "gramatica - copia.y"
+{tipovar = ElementoTS.INT; numLineaDecl = lex.getNewLineCounter(); }
 break;
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -1310,10 +1384,11 @@ case 14:
 >>>>>>> f75def1... comentario
 =======
 case 12:
-//#line 49 "gramatica.y"
-{tipovar = ElementoTS.INT;}
+//#line 54 "gramatica - copia.y"
+{tipovar = ElementoTS.LONG; numLineaDecl = lex.getNewLineCounter(); }
 break;
 case 13:
+<<<<<<< HEAD
 //#line 50 "gramatica.y"
 {tipovar = ElementoTS.LONG;}
 break;
@@ -1348,6 +1423,22 @@ case 14:
 =======
 //#line 53 "gramatica.y"
 >>>>>>> f58785c... arreglos para condiciones en indice de foreach
+=======
+//#line 57 "gramatica - copia.y"
+>>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
+{
+					if(!symbolTable.get(val_peek(0).sval).isDeclared()){
+						symbolTable.get(val_peek(0).sval).setDeclared();
+						symbolTable.get(val_peek(0).sval).setVariableType(tipovar);
+						symbolTable.get(val_peek(0).sval).setIdentifierClass(ElementoTS.VAR);
+					} else {
+						msgStack.addMsg("Error: variable "+ val_peek(0).sval+" re-declarada en el número de línea " + lex.getNewLineCounter());
+						hasError = true;
+					}
+				}
+break;
+case 14:
+//#line 67 "gramatica - copia.y"
 {
 					if(!symbolTable.get(val_peek(0).sval).isDeclared()){
 						symbolTable.get(val_peek(0).sval).setDeclared();
@@ -1360,20 +1451,24 @@ case 14:
 				}
 break;
 case 15:
-//#line 63 "gramatica.y"
+//#line 79 "gramatica - copia.y"
 {
-					if(!symbolTable.get(val_peek(0).sval).isDeclared()){
-						symbolTable.get(val_peek(0).sval).setDeclared();
-						symbolTable.get(val_peek(0).sval).setVariableType(tipovar);
-						symbolTable.get(val_peek(0).sval).setIdentifierClass(ElementoTS.VAR);
-					} else {
-						msgStack.addMsg("Error: variable "+ val_peek(0).sval+" re-declarada en el número de línea " + lex.getNewLineCounter());
-						hasError = true;
-					}
+				if(!symbolTable.get(val_peek(3).sval).isDeclared()) {
+					symbolTable.get(val_peek(3).sval).setDeclared();
+					symbolTable.get(val_peek(3).sval).setCSize(countSize);
+					symbolTable.get(val_peek(3).sval).setElemsCollection(elems);
+					symbolTable.get(val_peek(3).sval).setVariableType(tipovar);
+					symbolTable.get(val_peek(3).sval).setIdentifierClass(ElementoTS.COL);
+					elems = "";
+					countSize = 0;
+				} else {
+					msgStack.addMsg("Error: colección "+ val_peek(3).sval+" re-declarada en el número de línea " + lex.getNewLineCounter());
+					hasError = true;
 				}
+			}
 break;
 case 16:
-//#line 75 "gramatica.y"
+//#line 93 "gramatica - copia.y"
 {
 				if(!symbolTable.get(val_peek(3).sval).isDeclared()) {
 					symbolTable.get(val_peek(3).sval).setDeclared();
@@ -1390,24 +1485,7 @@ case 16:
 			}
 break;
 case 17:
-//#line 89 "gramatica.y"
-{
-				if(!symbolTable.get(val_peek(3).sval).isDeclared()) {
-					symbolTable.get(val_peek(3).sval).setDeclared();
-					symbolTable.get(val_peek(3).sval).setCSize(countSize);
-					symbolTable.get(val_peek(3).sval).setElemsCollection(elems);
-					symbolTable.get(val_peek(3).sval).setVariableType(tipovar);
-					symbolTable.get(val_peek(3).sval).setIdentifierClass(ElementoTS.COL);
-					elems = "";
-					countSize = 0;
-				} else {
-					msgStack.addMsg("Error: colección "+ val_peek(3).sval+" re-declarada en el número de línea " + lex.getNewLineCounter());
-					hasError = true;
-				}
-			}
-break;
-case 18:
-//#line 103 "gramatica.y"
+//#line 107 "gramatica - copia.y"
 {
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -1460,12 +1538,17 @@ case 18:
 break;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 case 26:
 //#line 88 "gramatica.y"
 { semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() +": Bloque de ejecuci�n"); }
 =======
 case 19:
 //#line 120 "gramatica.y"
+=======
+case 18:
+//#line 124 "gramatica - copia.y"
+>>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 {
 				if(!symbolTable.get(val_peek(5).sval).isDeclared()){
 					symbolTable.get(val_peek(5).sval).setDeclared();
@@ -1484,43 +1567,48 @@ case 19:
 				}
 			}
 break;
-case 20:
-//#line 139 "gramatica.y"
-{ elems= val_peek(0).sval; countSize++;}
+case 19:
+//#line 143 "gramatica - copia.y"
+{ elems = ((SyntacticTree)val_peek(0)).getElem(); countSize++; }
 break;
-case 21:
-//#line 140 "gramatica.y"
+case 20:
+//#line 144 "gramatica - copia.y"
 { elems= "_"; countSize++;}
 break;
-case 22:
-//#line 141 "gramatica.y"
-{ elems = elems + "," + val_peek(0).sval; countSize++;}
+case 21:
+//#line 145 "gramatica - copia.y"
+{ elems = elems + "," + ((SyntacticTree)val_peek(0)).getElem(); countSize++; }
 break;
-case 23:
-//#line 142 "gramatica.y"
+case 22:
+//#line 146 "gramatica - copia.y"
 { elems = elems + ",_"; countSize++; }
 break;
-case 24:
-//#line 145 "gramatica.y"
+case 23:
+//#line 149 "gramatica - copia.y"
 { yyval = val_peek(2); semanticStructStack.addMsg("Línea "+ stackOfLines.peek().intValue() +": Bloque de ejecución"); }
 break;
-case 25:
-//#line 148 "gramatica.y"
+case 24:
+//#line 152 "gramatica - copia.y"
 { yyval = new ST_Common("SENTENCIA", (SyntacticTree)val_peek(1), (SyntacticTree)val_peek(0));	}
 break;
-case 26:
-//#line 149 "gramatica.y"
+case 25:
+//#line 153 "gramatica - copia.y"
 { yyval = new ST_Common("SENTENCIA", (SyntacticTree)val_peek(0), null); }
 break;
-case 27:
-//#line 152 "gramatica.y"
+case 26:
+//#line 156 "gramatica - copia.y"
 { stackOfLines.push(lex.getNewLineCounter()); }
 break;
-case 28:
-//#line 155 "gramatica.y"
+case 27:
+//#line 159 "gramatica - copia.y"
 { yyval = val_peek(1); }
 break;
+case 28:
+//#line 160 "gramatica - copia.y"
+{ yyval = val_peek(0); }
+break;
 case 29:
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -1575,22 +1663,23 @@ case 29:
 >>>>>>> f58785c... arreglos para condiciones en indice de foreach
 { yyval = val_peek(0); }
 >>>>>>> 45299ea... visualización de árbol sintáctico
+=======
+//#line 161 "gramatica - copia.y"
+{ yyval = val_peek(1); }
+>>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 break;
 case 30:
-//#line 157 "gramatica.y"
+//#line 162 "gramatica - copia.y"
 { yyval = val_peek(1); }
 break;
 case 31:
-//#line 158 "gramatica.y"
-{ yyval = val_peek(1); }
-break;
-case 32:
-//#line 159 "gramatica.y"
+//#line 163 "gramatica - copia.y"
 {
 				yyval = new ST_Common("ERROR", null, null);
 				/* Hay un warning en error_p, por eso hasError se setea true abajo y no acá */
 			}
 break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 case 34:
@@ -1626,12 +1715,17 @@ case 37:
 =======
 case 33:
 //#line 163 "gramatica.y"
+=======
+case 32:
+//#line 167 "gramatica - copia.y"
+>>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 { 
 				msgStack.addMsg("Error genérico no contemplado cerca de línea " + lex.getNewLineCounter());
 				hasError = true;
 				yyval = new ST_Common("ERROR", null, null);
 			}
 break;
+<<<<<<< HEAD
 case 34:
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -1675,6 +1769,10 @@ case 34:
 =======
 //#line 170 "gramatica.y"
 >>>>>>> f58785c... arreglos para condiciones en indice de foreach
+=======
+case 33:
+//#line 174 "gramatica - copia.y"
+>>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 {
                     semanticStructStack.addMsg("L?nea " + stackOfLines.peek().intValue() + ": Sentencia IF ");
                     stackOfLines.pop();
@@ -1682,6 +1780,7 @@ case 34:
 					yyval = new ST_Common("IF",(SyntacticTree)val_peek(3),nodothen);
                 }
 break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -1755,6 +1854,10 @@ case 35:
 =======
 //#line 176 "gramatica.y"
 >>>>>>> f58785c... arreglos para condiciones en indice de foreach
+=======
+case 34:
+//#line 180 "gramatica - copia.y"
+>>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 {
                     semanticStructStack.addMsg("L?nea " + stackOfLines.peek().intValue() + ": Sentencia IF ");
                     stackOfLines.pop();
@@ -1764,6 +1867,7 @@ case 35:
 					yyval = new ST_Common("IF",(SyntacticTree)val_peek(5),nodoCuerpo);
                 }
 break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -1791,12 +1895,17 @@ case 41:
 =======
 case 36:
 //#line 188 "gramatica.y"
+=======
+case 35:
+//#line 192 "gramatica - copia.y"
+>>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 { yyval = val_peek(0); }
 break;
-case 37:
-//#line 191 "gramatica.y"
+case 36:
+//#line 195 "gramatica - copia.y"
 { yyval = val_peek(0); }
 break;
+<<<<<<< HEAD
 case 38:
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -1844,10 +1953,14 @@ case 38:
 =======
 //#line 194 "gramatica.y"
 >>>>>>> f58785c... arreglos para condiciones en indice de foreach
+=======
+case 37:
+//#line 198 "gramatica - copia.y"
+>>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 { stackOfLines.push(lex.getNewLineCounter()); }
 break;
-case 39:
-//#line 197 "gramatica.y"
+case 38:
+//#line 201 "gramatica - copia.y"
 {
 			SyntacticTree nodoCond;
 			if (((SyntacticTree)val_peek(2)).getType() != ((SyntacticTree)val_peek(0)).getType()){
@@ -1859,32 +1972,32 @@ case 39:
 			SyntacticTree nodoCondCtrol = new ST_Control("COND_IF",nodoCond);
 			yyval = nodoCondCtrol; }
 break;
-case 40:
-//#line 209 "gramatica.y"
+case 39:
+//#line 213 "gramatica - copia.y"
 { val_peek(0).sval = "<"; yyval = val_peek(0); }
 break;
-case 41:
-//#line 210 "gramatica.y"
+case 40:
+//#line 214 "gramatica - copia.y"
 { val_peek(0).sval = ">"; yyval = val_peek(0); }
 break;
-case 42:
-//#line 211 "gramatica.y"
+case 41:
+//#line 215 "gramatica - copia.y"
 { val_peek(0).sval = "LET"; yyval = val_peek(0); }
 break;
-case 43:
-//#line 212 "gramatica.y"
+case 42:
+//#line 216 "gramatica - copia.y"
 { val_peek(0).sval = "GET"; yyval = val_peek(0); }
 break;
-case 44:
-//#line 213 "gramatica.y"
+case 43:
+//#line 217 "gramatica - copia.y"
 { val_peek(0).sval = "EQ"; yyval = val_peek(0); }
 break;
-case 45:
-//#line 214 "gramatica.y"
+case 44:
+//#line 218 "gramatica - copia.y"
 { val_peek(0).sval = "DIF"; yyval = val_peek(0); }
 break;
-case 46:
-//#line 217 "gramatica.y"
+case 45:
+//#line 221 "gramatica - copia.y"
 { 
 		ST_Common nodo = null;
         semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() + ": Sentencia foreach");
@@ -1928,14 +2041,15 @@ case 46:
 		yyval = nodo;
 	}
 break;
+case 46:
+//#line 265 "gramatica - copia.y"
+{ yyval = val_peek(0); }
+break;
 case 47:
-//#line 261 "gramatica.y"
+//#line 266 "gramatica - copia.y"
 { yyval = val_peek(0); }
 break;
-case 48:
-//#line 262 "gramatica.y"
-{ yyval = val_peek(0); }
-break;
+<<<<<<< HEAD
 case 49:
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -2027,6 +2141,10 @@ case 50:
 =======
 //#line 265 "gramatica.y"
 >>>>>>> ff6e773... uso de punteros como enteros
+=======
+case 48:
+//#line 269 "gramatica - copia.y"
+>>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 { 
 					stackOfLines.push(lex.getNewLineCounter());
 					if (symbolTable.get(val_peek(0).sval).isDeclared()) {
@@ -2040,8 +2158,8 @@ case 50:
 				}
 >>>>>>> f58785c... arreglos para condiciones en indice de foreach
 break;
-case 50:
-//#line 278 "gramatica.y"
+case 49:
+//#line 282 "gramatica - copia.y"
 {
 				SyntacticTree nodo = null;
 				semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() + ": Asignación"); 
@@ -2089,6 +2207,7 @@ break;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 case 49:
 //#line 148 "gramatica.y"
 { stackOfLines.push(lex.getNewLineCounter()); }
@@ -2111,6 +2230,10 @@ case 49:
 =======
 case 51:
 //#line 310 "gramatica.y"
+=======
+case 50:
+//#line 314 "gramatica - copia.y"
+>>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 { 
 						SyntacticTree nodo = null;
 						stackOfLines.push(lex.getNewLineCounter()); 
@@ -2133,9 +2256,14 @@ case 51:
 						yyval = nodo;
 					}
 break;
+<<<<<<< HEAD
 >>>>>>> fcadff2... coment
 case 52:
 //#line 330 "gramatica.y"
+=======
+case 51:
+//#line 335 "gramatica - copia.y"
+>>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 { 
 				   		SyntacticTree nodo = null;
 						stackOfLines.push(lex.getNewLineCounter());
@@ -2159,6 +2287,7 @@ case 52:
 						yyval = nodo;
 					}
 break;
+<<<<<<< HEAD
 case 53:
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -2259,6 +2388,10 @@ case 53:
 =======
 //#line 352 "gramatica.y"
 >>>>>>> ff6e773... uso de punteros como enteros
+=======
+case 52:
+//#line 357 "gramatica - copia.y"
+>>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 {
 						SyntacticTree nodo = null;
 >>>>>>> 45299ea... visualización de árbol sintáctico
@@ -2290,6 +2423,7 @@ case 53:
 					}
 >>>>>>> cf97fd0... Arreglos en ventana
 break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 case 51:
@@ -2374,6 +2508,10 @@ if(symbolTable.get(val_peek(0).sval).getDeclaracion() == false)
 =======
 //#line 382 "gramatica.y"
 >>>>>>> ff6e773... uso de punteros como enteros
+=======
+case 53:
+//#line 387 "gramatica - copia.y"
+>>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 {
 					SyntacticTree nodo = null;
 					if(((SyntacticTree) val_peek(2)).getType() != ((SyntacticTree) val_peek(0)).getType()) {
@@ -2395,8 +2533,8 @@ if(symbolTable.get(val_peek(0).sval).getDeclaracion() == false)
 =======
 >>>>>>> 4269743... generador de datos
 break;
-case 55:
-//#line 396 "gramatica.y"
+case 54:
+//#line 401 "gramatica - copia.y"
 {
 					SyntacticTree nodo = null;
 					if(((SyntacticTree) val_peek(2)).getType() != ((SyntacticTree) val_peek(0)).getType()) {
@@ -2412,6 +2550,7 @@ case 55:
 					yyval = nodo;
 				}
 break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 case 59:
@@ -2447,10 +2586,14 @@ case 62:
 =======
 case 56:
 //#line 410 "gramatica.y"
+=======
+case 55:
+//#line 415 "gramatica - copia.y"
+>>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 { yyval =val_peek(0); }
 break;
-case 57:
-//#line 413 "gramatica.y"
+case 56:
+//#line 418 "gramatica - copia.y"
 {
 			SyntacticTree nodo = null;
 			if(((SyntacticTree) val_peek(2)).getType() != ((SyntacticTree) val_peek(0)).getType()) {
@@ -2465,8 +2608,8 @@ case 57:
 			yyval = nodo;
 		}
 break;
-case 58:
-//#line 426 "gramatica.y"
+case 57:
+//#line 431 "gramatica - copia.y"
 {
 			SyntacticTree nodo = null;
 			if(((SyntacticTree) val_peek(2)).getType() != ((SyntacticTree) val_peek(0)).getType()) {
@@ -2482,6 +2625,7 @@ case 58:
 			yyval = nodo;
 		}
 break;
+<<<<<<< HEAD
 case 59:
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -2589,6 +2733,14 @@ break;
 case 60:
 //#line 443 "gramatica.y"
 >>>>>>> ff6e773... uso de punteros como enteros
+=======
+case 58:
+//#line 445 "gramatica - copia.y"
+{ yyval = val_peek(0); }
+break;
+case 59:
+//#line 448 "gramatica - copia.y"
+>>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 {
 				SyntacticTree nodo = null;
 				
@@ -2610,6 +2762,7 @@ case 60:
 				yyval = nodo;
 			}
 break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -2815,6 +2968,14 @@ case 62:
 =======
 //#line 487 "gramatica.y"
 >>>>>>> ff6e773... uso de punteros como enteros
+=======
+case 60:
+//#line 468 "gramatica - copia.y"
+{ yyval = val_peek(0); }
+break;
+case 61:
+//#line 469 "gramatica - copia.y"
+>>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 {
 					SyntacticTree nodo = null;
 					if(!symbolTable.get(val_peek(3).sval).isDeclared()){
@@ -2835,6 +2996,7 @@ case 62:
 					yyval = nodo;
 				}
 break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -2876,6 +3038,10 @@ case 62:
 =======
 case 63:
 //#line 506 "gramatica.y"
+=======
+case 62:
+//#line 488 "gramatica - copia.y"
+>>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 {
 					SyntacticTree nodo = null;
 					if(!symbolTable.get(val_peek(3).sval).isDeclared() || !symbolTable.get(val_peek(1).sval).isDeclared()){
@@ -2902,7 +3068,38 @@ case 63:
 					yyval = nodo;
 				}
 break;
+case 63:
+//#line 516 "gramatica - copia.y"
+{
+							String lexeme = val_peek(0).sval;
+							ElementoTS tts = symbolTable.get(lexeme);
+							if(lexeme == "32768"){
+								tts.setVariableType(ElementoTS.LONG);
+							}
+							if (lexeme == "2147483648"){
+								String lexnuevo = "2147483647";
+								val_peek(0).sval = lexnuevo;
+								symbolTable.get(lexeme).decreaseVariableRepetitions();
+								if(symbolTable.containsKey(lexnuevo)){
+									symbolTable.get(lexnuevo).increaseVariableRepetitions();
+								}else {
+									ElementoTS ttsnuevo = new ElementoTS( ElementoTS.CONST, tts.getValue(), tts.getVariableType());
+									symbolTable.put(lexnuevo, ttsnuevo);
+								}
+							lexeme = lexnuevo;
+								msgStack.addMsg("Warning: Constante positiva fuera de rango.");
+							}
+							String currentType = symbolTable.get(lexeme).getVariableType();
+							expectedVarType = (expectedVarType == "")? currentType : 
+								(currentType == ElementoTS.LONG || expectedVarType == ElementoTS.LONG)? ElementoTS.LONG : ElementoTS.INT;
+							SyntacticTree nodo = new ST_Leaf(lexeme);
+							nodo.setType(currentType);
+							nodo.setAlmacenamiento(nodo.getElem());
+							yyval = nodo;
+	        			}
+break;
 case 64:
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -2945,24 +3142,30 @@ case 64:
 =======
 //#line 531 "gramatica.y"
 >>>>>>> ff6e773... uso de punteros como enteros
+=======
+//#line 543 "gramatica - copia.y"
+>>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 {
-					String lexeme = val_peek(0).sval;
-					ElementoTS tts = symbolTable.get(lexeme);
-					String lexnuevo = "-" + lexeme;
-					val_peek(0).sval = lexnuevo;
-					if(!symbolTable.containsKey(lexnuevo)){
-						ElementoTS ttsneg = new ElementoTS(ElementoTS.CONST, tts.getValue(), tts.getVariableType());
-						symbolTable.put(lexnuevo,ttsneg);
-					}else
-						symbolTable.get(lexnuevo).increaseVariableRepetitions();
-					if (tts.getVariableRepetitions() == 0)
-						symbolTable.remove(lexeme);
-					symbolTable.get(lexeme).decreaseVariableRepetitions();
-					SyntacticTree nodo = new ST_Leaf(lexnuevo);
-					nodo.setType(symbolTable.get(lexnuevo).getVariableType());
-					nodo.setAlmacenamiento(nodo.getElem());
-					yyval = nodo;
-	        }
+							String lexeme = val_peek(0).sval;
+							ElementoTS tts = symbolTable.get(lexeme);
+							String lexnuevo = "-" + lexeme;
+							val_peek(0).sval = lexnuevo;
+							if(!symbolTable.containsKey(lexnuevo)){
+								ElementoTS ttsneg = new ElementoTS(ElementoTS.CONST, tts.getValue(), tts.getVariableType());
+								symbolTable.put(lexnuevo, ttsneg);
+							}else
+								symbolTable.get(lexnuevo).increaseVariableRepetitions();
+							if (tts.getVariableRepetitions() == 0)
+								symbolTable.remove(lexeme);
+							symbolTable.get(lexeme).decreaseVariableRepetitions();
+							String currentType = symbolTable.get(lexeme).getVariableType();
+							expectedVarType = (expectedVarType == "")? currentType : 
+								(currentType == ElementoTS.LONG || expectedVarType == ElementoTS.LONG)? ElementoTS.LONG : ElementoTS.INT;
+							SyntacticTree nodo = new ST_Leaf(lexnuevo);
+							nodo.setType(currentType);
+							nodo.setAlmacenamiento(nodo.getElem());
+							yyval = nodo;
+						}
 break;
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -3022,6 +3225,7 @@ case 65:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 //#line 429 "gramatica (12).y"
 >>>>>>> cf97fd0... Arreglos en ventana
 =======
@@ -3054,6 +3258,9 @@ case 65:
 =======
 //#line 551 "gramatica.y"
 >>>>>>> ff6e773... uso de punteros como enteros
+=======
+//#line 565 "gramatica - copia.y"
+>>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 {
                 semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() +": Sentencia print");
                 stackOfLines.pop();
@@ -3115,6 +3322,7 @@ case 66:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 //#line 436 "gramatica (12).y"
 >>>>>>> cf97fd0... Arreglos en ventana
 =======
@@ -3147,54 +3355,57 @@ case 66:
 =======
 //#line 561 "gramatica.y"
 >>>>>>> ff6e773... uso de punteros como enteros
+=======
+//#line 575 "gramatica - copia.y"
+>>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 { stackOfLines.push(lex.getNewLineCounter()); }
 break;
 case 67:
-//#line 564 "gramatica.y"
+//#line 578 "gramatica - copia.y"
 { msgStack.addMsg("Warning: Declaración de bloque sin contenido"); }
 break;
 case 68:
-//#line 565 "gramatica.y"
+//#line 579 "gramatica - copia.y"
 { msgStack.addMsg("Error: Comparación incompleta en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 69:
-//#line 566 "gramatica.y"
+//#line 580 "gramatica - copia.y"
 { msgStack.addMsg("Error: Declaración de IF sin condición en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 70:
-//#line 567 "gramatica.y"
+//#line 581 "gramatica - copia.y"
 { msgStack.addMsg("Error: Declaracion de foreach sin índice y sin colección en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 71:
-//#line 568 "gramatica.y"
+//#line 582 "gramatica - copia.y"
 { msgStack.addMsg("Error: Declaracion de foreach sin colección en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 72:
-//#line 569 "gramatica.y"
+//#line 583 "gramatica - copia.y"
 { msgStack.addMsg("Error: Declaracion de foreach sin índice en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 73:
-//#line 570 "gramatica.y"
+//#line 584 "gramatica - copia.y"
 { msgStack.addMsg("Error: Nombre y valor de posicion de colección faltante en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 74:
-//#line 571 "gramatica.y"
+//#line 585 "gramatica - copia.y"
 { msgStack.addMsg("Error: Nombre de colección faltante en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 75:
-//#line 572 "gramatica.y"
+//#line 586 "gramatica - copia.y"
 { msgStack.addMsg("Error: Corchete de apertura faltante en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 76:
-//#line 573 "gramatica.y"
+//#line 587 "gramatica - copia.y"
 { msgStack.addMsg("Error: Corchete de cierre faltante en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 77:
-//#line 574 "gramatica.y"
+//#line 588 "gramatica - copia.y"
 { msgStack.addMsg("Error: Constante a la izquierda de una asignación en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 78:
-//#line 575 "gramatica.y"
+//#line 589 "gramatica - copia.y"
 { msgStack.addMsg("Error: Sentencia inválida en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 <<<<<<< HEAD
@@ -3330,6 +3541,7 @@ case 79:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 //#line 451 "gramatica (12).y"
 >>>>>>> cf97fd0... Arreglos en ventana
 =======
@@ -3366,17 +3578,21 @@ case 79:
 =======
 //#line 576 "gramatica.y"
 >>>>>>> ff6e773... uso de punteros como enteros
+=======
+//#line 590 "gramatica - copia.y"
+>>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 { msgStack.addMsg("Error: Constantes declaradas con tipo en línea: " + lex.getNewLineCounter()); hasError = true; }
 >>>>>>> 0fcca1b... varios
 break;
 case 80:
-//#line 577 "gramatica.y"
+//#line 591 "gramatica - copia.y"
 { msgStack.addMsg("Error: Falta de separador entre valores constantes en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 81:
-//#line 578 "gramatica.y"
+//#line 592 "gramatica - copia.y"
 { msgStack.addMsg("Error: Sentencia de asignación inválida en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -3455,6 +3671,9 @@ break;
 =======
 //#line 1299 "Parser.java"
 >>>>>>> ff6e773... uso de punteros como enteros
+=======
+//#line 1317 "Parser.java"
+>>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 //########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####
