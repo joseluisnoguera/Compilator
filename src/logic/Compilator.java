@@ -66,6 +66,7 @@ public class Compilator {
 		assemblerCode = new MsgStack();
 		syntacticTree = new MsgStack();
 		symbolTable = new Hashtable<String, ElementoTS>();
+		ElementoTS.resetIdGenerator();
 		lexicon = new Lexicon(programBuffer, msgStack, tokenStack, symbolTable);
 		parser = new Parser(lexicon, symbolTable, msgStack, semanticStructStack);
 		hasErrors = true;

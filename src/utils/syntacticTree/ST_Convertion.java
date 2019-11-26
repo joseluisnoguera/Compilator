@@ -257,7 +257,7 @@ public class ST_Convertion extends SyntacticTree{
 					String regData = registers.getReg(RegisterTable.NAME_AX, getHijoIzq(), symbolTable, assemblerCode);
 					assemblerCode.addMsg("mov " + regData + ", " + data);
 					assemblerCode.addMsg("cwde");
-					regData = registers.extendTo32bits(registers.getRegPos(RegisterTable.NAME_AX));
+					regData = registers.extendTo32b(registers.getRegPos(RegisterTable.NAME_AX));
 					setAlmacenamiento(regData);
 				}else { //es cte
 					String regConverted = registers.getRegFreeLong(getHijoIzq(), symbolTable, assemblerCode);
@@ -268,7 +268,7 @@ public class ST_Convertion extends SyntacticTree{
 				String regAX = registers.getReg(RegisterTable.NAME_AX, getHijoIzq(), symbolTable, assemblerCode);
 				assemblerCode.addMsg("mov " + regAX + ", " + data);
 				assemblerCode.addMsg("cwde");
-				regAX = registers.extendTo32bits(registers.getRegPos(RegisterTable.NAME_AX));
+				regAX = registers.extendTo32b(registers.getRegPos(RegisterTable.NAME_AX));
 				setAlmacenamiento(regAX);
 			}
 		}

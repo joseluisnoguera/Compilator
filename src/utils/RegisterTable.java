@@ -337,12 +337,20 @@ public class RegisterTable {
 =======
 	public void freeReg(int reg) { regState.get(reg).is_busy = false; }
 	
-	public String extendTo32bits(int reg) { (regState.get(reg)).name = getNameRegister32b(reg); return regState.get(reg).name; }
+	public String extendTo32b(int reg) { (regState.get(reg)).name = getNameRegister32b(reg); return regState.get(reg).name; }
+	
+	public String reduceTo16b(int reg) { (regState.get(reg)).name = getNameRegister16b(reg); return regState.get(reg).name; }
 	
 	private String getNameRegister32b(int reg) {
 		return (reg == 0)? NAME_EAX :
 				(reg == 1)? NAME_EBX :
 				(reg == 2)? NAME_ECX : NAME_EDX;
+	}
+	
+	private String getNameRegister16b(int reg) {
+		return (reg == 0)? NAME_AX :
+				(reg == 1)? NAME_BX :
+				(reg == 2)? NAME_CX : NAME_DX;
 	}
 
 	public int getRegPos(String regName) {

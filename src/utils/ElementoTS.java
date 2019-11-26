@@ -2,6 +2,7 @@ package utils;
 
 public class ElementoTS{
 <<<<<<< HEAD
+<<<<<<< HEAD
 	private String value; //Para valores númericos (CONST o PR)
 	private String tipoToken; //ID CONST PR CAD
 	private String tipoAtributo; //int long
@@ -50,6 +51,9 @@ public class ElementoTS{
 =======
 =======
 	private String value; 				// Para valores númericos que requieren ser guardados (CONST o PR)
+=======
+	private String value; 				// Para valores númericos que requieren ser guardados y cadenas (CONST o PR o cadena)
+>>>>>>> ff6e773... uso de punteros como enteros
 	private String tokenClass; 			// ID CONST PR CAD
 	private String variableType; 		// int long
 	private int variableRepatitions; 	// Cantidad de repeticiones de la variable/constante
@@ -162,6 +166,8 @@ public class ElementoTS{
 	public int getId() { return id; }
 =======
 	public static int getNewId() { idCounter++; return idCounter-1; }
+	
+	public static void resetIdGenerator() { idCounter = 0; }
 
 <<<<<<< HEAD
 	public int getId() { return id_cadena; }
@@ -177,5 +183,13 @@ public class ElementoTS{
 	public void increaseForeachControlCounter() { foreachControlCounter--; }
 	
 	public int getForeachControlCounter() { return foreachControlCounter; }
+<<<<<<< HEAD
 >>>>>>> f58785c... arreglos para condiciones en indice de foreach
+=======
+	
+	@Override
+	public boolean equals(Object value) {
+        return (this.value.equals((String)value) && (tokenClass != PR));
+    }
+>>>>>>> ff6e773... uso de punteros como enteros
 }

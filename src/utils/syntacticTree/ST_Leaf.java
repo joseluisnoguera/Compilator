@@ -181,11 +181,11 @@ public class ST_Leaf extends SyntacticTree{
 			assemblerCode.addMsg("mov " + regIndex + ", " + subIndexName); // Valor de índice en EAX
 =======
 			String regIndex = "";
-			if (getType().equals(ElementoTS.INT) && !symbolTable.get(subIndexName.substring(1)).isPointer()) { 
+			if (getType().equals(ElementoTS.INT) || (symbolTable.containsKey(subIndexName) && !symbolTable.get(subIndexName.substring(1)).isPointer())) { 
 				regIndex = registers.getReg(RegisterTable.NAME_AX, this, symbolTable, assemblerCode);
 				assemblerCode.addMsg("mov " + regIndex + ", " + subIndexName); // Valor de índice en EAX
 				assemblerCode.addMsg("cwde");
-				regIndex = registers.extendTo32bits(registers.getRegPos(RegisterTable.NAME_AX));
+				regIndex = registers.extendTo32b(registers.getRegPos(RegisterTable.NAME_AX));
 			} else {
 				regIndex = registers.getReg(RegisterTable.NAME_EAX, this, symbolTable, assemblerCode);
 				assemblerCode.addMsg("mov " + regIndex + ", " + subIndexName); // Valor de índice en EAX
@@ -364,7 +364,20 @@ public class ST_Leaf extends SyntacticTree{
 			registers.freeReg(registers.getRegPos(regEndCollection));
 >>>>>>> f58785c... arreglos para condiciones en indice de foreach:src/utils/syntacticTree/ST_Leaf.java
 		}
+<<<<<<< HEAD
 >>>>>>> d209296... comentario
+=======
+		// Tratamiento de punteros como enteros, devuelve un registro de 16 bits, tira la parte alta
+		if (isVariable() && getType().equals(ElementoTS.INT)  && symbolTable.get(getElem().substring(1)).isPointer() && !forLeftSideInAssignment) {
+			String regEAX = registers.getReg(RegisterTable.NAME_EAX, this, symbolTable, assemblerCode);
+			assemblerCode.addMsg("mov " + regEAX + ", " + getElem());
+			regEAX = registers.reduceTo16b(registers.getRegPos(regEAX)); // Comienza utilizar AX
+			String regResult = registers.getRegFreeInt(this, symbolTable, assemblerCode);
+			assemblerCode.addMsg("mov " + regResult + ", " + regEAX);
+			registers.freeReg(registers.getRegPos(regEAX));
+			data = regResult;
+		}
+>>>>>>> ff6e773... uso de punteros como enteros
 		setAlmacenamiento(data);
 <<<<<<< HEAD:src/utils/syntacticTree/SyntacticTreeLeaf.java
 >>>>>>> 51f241d... arreglos varios

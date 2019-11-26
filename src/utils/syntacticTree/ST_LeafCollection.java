@@ -30,7 +30,7 @@ public class ST_LeafCollection extends ST_Leaf {
 				regIndex = registers.getReg(RegisterTable.NAME_AX, this, symbolTable, assemblerCode);
 				assemblerCode.addMsg("mov " + regIndex + ", " + indexValue); // Valor de índice en EAX
 				assemblerCode.addMsg("cwde");
-				regIndex = registers.extendTo32bits(registers.getRegPos(RegisterTable.NAME_AX));
+				regIndex = registers.extendTo32b(registers.getRegPos(RegisterTable.NAME_AX));
 			} else {
 				regIndex = registers.getReg(RegisterTable.NAME_EAX, this, symbolTable, assemblerCode);
 				assemblerCode.addMsg("mov " + regIndex + ", " + indexValue); // Valor de índice en EAX

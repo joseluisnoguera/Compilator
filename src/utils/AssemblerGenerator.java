@@ -47,9 +47,8 @@ public class AssemblerGenerator {
 				}	
 			}
 			if (element.getTokenClass().equals(ElementoTS.CAD)) {
-				//TODO: Tratamiento para multilínea
-				key = key.replaceAll("\n", "\", 10, 13,\"");
-				data.addMsg("_@cad" + element.getId() + " db \"" + key + "\"" + ", 0" );
+				String cadena = element.getValue().replaceAll("\n", "\", 10, 13,\"");
+				data.addMsg("_" + key + " db \"" + cadena + "\"" + ", 0" );
 			}	
 		}
 		data.addMsg("_@ErrorDivisionPorCero" + " db \"Error: Se dividio por cero\", 0");

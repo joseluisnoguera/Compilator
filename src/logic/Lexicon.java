@@ -578,6 +578,8 @@ public class Lexicon {
 	public int getNewLineCounter() { return nlCounter; }
 
 	public int getCurrentCharacter() { return currentChar; }
+	
+	public void setLexeme(String newLexeme) { currentLexeme = newLexeme; }
 
 	public String getCurrentLexeme(){ return currentLexeme; }
 

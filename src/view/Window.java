@@ -316,7 +316,7 @@ public class Window {
 		springLayout.putConstraint(SpringLayout.NORTH, lblNumberLine, 6, SpringLayout.SOUTH, lblProgramName);
 		lblNumberLine.setAlignmentY(Component.TOP_ALIGNMENT);
 		frmCompilator.getContentPane().add(lblNumberLine);
-
+		
 		JScrollPane scrollPane_Codigo = new JScrollPane();
 		springLayout.putConstraint(SpringLayout.NORTH, scrollPane_Codigo, 6, SpringLayout.SOUTH, lblNumberLine);
 		springLayout.putConstraint(SpringLayout.WEST, scrollPane_Codigo, 10, SpringLayout.WEST, frmCompilator.getContentPane());

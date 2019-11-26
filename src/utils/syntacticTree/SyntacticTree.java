@@ -85,7 +85,7 @@ public abstract class SyntacticTree extends ParserVal {
 
 	public boolean isVariable() { return getAlmacenamiento().charAt(0) == '_'; }
 	
-	public boolean isConstant() { return ((int)(getAlmacenamiento().charAt(0)) >= 48 && (int)(getAlmacenamiento().charAt(0)) <= 57); }
+	public boolean isConstant() { return ((int)(getAlmacenamiento().charAt(0)) >= 48 && (int)(getAlmacenamiento().charAt(0)) <= 57 || getAlmacenamiento().charAt(0) == '-'); }
 	
 	public String getBlankSpace() { return blankSpace; }
 }

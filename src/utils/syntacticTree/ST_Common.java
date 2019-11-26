@@ -628,14 +628,23 @@ public class ST_Common extends SyntacticTree {
 		String dataFromRight;
 		if (getHijoIzq().isVariableOrConst()) { //// Izq constante o variable ////
 			String regAux;
-			if(isInt(dataFromLeft, symbolTable))
-				regAux = registers.getRegFreeInt(getHijoIzq(), symbolTable, assemblerCode);
-			else
+			if(getHijoIzq().getType().equals(ElementoTS.LONG) || (symbolTable.containsKey(dataFromLeft) && symbolTable.get(dataFromLeft.substring(1)).isPointer()))
 				regAux = registers.getRegFreeLong(getHijoIzq(), symbolTable, assemblerCode);
+			else
+				regAux = registers.getRegFreeInt(getHijoIzq(), symbolTable, assemblerCode);
 			assemblerCode.addMsg("mov " + regAux + ", " + dataFromLeft);
 			dataFromLeft = regAux;
 		}
 		dataFromRight = getHijoDer().getAlmacenamiento();
+		if (getHijoIzq().getType() == ElementoTS.INT && (symbolTable.containsKey(getHijoIzq().getElem()) && 
+				symbolTable.get(getHijoIzq().getElem().substring(1)).isPointer())) { // Si el lado izquierdo es puntero y entero, el lado derecho se debe convertir en 32 bits
+			String reg = registers.getReg(RegisterTable.NAME_AX, getHijoDer(), symbolTable, assemblerCode);
+			assemblerCode.addMsg("mov " + reg + ", " + dataFromRight);
+			assemblerCode.addMsg("cwde");
+			reg = registers.extendTo32b(registers.getRegPos(reg));
+			dataFromRight = reg;
+			dataFromLeft = getHijoIzq().getAlmacenamiento();
+		}
 		assemblerCode.addMsg("cmp " + dataFromLeft +", " + dataFromRight);
 		registers.freeReg(registers.getRegPos(dataFromLeft));
 		if(!(getHijoDer().isVariableOrConst()))
@@ -1598,7 +1607,7 @@ public class ST_Common extends SyntacticTree {
 				getHijoDer().setAlmacenamiento(regAux);
 			}
 			assemblerCode.addMsg("imul " + dataFromRight);
-			regDX = registers.extendTo32bits(registers.getRegPos(RegisterTable.NAME_DX));
+			regDX = registers.extendTo32b(registers.getRegPos(RegisterTable.NAME_DX));
 			assemblerCode.addMsg("shl "  + regDX + ", 16");
 			assemblerCode.addMsg("mov " + RegisterTable.NAME_DX + ", " + regAX);
 			registers.freeReg(RegisterTable.AX);
