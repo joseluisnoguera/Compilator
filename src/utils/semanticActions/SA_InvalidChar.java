@@ -7,7 +7,7 @@ public class SA_InvalidChar implements SemanticAction{
 	
 	@Override
 	public void action(Lexicon Lex) {
-		Lex.addMsg("Línea " + Lex.getNewLineCounter() + ": Carácter inválido " + (char)Lex.getCurrentCharacter());
+		Lex.addMsg("Línea " + Lex.getNewLineCounter() + ": Carácter inválido.");
 	}
 
 }

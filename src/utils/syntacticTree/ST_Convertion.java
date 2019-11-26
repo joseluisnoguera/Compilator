@@ -275,12 +275,16 @@ public class ST_Convertion extends SyntacticTree{
 		if(getElem() == PTOV) {// extraccion de valor en memoria apuntado por una variable ("pointToVal")
 			String reg;
 			data = getHijoIzq().getElem();
+			String regPosicion = registers.getRegFreeLong(getHijoIzq(), symbolTable, assemblerCode);
+			assemblerCode.addMsg("mov " + regPosicion + ", " + data);
 			if(symbolTable.get(data.substring(1)).getVariableType() == ElementoTS.INT) {
 				reg = registers.getRegFreeInt(getHijoIzq(), symbolTable, assemblerCode);
-				assemblerCode.addMsg("mov " + reg + ", word ptr [" + data + "]");
+				assemblerCode.addMsg("mov " + reg + ", word ptr [" + regPosicion + "]");
+				System.out.println("extrae entero del indice: " + data);
 			} else {
 				reg = registers.getRegFreeLong(getHijoIzq(), symbolTable, assemblerCode);
-				assemblerCode.addMsg("mov " + reg + ", dword ptr [" + data + "]");
+				assemblerCode.addMsg("mov " + reg + ", dword ptr [" + regPosicion + "]");
+				System.out.println("extrae long del indice: " + data);
 			}
 			setAlmacenamiento(reg);
 >>>>>>> ffe4c4b... comentario

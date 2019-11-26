@@ -65,7 +65,7 @@ public class ElementoTS{
 	private static int idCounter = 0; 	// Generador de ID �nico para cadenas
 	private int idCadena; 			  	// Id para identificar cadenas
 	private boolean isPointer; 		  	// Define si un ID variable es puntero (32 bits sin tipo)
-	private int foreachControlCounter;	// Para control en los distintos casos de variables para foreach
+	private boolean foreachControl;		// Para control en los distintos casos de variables para foreach
 
 			//// Tipos de variables ////
 	public static final String INT = "int";
@@ -97,7 +97,11 @@ public class ElementoTS{
 >>>>>>> 6bb5a8f... _
 =======
 		elemsCollection = "";
+<<<<<<< HEAD
 >>>>>>> 67de6b7... _
+=======
+		foreachControl = false;
+>>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
 	}
 
 	public String getElemsCollection() {return elemsCollection;}
@@ -178,14 +182,18 @@ public class ElementoTS{
 >>>>>>> fde7cdb... varios
 =======
 	
-	public void decreaseForeachControlCounter() { foreachControlCounter++; }
+	public void foreachControlOn() { foreachControl = true; }
 	
-	public void increaseForeachControlCounter() { foreachControlCounter--; }
+	public void foreachControlOff() { foreachControl = false; }
 	
+<<<<<<< HEAD
 	public int getForeachControlCounter() { return foreachControlCounter; }
 <<<<<<< HEAD
 >>>>>>> f58785c... arreglos para condiciones en indice de foreach
 =======
+=======
+	public boolean foreachControlState() { return foreachControl; }
+>>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
 	
 	@Override
 	public boolean equals(Object value) {

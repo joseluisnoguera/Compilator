@@ -19,6 +19,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 //#line 2 "gramatica (12).y"
 =======
 //#line 2 "gramatica.y"
@@ -26,6 +27,9 @@
 =======
 //#line 2 "gramatica - copia.y"
 >>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
+=======
+//#line 2 "gramatica.y"
+>>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
 	package logic;
 	
 	import java.util.Hashtable;
@@ -986,6 +990,7 @@ final static String yyrule[] = {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 //#line 222 "gramatica_2.y"
 =======
 //#line 213 "gramatica_2.y"
@@ -1053,6 +1058,9 @@ final static String yyrule[] = {
 =======
 //#line 596 "gramatica - copia.y"
 >>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
+=======
+//#line 595 "gramatica.y"
+>>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
 
 private Lexicon lex;
 private Hashtable<String,ElementoTS> symbolTable;
@@ -1309,27 +1317,27 @@ boolean doaction;
       {
 //########## USER-SUPPLIED ACTIONS ##########
 case 1:
-//#line 28 "gramatica - copia.y"
+//#line 28 "gramatica.y"
 { nodoRaiz = new ST_Control("PROGRAMA",(SyntacticTree)val_peek(0)); }
 break;
 case 2:
-//#line 31 "gramatica - copia.y"
+//#line 31 "gramatica.y"
 { yyval = val_peek(0); }
 break;
 case 3:
-//#line 32 "gramatica - copia.y"
+//#line 32 "gramatica.y"
 { yyval = new ST_Common("SENTENCIA", null, null); msgStack.addMsg("Warning: Programa sin codigo ejecutable"); }
 break;
 case 4:
-//#line 33 "gramatica - copia.y"
+//#line 33 "gramatica.y"
 { yyval = val_peek(0); }
 break;
 case 7:
-//#line 40 "gramatica - copia.y"
+//#line 40 "gramatica.y"
 { semanticStructStack.addMsg("Linea "+ numLineaDecl +": Sentencia declarativa"); }
 break;
 case 8:
-//#line 41 "gramatica - copia.y"
+//#line 41 "gramatica.y"
 { 
 				semanticStructStack.addMsg("Linea "+ numLineaDecl +": Sentencia declarativa");
 				if (tipovar != expectedVarType){
@@ -1340,11 +1348,11 @@ case 8:
 			  }
 break;
 case 10:
-//#line 50 "gramatica - copia.y"
+//#line 50 "gramatica.y"
 { msgStack.addMsg("Error genérico en el bloque declarativo no contemplado cerca de línea " + lex.getNewLineCounter()); }
 break;
 case 11:
-//#line 53 "gramatica - copia.y"
+//#line 53 "gramatica.y"
 {tipovar = ElementoTS.INT; numLineaDecl = lex.getNewLineCounter(); }
 break;
 <<<<<<< HEAD
@@ -1384,10 +1392,11 @@ case 14:
 >>>>>>> f75def1... comentario
 =======
 case 12:
-//#line 54 "gramatica - copia.y"
+//#line 54 "gramatica.y"
 {tipovar = ElementoTS.LONG; numLineaDecl = lex.getNewLineCounter(); }
 break;
 case 13:
+<<<<<<< HEAD
 <<<<<<< HEAD
 //#line 50 "gramatica.y"
 {tipovar = ElementoTS.LONG;}
@@ -1426,6 +1435,9 @@ case 14:
 =======
 //#line 57 "gramatica - copia.y"
 >>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
+=======
+//#line 57 "gramatica.y"
+>>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
 {
 					if(!symbolTable.get(val_peek(0).sval).isDeclared()){
 						symbolTable.get(val_peek(0).sval).setDeclared();
@@ -1438,7 +1450,7 @@ case 14:
 				}
 break;
 case 14:
-//#line 67 "gramatica - copia.y"
+//#line 67 "gramatica.y"
 {
 					if(!symbolTable.get(val_peek(0).sval).isDeclared()){
 						symbolTable.get(val_peek(0).sval).setDeclared();
@@ -1451,7 +1463,7 @@ case 14:
 				}
 break;
 case 15:
-//#line 79 "gramatica - copia.y"
+//#line 79 "gramatica.y"
 {
 				if(!symbolTable.get(val_peek(3).sval).isDeclared()) {
 					symbolTable.get(val_peek(3).sval).setDeclared();
@@ -1468,7 +1480,7 @@ case 15:
 			}
 break;
 case 16:
-//#line 93 "gramatica - copia.y"
+//#line 93 "gramatica.y"
 {
 				if(!symbolTable.get(val_peek(3).sval).isDeclared()) {
 					symbolTable.get(val_peek(3).sval).setDeclared();
@@ -1485,7 +1497,7 @@ case 16:
 			}
 break;
 case 17:
-//#line 107 "gramatica - copia.y"
+//#line 107 "gramatica.y"
 {
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -1547,8 +1559,12 @@ case 19:
 //#line 120 "gramatica.y"
 =======
 case 18:
+<<<<<<< HEAD
 //#line 124 "gramatica - copia.y"
 >>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
+=======
+//#line 124 "gramatica.y"
+>>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
 {
 				if(!symbolTable.get(val_peek(5).sval).isDeclared()){
 					symbolTable.get(val_peek(5).sval).setDeclared();
@@ -1568,46 +1584,47 @@ case 18:
 			}
 break;
 case 19:
-//#line 143 "gramatica - copia.y"
+//#line 143 "gramatica.y"
 { elems = ((SyntacticTree)val_peek(0)).getElem(); countSize++; }
 break;
 case 20:
-//#line 144 "gramatica - copia.y"
+//#line 144 "gramatica.y"
 { elems= "_"; countSize++;}
 break;
 case 21:
-//#line 145 "gramatica - copia.y"
+//#line 145 "gramatica.y"
 { elems = elems + "," + ((SyntacticTree)val_peek(0)).getElem(); countSize++; }
 break;
 case 22:
-//#line 146 "gramatica - copia.y"
+//#line 146 "gramatica.y"
 { elems = elems + ",_"; countSize++; }
 break;
 case 23:
-//#line 149 "gramatica - copia.y"
+//#line 149 "gramatica.y"
 { yyval = val_peek(2); semanticStructStack.addMsg("Línea "+ stackOfLines.peek().intValue() +": Bloque de ejecución"); }
 break;
 case 24:
-//#line 152 "gramatica - copia.y"
+//#line 152 "gramatica.y"
 { yyval = new ST_Common("SENTENCIA", (SyntacticTree)val_peek(1), (SyntacticTree)val_peek(0));	}
 break;
 case 25:
-//#line 153 "gramatica - copia.y"
+//#line 153 "gramatica.y"
 { yyval = new ST_Common("SENTENCIA", (SyntacticTree)val_peek(0), null); }
 break;
 case 26:
-//#line 156 "gramatica - copia.y"
+//#line 156 "gramatica.y"
 { stackOfLines.push(lex.getNewLineCounter()); }
 break;
 case 27:
-//#line 159 "gramatica - copia.y"
+//#line 159 "gramatica.y"
 { yyval = val_peek(1); }
 break;
 case 28:
-//#line 160 "gramatica - copia.y"
+//#line 160 "gramatica.y"
 { yyval = val_peek(0); }
 break;
 case 29:
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -1665,15 +1682,18 @@ case 29:
 >>>>>>> 45299ea... visualización de árbol sintáctico
 =======
 //#line 161 "gramatica - copia.y"
+=======
+//#line 161 "gramatica.y"
+>>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
 { yyval = val_peek(1); }
 >>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 break;
 case 30:
-//#line 162 "gramatica - copia.y"
+//#line 162 "gramatica.y"
 { yyval = val_peek(1); }
 break;
 case 31:
-//#line 163 "gramatica - copia.y"
+//#line 163 "gramatica.y"
 {
 				yyval = new ST_Common("ERROR", null, null);
 				/* Hay un warning en error_p, por eso hasError se setea true abajo y no acá */
@@ -1717,8 +1737,12 @@ case 33:
 //#line 163 "gramatica.y"
 =======
 case 32:
+<<<<<<< HEAD
 //#line 167 "gramatica - copia.y"
 >>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
+=======
+//#line 167 "gramatica.y"
+>>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
 { 
 				msgStack.addMsg("Error genérico no contemplado cerca de línea " + lex.getNewLineCounter());
 				hasError = true;
@@ -1771,8 +1795,12 @@ case 34:
 >>>>>>> f58785c... arreglos para condiciones en indice de foreach
 =======
 case 33:
+<<<<<<< HEAD
 //#line 174 "gramatica - copia.y"
 >>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
+=======
+//#line 174 "gramatica.y"
+>>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
 {
                     semanticStructStack.addMsg("L?nea " + stackOfLines.peek().intValue() + ": Sentencia IF ");
                     stackOfLines.pop();
@@ -1856,8 +1884,12 @@ case 35:
 >>>>>>> f58785c... arreglos para condiciones en indice de foreach
 =======
 case 34:
+<<<<<<< HEAD
 //#line 180 "gramatica - copia.y"
 >>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
+=======
+//#line 180 "gramatica.y"
+>>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
 {
                     semanticStructStack.addMsg("L?nea " + stackOfLines.peek().intValue() + ": Sentencia IF ");
                     stackOfLines.pop();
@@ -1897,12 +1929,16 @@ case 36:
 //#line 188 "gramatica.y"
 =======
 case 35:
+<<<<<<< HEAD
 //#line 192 "gramatica - copia.y"
 >>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
+=======
+//#line 192 "gramatica.y"
+>>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
 { yyval = val_peek(0); }
 break;
 case 36:
-//#line 195 "gramatica - copia.y"
+//#line 195 "gramatica.y"
 { yyval = val_peek(0); }
 break;
 <<<<<<< HEAD
@@ -1955,12 +1991,16 @@ case 38:
 >>>>>>> f58785c... arreglos para condiciones en indice de foreach
 =======
 case 37:
+<<<<<<< HEAD
 //#line 198 "gramatica - copia.y"
 >>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
+=======
+//#line 198 "gramatica.y"
+>>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
 { stackOfLines.push(lex.getNewLineCounter()); }
 break;
 case 38:
-//#line 201 "gramatica - copia.y"
+//#line 201 "gramatica.y"
 {
 			SyntacticTree nodoCond;
 			if (((SyntacticTree)val_peek(2)).getType() != ((SyntacticTree)val_peek(0)).getType()){
@@ -1973,36 +2013,36 @@ case 38:
 			yyval = nodoCondCtrol; }
 break;
 case 39:
-//#line 213 "gramatica - copia.y"
+//#line 213 "gramatica.y"
 { val_peek(0).sval = "<"; yyval = val_peek(0); }
 break;
 case 40:
-//#line 214 "gramatica - copia.y"
+//#line 214 "gramatica.y"
 { val_peek(0).sval = ">"; yyval = val_peek(0); }
 break;
 case 41:
-//#line 215 "gramatica - copia.y"
+//#line 215 "gramatica.y"
 { val_peek(0).sval = "LET"; yyval = val_peek(0); }
 break;
 case 42:
-//#line 216 "gramatica - copia.y"
+//#line 216 "gramatica.y"
 { val_peek(0).sval = "GET"; yyval = val_peek(0); }
 break;
 case 43:
-//#line 217 "gramatica - copia.y"
+//#line 217 "gramatica.y"
 { val_peek(0).sval = "EQ"; yyval = val_peek(0); }
 break;
 case 44:
-//#line 218 "gramatica - copia.y"
+//#line 218 "gramatica.y"
 { val_peek(0).sval = "DIF"; yyval = val_peek(0); }
 break;
 case 45:
-//#line 221 "gramatica - copia.y"
+//#line 221 "gramatica.y"
 { 
 		ST_Common nodo = null;
         semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() + ": Sentencia foreach");
         stackOfLines.pop();
-		if(!(symbolTable.get(val_peek(1).sval).isDeclared())) {
+		if(!(symbolTable.containsKey(val_peek(2).sval) && symbolTable.get(val_peek(1).sval).isDeclared())) {
 			msgStack.addMsg("Error: Colección  " + val_peek(1).sval + " no declarada.");
 			hasError = true;
 		}
@@ -2037,16 +2077,16 @@ case 45:
 				nodo = new ST_Common("FOREACH", nodoBucle,nodoCuerpoAvance);				
 			}
 		}
-		symbolTable.get(val_peek(3).sval).decreaseForeachControlCounter();
+		symbolTable.get(val_peek(3).sval).foreachControlOff();
 		yyval = nodo;
 	}
 break;
 case 46:
-//#line 265 "gramatica - copia.y"
+//#line 265 "gramatica.y"
 { yyval = val_peek(0); }
 break;
 case 47:
-//#line 266 "gramatica - copia.y"
+//#line 266 "gramatica.y"
 { yyval = val_peek(0); }
 break;
 <<<<<<< HEAD
@@ -2143,12 +2183,16 @@ case 50:
 >>>>>>> ff6e773... uso de punteros como enteros
 =======
 case 48:
+<<<<<<< HEAD
 //#line 269 "gramatica - copia.y"
 >>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
+=======
+//#line 269 "gramatica.y"
+>>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
 { 
 					stackOfLines.push(lex.getNewLineCounter());
-					if (symbolTable.get(val_peek(0).sval).isDeclared()) {
-						symbolTable.get(val_peek(0).sval).increaseForeachControlCounter();
+					if (symbolTable.containsKey(val_peek(0).sval) && symbolTable.get(val_peek(0).sval).isDeclared()) {
+						symbolTable.get(val_peek(0).sval).foreachControlOn();
 						symbolTable.get(val_peek(0).sval).setHasPointer();
 					} else {
 						msgStack.addMsg("Error: Variable " + val_peek(0).sval + " no declarada.");
@@ -2159,7 +2203,7 @@ case 48:
 >>>>>>> f58785c... arreglos para condiciones en indice de foreach
 break;
 case 49:
-//#line 282 "gramatica - copia.y"
+//#line 282 "gramatica.y"
 {
 				SyntacticTree nodo = null;
 				semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() + ": Asignación"); 
@@ -2232,8 +2276,12 @@ case 51:
 //#line 310 "gramatica.y"
 =======
 case 50:
+<<<<<<< HEAD
 //#line 314 "gramatica - copia.y"
 >>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
+=======
+//#line 314 "gramatica.y"
+>>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
 { 
 						SyntacticTree nodo = null;
 						stackOfLines.push(lex.getNewLineCounter()); 
@@ -2242,7 +2290,7 @@ case 50:
 							hasError = true;
 							nodo = new ST_Leaf("ERROR");
 						}else {
-							if (symbolTable.get(val_peek(0).sval).getForeachControlCounter() > 0 && symbolTable.get(val_peek(0).sval).isPointer()){
+							if (symbolTable.get(val_peek(0).sval).foreachControlState() && symbolTable.get(val_peek(0).sval).isPointer()){
 								msgStack.addMsg("Error: No se puede asignar a " + val_peek(0).sval + " dentro de foreach.");
 								hasError = true;
 								nodo = new ST_Leaf("ERROR");
@@ -2262,8 +2310,12 @@ case 52:
 //#line 330 "gramatica.y"
 =======
 case 51:
+<<<<<<< HEAD
 //#line 335 "gramatica - copia.y"
 >>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
+=======
+//#line 335 "gramatica.y"
+>>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
 { 
 				   		SyntacticTree nodo = null;
 						stackOfLines.push(lex.getNewLineCounter());
@@ -2390,8 +2442,12 @@ case 53:
 >>>>>>> ff6e773... uso de punteros como enteros
 =======
 case 52:
+<<<<<<< HEAD
 //#line 357 "gramatica - copia.y"
 >>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
+=======
+//#line 357 "gramatica.y"
+>>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
 {
 						SyntacticTree nodo = null;
 >>>>>>> 45299ea... visualización de árbol sintáctico
@@ -2402,7 +2458,7 @@ case 52:
 							nodo  = new ST_Leaf("ERROR");
 						}else {
 							if (symbolTable.get(val_peek(1).sval).getIdentifierClass().equals(ElementoTS.VAR)) {
-								if (symbolTable.get(val_peek(1).sval).getForeachControlCounter() > 0 && symbolTable.get(val_peek(1).sval).isPointer()) {
+								if (symbolTable.get(val_peek(1).sval).foreachControlState()) {
 									ST_Leaf nodoHoja = new ST_Leaf("_" + val_peek(1).sval);
 									nodoHoja.setAlmacenamiento(nodoHoja.getElem());
 									ST_Convertion nodoAux = new ST_Convertion(ST_Convertion.PTOV, nodoHoja);
@@ -2510,8 +2566,12 @@ if(symbolTable.get(val_peek(0).sval).getDeclaracion() == false)
 >>>>>>> ff6e773... uso de punteros como enteros
 =======
 case 53:
+<<<<<<< HEAD
 //#line 387 "gramatica - copia.y"
 >>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
+=======
+//#line 387 "gramatica.y"
+>>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
 {
 					SyntacticTree nodo = null;
 					if(((SyntacticTree) val_peek(2)).getType() != ((SyntacticTree) val_peek(0)).getType()) {
@@ -2534,7 +2594,7 @@ case 53:
 >>>>>>> 4269743... generador de datos
 break;
 case 54:
-//#line 401 "gramatica - copia.y"
+//#line 401 "gramatica.y"
 {
 					SyntacticTree nodo = null;
 					if(((SyntacticTree) val_peek(2)).getType() != ((SyntacticTree) val_peek(0)).getType()) {
@@ -2588,12 +2648,16 @@ case 56:
 //#line 410 "gramatica.y"
 =======
 case 55:
+<<<<<<< HEAD
 //#line 415 "gramatica - copia.y"
 >>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
+=======
+//#line 415 "gramatica.y"
+>>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
 { yyval =val_peek(0); }
 break;
 case 56:
-//#line 418 "gramatica - copia.y"
+//#line 418 "gramatica.y"
 {
 			SyntacticTree nodo = null;
 			if(((SyntacticTree) val_peek(2)).getType() != ((SyntacticTree) val_peek(0)).getType()) {
@@ -2609,7 +2673,7 @@ case 56:
 		}
 break;
 case 57:
-//#line 431 "gramatica - copia.y"
+//#line 431 "gramatica.y"
 {
 			SyntacticTree nodo = null;
 			if(((SyntacticTree) val_peek(2)).getType() != ((SyntacticTree) val_peek(0)).getType()) {
@@ -2735,21 +2799,24 @@ case 60:
 >>>>>>> ff6e773... uso de punteros como enteros
 =======
 case 58:
-//#line 445 "gramatica - copia.y"
+//#line 445 "gramatica.y"
 { yyval = val_peek(0); }
 break;
 case 59:
+<<<<<<< HEAD
 //#line 448 "gramatica - copia.y"
 >>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
+=======
+//#line 448 "gramatica.y"
+>>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
 {
 				SyntacticTree nodo = null;
-				
 				if(!symbolTable.get(val_peek(0).sval).isDeclared()){
 					msgStack.addMsg("Error: Variable no declarada en línea: " + lex.getNewLineCounter());
 					hasError = true;
 					nodo = new ST_Leaf("_");
-				}else{
-					if (symbolTable.get(val_peek(0).sval).getForeachControlCounter() > 0 && symbolTable.get(val_peek(0).sval).isPointer()){
+				} else {
+					if (symbolTable.get(val_peek(0).sval).foreachControlState()){
 						ST_Leaf nodoHoja = new ST_Leaf("_" + val_peek(0).sval);
 						nodoHoja.setAlmacenamiento(nodoHoja.getElem());
 						ST_Convertion nodoAux = new ST_Convertion(ST_Convertion.PTOV, nodoHoja);
@@ -2970,12 +3037,16 @@ case 62:
 >>>>>>> ff6e773... uso de punteros como enteros
 =======
 case 60:
-//#line 468 "gramatica - copia.y"
+//#line 467 "gramatica.y"
 { yyval = val_peek(0); }
 break;
 case 61:
+<<<<<<< HEAD
 //#line 469 "gramatica - copia.y"
 >>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
+=======
+//#line 468 "gramatica.y"
+>>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
 {
 					SyntacticTree nodo = null;
 					if(!symbolTable.get(val_peek(3).sval).isDeclared()){
@@ -3040,8 +3111,12 @@ case 63:
 //#line 506 "gramatica.y"
 =======
 case 62:
+<<<<<<< HEAD
 //#line 488 "gramatica - copia.y"
 >>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
+=======
+//#line 487 "gramatica.y"
+>>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
 {
 					SyntacticTree nodo = null;
 					if(!symbolTable.get(val_peek(3).sval).isDeclared() || !symbolTable.get(val_peek(1).sval).isDeclared()){
@@ -3050,7 +3125,7 @@ case 62:
 						nodo = new ST_Leaf("ERROR");
 					}else{
 						if (symbolTable.get(val_peek(1).sval).getIdentifierClass().equals(ElementoTS.VAR)) {
-							if (symbolTable.get(val_peek(1).sval).getForeachControlCounter() > 0 && symbolTable.get(val_peek(1).sval).isPointer()){
+							if (symbolTable.get(val_peek(1).sval).foreachControlState()){
 								ST_Leaf nodoHoja = new ST_Leaf("_" + val_peek(1).sval);
 								nodoHoja.setAlmacenamiento(nodoHoja.getElem());
 								ST_Convertion nodoAux = new ST_Convertion(ST_Convertion.PTOV, nodoHoja);
@@ -3069,7 +3144,7 @@ case 62:
 				}
 break;
 case 63:
-//#line 516 "gramatica - copia.y"
+//#line 515 "gramatica.y"
 {
 							String lexeme = val_peek(0).sval;
 							ElementoTS tts = symbolTable.get(lexeme);
@@ -3099,6 +3174,7 @@ case 63:
 	        			}
 break;
 case 64:
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -3145,6 +3221,9 @@ case 64:
 =======
 //#line 543 "gramatica - copia.y"
 >>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
+=======
+//#line 542 "gramatica.y"
+>>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
 {
 							String lexeme = val_peek(0).sval;
 							ElementoTS tts = symbolTable.get(lexeme);
@@ -3226,6 +3305,7 @@ case 65:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 //#line 429 "gramatica (12).y"
 >>>>>>> cf97fd0... Arreglos en ventana
 =======
@@ -3261,6 +3341,9 @@ case 65:
 =======
 //#line 565 "gramatica - copia.y"
 >>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
+=======
+//#line 564 "gramatica.y"
+>>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
 {
                 semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() +": Sentencia print");
                 stackOfLines.pop();
@@ -3323,6 +3406,7 @@ case 66:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 //#line 436 "gramatica (12).y"
 >>>>>>> cf97fd0... Arreglos en ventana
 =======
@@ -3358,54 +3442,57 @@ case 66:
 =======
 //#line 575 "gramatica - copia.y"
 >>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
+=======
+//#line 574 "gramatica.y"
+>>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
 { stackOfLines.push(lex.getNewLineCounter()); }
 break;
 case 67:
-//#line 578 "gramatica - copia.y"
+//#line 577 "gramatica.y"
 { msgStack.addMsg("Warning: Declaración de bloque sin contenido"); }
 break;
 case 68:
-//#line 579 "gramatica - copia.y"
+//#line 578 "gramatica.y"
 { msgStack.addMsg("Error: Comparación incompleta en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 69:
-//#line 580 "gramatica - copia.y"
+//#line 579 "gramatica.y"
 { msgStack.addMsg("Error: Declaración de IF sin condición en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 70:
-//#line 581 "gramatica - copia.y"
+//#line 580 "gramatica.y"
 { msgStack.addMsg("Error: Declaracion de foreach sin índice y sin colección en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 71:
-//#line 582 "gramatica - copia.y"
+//#line 581 "gramatica.y"
 { msgStack.addMsg("Error: Declaracion de foreach sin colección en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 72:
-//#line 583 "gramatica - copia.y"
+//#line 582 "gramatica.y"
 { msgStack.addMsg("Error: Declaracion de foreach sin índice en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 73:
-//#line 584 "gramatica - copia.y"
+//#line 583 "gramatica.y"
 { msgStack.addMsg("Error: Nombre y valor de posicion de colección faltante en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 74:
-//#line 585 "gramatica - copia.y"
+//#line 584 "gramatica.y"
 { msgStack.addMsg("Error: Nombre de colección faltante en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 75:
-//#line 586 "gramatica - copia.y"
+//#line 585 "gramatica.y"
 { msgStack.addMsg("Error: Corchete de apertura faltante en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 76:
-//#line 587 "gramatica - copia.y"
+//#line 586 "gramatica.y"
 { msgStack.addMsg("Error: Corchete de cierre faltante en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 77:
-//#line 588 "gramatica - copia.y"
+//#line 587 "gramatica.y"
 { msgStack.addMsg("Error: Constante a la izquierda de una asignación en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 78:
-//#line 589 "gramatica - copia.y"
+//#line 588 "gramatica.y"
 { msgStack.addMsg("Error: Sentencia inválida en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 <<<<<<< HEAD
@@ -3542,6 +3629,7 @@ case 79:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 //#line 451 "gramatica (12).y"
 >>>>>>> cf97fd0... Arreglos en ventana
 =======
@@ -3581,17 +3669,21 @@ case 79:
 =======
 //#line 590 "gramatica - copia.y"
 >>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
+=======
+//#line 589 "gramatica.y"
+>>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
 { msgStack.addMsg("Error: Constantes declaradas con tipo en línea: " + lex.getNewLineCounter()); hasError = true; }
 >>>>>>> 0fcca1b... varios
 break;
 case 80:
-//#line 591 "gramatica - copia.y"
+//#line 590 "gramatica.y"
 { msgStack.addMsg("Error: Falta de separador entre valores constantes en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 81:
-//#line 592 "gramatica - copia.y"
+//#line 591 "gramatica.y"
 { msgStack.addMsg("Error: Sentencia de asignación inválida en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -3674,6 +3766,9 @@ break;
 =======
 //#line 1317 "Parser.java"
 >>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
+=======
+//#line 1316 "Parser.java"
+>>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
 //########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####
