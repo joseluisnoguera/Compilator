@@ -9,6 +9,7 @@ import utils.syntacticTree.ST_Control;
 import utils.AssemblerGenerator;
 import utils.ElementoTS;
 
+<<<<<<< HEAD
 /*
  *TODO: Antes de entregar sacar las ventanas de token y estructura sintáctica
 <<<<<<< HEAD
@@ -30,6 +31,8 @@ import utils.ElementoTS;
 >>>>>>> 1375c5c... arreglos varios
  */
 
+=======
+>>>>>>> 4812029... detalles
 public class Compilator {
 	private static Compilator single_instance = null;
 	private Hashtable<String, ElementoTS> symbolTable;
@@ -67,6 +70,7 @@ public class Compilator {
 		syntacticTree = new MsgStack();
 		symbolTable = new Hashtable<String, ElementoTS>();
 		ElementoTS.resetIdGenerator();
+		ST_Control.resetLabels();
 		lexicon = new Lexicon(programBuffer, msgStack, tokenStack, symbolTable);
 		parser = new Parser(lexicon, symbolTable, msgStack, semanticStructStack);
 		hasErrors = true;

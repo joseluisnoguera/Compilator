@@ -7,14 +7,14 @@ import utils.MsgStack;
 import utils.RegisterTable;
 
 public class ST_Leaf extends SyntacticTree{
-	
-	protected boolean forLeftSideInAssignment;
 
-	public ST_Leaf(String lex)
-	{
+	protected boolean collectionInLeftSideAssig;
+
+	public ST_Leaf(String lex) {
 		super(lex);
-		forLeftSideInAssignment = false;
+		collectionInLeftSideAssig = false;
 	}
+<<<<<<< HEAD
 	
 	public void setLeftSideAssignment() { forLeftSideInAssignment = true; }
 	
@@ -34,8 +34,15 @@ public class ST_Leaf extends SyntacticTree{
 =======
 	
 >>>>>>> f58785c... arreglos para condiciones en indice de foreach:src/utils/syntacticTree/ST_Leaf.java
+=======
+
+	public void setCollectionInLeftSideAssig() { collectionInLeftSideAssig = true; }
+
+	public boolean isCollectionInLeftSideAssig() { return collectionInLeftSideAssig; }
+
+>>>>>>> 4812029... detalles
 	@Override
-	public void recorreArbol(RegisterTable registers, MsgStack assemblerCode, MsgStack comInterm, Hashtable<String,
+	public void recorreArbol(RegisterTable registers, MsgStack assemblerCode, MsgStack comInterm, Hashtable<String, 
 			ElementoTS> symbolTable, String blankPrefix) {
 <<<<<<< HEAD:src/utils/syntacticTree/SyntacticTreeLeaf.java
 <<<<<<< HEAD
@@ -181,7 +188,12 @@ public class ST_Leaf extends SyntacticTree{
 			assemblerCode.addMsg("mov " + regIndex + ", " + subIndexName); // Valor de índice en EAX
 =======
 			String regIndex = "";
-			if (getType().equals(ElementoTS.INT) || (symbolTable.containsKey(subIndexName) && !symbolTable.get(subIndexName.substring(1)).isPointer())) { 
+			// El subindice puede ser constante o variable (no va a ser una variable puntero)
+			if ((symbolTable.containsKey(subIndexName) && symbolTable.get(subIndexName).getVariableType() == ElementoTS.INT) ||
+					(symbolTable.containsKey(subIndexName.substring(1))
+					 && symbolTable.get(subIndexName.substring(1)).getVariableType() == ElementoTS.INT) 
+					 && !(symbolTable.get(subIndexName.substring(1)).isPointer())
+					) { 
 				regIndex = registers.getReg(RegisterTable.NAME_AX, this, symbolTable, assemblerCode);
 				assemblerCode.addMsg("mov " + regIndex + ", " + subIndexName); // Valor de índice en EAX
 				assemblerCode.addMsg("cwde");
@@ -197,39 +209,45 @@ public class ST_Leaf extends SyntacticTree{
 			String collectionName = data.substring(1, subIndexNameStart - 1);
 			String regSizeByType = registers.getRegFreeLong(null, symbolTable, assemblerCode);
 			int size;
+<<<<<<< HEAD
 			if(symbolTable.get(collectionName).getVariableType().equals("int"))
 <<<<<<< HEAD
 				assemblerCode.addMsg("mul " + regIndex + ", 2");
 >>>>>>> 0fcca1b... varios
 =======
+=======
+			if(symbolTable.get(collectionName).getVariableType().equals(ElementoTS.INT))
+>>>>>>> 4812029... detalles
 				size = 2;
 >>>>>>> fde7cdb... varios
 			else
 				size = 4;
 			System.out.println("en leaf con " + collectionName + "[" + subIndexName + "]");
+
 			assemblerCode.addMsg("mov " + regSizeByType + ", " + size);
-			assemblerCode.addMsg("mul " + regSizeByType); // Calcula el índice en Bytes (EDX:EAX = EAX * regSizeByType)
+			assemblerCode.addMsg("mul " + regSizeByType); 										// Calcula el índice en Bytes (EDX:EAX = EAX * regSizeByType)
 			registers.freeReg(registers.getRegPos(regSizeByType));
 			String regCollectionOffset = registers.getRegFreeLong(this, symbolTable, assemblerCode);
-			assemblerCode.addMsg("lea " + regCollectionOffset + ", " + "_" + collectionName); // Base de la colección
-			assemblerCode.addMsg("add " + regIndex + ", " + regCollectionOffset); // Calcula posición del índice en memoria (Base + Desplazamiento)
+			assemblerCode.addMsg("lea " + regCollectionOffset + ", " + "_" + collectionName); 	// Base de la colección
+			assemblerCode.addMsg("add " + regIndex + ", " + regCollectionOffset); 				// Calcula posición del índice en memoria (Base + Desplazamiento)
 			//chequeo por arreglo superado
 			String regEndCollection = registers.getRegFreeLong(this,symbolTable,assemblerCode);
-			assemblerCode.addMsg("mov " + regEndCollection + ", " + symbolTable.get(collectionName).getCSizeBytes()); //guarda el tamaño en bytes del arreglo
-			assemblerCode.addMsg("add " + regEndCollection + ", " + regCollectionOffset); //guarda la direccion final del arreglo
-			assemblerCode.addMsg("cmp " + regIndex + ", " + regEndCollection); //compara direccion final del arreglo con direccion a la que se desea acceder del arreglo
+			assemblerCode.addMsg("mov " + regEndCollection + ", " + 
+					symbolTable.get(collectionName).getCSizeBytes()); 			//guarda el tamaño en bytes del arreglo
+			assemblerCode.addMsg("add " + regEndCollection + ", " + regCollectionOffset); 		//guarda la direccion final del arreglo
+			assemblerCode.addMsg("cmp " + regIndex + ", " + regEndCollection); 					//compara direccion final del arreglo con direccion a la que se desea acceder del arreglo
 			assemblerCode.addMsg("jge _msgArregloFueraDeRango");
 			//chequeo por direccion de memoria menor (por subíndices negativos)
-			assemblerCode.addMsg("cmp " + regIndex + ", " + regCollectionOffset); //compara direccion final del arreglo con direccion a la que se desea acceder del arreglo
+			assemblerCode.addMsg("cmp " + regIndex + ", " + regCollectionOffset); 				//compara direccion final del arreglo con direccion a la que se desea acceder del arreglo
 			assemblerCode.addMsg("jl _msgArregloFueraDeRango");
-			if (forLeftSideInAssignment) { // Si es para el lado izquierdo se devuelve el puntero
+			if (collectionInLeftSideAssig) { 														// Si es para el lado izquierdo se devuelve el puntero
 				data = regIndex;
 				registers.freeReg(registers.getRegPos(regCollectionOffset));
-			} else { // Para el lado derecho se devuelve el valor apuntado
+			} else { 																			// Para el lado derecho se devuelve el valor apuntado
 				if (getType().equals(ElementoTS.INT)) {
 					registers.freeReg(registers.getRegPos(regCollectionOffset));
 					data = registers.getRegFreeInt(this, symbolTable, assemblerCode);
-					assemblerCode.addMsg("mov " + data + ", word ptr [" + regIndex + "]"); //guarda en regColec el valor almacenado en la direccion de memoria guardada en regI
+					assemblerCode.addMsg("mov " + data + ", word ptr [" + regIndex + "]"); 		//guarda en regColec el valor almacenado en la direccion de memoria guardada en regI
 				} else {
 					assemblerCode.addMsg("mov " + regCollectionOffset + ", dword ptr [" + regIndex + "]");
 					data = regCollectionOffset;
@@ -362,6 +380,8 @@ public class ST_Leaf extends SyntacticTree{
 >>>>>>> fde7cdb... varios
 =======
 			registers.freeReg(registers.getRegPos(regEndCollection));
+<<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> f58785c... arreglos para condiciones en indice de foreach:src/utils/syntacticTree/ST_Leaf.java
 		}
 <<<<<<< HEAD
@@ -378,6 +398,28 @@ public class ST_Leaf extends SyntacticTree{
 			data = regResult;
 		}
 >>>>>>> ff6e773... uso de punteros como enteros
+=======
+		} else
+		// Tratamiento de punteros como enteros, devuelve un registro de 16 bits, tira la parte alta
+			if (isVariable() && getType().equals(ElementoTS.INT)  && symbolTable.get(getElem().substring(1)).isPointer() && !forLeftSideInAssignment) {
+=======
+		} else {
+			// Tratamiento de punteros como enteros, devuelve un registro de 16 bits, tira la parte alta
+			if (isVariable() && getType().equals(ElementoTS.INT)  && symbolTable.get(getElem().substring(1)).isPointer()) {
+>>>>>>> 4812029... detalles
+				String regEAX = registers.getReg(RegisterTable.NAME_EAX, this, symbolTable, assemblerCode);
+				assemblerCode.addMsg("mov " + regEAX + ", " + getElem());
+				String regAX = registers.reduceTo16b(registers.getRegPos(regEAX)); 					// Comienza utilizar AX
+				String regResult = registers.getRegFreeInt(this, symbolTable, assemblerCode);
+				assemblerCode.addMsg("mov " + regResult + ", " + regAX);
+				registers.freeReg(registers.getRegPos(regAX));
+				data = regResult;
+			}
+<<<<<<< HEAD
+>>>>>>> 683cde1... resuelto problema de regtable con punteros de enteros al crear variable auxiliar o cambiar registro de lugar
+=======
+		}
+>>>>>>> 4812029... detalles
 		setAlmacenamiento(data);
 <<<<<<< HEAD:src/utils/syntacticTree/SyntacticTreeLeaf.java
 >>>>>>> 51f241d... arreglos varios

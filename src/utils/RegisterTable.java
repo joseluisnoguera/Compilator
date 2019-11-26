@@ -137,6 +137,7 @@ public class RegisterTable {
 =======
 			if(!reg.is_busy) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if(i == AX) reg.nombre = NAME_AX;
 				else if(i == BX) reg.nombre = NAME_BX;
 				else if(i == CX) reg.nombre = NAME_CX;
@@ -149,6 +150,9 @@ public class RegisterTable {
 				else reg.name = NAME_DX;
 >>>>>>> 313c55b... extensiones a 32 bits
 				reg.nodoAsociado = nodoAsociado;
+=======
+				reg.name = getNameRegister16b(i);
+>>>>>>> 4812029... detalles
 				reg.is_busy = true;
 				encontrado=true;
 			}
@@ -171,11 +175,14 @@ public class RegisterTable {
 =======
 		if(!encontrado) {
 			String nombreVarAux = "_@varAux" + contadorVarAUX++;
-			int regPos = (int)((Math.random()*2 + 1)); //devueve como valor 1 o 2
-			reg = regState.get(regPos); // Siempre se le asigna a BX o CX
-			ElementoTS nuevoElemento = new ElementoTS(ElementoTS.ID, "", reg.nodoAsociado.getType()); //agrego la variable auxiliar a la tabla de simbolos
+			int regPos = (int)((Math.random()*2 + 1)); 													// devueve como valor 1 o 2
+			reg = regState.get(regPos); 																// Siempre se le asigna a BX o CX
+			ElementoTS nuevoElemento = new ElementoTS(ElementoTS.ID, "", reg.nodoAsociado.getType()); 	// agrego la variable auxiliar a la tabla de simbolos
+			if ((reg.name == NAME_EAX || reg.name == NAME_EBX || reg.name == NAME_ECX || reg.name == NAME_EDX) && reg.nodoAsociado.getType() == ElementoTS.INT)
+				nuevoElemento.setHasPointer();
 			nuevoElemento.setIdentifierClass(ElementoTS.VAR);
 			symbolTable.put(nombreVarAux.substring(1), nuevoElemento);
+<<<<<<< HEAD
 			reg.nodoAsociado.setAlmacenamiento(nombreVarAux); // setea el nodo del registro almacenado en var
 			assemblerCode.addMsg("mov " + nombreVarAux + ", " + reg.name);// mueve lo que contiene CX a var
 			reg.nodoAsociado = nodoAsociado;
@@ -192,9 +199,14 @@ public class RegisterTable {
 =======
 				reg.name = NAME_CX;
 >>>>>>> 313c55b... extensiones a 32 bits
+=======
+			reg.nodoAsociado.setAlmacenamiento(nombreVarAux); 											// setea el nodo del registro almacenado en var
+			assemblerCode.addMsg("mov " + nombreVarAux + ", " + reg.name);								// mueve lo que contiene CX a var
+			reg.name = getNameRegister16b(regPos);
+>>>>>>> 4812029... detalles
 		}
+		reg.nodoAsociado = nodoAsociado;
 		return reg.name;
-
 	}
 
 	public String getRegFreeLong(SyntacticTree nodoAsociado, Hashtable<String, ElementoTS> symbolTable, MsgStack assemblerCode) {
@@ -217,6 +229,7 @@ public class RegisterTable {
 		while (i < regState.size() && !encontrado) {
 			reg = regState.get(i);
 			if(!reg.is_busy) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 				switch(i){
@@ -247,6 +260,9 @@ public class RegisterTable {
 				else reg.name = NAME_EDX;
 >>>>>>> 313c55b... extensiones a 32 bits
 				reg.nodoAsociado = nodoAsociado;
+=======
+				reg.name = getNameRegister32b(i);
+>>>>>>> 4812029... detalles
 				reg.is_busy = true;
 				encontrado=true;
 			}
@@ -268,11 +284,14 @@ public class RegisterTable {
 =======
 		if(!encontrado) {
 			String nombreVarAux = "_@varAux" + contadorVarAUX++;
-			int regPos = (int)((Math.random()*2 + 1)); //devuelve como valor 1 o 2
-			reg = regState.get(regPos); // Asigna siempre EBX o ECX 
-			ElementoTS nuevoElemento = new ElementoTS(ElementoTS.ID, "", reg.nodoAsociado.getType()); //agrego la variable auxiliar a la tabla de simbolos
+			int regPos = (int)((Math.random()*2 + 1)); 													// devuelve como valor 1 o 2
+			reg = regState.get(regPos); 																// Asigna siempre EBX o ECX
+			ElementoTS nuevoElemento = new ElementoTS(ElementoTS.ID, "", reg.nodoAsociado.getType()); 	//agrego la variable auxiliar a la tabla de simbolos
+			if ((reg.name == NAME_EAX || reg.name == NAME_EBX || reg.name == NAME_ECX || reg.name == NAME_EDX) && reg.nodoAsociado.getType() == ElementoTS.INT)
+				nuevoElemento.setHasPointer();
 			nuevoElemento.setIdentifierClass(ElementoTS.VAR);
 			symbolTable.put(nombreVarAux.substring(1), nuevoElemento);
+<<<<<<< HEAD
 			reg.nodoAsociado.setAlmacenamiento(nombreVarAux);//setea el nodo del registro almacenado en var
 			assemblerCode.addMsg("mov " + nombreVarAux + ", " + reg.name);//mueve lo que contiene ECX a var
 			reg.nodoAsociado = nodoAsociado;
@@ -297,10 +316,19 @@ public class RegisterTable {
 				reg.name = NAME_ECX;
 >>>>>>> 313c55b... extensiones a 32 bits
 
+=======
+			reg.nodoAsociado.setAlmacenamiento(nombreVarAux);											// setea el nodo del registro almacenado en var
+			assemblerCode.addMsg("mov " + nombreVarAux + ", " + reg.name);								// mueve lo que contiene ECX a var
+			reg.name = getNameRegister32b(regPos);
+>>>>>>> 4812029... detalles
 		}
+		reg.nodoAsociado = nodoAsociado;
 		return reg.name;
+<<<<<<< HEAD
 
 >>>>>>> bbb6d5a... commit para pull
+=======
+>>>>>>> 4812029... detalles
 	}
 
 <<<<<<< HEAD
@@ -336,27 +364,27 @@ public class RegisterTable {
 >>>>>>> 39b95a0... Update RegisterTable-VarAUX
 =======
 	public void freeReg(int reg) { regState.get(reg).is_busy = false; }
-	
+
 	public String extendTo32b(int reg) { (regState.get(reg)).name = getNameRegister32b(reg); return regState.get(reg).name; }
-	
+
 	public String reduceTo16b(int reg) { (regState.get(reg)).name = getNameRegister16b(reg); return regState.get(reg).name; }
-	
+
 	private String getNameRegister32b(int reg) {
 		return (reg == 0)? NAME_EAX :
-				(reg == 1)? NAME_EBX :
-				(reg == 2)? NAME_ECX : NAME_EDX;
+			(reg == 1)? NAME_EBX :
+			(reg == 2)? NAME_ECX : NAME_EDX;
 	}
-	
+
 	private String getNameRegister16b(int reg) {
 		return (reg == 0)? NAME_AX :
-				(reg == 1)? NAME_BX :
-				(reg == 2)? NAME_CX : NAME_DX;
+			(reg == 1)? NAME_BX :
+			(reg == 2)? NAME_CX : NAME_DX;
 	}
 
 	public int getRegPos(String regName) {
 		return  (regName == NAME_AX || regName == NAME_EAX)? AX :
 			(regName == NAME_BX || regName == NAME_EBX)? BX :
-				(regName == NAME_CX || regName == NAME_ECX)? CX : DX;
+			(regName == NAME_CX || regName == NAME_ECX)? CX : DX;
 	}
 
 	// Para pedir un registro en específico
@@ -375,6 +403,7 @@ public class RegisterTable {
 		Registro reg = regState.get(index);
 		if(reg.ocupado) {
 			String regNuevo;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -407,13 +436,17 @@ public class RegisterTable {
 >>>>>>> fde7cdb... varios
 				regNuevo = getRegFreeInt(reg.nodoAsociado, symbolTable, assemblerCode);
 			else
+=======
+			if(reg.name == NAME_EAX || reg.name == NAME_EBX || reg.name == NAME_ECX || reg.name == NAME_EDX)
+>>>>>>> 683cde1... resuelto problema de regtable con punteros de enteros al crear variable auxiliar o cambiar registro de lugar
 				regNuevo = getRegFreeLong(reg.nodoAsociado, symbolTable, assemblerCode);
+			else
+				regNuevo = getRegFreeInt(reg.nodoAsociado, symbolTable, assemblerCode);
 			assemblerCode.addMsg("mov " + regNuevo + ", " + reg.name);
 			reg.nodoAsociado.setAlmacenamiento(regNuevo);
-			reg.nodoAsociado = nodo;
-			reg.name = nameReg;
-		} else {
+		} else
 			reg.is_busy = true;
+<<<<<<< HEAD
 			reg.nodoAsociado = nodo;
 <<<<<<< HEAD
 			reg.nombre = nameReg;
@@ -423,6 +456,11 @@ public class RegisterTable {
 >>>>>>> 313c55b... extensiones a 32 bits
 		}
 		return dato;
+=======
+		reg.nodoAsociado = nodo;
+		reg.name = nameReg;
+		return nameReg;
+>>>>>>> 4812029... detalles
 	}
 }
 

@@ -30,7 +30,7 @@ public class ST_Convertion extends SyntacticTree{
 		super(lexeme);
 		super.setHijoIzq(nodo);
 	}
-	
+
 	public static final String ITOL = "itol"; 			// Para convertir int en long
 	public static final String PTOV = "pointerToVal";	// Para extraer el valor apuntado por una variable puntero
 >>>>>>> f58785c... arreglos para condiciones en indice de foreach:src/utils/syntacticTree/ST_Convertion.java
@@ -109,6 +109,7 @@ public class ST_Convertion extends SyntacticTree{
 		String data = "";
 		getHijoIzq().recorreArbol(registers,assemblerCode,comInterm,symbolTable, blankPrefix + getBlankSpace());
 		data = getHijoIzq().getAlmacenamiento();
+<<<<<<< HEAD
 <<<<<<< HEAD:src/utils/syntacticTree/SyntacticTreeConver.java
 <<<<<<< HEAD
 		if(getHijoIzq().isVariableOrConst()) {
@@ -252,13 +253,20 @@ public class ST_Convertion extends SyntacticTree{
 =======
 		if(getElem() == ITOL) {
 >>>>>>> f58785c... arreglos para condiciones en indice de foreach:src/utils/syntacticTree/ST_Convertion.java
+=======
+		if(getElem() == ITOL) {	
+>>>>>>> 4812029... detalles
 			if(getHijoIzq().isVariableOrConst()) {
 				if (data.charAt(0) == '_') { //es id
-					String regData = registers.getReg(RegisterTable.NAME_AX, getHijoIzq(), symbolTable, assemblerCode);
-					assemblerCode.addMsg("mov " + regData + ", " + data);
-					assemblerCode.addMsg("cwde");
-					regData = registers.extendTo32b(registers.getRegPos(RegisterTable.NAME_AX));
-					setAlmacenamiento(regData);
+					if (symbolTable.get(getHijoIzq().getElem().substring(1)).isPointer()) {
+						setAlmacenamiento(data); // Ya es un puntero de 32 bits
+					} else {
+						String regData = registers.getReg(RegisterTable.NAME_AX, getHijoIzq(), symbolTable, assemblerCode);
+						assemblerCode.addMsg("mov " + regData + ", " + data);
+						assemblerCode.addMsg("cwde");
+						regData = registers.extendTo32b(registers.getRegPos(RegisterTable.NAME_AX));
+						setAlmacenamiento(regData);
+					}
 				}else { //es cte
 					String regConverted = registers.getRegFreeLong(getHijoIzq(), symbolTable, assemblerCode);
 					assemblerCode.addMsg("mov " + regConverted + ", " + data);
@@ -268,26 +276,15 @@ public class ST_Convertion extends SyntacticTree{
 				String regAX = registers.getReg(RegisterTable.NAME_AX, getHijoIzq(), symbolTable, assemblerCode);
 				assemblerCode.addMsg("mov " + regAX + ", " + data);
 				assemblerCode.addMsg("cwde");
-				regAX = registers.extendTo32b(registers.getRegPos(RegisterTable.NAME_AX));
-				setAlmacenamiento(regAX);
+				String regEAX = registers.extendTo32b(registers.getRegPos(RegisterTable.NAME_AX));
+				setAlmacenamiento(regEAX);
 			}
-		}
-		if(getElem() == PTOV) {// extraccion de valor en memoria apuntado por una variable ("pointToVal")
-			String reg;
-			data = getHijoIzq().getElem();
-			String regPosicion = registers.getRegFreeLong(getHijoIzq(), symbolTable, assemblerCode);
-			assemblerCode.addMsg("mov " + regPosicion + ", " + data);
-			if(symbolTable.get(data.substring(1)).getVariableType() == ElementoTS.INT) {
-				reg = registers.getRegFreeInt(getHijoIzq(), symbolTable, assemblerCode);
-				assemblerCode.addMsg("mov " + reg + ", word ptr [" + regPosicion + "]");
-				System.out.println("extrae entero del indice: " + data);
-			} else {
-				reg = registers.getRegFreeLong(getHijoIzq(), symbolTable, assemblerCode);
-				assemblerCode.addMsg("mov " + reg + ", dword ptr [" + regPosicion + "]");
-				System.out.println("extrae long del indice: " + data);
-			}
+<<<<<<< HEAD
 			setAlmacenamiento(reg);
 >>>>>>> ffe4c4b... comentario
+=======
+			setType(ElementoTS.LONG);
+>>>>>>> 4812029... detalles
 		}
 		String regAux = registros.getRegFreeLong();
 		comAssembler.addMsg("MOV " + regAux + ", " + super.getElem());

@@ -293,7 +293,7 @@ final static short yylen[] = {                            2,
     0,    1,    1,    1,    2,    2,    4,    4,    4,    4,
     5,    5,    6,    6,    7,    7,    7,    7,    8,    8,
     8,    8,    3,   11,   11,   10,   12,   12,   12,   12,
-   12,   12,   13,   13,   20,   21,   18,   19,   23,   23,
+   12,   12,   13,   13,   18,   20,   21,   19,   23,   23,
    23,   23,   23,   23,   14,   25,   25,   24,   15,   26,
    26,   26,   27,   27,   27,   28,   28,   28,   22,   22,
    22,   22,    9,    9,   16,   29,   17,   17,   17,   17,
@@ -344,7 +344,7 @@ final static short yylen[] = {                            2,
 final static short yydefred[] = {                         0,
     0,   26,   11,   12,    0,    1,    0,    4,    5,    0,
     0,   10,    2,    6,    0,    0,    0,    0,    0,    0,
-   37,    0,   66,   41,   42,   43,   44,    0,   39,   40,
+   35,    0,   66,   41,   42,   43,   44,    0,   39,   40,
     0,    0,    0,    0,    0,   28,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    7,    0,    8,    0,   32,
    78,    0,    0,   77,   48,    0,   73,   79,   67,    0,
@@ -354,9 +354,9 @@ final static short yydefred[] = {                         0,
     0,   64,    0,    0,   70,   58,    0,    0,    0,    0,
     0,   15,    0,   52,    0,   76,   51,    0,    0,    0,
     0,    0,   71,    0,    0,   47,   45,    0,    0,    0,
-    0,   65,    0,   22,   21,    0,    0,   80,   69,   35,
+    0,   65,    0,   22,   21,    0,    0,   80,   69,   36,
     0,   38,   62,   61,    0,    0,   56,   57,   17,    0,
-   16,    0,   33,    0,   36,    0,   18,   34,
+   16,    0,   33,    0,   37,    0,   18,   34,
 };
 final static short yydgoto[] = {                          5,
     6,    7,    8,    9,   31,   16,   17,   79,   71,   11,
@@ -898,6 +898,7 @@ final static String yyrule[] = {
 "sent_cond : comienzo_if '(' cond_if ')' bloque_then ELSE bloque_else END_IF",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 1375c5c... arreglos varios
 "bloque_then : bloque_ejec",
 "bloque_else : bloque_ejec",
@@ -911,6 +912,11 @@ final static String yyrule[] = {
 "bloque_else : conj_sent",
 >>>>>>> 1ce0652... comentario
 "comienzo_if : IF",
+=======
+"comienzo_if : IF",
+"bloque_then : conj_sent",
+"bloque_else : conj_sent",
+>>>>>>> 4812029... detalles
 "cond_if : factor comparador factor",
 "comparador : '<'",
 "comparador : '>'",
@@ -968,6 +974,8 @@ final static String yyrule[] = {
 "error_p : comparador ASSIGN",
 };
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -1061,6 +1069,12 @@ final static String yyrule[] = {
 =======
 //#line 595 "gramatica.y"
 >>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
+=======
+//#line 588 "gramatica.y"
+>>>>>>> 4812029... detalles
+=======
+//#line 589 "gramatica.y"
+>>>>>>> 8381084... nothing
 
 private Lexicon lex;
 private Hashtable<String,ElementoTS> symbolTable;
@@ -1094,7 +1108,7 @@ private int yylex(){
 }
 
 private void yyerror(String msg){
-	msgStack.addMsg("Línea "+ lex.getNewLineCounter() + ": " + msg);
+	//msgStack.addMsg("Línea "+ lex.getNewLineCounter() + ": " + msg);
 }
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -1340,20 +1354,20 @@ case 8:
 //#line 41 "gramatica.y"
 { 
 				semanticStructStack.addMsg("Linea "+ numLineaDecl +": Sentencia declarativa");
-				if (tipovar != expectedVarType){
-					 msgStack.addMsg("Error: uso de constante de tipo distinto al declarado en línea: " + lex.getNewLineCounter());
+				if (expectedVarType != "" && tipovar == ElementoTS.INT && expectedVarType == ElementoTS.LONG){
+					 msgStack.addMsg("Error: incompatibilidad de tipos en la declaración de la línea: " + lex.getNewLineCounter());
 					 hasError = true;
 				}
 				expectedVarType = "";
-			  }
+			}
 break;
 case 10:
 //#line 50 "gramatica.y"
-{ msgStack.addMsg("Error genérico en el bloque declarativo no contemplado cerca de línea " + lex.getNewLineCounter()); }
+{ msgStack.addMsg("Error de sintáxis en el bloque declarativo cerca de línea " + lex.getNewLineCounter()); }
 break;
 case 11:
 //#line 53 "gramatica.y"
-{tipovar = ElementoTS.INT; numLineaDecl = lex.getNewLineCounter(); }
+{ tipovar = ElementoTS.INT; numLineaDecl = lex.getNewLineCounter(); }
 break;
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -1393,7 +1407,7 @@ case 14:
 =======
 case 12:
 //#line 54 "gramatica.y"
-{tipovar = ElementoTS.LONG; numLineaDecl = lex.getNewLineCounter(); }
+{ tipovar = ElementoTS.LONG; numLineaDecl = lex.getNewLineCounter(); }
 break;
 case 13:
 <<<<<<< HEAD
@@ -1744,7 +1758,7 @@ case 32:
 //#line 167 "gramatica.y"
 >>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
 { 
-				msgStack.addMsg("Error genérico no contemplado cerca de línea " + lex.getNewLineCounter());
+				msgStack.addMsg("Error de sintáxis cerca de línea " + lex.getNewLineCounter());
 				hasError = true;
 				yyval = new ST_Common("ERROR", null, null);
 			}
@@ -1934,8 +1948,12 @@ case 35:
 >>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 =======
 //#line 192 "gramatica.y"
+<<<<<<< HEAD
 >>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
 { yyval = val_peek(0); }
+=======
+{ stackOfLines.push(lex.getNewLineCounter()); }
+>>>>>>> 4812029... detalles
 break;
 case 36:
 //#line 195 "gramatica.y"
@@ -1996,61 +2014,72 @@ case 37:
 >>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 =======
 //#line 198 "gramatica.y"
+<<<<<<< HEAD
 >>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
 { stackOfLines.push(lex.getNewLineCounter()); }
+=======
+{ yyval = val_peek(0); }
+>>>>>>> 4812029... detalles
 break;
 case 38:
 //#line 201 "gramatica.y"
 {
 			SyntacticTree nodoCond;
 			if (((SyntacticTree)val_peek(2)).getType() != ((SyntacticTree)val_peek(0)).getType()){
-				hasError = true;
-				msgStack.addMsg("Error: Incompatibilidad de tipos entre las variables utilizadas en línea: " + lex.getNewLineCounter());
-				nodoCond = new ST_Common("ERROR", null, null);
+				SyntacticTree nodoLeft;
+				SyntacticTree nodoRight;
+				if (((SyntacticTree)val_peek(2)).getType() == ElementoTS.LONG){
+					nodoLeft = (SyntacticTree)val_peek(2);
+					nodoRight = new ST_Convertion(ST_Convertion.ITOL,(SyntacticTree)val_peek(0));
+				} else {
+					nodoLeft = new ST_Convertion(ST_Convertion.ITOL,(SyntacticTree)val_peek(2));
+					nodoRight = (SyntacticTree)val_peek(0);
+				}
+				nodoCond = new ST_Common(val_peek(1).sval, nodoLeft, nodoRight);
 			} else
 				nodoCond = new ST_Common(val_peek(1).sval, (SyntacticTree)val_peek(2), (SyntacticTree)val_peek(0));
 			SyntacticTree nodoCondCtrol = new ST_Control("COND_IF",nodoCond);
 			yyval = nodoCondCtrol; }
 break;
 case 39:
-//#line 213 "gramatica.y"
+//#line 220 "gramatica.y"
 { val_peek(0).sval = "<"; yyval = val_peek(0); }
 break;
 case 40:
-//#line 214 "gramatica.y"
+//#line 221 "gramatica.y"
 { val_peek(0).sval = ">"; yyval = val_peek(0); }
 break;
 case 41:
-//#line 215 "gramatica.y"
+//#line 222 "gramatica.y"
 { val_peek(0).sval = "LET"; yyval = val_peek(0); }
 break;
 case 42:
-//#line 216 "gramatica.y"
+//#line 223 "gramatica.y"
 { val_peek(0).sval = "GET"; yyval = val_peek(0); }
 break;
 case 43:
-//#line 217 "gramatica.y"
+//#line 224 "gramatica.y"
 { val_peek(0).sval = "EQ"; yyval = val_peek(0); }
 break;
 case 44:
-//#line 218 "gramatica.y"
+//#line 225 "gramatica.y"
 { val_peek(0).sval = "DIF"; yyval = val_peek(0); }
 break;
 case 45:
-//#line 221 "gramatica.y"
+//#line 228 "gramatica.y"
 { 
 		ST_Common nodo = null;
         semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() + ": Sentencia foreach");
         stackOfLines.pop();
-		if(!(symbolTable.containsKey(val_peek(2).sval) && symbolTable.get(val_peek(1).sval).isDeclared())) {
+		if(!symbolTable.get(val_peek(1).sval).isDeclared()) {
 			msgStack.addMsg("Error: Colección  " + val_peek(1).sval + " no declarada.");
 			hasError = true;
 		}
-		if (hasError) /*Por si detecto error en comienzo_foreach*/
+		if (hasError) /*Por si detecto error en comienzo_foreach por variable no declarada*/
 			nodo = new ST_Common("ERROR", null, null);
 		else {
-			if (!(symbolTable.get(val_peek(3).sval).getVariableType().equals(symbolTable.get(val_peek(1).sval).getVariableType()))) {
-				msgStack.addMsg("Error: Tipos distintos en línea: " + lex.getNewLineCounter());
+			if (!(symbolTable.get(val_peek(3).sval).getVariableType() == symbolTable.get(val_peek(1).sval).getVariableType())) {
+				msgStack.addMsg("Error: Tipos distintos en el foreach de la línea: " + lex.getNewLineCounter());
 				hasError = true;
 				nodo = new ST_Common("ERROR", null, null);
 			} else {
@@ -2082,11 +2111,11 @@ case 45:
 	}
 break;
 case 46:
-//#line 265 "gramatica.y"
+//#line 272 "gramatica.y"
 { yyval = val_peek(0); }
 break;
 case 47:
-//#line 266 "gramatica.y"
+//#line 273 "gramatica.y"
 { yyval = val_peek(0); }
 break;
 <<<<<<< HEAD
@@ -2184,14 +2213,18 @@ case 50:
 =======
 case 48:
 <<<<<<< HEAD
+<<<<<<< HEAD
 //#line 269 "gramatica - copia.y"
 >>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 =======
 //#line 269 "gramatica.y"
 >>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
+=======
+//#line 276 "gramatica.y"
+>>>>>>> 4812029... detalles
 { 
 					stackOfLines.push(lex.getNewLineCounter());
-					if (symbolTable.containsKey(val_peek(0).sval) && symbolTable.get(val_peek(0).sval).isDeclared()) {
+					if (symbolTable.get(val_peek(0).sval).isDeclared()) {
 						symbolTable.get(val_peek(0).sval).foreachControlOn();
 						symbolTable.get(val_peek(0).sval).setHasPointer();
 					} else {
@@ -2203,7 +2236,7 @@ case 48:
 >>>>>>> f58785c... arreglos para condiciones en indice de foreach
 break;
 case 49:
-//#line 282 "gramatica.y"
+//#line 289 "gramatica.y"
 {
 				SyntacticTree nodo = null;
 				semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() + ": Asignación"); 
@@ -2220,30 +2253,30 @@ case 49:
 >>>>>>> fde7cdb... varios
 =======
 				if(((SyntacticTree) val_peek(0)).getType() == ElementoTS.LONG && ((SyntacticTree) val_peek(2)).getType().equals(ElementoTS.INT)){
+<<<<<<< HEAD
 >>>>>>> dbec3d7... comentario
 					msgStack.addMsg("Error: incompatibilidad de tipos en línea: " + lex.getNewLineCounter());
 >>>>>>> 0fcca1b... varios
+=======
+					msgStack.addMsg("Error: Incompatibilidad de tipos en línea: " + lex.getNewLineCounter());
+>>>>>>> 4812029... detalles
 					hasError = true;
 					nodo = new ST_Common("ERROR", null, null);
 				} else {
 					boolean flag = false;
-					String subIndexName = ((SyntacticTree) val_peek(2)).getElem();
-					if (subIndexName.contains("[")) {
-						int subIndexNameStart = 0;
-						while (subIndexName.charAt(subIndexNameStart) != '[')
-							subIndexNameStart++;
-						subIndexNameStart++; /* Salta el corchete inicial*/
-						subIndexName = subIndexName.substring(subIndexNameStart + 1, subIndexName.length() - 1);
-						if (symbolTable.containsKey(subIndexName)) /* Si no está en la TS es porque era una constante*/
-							flag = (symbolTable.get(subIndexName).isPointer() && ((SyntacticTree) val_peek(0)).getType().equals(ElementoTS.INT));
+					String varName = ((SyntacticTree) val_peek(2)).getElem();
+					if (!varName.contains("[")) {
+						flag = (symbolTable.containsKey(varName.substring(1))
+								&& symbolTable.get(varName.substring(1)).isPointer() 
+								&& ((SyntacticTree) val_peek(0)).getType().equals(ElementoTS.INT));
 					}
-					if (((SyntacticTree) val_peek(2)).getType() == ElementoTS.LONG && ((SyntacticTree) val_peek(0)).getType().equals(ElementoTS.INT)
-							|| flag){
+					if (((SyntacticTree) val_peek(2)).getType() == ElementoTS.LONG && ((SyntacticTree) val_peek(0)).getType().equals(ElementoTS.INT) || flag){
 						SyntacticTree nodoConv = new ST_Convertion(ST_Convertion.ITOL,(SyntacticTree)val_peek(0));
 						nodo = new ST_Common(":=",(SyntacticTree)val_peek(2),nodoConv);
 					}else
 						nodo = new ST_Common(":=",(SyntacticTree)val_peek(2),(SyntacticTree)val_peek(0));
 					nodo.setType( ((SyntacticTree) val_peek(2)).getType());
+					nodo.setAlmacenamiento(varName);
 				}
 				yyval = nodo;
 			}
@@ -2257,6 +2290,7 @@ case 49:
 { stackOfLines.push(lex.getNewLineCounter()); }
 break;
 case 50:
+<<<<<<< HEAD
 <<<<<<< HEAD
 //#line 129 "gramatica_2.y"
 =======
@@ -2282,15 +2316,18 @@ case 50:
 =======
 //#line 314 "gramatica.y"
 >>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
+=======
+//#line 317 "gramatica.y"
+>>>>>>> 4812029... detalles
 { 
 						SyntacticTree nodo = null;
 						stackOfLines.push(lex.getNewLineCounter()); 
-						if(!symbolTable.get(val_peek(0).sval).isDeclared()){
+						if(!(symbolTable.containsKey(val_peek(0).sval) && symbolTable.get(val_peek(0).sval).isDeclared())){
 							msgStack.addMsg("Error: Variable no declarada en línea: " + lex.getNewLineCounter());
 							hasError = true;
 							nodo = new ST_Leaf("ERROR");
 						}else {
-							if (symbolTable.get(val_peek(0).sval).foreachControlState() && symbolTable.get(val_peek(0).sval).isPointer()){
+							if (symbolTable.get(val_peek(0).sval).foreachControlState()){
 								msgStack.addMsg("Error: No se puede asignar a " + val_peek(0).sval + " dentro de foreach.");
 								hasError = true;
 								nodo = new ST_Leaf("ERROR");
@@ -2298,7 +2335,7 @@ case 50:
 								nodo = new ST_Leaf("_" + val_peek(0).sval);
 								nodo.setType(symbolTable.get(val_peek(0).sval).getVariableType());
 								nodo.setAlmacenamiento(nodo.getElem());
-								((ST_Leaf)nodo).setLeftSideAssignment();
+								((ST_Leaf)nodo).setCollectionInLeftSideAssig();
 							}
 						}
 						yyval = nodo;
@@ -2311,29 +2348,37 @@ case 52:
 =======
 case 51:
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 //#line 335 "gramatica - copia.y"
 >>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 =======
 //#line 335 "gramatica.y"
 >>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
+=======
+//#line 337 "gramatica.y"
+>>>>>>> 4812029... detalles
+=======
+//#line 338 "gramatica.y"
+>>>>>>> 8381084... nothing
 { 
 				   		SyntacticTree nodo = null;
 						stackOfLines.push(lex.getNewLineCounter());
-						if(!symbolTable.get(val_peek(3).sval).isDeclared()) {
+						if(!(symbolTable.containsKey(val_peek(3).sval) && symbolTable.get(val_peek(3).sval).isDeclared())) {
 							msgStack.addMsg("Error: Variable no declarada en línea: " + lex.getNewLineCounter());
 							hasError = true;
 							nodo  = new ST_Leaf("ERROR");
-						}else{
+						} else {
 							long pos = Long.valueOf(val_peek(1).sval);
 							if((long)symbolTable.get(val_peek(3).sval).getCSize() <= pos){
 								msgStack.addMsg("Error: Posición de colección superada en línea: " + lex.getNewLineCounter());
 								hasError = true;
 								nodo  = new ST_Leaf("ERROR");
-							}else{
+							} else {
 								nodo = new ST_Leaf("_" + val_peek(3).sval + "[" + val_peek(1).sval + "]");
 								nodo.setType(symbolTable.get(val_peek(3).sval).getVariableType());
 								nodo.setAlmacenamiento(nodo.getElem());
-								((ST_Leaf)nodo).setLeftSideAssignment();
+								((ST_Leaf)nodo).setCollectionInLeftSideAssig();
 							}
 						}
 						yyval = nodo;
@@ -2443,11 +2488,19 @@ case 53:
 =======
 case 52:
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 //#line 357 "gramatica - copia.y"
 >>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 =======
 //#line 357 "gramatica.y"
 >>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
+=======
+//#line 359 "gramatica.y"
+>>>>>>> 4812029... detalles
+=======
+//#line 360 "gramatica.y"
+>>>>>>> 8381084... nothing
 {
 						SyntacticTree nodo = null;
 >>>>>>> 45299ea... visualización de árbol sintáctico
@@ -2456,19 +2509,16 @@ case 52:
 							msgStack.addMsg("Error: Una o ambas variables no fueron declaradas en línea: " + lex.getNewLineCounter());
 							hasError = true;
 							nodo  = new ST_Leaf("ERROR");
-						}else {
+						} else {
 							if (symbolTable.get(val_peek(1).sval).getIdentifierClass().equals(ElementoTS.VAR)) {
 								if (symbolTable.get(val_peek(1).sval).foreachControlState()) {
-									ST_Leaf nodoHoja = new ST_Leaf("_" + val_peek(1).sval);
-									nodoHoja.setAlmacenamiento(nodoHoja.getElem());
-									ST_Convertion nodoAux = new ST_Convertion(ST_Convertion.PTOV, nodoHoja);
-									nodo = new ST_LeafCollection("_" + val_peek(3).sval + "[" + "_" + val_peek(1).sval + "]", nodoAux);
+									nodo = new ST_LeafCollection("_" + val_peek(3).sval + "[" + "_" + val_peek(1).sval + "]");
 								} else {
 									nodo  = new ST_Leaf("_" + val_peek(3).sval + "[" + "_" + val_peek(1).sval + "]");
 								}
 								nodo.setType(symbolTable.get(val_peek(3).sval).getVariableType());
 								nodo.setAlmacenamiento(nodo.getElem());
-								((ST_Leaf)nodo).setLeftSideAssignment();
+								((ST_Leaf)nodo).setCollectionInLeftSideAssig();
 							} else{
 								msgStack.addMsg("Error: El subíndice es distinto a una variable o constante en línea: " + lex.getNewLineCounter());
 								hasError = true;
@@ -2567,11 +2617,19 @@ if(symbolTable.get(val_peek(0).sval).getDeclaracion() == false)
 =======
 case 53:
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 //#line 387 "gramatica - copia.y"
 >>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 =======
 //#line 387 "gramatica.y"
 >>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
+=======
+//#line 386 "gramatica.y"
+>>>>>>> 4812029... detalles
+=======
+//#line 387 "gramatica.y"
+>>>>>>> 8381084... nothing
 {
 					SyntacticTree nodo = null;
 					if(((SyntacticTree) val_peek(2)).getType() != ((SyntacticTree) val_peek(0)).getType()) {
@@ -2649,11 +2707,19 @@ case 56:
 =======
 case 55:
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 //#line 415 "gramatica - copia.y"
 >>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 =======
 //#line 415 "gramatica.y"
 >>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
+=======
+//#line 414 "gramatica.y"
+>>>>>>> 4812029... detalles
+=======
+//#line 415 "gramatica.y"
+>>>>>>> 8381084... nothing
 { yyval =val_peek(0); }
 break;
 case 56:
@@ -2682,7 +2748,7 @@ case 57:
 				else
 					nodo = new ST_Common("/", (SyntacticTree)val_peek(2),new ST_Convertion(ST_Convertion.ITOL,(SyntacticTree)val_peek(0)));
 				nodo.setType(ElementoTS.LONG);
-			}else{
+			} else {
 				nodo = new ST_Common("/",(SyntacticTree)val_peek(2),(SyntacticTree)val_peek(0));
 				nodo.setType(((SyntacticTree)val_peek(2)).getType());
 			}
@@ -2804,11 +2870,19 @@ case 58:
 break;
 case 59:
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 //#line 448 "gramatica - copia.y"
 >>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 =======
 //#line 448 "gramatica.y"
 >>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
+=======
+//#line 447 "gramatica.y"
+>>>>>>> 4812029... detalles
+=======
+//#line 448 "gramatica.y"
+>>>>>>> 8381084... nothing
 {
 				SyntacticTree nodo = null;
 				if(!symbolTable.get(val_peek(0).sval).isDeclared()){
@@ -2817,10 +2891,7 @@ case 59:
 					nodo = new ST_Leaf("_");
 				} else {
 					if (symbolTable.get(val_peek(0).sval).foreachControlState()){
-						ST_Leaf nodoHoja = new ST_Leaf("_" + val_peek(0).sval);
-						nodoHoja.setAlmacenamiento(nodoHoja.getElem());
-						ST_Convertion nodoAux = new ST_Convertion(ST_Convertion.PTOV, nodoHoja);
-						nodo = new ST_LeafCollection("_" + val_peek(0).sval, nodoAux);
+						nodo = new ST_LeafCollection("_" + val_peek(0).sval);
 					} else
 						nodo = new ST_Leaf("_" + val_peek(0).sval);
 					nodo.setType(symbolTable.get(val_peek(0).sval).getVariableType());
@@ -3037,16 +3108,24 @@ case 62:
 >>>>>>> ff6e773... uso de punteros como enteros
 =======
 case 60:
-//#line 467 "gramatica.y"
+//#line 464 "gramatica.y"
 { yyval = val_peek(0); }
 break;
 case 61:
+<<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< HEAD
 //#line 469 "gramatica - copia.y"
 >>>>>>> 1612ef0... constantes negativas en inicialización de colecciones y control de tipos
 =======
 //#line 468 "gramatica.y"
 >>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
+=======
+//#line 464 "gramatica.y"
+>>>>>>> 4812029... detalles
+=======
+//#line 465 "gramatica.y"
+>>>>>>> 8381084... nothing
 {
 					SyntacticTree nodo = null;
 					if(!symbolTable.get(val_peek(3).sval).isDeclared()){
@@ -3055,7 +3134,7 @@ case 61:
 						nodo = new ST_Leaf("ERROR");
 					}else{
 						long pos = Integer.valueOf(val_peek(1).sval);
-						if(symbolTable.get(val_peek(3).sval).getCSize() <= pos) {
+						if((long)symbolTable.get(val_peek(3).sval).getCSize() <= pos) {
 							msgStack.addMsg("Error: Posicion de coleccion superada en línea: " + lex.getNewLineCounter());
 							hasError = true;
 							nodo = new ST_Leaf("ERROR");
@@ -3072,6 +3151,8 @@ break;
 <<<<<<< HEAD
 <<<<<<< HEAD
 case 62:
+<<<<<<< HEAD
+<<<<<<< HEAD
 //#line 206 "gramatica.y"
 >>>>>>> f713e33... comentario generico
 =======
@@ -3117,6 +3198,12 @@ case 62:
 =======
 //#line 487 "gramatica.y"
 >>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
+=======
+//#line 483 "gramatica.y"
+>>>>>>> 4812029... detalles
+=======
+//#line 484 "gramatica.y"
+>>>>>>> 8381084... nothing
 {
 					SyntacticTree nodo = null;
 					if(!symbolTable.get(val_peek(3).sval).isDeclared() || !symbolTable.get(val_peek(1).sval).isDeclared()){
@@ -3126,16 +3213,13 @@ case 62:
 					}else{
 						if (symbolTable.get(val_peek(1).sval).getIdentifierClass().equals(ElementoTS.VAR)) {
 							if (symbolTable.get(val_peek(1).sval).foreachControlState()){
-								ST_Leaf nodoHoja = new ST_Leaf("_" + val_peek(1).sval);
-								nodoHoja.setAlmacenamiento(nodoHoja.getElem());
-								ST_Convertion nodoAux = new ST_Convertion(ST_Convertion.PTOV, nodoHoja);
-								nodo = new ST_LeafCollection("_" + val_peek(3).sval + "[" + "_" + val_peek(1).sval + "]", nodoAux);
+								nodo = new ST_LeafCollection("_" + val_peek(3).sval + "[" + "_" + val_peek(1).sval + "]");
 							} else
 								nodo = new ST_Leaf("_" + val_peek(3).sval + "[" + "_" + val_peek(1).sval + "]");
 							nodo.setType(symbolTable.get(val_peek(3).sval).getVariableType());
 							nodo.setAlmacenamiento(nodo.getElem());
-						} else{
-							msgStack.addMsg("Error: El subíndice es distinto a una variable o constante en línea: " + lex.getNewLineCounter());
+						} else {
+							msgStack.addMsg("Error: El subíndice es distinto a una variable o constante, en línea: " + lex.getNewLineCounter());
 							hasError = true;
 							nodo = new ST_Leaf("ERROR");
 						}
@@ -3144,7 +3228,7 @@ case 62:
 				}
 break;
 case 63:
-//#line 515 "gramatica.y"
+//#line 509 "gramatica.y"
 {
 							String lexeme = val_peek(0).sval;
 							ElementoTS tts = symbolTable.get(lexeme);
@@ -3158,13 +3242,13 @@ case 63:
 								if(symbolTable.containsKey(lexnuevo)){
 									symbolTable.get(lexnuevo).increaseVariableRepetitions();
 								}else {
-									ElementoTS ttsnuevo = new ElementoTS( ElementoTS.CONST, tts.getValue(), tts.getVariableType());
+									ElementoTS ttsnuevo = new ElementoTS(ElementoTS.CONST, tts.getValue(), tts.getVariableType());
 									symbolTable.put(lexnuevo, ttsnuevo);
 								}
-							lexeme = lexnuevo;
+								lexeme = lexnuevo;
 								msgStack.addMsg("Warning: Constante positiva fuera de rango.");
 							}
-							String currentType = symbolTable.get(lexeme).getVariableType();
+							String currentType = (symbolTable.containsKey(lexeme))? symbolTable.get(lexeme).getVariableType() : "";
 							expectedVarType = (expectedVarType == "")? currentType : 
 								(currentType == ElementoTS.LONG || expectedVarType == ElementoTS.LONG)? ElementoTS.LONG : ElementoTS.INT;
 							SyntacticTree nodo = new ST_Leaf(lexeme);
@@ -3174,6 +3258,8 @@ case 63:
 	        			}
 break;
 case 64:
+<<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -3224,6 +3310,12 @@ case 64:
 =======
 //#line 542 "gramatica.y"
 >>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
+=======
+//#line 535 "gramatica.y"
+>>>>>>> 4812029... detalles
+=======
+//#line 536 "gramatica.y"
+>>>>>>> 8381084... nothing
 {
 							String lexeme = val_peek(0).sval;
 							ElementoTS tts = symbolTable.get(lexeme);
@@ -3237,7 +3329,7 @@ case 64:
 							if (tts.getVariableRepetitions() == 0)
 								symbolTable.remove(lexeme);
 							symbolTable.get(lexeme).decreaseVariableRepetitions();
-							String currentType = symbolTable.get(lexeme).getVariableType();
+							String currentType = symbolTable.get(lexnuevo).getVariableType();
 							expectedVarType = (expectedVarType == "")? currentType : 
 								(currentType == ElementoTS.LONG || expectedVarType == ElementoTS.LONG)? ElementoTS.LONG : ElementoTS.INT;
 							SyntacticTree nodo = new ST_Leaf(lexnuevo);
@@ -3306,6 +3398,8 @@ case 65:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 //#line 429 "gramatica (12).y"
 >>>>>>> cf97fd0... Arreglos en ventana
 =======
@@ -3344,6 +3438,12 @@ case 65:
 =======
 //#line 564 "gramatica.y"
 >>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
+=======
+//#line 557 "gramatica.y"
+>>>>>>> 4812029... detalles
+=======
+//#line 558 "gramatica.y"
+>>>>>>> 8381084... nothing
 {
                 semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() +": Sentencia print");
                 stackOfLines.pop();
@@ -3407,6 +3507,8 @@ case 66:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 //#line 436 "gramatica (12).y"
 >>>>>>> cf97fd0... Arreglos en ventana
 =======
@@ -3445,54 +3547,60 @@ case 66:
 =======
 //#line 574 "gramatica.y"
 >>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
+=======
+//#line 567 "gramatica.y"
+>>>>>>> 4812029... detalles
+=======
+//#line 568 "gramatica.y"
+>>>>>>> 8381084... nothing
 { stackOfLines.push(lex.getNewLineCounter()); }
 break;
 case 67:
-//#line 577 "gramatica.y"
+//#line 571 "gramatica.y"
 { msgStack.addMsg("Warning: Declaración de bloque sin contenido"); }
 break;
 case 68:
-//#line 578 "gramatica.y"
+//#line 572 "gramatica.y"
 { msgStack.addMsg("Error: Comparación incompleta en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 69:
-//#line 579 "gramatica.y"
+//#line 573 "gramatica.y"
 { msgStack.addMsg("Error: Declaración de IF sin condición en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 70:
-//#line 580 "gramatica.y"
+//#line 574 "gramatica.y"
 { msgStack.addMsg("Error: Declaracion de foreach sin índice y sin colección en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 71:
-//#line 581 "gramatica.y"
+//#line 575 "gramatica.y"
 { msgStack.addMsg("Error: Declaracion de foreach sin colección en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 72:
-//#line 582 "gramatica.y"
+//#line 576 "gramatica.y"
 { msgStack.addMsg("Error: Declaracion de foreach sin índice en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 73:
-//#line 583 "gramatica.y"
+//#line 577 "gramatica.y"
 { msgStack.addMsg("Error: Nombre y valor de posicion de colección faltante en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 74:
-//#line 584 "gramatica.y"
+//#line 578 "gramatica.y"
 { msgStack.addMsg("Error: Nombre de colección faltante en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 75:
-//#line 585 "gramatica.y"
+//#line 579 "gramatica.y"
 { msgStack.addMsg("Error: Corchete de apertura faltante en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 76:
-//#line 586 "gramatica.y"
+//#line 580 "gramatica.y"
 { msgStack.addMsg("Error: Corchete de cierre faltante en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 77:
-//#line 587 "gramatica.y"
+//#line 581 "gramatica.y"
 { msgStack.addMsg("Error: Constante a la izquierda de una asignación en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 78:
-//#line 588 "gramatica.y"
+//#line 582 "gramatica.y"
 { msgStack.addMsg("Error: Sentencia inválida en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 <<<<<<< HEAD
@@ -3510,6 +3618,7 @@ case 78:
 { msgStack.addMsg("Error: Constante a la izquierda de una asignación"); }
 break;
 case 79:
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -3630,6 +3739,7 @@ case 79:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 //#line 451 "gramatica (12).y"
 >>>>>>> cf97fd0... Arreglos en ventana
 =======
@@ -3672,17 +3782,25 @@ case 79:
 =======
 //#line 589 "gramatica.y"
 >>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
+=======
+//#line 582 "gramatica.y"
+>>>>>>> 4812029... detalles
+=======
+//#line 583 "gramatica.y"
+>>>>>>> 8381084... nothing
 { msgStack.addMsg("Error: Constantes declaradas con tipo en línea: " + lex.getNewLineCounter()); hasError = true; }
 >>>>>>> 0fcca1b... varios
 break;
 case 80:
-//#line 590 "gramatica.y"
+//#line 584 "gramatica.y"
 { msgStack.addMsg("Error: Falta de separador entre valores constantes en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 81:
-//#line 591 "gramatica.y"
+//#line 585 "gramatica.y"
 { msgStack.addMsg("Error: Sentencia de asignación inválida en línea: " + lex.getNewLineCounter()); hasError = true; }
 break;
+<<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -3769,6 +3887,12 @@ break;
 =======
 //#line 1316 "Parser.java"
 >>>>>>> d8fb1c1... arreglado la extracción de valor del indice dentro del foreach
+=======
+//#line 1309 "Parser.java"
+>>>>>>> 4812029... detalles
+=======
+//#line 1310 "Parser.java"
+>>>>>>> 8381084... nothing
 //########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####

@@ -38,7 +38,11 @@ public abstract class SyntacticTree extends ParserVal {
 >>>>>>> 51f241d... arreglos varios
 =======
 		type = ""; //Sin tipo por defecto
+<<<<<<< HEAD
 >>>>>>> fde7cdb... varios
+=======
+		almacenamiento = " ";
+>>>>>>> 4812029... detalles
 	}
 
 	public String getType() { return type; }

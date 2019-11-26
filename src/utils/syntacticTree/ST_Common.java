@@ -593,29 +593,28 @@ public class ST_Common extends SyntacticTree {
 		else if(op == "*") multiplicacion(registers,assemblerCode,symbolTable);
 		else if(op == "/") division(registers,assemblerCode,symbolTable);
 		else if(op == ":=") asignacion(registers, assemblerCode, symbolTable);
-		else if((op == "<") || (op == ">") || (op == "LET") || (op == "GET") || (op == "EQ") || (op == "DIF"))
-			comparacion(registers,assemblerCode,symbolTable);
+		else if((op == "<") || (op == ">") || (op == "LET") || (op == "GET") || (op == "EQ") || (op == "DIF")) comparacion(registers,assemblerCode,symbolTable);
 	}
 
 	private void asignacion(RegisterTable registers, MsgStack assemblerCode, Hashtable<String, ElementoTS> symbolTable) {
 		String dataFromLeft = getHijoIzq().getAlmacenamiento();
 		String dataFromRight = getHijoDer().getAlmacenamiento();
-		if ((((ST_Leaf)getHijoIzq()).isCollectionPointer() && getHijoDer().isVariable()) 
+		if ((((ST_Leaf)getHijoIzq()).isCollectionInLeftSideAssig() && getHijoDer().isVariable()) 
 				|| (getHijoIzq().isVariable() && getHijoDer().isVariable())) {  //// Se mueve el lado derecho a registro ////
 			String tempReg;
-			if (isInt(dataFromRight, symbolTable))
+			if (getHijoDer().getType() == ElementoTS.INT)
 				tempReg = registers.getRegFreeInt(getHijoDer(), symbolTable, assemblerCode);
 			else
 				tempReg = registers.getRegFreeLong(getHijoDer(), symbolTable, assemblerCode);
 			assemblerCode.addMsg("mov " + tempReg + ", " + dataFromRight);
 			dataFromRight = tempReg;
 		}
-		if (((ST_Leaf)getHijoIzq()).isCollectionPointer()) //// Se realiza la asignación ////
+		if (((ST_Leaf)getHijoIzq()).isCollectionInLeftSideAssig()) { //// Se realiza la asignación ////
 			if (getHijoIzq().getType().equals(ElementoTS.INT))
 				assemblerCode.addMsg("mov word ptr [" + dataFromLeft + "], " + dataFromRight);
 			else
 				assemblerCode.addMsg("mov dword ptr [" + dataFromLeft + "], " + dataFromRight);
-		else
+		} else
 			assemblerCode.addMsg("mov " + dataFromLeft + ", " + dataFromRight);
 		if(!(getHijoDer().isVariableOrConst()))
 			registers.freeReg(registers.getRegPos(dataFromRight));
@@ -626,9 +625,10 @@ public class ST_Common extends SyntacticTree {
 	private void comparacion(RegisterTable registers, MsgStack assemblerCode, Hashtable<String, ElementoTS> symbolTable) {
 		String dataFromLeft = getHijoIzq().getAlmacenamiento();
 		String dataFromRight;
-		if (getHijoIzq().isVariableOrConst()) { //// Izq constante o variable ////
+		//// Izq constante o variable ////
+		if (getHijoIzq().isVariableOrConst()) { 
 			String regAux;
-			if(getHijoIzq().getType().equals(ElementoTS.LONG) || (symbolTable.containsKey(dataFromLeft) && symbolTable.get(dataFromLeft.substring(1)).isPointer()))
+			if(getHijoIzq().getType().equals(ElementoTS.LONG) || (symbolTable.containsKey(dataFromLeft) && symbolTable.get(dataFromLeft).isPointer()))
 				regAux = registers.getRegFreeLong(getHijoIzq(), symbolTable, assemblerCode);
 			else
 				regAux = registers.getRegFreeInt(getHijoIzq(), symbolTable, assemblerCode);
@@ -636,8 +636,9 @@ public class ST_Common extends SyntacticTree {
 			dataFromLeft = regAux;
 		}
 		dataFromRight = getHijoDer().getAlmacenamiento();
-		if (getHijoIzq().getType() == ElementoTS.INT && (symbolTable.containsKey(getHijoIzq().getElem()) && 
-				symbolTable.get(getHijoIzq().getElem().substring(1)).isPointer())) { // Si el lado izquierdo es puntero y entero, el lado derecho se debe convertir en 32 bits
+		// Si el lado izquierdo es puntero y entero, el lado derecho se debe convertir en 32 bits
+		if (getHijoIzq().getType() == ElementoTS.INT && symbolTable.containsKey(getHijoIzq().getElem()) && 
+				symbolTable.get(getHijoIzq().getElem()).isPointer()) { 
 			String reg = registers.getReg(RegisterTable.NAME_AX, getHijoDer(), symbolTable, assemblerCode);
 			assemblerCode.addMsg("mov " + reg + ", " + dataFromRight);
 			assemblerCode.addMsg("cwde");
@@ -653,31 +654,31 @@ public class ST_Common extends SyntacticTree {
 	}
 
 	private void suma(RegisterTable registers, MsgStack assemblerCode, Hashtable<String, ElementoTS> symbolTable) {
-		String reg;
+		String regResult;
 		String dataFromLeft = getHijoIzq().getAlmacenamiento();
 		String dataFromRight =  getHijoDer().getAlmacenamiento();
 		if(getHijoIzq().isVariableOrConst() && getHijoDer().isVariableOrConst()) {
-			if(isInt(dataFromLeft, symbolTable))///ES ENTERO
-				reg = registers.getRegFreeInt(getHijoIzq(), symbolTable, assemblerCode);
+			if(getHijoIzq().getType() == ElementoTS.INT) // Ambos son enteros
+				regResult = registers.getRegFreeInt(getHijoIzq(), symbolTable, assemblerCode);
 			else
-				reg = registers.getRegFreeLong(getHijoIzq(), symbolTable, assemblerCode);
+				regResult = registers.getRegFreeLong(getHijoIzq(), symbolTable, assemblerCode);
 			dataFromRight = getHijoDer().getAlmacenamiento();
-			assemblerCode.addMsg("mov " + reg + ", " + dataFromLeft);
-			assemblerCode.addMsg("add " + reg + ", " + dataFromRight);
+			assemblerCode.addMsg("mov " + regResult + ", " + dataFromLeft);
+			assemblerCode.addMsg("add " + regResult + ", " + dataFromRight);
 		} else {
 			if(getHijoIzq().isVariableOrConst()) { // HIJO DER ES REG
 				assemblerCode.addMsg("add " + dataFromRight + ", " + dataFromLeft);
-				reg = dataFromRight;
+				regResult = dataFromRight;
 				if (!getHijoIzq().isVariableOrConst())
 					registers.freeReg(registers.getRegPos(dataFromLeft));
 			} else { // HIJO IZQ ES REG (Puede que el derecho también sea registro)
 				assemblerCode.addMsg("add " + dataFromLeft + ", " + dataFromRight);
-				reg = dataFromLeft;
+				regResult = dataFromLeft;
 				if (!getHijoDer().isVariableOrConst())
 					registers.freeReg(registers.getRegPos(dataFromRight));
 			}
 		}
-		setAlmacenamiento(reg);
+		setAlmacenamiento(regResult);
 	}
 
 <<<<<<< HEAD
@@ -1577,7 +1578,7 @@ public class ST_Common extends SyntacticTree {
 >>>>>>> 0fcca1b... varios
 		String dataFromLeft = getHijoIzq().getAlmacenamiento();
 		if (getHijoIzq().isVariableOrConst()) {
-			if(isInt(dataFromLeft, symbolTable)) ///ES ENTERO
+			if(getHijoIzq().getType() == ElementoTS.INT) ///ES ENTERO
 				regResult = registers.getRegFreeInt(this, symbolTable, assemblerCode);
 			else
 				regResult = registers.getRegFreeLong(this,symbolTable,assemblerCode);
@@ -1593,7 +1594,7 @@ public class ST_Common extends SyntacticTree {
 	private void multiplicacion(RegisterTable registers, MsgStack assemblerCode, Hashtable<String, ElementoTS> symbolTable) {
 		String dataFromLeft = getHijoIzq().getAlmacenamiento();
 		String dataFromRight = getHijoDer().getAlmacenamiento();
-		if(isInt(dataFromLeft, symbolTable)) {//ENTERO
+		if(getHijoIzq().getType() == ElementoTS.INT) {//ENTERO
 			String regAX = registers.getReg(RegisterTable.NAME_AX, getHijoIzq(), symbolTable, assemblerCode);
 			@SuppressWarnings("unused")
 			String regDX = registers.getReg(RegisterTable.NAME_DX, getHijoIzq(), symbolTable, assemblerCode); // Se reserva para que, si tiene algo, no sea pisado
@@ -1615,7 +1616,7 @@ public class ST_Common extends SyntacticTree {
 				registers.freeReg(registers.getRegPos(dataFromRight));	
 			setAlmacenamiento(regDX);
 		} else {//LONG
-			String regEAX = registers.getReg(RegisterTable.NAME_EAX, getHijoIzq(), symbolTable, assemblerCode);
+			String regEAX = registers.getReg(RegisterTable.NAME_EAX, this, symbolTable, assemblerCode);
 			@SuppressWarnings("unused")
 			String regEDX = registers.getReg(RegisterTable.NAME_EDX, getHijoIzq(), symbolTable, assemblerCode); // Nuevamente se reserva para, si tiene algo, no pisarlo
 			dataFromLeft = getHijoIzq().getAlmacenamiento();
@@ -1642,11 +1643,11 @@ public class ST_Common extends SyntacticTree {
 	}
 
 	private void division(RegisterTable registers, MsgStack assemblerCode,Hashtable<String, ElementoTS> symbolTable) {
-		String dataFromLeft = getHijoIzq().getAlmacenamiento();
-		String dataFromRight = getHijoDer().getAlmacenamiento();
+		String dataFromLeft = getHijoIzq().getAlmacenamiento(); //Dividendo
+		String dataFromRight = getHijoDer().getAlmacenamiento(); //Divisor
 		String regAuxControlZero = "";
-		if ((int)(dataFromRight.charAt(0)) >= 48 && (int)(dataFromRight.charAt(0)) <= 57) { // Con constantes a izquierda se rompe la comparación
-			if (symbolTable.get(dataFromRight).getVariableType().equals(ElementoTS.INT))
+		if (getHijoDer().isConstant()) { // Con constantes a izquierda se rompe la comparación
+			if (getHijoDer().getType() == ElementoTS.INT)
 				regAuxControlZero = registers.getRegFreeInt(getHijoDer(), symbolTable, assemblerCode);
 			else
 				regAuxControlZero = registers.getRegFreeLong(getHijoDer(), symbolTable, assemblerCode);
@@ -1657,10 +1658,10 @@ public class ST_Common extends SyntacticTree {
 		assemblerCode.addMsg("jz _msgDivisionPorCero"); //Salto a la subrutina de programa si el divisor es 0
 		if (regAuxControlZero != "")
 			registers.freeReg(registers.getRegPos(regAuxControlZero));
-
-		if(isInt(dataFromLeft, symbolTable)) { //// ES ENTERO
+		if(getType() == ElementoTS.INT) { //// ES ENTERO
+			System.out.println("Se realiza división entera de: " + getHijoIzq().getElem() + " y " + getHijoDer().getElem());
 			//pide registros para contener al dividendo
-			String regAX = registers.getReg(RegisterTable.NAME_AX, getHijoIzq(), symbolTable, assemblerCode);
+			String regAX = registers.getReg(RegisterTable.NAME_AX, this, symbolTable, assemblerCode);
 			@SuppressWarnings("unused")
 			String regDX = registers.getReg(RegisterTable.NAME_DX, getHijoIzq(), symbolTable, assemblerCode);
 			dataFromLeft = getHijoIzq().getAlmacenamiento();
@@ -1678,7 +1679,8 @@ public class ST_Common extends SyntacticTree {
 			registers.freeReg(RegisterTable.DX);//LIBERA COCIENTE
 			setAlmacenamiento(regAX);//DEVUELVE RESTO
 		} else { //// ES LONG
-			String regEAX = registers.getReg(RegisterTable.NAME_EAX, getHijoIzq(), symbolTable, assemblerCode);
+			System.out.println("Se realiza división long de: " + getHijoIzq().getElem() + " y " + getHijoDer().getElem());
+			String regEAX = registers.getReg(RegisterTable.NAME_EAX, this, symbolTable, assemblerCode);
 			@SuppressWarnings("unused")
 			String regEDX = registers.getReg(RegisterTable.NAME_EDX, getHijoIzq(), symbolTable, assemblerCode);
 			dataFromLeft = getHijoIzq().getAlmacenamiento();
@@ -1709,6 +1711,7 @@ public class ST_Common extends SyntacticTree {
 		}
 >>>>>>> 154a393... comentario
 	}
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -1740,3 +1743,6 @@ public class ST_Common extends SyntacticTree {
 =======
 }
 >>>>>>> 51f241d... arreglos varios
+=======
+}
+>>>>>>> 683cde1... resuelto problema de regtable con punteros de enteros al crear variable auxiliar o cambiar registro de lugar

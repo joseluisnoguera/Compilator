@@ -17,6 +17,11 @@ public class ST_Control extends SyntacticTree {
 		super(lexeme);
 		super.setHijoIzq(nodo);
 	}
+	
+	public static void resetLabels() {
+		etiquetas = new ArrayList<String>();
+		contEtiquetas = 0;
+	}
 
 	@Override
 <<<<<<< HEAD:src/utils/syntacticTree/SyntacticTreeCtrl.java
@@ -39,8 +44,12 @@ public class ST_Control extends SyntacticTree {
 =======
 		System.out.println("entro a ctrl " + getElem());
 		comInterm.addMsg(blankPrefix + "Nodo: " + getElem());
+<<<<<<< HEAD
 		if(getElem() == "COND_FOREACH") { //cond del foreach
 >>>>>>> d209296... comentario
+=======
+		if(getElem() == "COND_FOREACH") { 								//cond del foreach
+>>>>>>> 4812029... detalles
 			contEtiquetas++;
 <<<<<<< HEAD:src/utils/syntacticTree/SyntacticTreeCtrl.java
 			comAssembler.addMsg("_label" + contEtiquetas + ":");
@@ -86,7 +95,7 @@ public class ST_Control extends SyntacticTree {
 =======
 =======
 			assemblerCode.addMsg("_label" + contEtiquetas + ":");
-			etiquetas.add("_label" + contEtiquetas); //etiqueta de inicio de condicion de foreach
+			etiquetas.add("_label" + contEtiquetas); 					//etiqueta de inicio de condicion de foreach
 		}
 		getHijoIzq().recorreArbol(registers, assemblerCode, comInterm,symbolTable, blankPrefix + getBlankSpace());
 >>>>>>> f58785c... arreglos para condiciones en indice de foreach:src/utils/syntacticTree/ST_Control.java
@@ -133,8 +142,8 @@ public class ST_Control extends SyntacticTree {
 		else if(getElem() == "COND_FOREACH") {
 >>>>>>> d209296... comentario
 			contEtiquetas++;
-			assemblerCode.addMsg("jge _label" + contEtiquetas); //salto en caso de que se termine el arreglo
-			etiquetas.add("_label" + contEtiquetas);//etiqueta de fin de foreach
+			assemblerCode.addMsg("jge _label" + contEtiquetas); 			//salto en caso de que se termine el arreglo
+			etiquetas.add("_label" + contEtiquetas);						//etiqueta de fin de foreach
 		}
 <<<<<<< HEAD
 
@@ -154,14 +163,14 @@ public class ST_Control extends SyntacticTree {
 >>>>>>> bca257b... resueltos problemas en common
 =======
 		else if(getElem() == "THEN") {
-			assemblerCode.addMsg(etiquetas.get(etiquetas.size()-1) + ":");//se agrega la etiqueta de fin de if
+			assemblerCode.addMsg(etiquetas.get(etiquetas.size()-1) + ":");	//se agrega la etiqueta de fin de if
 			etiquetas.remove(etiquetas.size()-1);
 		}
 		else if(getElem() == "THEN_ELSE") {
 >>>>>>> d209296... comentario
 			contEtiquetas++;
-			assemblerCode.addMsg("jmp _label" + contEtiquetas);//se agrega el salto al fin del if (y se agrega despues su etiqueta)
-			assemblerCode.addMsg(etiquetas.get(etiquetas.size()-1) + ":");//se agrega etiqueta de inicio de else
+			assemblerCode.addMsg("jmp _label" + contEtiquetas);				//se agrega el salto al fin del if (y se agrega despues su etiqueta)
+			assemblerCode.addMsg(etiquetas.get(etiquetas.size()-1) + ":");	//se agrega etiqueta de inicio de else
 			etiquetas.remove(etiquetas.size()-1);
 			etiquetas.add("_label" + contEtiquetas);
 		}
@@ -179,7 +188,7 @@ public class ST_Control extends SyntacticTree {
 		case "CUERPOAVANCE":{
 =======
 		else if(getElem() == "ELSE") {
-			assemblerCode.addMsg(etiquetas.get(etiquetas.size()-1) + ":");//se agrega la etiqueta de fin de if
+			assemblerCode.addMsg(etiquetas.get(etiquetas.size()-1) + ":");	//se agrega la etiqueta de fin de if
 			etiquetas.remove(etiquetas.size()-1);
 		}
 		else if(getElem() == "CUERPOAVANCE") {
@@ -190,8 +199,12 @@ public class ST_Control extends SyntacticTree {
 			comAssembler.addMsg(etiquetas.get(etiquetas.size()-1) + ":");//creacion de etiqueta de fin de foreach
 =======
 			assemblerCode.addMsg("jmp " + etiquetas.get(etiquetas.size()-2));//salto al principio de la condicion de foreach
+<<<<<<< HEAD
 			assemblerCode.addMsg(etiquetas.get(etiquetas.size()-1) + ":");//creacion de etiqueta de fin de foreach
 >>>>>>> f58785c... arreglos para condiciones en indice de foreach:src/utils/syntacticTree/ST_Control.java
+=======
+			assemblerCode.addMsg(etiquetas.get(etiquetas.size()-1) + ":");	//creacion de etiqueta de fin de foreach
+>>>>>>> 4812029... detalles
 			etiquetas.remove(etiquetas.size()-1);
 			etiquetas.remove(etiquetas.size()-1);
 		}
