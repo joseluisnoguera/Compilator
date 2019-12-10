@@ -86,21 +86,8 @@ public class Lexicon {
 		currentLexeme = ""; //Limpia la variable
 		int state = 0;
 		int previous_state = -1;
-<<<<<<< HEAD
 		while(state != -1) { //Mientras que no llegue a F, itera sobre la tabla de estados
-<<<<<<< HEAD
-=======
-		while(state != -1) //Mientras que no llegue a F, itera sobre la tabla de estados
-		{
-<<<<<<< HEAD
-<<<<<<< Updated upstream
->>>>>>> 6b7f13f... StateMachine
-=======
->>>>>>> cddb5e5... Lex
-			actualCharac = programBuffer.get(0); //Lee el primer caracter
-=======
 			currentChar = programBuffer.get(0); //Lee el primer caracter
->>>>>>> 1ade0f6... Funcion de carga de datos en paneles de la ventana
 			programBuffer.remove(0); //Lo elimina del buffer
 			int symbol = range(currentChar); //Ve a que columna tiene que ir con el caracter que obtuvo anteriormente
 			if (stateMachine[state][symbol].getSemanticAction() != null)
@@ -108,208 +95,7 @@ public class Lexicon {
 			previous_state = state; //Guarda el estado anterior para el control posterior
 			state = stateMachine[state][symbol].getState(); //Cambia de estado
 		}
-<<<<<<< HEAD
-<<<<<<< HEAD
 		switch (previous_state) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-			case 0:
-				if (currentChar == END_OF_TEXT) { //Es end of file y tiene que mandar 0, sino un token normal
-					tokenStack.addMsg("Fin de archivo");
-					return new Token(END_OF_FILE);
-				}
-				else {
-					
-					tokenStack.addMsg(String.valueOf((char)currentChar));
-					return new Token(currentChar); //Literal directo
-				}
-			case 1:
-				//Ver si el lexema es un PR, sino es un ID
-				if (symbolTable.get(currentLexeme).getTipoToken().equals(ElementoTS.PR)) {
-					tokenStack.addMsg("Palabra reservada " + currentLexeme);
-					return new Token(Integer.valueOf(symbolTable.get(currentLexeme).getValue()));
-				}
-				else {
-					tokenStack.addMsg("Identificador " + currentLexeme);
-					return new Token(ID, currentLexeme);
-				}
-			case 2:
-				tokenStack.addMsg("Constante " + currentLexeme);
-				return new Token(CTE, currentLexeme);
-			case 3:
-				tokenStack.addMsg("Cadena " + currentLexeme);
-				return new Token(CAD, currentLexeme);
-			case 4:
-				if (currentLexeme.length() == 1) { // Solo >
- 					tokenStack.addMsg(currentLexeme);
-					return new Token((int)(currentLexeme.charAt(0)));
-				}
-				else {
-					tokenStack.addMsg(">=");
-					return new Token(GET);
-				}
-			case 5: 
-				if (currentLexeme.length() == 1) { // Solo <
-					tokenStack.addMsg(currentLexeme);
-					return new Token((int)(currentLexeme.charAt(0)));
-				}
-				else if (currentLexeme.equals("<=")) {
-					tokenStack.addMsg("<=");
-					return new Token(LET);
-				}
-				else {
-					tokenStack.addMsg("<>");
-					return new Token(DIF);
-				}
-			case 6:
-					tokenStack.addMsg("=="); //Si es = solo, lo completa como comparación
-					return new Token(EQ);
-			case 8:
-<<<<<<< HEAD
-					tokenStack.addMsg("Asignación"); //Si es :, lo completa como asignación
-					return new Token(ASSIGN);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
-		switch (previous_state) {
->>>>>>> 334ecd7... SA
-		case 0:
-			return new Token(actualCharac); //Literal directo
-		case 1:
-			return new Token(ID, actualLexeme);
-		case 2:
-			return new Token(CTE, actualLexeme);
-		case 3:
-			return new Token(CAD, actualLexeme);
-		case 4:
-			if (actualLexeme.length() == 1)
-				return new Token(actualCharac);
-			else
-				return new Token(GET);
-		case 5:
-			if (actualLexeme.length() == 1)
-				return new Token(actualCharac);
-			else if (actualLexeme == "<=")
-				return new Token(LET);
-			else
-				return new Token(DIF);
-		case 6:
-			if (actualLexeme.length() == 1)
-				return new Token(actualCharac);
-			else
-				return new Token(EQ);
-		case 8:
-			if (actualLexeme.length() == 1)
-				return new Token(actualCharac);
-			else
-				return new Token(ASSIGN);
-<<<<<<< HEAD
-=======
-			this.actualCharac = programBuffer.get(0); //Lee el primer caracter
-			this.programBuffer.remove(0); //Lo elimina del buffer
-			int simbol = range(this.programBuffer.get(0)); //Ve a que columna tiene que ir
-			if (this.stateMachine[state][simbol].getSemanticAction() != null)
-				this.stateMachine[state][simbol].getSemanticAction().action(this); //Si tiene, realiza una A.S.
-			state = this.stateMachine[state][simbol].getState(); //Cambia de estado
-		}
-=======
-
->>>>>>> cddb5e5... Lex
-		//< > = : son los unicos literales que agregan en lexeme
-		if (actualLexeme.length() == 0 || actualLexeme == "<" || actualLexeme == ">" 
-				|| actualLexeme == "="  || actualLexeme == ":")
-			return new Token(actualCharac); //Entonces era un literal que pasa directo
-		else 
-			if(simbTable.containsKey(actualLexeme)) { //No era un literal, es PR, combinado de literales, ID, CTE o CAD
-				this.simbTable.get(this.actualLexeme).setCantidad(1);
-				if ((simbTable.get(actualLexeme).getTipoToken()) == "PR")
-					{
-					return new Token(simbTable.get(actualLexeme).getValue());
-					}
-				else 
-					if ((simbTable.get(actualLexeme).getTipoToken()) == "ID") //Es un ID, una CTE o una CAD
-						{
-						return new Token(ID, actualLexeme); 
-						}
-					else 
-						if ((simbTable.get(actualLexeme).getTipoToken()) == "CTE")
-							{
-							return new Token(CTE, actualLexeme);
-							}
-						else 
-							{
-							return new Token(CAD, actualLexeme); //Si no es ninguno de los anterior es CAD
-							}
-			} 
-			else 
-				
-				return new Token(getCombLiteral(actualLexeme), this.actualLexeme); //Si no está en la TS es combinado de literales
-	
-<<<<<<< HEAD
-	private int getCombLiteral(String combined) {
-		int ret = 0;
-		switch(combined) {
-			case "<=": ret = LET;
-			case ">=": ret = GET;
-			case "==": ret = EQ;
-			case "<>": ret = DIF;
->>>>>>> Stashed changes
->>>>>>> 6b7f13f... StateMachine
-		}
-=======
-	
-
->>>>>>> cddb5e5... Lex
-		return null; //No llega acá, es para que no de error de retorno
-<<<<<<< HEAD
-=======
->>>>>>> 334ecd7... SA
-	}
-		return null;
-}
-	
-//	private int openFile (String src){
-//		File file = new File(src);
-//	    if (!file.exists()) {
-//	    	addMsg("ERROR: Archivo inexistente");
-//	      return 1;
-//	    }
-//	    if (!(file.isFile() && file.canRead())) {
-//	    	addMsg("ERROR: Archivo sin permiso de lectura");
-//	      return 1;
-//	    }
-//	    try {
-//	      FileInputStream fis = new FileInputStream(file);
-//	      while (fis.available() > 0)
-//	    	//Se agrega uno por uno los caracteres que contiene el file input
-//	        programBuffer.add(fis.read());
-//	    //Se agrega artificialmente el fin de archivo
-//	      programBuffer.add(END_OF_FILE); 
-//	      fis.close();
-//	    } catch (IOException e) {
-//	      e.printStackTrace();
-//	      addMsg("ERROR: Error de lectura en archivo");
-//	      return 1;
-//	    }
-//	    return 0;
-//	}
-=======
-=======
-				}
-=======
->>>>>>> 569d5c9... varios
-=======
-					if (currentLexeme.length() == 1) { // Solo :
-						tokenStack.addMsg(currentLexeme);
-						return new Token((int)(currentLexeme.charAt(0)));
-					}
-					else if (currentLexeme.equals(":=")) {
-						tokenStack.addMsg("Asignación"); //Si es :, lo completa como asignación
-						return new Token(ASSIGN);
-					}
->>>>>>> cdec646... Repair err :
-=======
 		case 0:
 			if (currentChar == END_OF_TEXT) { //Es end of file y tiene que mandar 0, sino un token normal
 				tokenStack.addMsg("Fin de archivo");
@@ -370,17 +156,10 @@ public class Lexicon {
 				tokenStack.addMsg("Asignación");
 				return new Token(ASSIGN);
 			}
->>>>>>> 34ec829... _
 		}
 		return null; //No llega acá, es para que no de error por falta de retorno
->>>>>>> 0999ae6... varios
 	}
-<<<<<<< HEAD
->>>>>>> 1ade0f6... Funcion de carga de datos en paneles de la ventana
-	
-=======
 
->>>>>>> 34ec829... _
 	private void initSimbTable()
 	{
 		//Carga de todas las palabras reservadas (PR) en la tabla de símbolos

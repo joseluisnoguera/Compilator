@@ -16,20 +16,7 @@
 
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 2 "gramatica (12).y"
-=======
 //#line 2 "gramatica.y"
->>>>>>> 1ce0652... comentario
-=======
-//#line 2 "gramatica - copia.y"
->>>>>>> 1612ef0... constantes negativas en inicializaci贸n de colecciones y control de tipos
-=======
-//#line 2 "gramatica.y"
->>>>>>> d8fb1c1... arreglado la extracci贸n de valor del indice dentro del foreach
 	package logic;
 	
 	import java.util.Hashtable;
@@ -38,61 +25,8 @@
 	import utils.ParserVal;
 	import utils.MsgStack;
 	import utils.Token;
-<<<<<<< HEAD
-<<<<<<< HEAD
-	import java.util.Stack;
-	import utils.SintacticTree;
-	import utils.SintacticTreeCommon;
-	import utils.SintacticTreeConver;
-	import utils.SintacticTreeCtrl;
-	import utils.SintacticTreeLeaf;
-	import utils.SintacticTreeMemory;
-	import utils.SintacticTreeUnary;
-//#line 35 "Parser.java"
-=======
-//#line 2 "gramatica.y"
-package logic;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import logic.Lexicon;
-import utils.ElementoTS;
-import utils.ParserVal;
-import utils.MsgStack;
-import utils.Token;
-import java.util.Stack;
-import utils.SintacticTree;
-import utils.SintacticTreeCommon;
-import utils.SintacticTreeConver;
-import utils.SintacticTreeCtrl;
-import utils.SintacticTreeLeaf;
-import utils.SintacticTreeMemory;
-import utils.SintacticTreeUnary;
-//#line 33 "Parser.java"
->>>>>>> 87e6250... comentario
-=======
-import utils.sintacticTree.SintacticTree;
-import utils.sintacticTree.SintacticTreeCommon;
-import utils.sintacticTree.SintacticTreeConver;
-import utils.sintacticTree.SintacticTreeCtrl;
-import utils.sintacticTree.SintacticTreeLeaf;
-import utils.sintacticTree.SintacticTreeMemory;
-import utils.sintacticTree.SintacticTreeUnary;
-
-import java.util.Stack;
->>>>>>> 34ec829... _
-=======
 	import java.util.Stack;
 	import utils.syntacticTree.SyntacticTree;
-<<<<<<< HEAD
-	import utils.syntacticTree.SyntacticTreeCommon;
-	import utils.syntacticTree.SyntacticTreeConver;
-	import utils.syntacticTree.SyntacticTreeCtrl;
-	import utils.syntacticTree.SyntacticTreeLeaf;
-	import utils.syntacticTree.SyntacticTreeMemory;
-	import utils.syntacticTree.SyntacticTreeUnary;
-//#line 34 "Parser.java"
->>>>>>> cf97fd0... Arreglos en ventana
-=======
 	import utils.syntacticTree.ST_Common;
 	import utils.syntacticTree.ST_Convertion;
 	import utils.syntacticTree.ST_Control;
@@ -101,7 +35,6 @@ import java.util.Stack;
 	import utils.syntacticTree.ST_Memory;
 	import utils.syntacticTree.ST_Unary;
 //#line 35 "Parser.java"
->>>>>>> f58785c... arreglos para condiciones en indice de foreach
 
 
 
@@ -260,36 +193,6 @@ public final static short CAD=274;
 public final static short SIZE=275;
 public final static short YYERRCODE=256;
 final static short yylhs[] = {                           -1,
-<<<<<<< HEAD
-    0,    1,    1,    1,    2,    2,    4,    4,    4,    5,
-    8,    8,    6,    6,    7,    7,    9,    9,    9,    9,
-<<<<<<< HEAD
-    3,   11,   11,   11,   11,   10,   13,   12,   12,   12,
-   12,   12,   12,   14,   14,   21,   22,   19,   20,   24,
-   24,   24,   24,   24,   24,   15,   26,   26,   25,   16,
-   27,   27,   28,   28,   28,   29,   29,   29,   23,   23,
-   23,   23,   17,   30,   18,   18,   18,   18,   18,   18,
-   18,   18,   18,   18,   18,   18,   18,   18,   18,
-=======
-    3,   12,   12,   13,   13,   13,   13,   10,   11,   11,
-   14,   14,   14,   14,   14,   14,   15,   15,   20,   21,
-   23,   23,   23,   23,   23,   23,   16,   24,   17,   25,
-   25,   26,   26,   26,   27,   27,   27,   22,   22,   22,
-   22,   18,   28,   19,   19,   19,   19,   19,   19,   19,
-   19,   19,   19,   19,   19,   19,   19,   19,
->>>>>>> 87f0bc1... cambios pre-entrega
-};
-final static short yylen[] = {                            2,
-    1,    2,    1,    1,    1,    2,    3,    3,    2,    1,
-    1,    1,    1,    3,    4,    6,    1,    1,    3,    3,
-<<<<<<< HEAD
-    1,    1,    2,    2,    1,    4,    1,    2,    1,    2,
-    2,    2,    2,    6,    8,    1,    1,    1,    3,    1,
-    1,    1,    1,    1,    1,    5,    1,    1,    1,    3,
-    1,    4,    3,    3,    1,    3,    3,    1,    1,    1,
-    4,    2,    4,    1,    2,    2,    5,    3,    4,    4,
-    2,    3,    3,    4,    2,    2,    2,    5,    2,
-=======
     0,    1,    1,    1,    2,    2,    4,    4,    4,    4,
     5,    5,    6,    6,    7,    7,    7,    7,    8,    8,
     8,    8,    3,   11,   11,   10,   12,   12,   12,   12,
@@ -302,44 +205,14 @@ final static short yylen[] = {                            2,
 };
 final static short yylen[] = {                            2,
     1,    2,    1,    1,    1,    2,    3,    3,    1,    2,
-<<<<<<< HEAD
-    1,    1,    1,    1,    3,    4,    6,    6,    8,    1,
-<<<<<<< HEAD
-    1,    3,    3,    1,    1,    2,    2,    1,    4,    1,
-    2,    1,    2,    2,    2,    2,    6,    8,    1,    1,
-    1,    3,    1,    1,    1,    1,    1,    1,    5,    1,
-    1,    1,    3,    1,    4,    3,    3,    1,    3,    3,
-    1,    1,    1,    4,    2,    4,    1,    2,    2,    5,
-    3,    4,    4,    2,    3,    3,    4,    2,    2,    2,
-    5,    2,
->>>>>>> 733ee4b... Agregado size y TS
-=======
-    1,    3,    3,    4,    2,    1,    1,    2,    1,    2,
-    2,    2,    2,    6,    8,    1,    1,    1,    3,    1,
-<<<<<<< HEAD
-    1,    1,    1,    1,    1,    5,    1,    1,    1,    3,
-<<<<<<< HEAD
-    1,    4,    3,    3,    1,    3,    3,    1,    1,    1,
-    4,    2,    4,    1,    2,    2,    5,    3,    4,    4,
-    2,    3,    3,    4,    2,    2,    2,    5,    2,
->>>>>>> fcadff2... coment
-=======
-=======
-    1,    1,    1,    1,    1,    4,    1,    1,    2,    3,
->>>>>>> f58785c... arreglos para condiciones en indice de foreach
-    1,    4,    4,    3,    3,    1,    3,    3,    1,    1,
-    1,    4,    4,    2,    4,    1,    2,    2,    5,    3,
-=======
     1,    1,    1,    3,    4,    6,    6,    8,    1,    1,
     3,    3,    4,    2,    1,    1,    2,    1,    2,    2,
     2,    2,    6,    8,    1,    1,    1,    3,    1,    1,
     1,    1,    1,    1,    4,    1,    1,    2,    3,    1,
     4,    4,    3,    3,    1,    3,    3,    1,    1,    1,
     4,    4,    1,    2,    4,    1,    2,    2,    5,    3,
->>>>>>> 1612ef0... constantes negativas en inicializaci贸n de colecciones y control de tipos
     4,    4,    2,    3,    3,    4,    2,    2,    2,    5,
     2,
->>>>>>> cf97fd0... Arreglos en ventana
 };
 final static short yydefred[] = {                         0,
     0,   26,   11,   12,    0,    1,    0,    4,    5,    0,
@@ -428,157 +301,6 @@ yytable = new short[]{                         70,
    51,   52,   56,    0,    0,    0,  106,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    0,    0,    0,   70,   71,    0,    0,    0,   70,   71,
-    0,    0,    0,   72,   70,   71,   26,   27,   28,   29,
-   62,   62,   62,   62,   20,    2,   61,   21,   22,    3,
-    4,   23,    0,    0,   24,    0,   25,    0,   26,   27,
-   28,   29,    0,    0,    0,    0,    9,    9,    0,    0,
-    0,    9,    9,    0,   20,    2,   64,   21,   22,    3,
-    4,   23,    0,    0,   24,    0,   25,    0,   26,   27,
-   28,   29,   20,    2,    0,   21,   22,    3,    4,   23,
-    0,    0,   24,    0,   25,    0,   26,   27,   28,   29,
-<<<<<<< HEAD
-   20,    2,   64,   21,   22,    3,    4,   23,    0,    0,
-   24,    0,   25,    0,   26,   27,   28,   29,   20,    2,
-    0,   21,   22,    3,    4,   23,    0,    0,   24,    0,
-   25,    0,   26,   27,   28,   29,   26,   27,   28,   29,
-=======
-    4,    1,    2,    4,    4,    5,    5,    1,    1,    2,
-    2,    2,    2,    2,    2,    2,    6,    8,    1,    3,
-    1,    1,    1,    1,    1,    1,    5,    1,    3,    1,
-    4,    3,    3,    1,    3,    3,    1,    1,    1,    4,
-    2,    4,    1,    2,    2,    5,    3,    4,    4,    2,
-    3,    3,    4,    2,    2,    2,    5,    2,
-};
-final static short yydefred[] = {                         0,
-    0,   28,   11,   12,    0,    1,    0,    4,    5,    0,
-   10,    0,    9,    2,    6,    0,    0,    0,    0,    0,
-    0,   39,   48,   63,   43,   44,   45,   46,    0,   41,
-   42,    0,    0,    0,   29,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    7,    0,    8,    0,
-   36,   75,    0,    0,   74,    0,   70,   76,   64,    0,
-   30,   31,   32,   33,   34,   35,    0,    0,   59,   78,
-    0,   65,    0,    0,    0,    0,   17,   18,    0,   14,
-    0,   72,    0,   71,   21,    0,    0,    0,    0,   61,
-    0,    0,    0,   67,   57,    0,    0,    0,    0,   15,
-    0,    0,   73,   51,    0,    0,    0,    0,    0,   68,
-   69,    0,    0,    0,   22,    0,    0,    0,    0,   62,
-   19,   20,    0,   77,   66,    0,   40,   60,   47,    0,
-    0,    0,    0,   23,    0,    0,   55,   56,   16,    0,
-   37,   24,    0,   25,    0,    0,   27,   26,   38,
-};
-final static short yydgoto[] = {                          5,
-    6,    7,    8,    9,   10,   17,   18,   32,   79,   93,
-  113,  114,  115,   35,   36,   37,   38,   39,   40,   41,
-   87,   95,   42,   43,   44,   96,   97,   45,
-};
-final static short yysindex[] = {                      -180,
-  -31,    0,    0,    0,    0,    0, -180,    0,    0, -206,
-    0,   67,    0,    0,    0,  -32,   -9,   -8,   15,  -81,
- -189,    0,    0,    0,    0,    0,    0,    0,  -80,    0,
-    0, -176, -169,  -23,    0,   36,   39,   40,   41,   42,
-   50,  -42, -207, -167,   63,  -84,    0, -154,    0, -153,
-    0,    0,   14, -152,    0,   19,    0,    0,    0,   51,
-    0,    0,    0,    0,    0,    0,  -36,   26,    0,    0,
- -147,    0, -149, -217,  -38, -155,    0,    0,  -28,    0,
-   29,    0,  -85,    0,    0, -136,   82,   71, -135,    0,
- -195, -136,   67,    0,    0,   24,    7,   83,  -83,    0,
-  -84,   33,    0,    0, -137, -136,  -38,   37, -136,    0,
-    0,   -5,   13,   31,    0,  -38,  -38,  -38,  -38,    0,
-    0,    0,  -21,    0,    0, -194,    0,    0,    0,   73,
- -179,   78,   49,    0,    7,    7,    0,    0,    0, -136,
-    0,    0,   79,    0,   80, -124,    0,    0,    0,
-};
-final static short yyrindex[] = {                         0,
-    0,    0,    0,    0,    0,    0,  142,    0,    0,    0,
-    0,    0,    0,    0,    0,    4,    0,    0,    0, -126,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,  -41,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,   85,  -18,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,  -13,  -12,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,
-};
-final static short yygindex[] = {                         0,
-    0,    0,  138,  139,    0,    0,    0,   17,   46,   22,
-    2,   35,  -48,  -19,    0,    0,    0,    0,    0,    0,
-    0,  -22,   61,    0,    0,    0,  -29,    0,
-};
-final static int YYTABLESIZE=344;
-static short yytable[];
-static { yytable();}
-static void yytable(){
-yytable = new short[]{                         58,
-   58,   58,   71,   58,   86,   58,   71,  104,   71,   54,
-   78,  122,   57,   34,   61,   99,   11,   58,   58,   72,
-   58,   12,   99,   11,   54,   94,   54,   13,   12,   53,
-   52,   53,   52,   33,   48,   50,   30,  105,   31,    2,
-   54,   92,  110,  111,   88,   53,   52,   13,  118,   47,
-   49,   73,   16,  119,   30,   33,   31,  126,   46,   74,
-  129,    2,   13,  109,  100,  134,  117,   29,  116,  140,
-  141,  139,   30,   51,   31,    1,    2,    2,  143,   55,
-    3,    4,  134,   58,  127,   29,  135,  136,   59,   67,
-   30,  146,   31,   61,   62,  137,  138,   63,   64,   65,
-   66,   75,   76,   29,   80,   81,   82,   83,   30,   85,
-   31,   84,   90,   61,  112,  133,   89,   91,   98,  101,
-    2,   29,  106,  120,  108,  124,   30,  125,   31,  128,
-   30,  142,   31,  112,  112,  112,  144,  147,  148,   29,
-  149,    3,   50,   49,   14,   15,  123,  131,  107,    0,
-    0,    0,    0,    0,   33,    0,    0,   29,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,  102,   77,  121,   52,   53,   56,
-    0,    0,    0,  103,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,   68,   69,    0,    0,
-   68,   69,   68,   69,    0,    0,   70,    0,   58,   58,
-   58,   58,   19,    2,   60,   20,   21,    3,    4,   22,
-    0,    0,   23,    0,   24,    0,   25,   26,   27,   28,
-   19,    2,   59,   20,   21,    3,    4,   22,    0,    0,
-   23,    0,   24,    0,   25,   26,   27,   28,   19,    2,
-  130,   20,   21,    3,    4,   22,    0,    0,   23,    0,
-   24,    0,   25,   26,   27,   28,   19,    2,  132,   20,
-   21,    3,    4,   22,    0,    0,   23,    0,   24,    0,
-   25,   26,   27,   28,   19,    2,  145,   20,   21,    3,
-    4,   22,    0,    0,   23,    0,   24,    0,   25,   26,
-   27,   28,   19,    2,    0,   20,   21,    3,    4,   22,
-    0,    0,   23,    0,   24,    0,   25,   26,   27,   28,
-   25,   26,   27,   28,
->>>>>>> 87f0bc1... cambios pre-entrega
-=======
->>>>>>> 733ee4b... Agregado size y TS
-=======
-    0,    0,    0,   67,   68,    0,    0,    0,   67,   68,
-    0,    0,    0,   69,   67,   68,   25,   26,   27,   28,
-   60,   60,   60,   60,   19,    2,   59,   20,   21,    3,
-    4,   22,    0,    0,   23,    0,   24,    0,   25,   26,
-   27,   28,    0,    0,    0,    0,    9,    9,    0,    0,
-    0,    9,    9,    0,   19,    2,    0,   20,   21,    3,
-    4,   22,    0,    0,   23,    0,   24,    0,   25,   26,
-   27,   28,
->>>>>>> fcadff2... coment
-=======
-    0,    0,    0,   68,   69,    0,    0,    0,   68,   69,
-    0,    0,    0,   70,   68,   69,   25,   26,   27,   28,
-   60,   60,   60,   60,   47,   47,   47,   47,   47,   47,
-   47,   47,   47,   47,   47,    0,   47,    0,   47,   47,
-   47,   47,    0,    0,    0,    0,    9,    9,    0,    0,
-    0,    9,    9,    0,   19,    2,   60,   20,   21,    3,
-    4,   22,    0,    0,   23,    0,   24,    0,   25,   26,
-   27,   28,   19,    2,    0,   20,   21,    3,    4,   22,
-    0,    0,   23,    0,   24,    0,   25,   26,   27,   28,
->>>>>>> f58785c... arreglos para condiciones en indice de foreach
-=======
     0,    0,    0,    0,   68,    0,    0,    0,    0,   68,
    67,   68,    0,   68,    0,   67,   68,   67,   68,   77,
    59,   59,   59,   59,  126,   69,   46,   46,   46,   46,
@@ -589,121 +311,12 @@ yytable = new short[]{                         58,
    27,   18,    2,    0,   19,   20,    3,    4,   21,    0,
     0,   22,    0,   23,    0,   24,   25,   26,   27,   24,
    25,   26,   27,
->>>>>>> 1612ef0... constantes negativas en inicializaci贸n de colecciones y control de tipos
 };
 }
 static short yycheck[];
 static { yycheck(); }
 static void yycheck() {
-<<<<<<< HEAD
-yycheck = new short[] {                         41,
-   42,   43,   45,   45,   41,   47,   45,   93,   45,   91,
-<<<<<<< HEAD
-   95,   95,   93,   35,    0,   44,   44,   59,   60,   44,
-   62,    7,  259,    0,  107,   43,   43,   45,   45,   43,
-    7,   45,   44,   44,   42,   44,   60,    0,   62,   47,
-   69,   59,   59,  259,    7,   59,   59,   59,   59,   35,
-   59,  267,  135,  257,   60,  259,   62,  256,  257,  257,
-   59,  259,  261,  262,   43,   93,   45,   91,   93,  264,
-  265,   91,   60,  269,   62,  260,   60,   59,   62,  108,
-  264,  265,  113,  114,   59,   91,  115,  116,  110,   59,
-   76,   59,   40,  269,   40,  259,  259,   93,  260,   76,
-   93,  123,   88,   91,   59,  260,   91,   93,   94,  267,
-   91,   88,  257,  274,   41,  137,   93,   94,  260,   41,
-   93,  265,   93,    0,  110,  265,  269,   59,  265,    7,
-  102,    7,   90,   -1,   -1,   -1,   -1,  123,   -1,   -1,
-   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
-   -1,  137,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
-=======
-   95,   95,   93,   12,   34,   44,    0,   59,   60,   42,
-   62,    0,   44,    7,   43,   74,   45,   59,    7,   43,
-   43,   45,   45,   12,   44,   44,   60,   86,   62,  257,
-   59,  259,   91,   92,   67,   59,   59,   44,   42,   59,
-   59,  259,  259,   47,   60,   34,   62,  106,   91,  267,
-  109,  257,   59,  259,   93,  114,   43,   91,   45,  264,
-  265,   93,   60,   59,   62,  256,  257,  257,  258,  269,
-  261,  262,  131,  260,  107,   91,  116,  117,  258,   40,
-   60,  140,   62,  113,   59,  118,  119,   59,   59,   59,
-   59,  269,   40,   91,  259,  259,   93,  260,   60,   59,
-   62,   93,  260,  133,   93,  114,   91,  267,  274,   91,
-  257,   91,   41,   41,  260,   93,   60,  265,   62,   93,
-   60,   59,   62,  112,  113,  114,   59,   59,   59,   91,
-  265,    0,  269,   59,    7,    7,  101,  113,   88,   -1,
-   -1,   -1,   -1,   -1,  133,   -1,   -1,   91,   -1,   -1,
->>>>>>> 87f0bc1... cambios pre-entrega
-=======
 yycheck = new short[] {                         45,
-<<<<<<< HEAD
-    0,   41,   42,   43,   45,   45,   41,   47,   95,   95,
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-   45,   93,   91,   44,   95,   93,   60,    0,   62,   59,
-   60,   35,   62,   44,    7,    0,   44,   44,   43,  109,
-   45,   43,    7,   45,   43,  259,   45,  259,   60,   44,
-   62,   44,   59,  267,   59,  260,    0,   59,   69,  257,
-   59,  259,   35,    7,   59,   42,   59,   59,  256,  257,
-   47,  141,   93,  261,  262,  257,   91,  259,   60,   91,
-   62,   43,  269,   45,   59,   93,  264,  265,  264,  265,
-   59,  115,  116,   59,   40,  269,   60,   40,   62,  110,
-   59,   59,  259,   76,  259,   93,  117,  118,  112,   91,
-  260,   76,   93,   91,   59,  260,   89,   58,  267,   91,
-  274,   94,   95,  127,   89,  257,   41,   91,   41,   94,
-   95,  260,  260,   93,  265,   58,   93,   93,  260,  112,
-  144,   93,  265,    0,  269,  265,    7,    7,   -1,  104,
-   -1,   91,   -1,   -1,  127,   -1,   -1,   -1,   -1,   -1,
->>>>>>> 733ee4b... Agregado size y TS
-=======
-   45,   93,   91,    7,   95,   93,   60,   42,   62,   59,
-   60,   12,   62,   44,   44,   59,   43,   43,   45,   45,
-   43,  259,   45,   44,   44,   44,  112,  113,   60,  267,
-   62,   66,   59,   59,   35,    0,   59,  259,   59,   59,
-   59,   59,    7,  256,  257,   42,  264,  265,  261,  262,
-   47,  257,  257,  259,  259,   43,  260,   45,   60,   91,
-   62,  269,   93,   93,  258,  258,   91,   59,   59,   73,
-   59,   40,  107,   59,  269,  259,   40,  259,   93,  114,
-  115,  260,   86,   59,   93,   91,  260,   91,   92,   91,
-  267,  274,   58,   91,  257,   41,  260,   41,  260,   93,
-  265,   58,  106,   93,  260,  109,   93,  265,  109,   93,
-    0,  258,  269,    7,   59,   35,  101,   88,   -1,   -1,
-   -1,   -1,   -1,   -1,   -1,   -1,  109,   -1,  129,   -1,
-   -1,   -1,   -1,   -1,   -1,  139,   -1,   -1,   -1,   -1,
-   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
->>>>>>> fcadff2... coment
-=======
-   45,   93,   91,   12,   95,   93,   60,    7,   62,   59,
-   60,   59,   62,   44,   44,   42,   44,   43,   43,   45,
-   45,   43,    0,   45,  259,   44,   35,   44,   60,    7,
-   62,   59,  267,   59,   59,  259,   42,   59,   91,   66,
-   59,   47,   59,  256,  257,  257,   59,  259,  261,  262,
-  257,   43,  259,   45,  259,  260,  259,  260,   60,   91,
-   62,  269,   93,   93,  264,  265,  115,  116,  260,  258,
-  258,   59,   59,   73,   59,   59,   40,   40,  269,  259,
-  259,   93,  109,   59,   91,   93,  260,   87,  274,   91,
-  117,  118,   92,   93,  267,   91,   58,  257,   93,   41,
-   41,  260,   93,  112,  265,   58,  260,   93,  108,  265,
-   93,   93,  112,   93,    0,  258,  269,    7,   35,   59,
-   89,  102,  112,   -1,  133,   -1,   -1,   -1,   -1,   -1,
-   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
-   -1,   -1,   -1,  143,   -1,   -1,   -1,   -1,   -1,   -1,
->>>>>>> cf97fd0... Arreglos en ventana
-=======
-   45,   93,   91,   12,   95,   93,   60,   35,   62,   59,
-   60,  259,   62,   44,   44,    7,   42,   44,   43,   43,
-   45,   45,   43,  259,   45,   44,   35,   59,   60,   44,
-   62,  267,   59,   91,   59,   59,  258,   59,   59,    0,
-   59,   67,  264,  265,   59,   42,    7,  256,  257,  257,
-   47,  259,  261,  262,   43,   59,   45,  269,   60,   91,
-   62,  259,   93,   93,  259,  260,  259,  260,  264,  265,
-  118,  119,  260,  258,  258,   40,   60,   59,   62,   59,
-   59,  109,   74,   59,  110,   94,  269,   40,  259,   91,
-  259,   59,   93,   93,  120,  121,   88,   91,  260,  267,
-  109,   93,   94,   58,  274,   91,  115,   91,   93,  257,
-   41,   41,   93,  260,  142,  265,   93,   58,   93,   93,
-  260,   93,  265,    0,  269,   59,    7,   94,   90,   -1,
-  103,   -1,   -1,  142,   -1,   -1,   -1,   -1,   -1,   -1,
-=======
     0,   41,   42,   43,   45,   45,   45,   47,   45,   41,
    93,   45,   91,   45,   11,   93,   45,   34,   42,   59,
    60,    7,   62,   47,   59,   41,   44,  259,  259,   44,
@@ -719,76 +332,12 @@ yycheck = new short[] {                         45,
   267,  274,   58,   91,  257,  142,   41,   41,   93,  260,
    93,  265,   93,   93,   93,   58,  260,  265,   93,    0,
   269,   59,    7,   94,   90,  142,  103,   -1,   -1,   -1,
->>>>>>> 1612ef0... constantes negativas en inicializaci贸n de colecciones y control de tipos
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
->>>>>>> bca257b... resueltos problemas en common
-=======
-   45,   93,   91,   12,   95,   93,   60,   35,   62,   59,
-   60,    7,   62,   44,   44,  259,   43,   42,   45,   43,
-   43,   45,   45,   44,   44,   44,   35,  258,   60,  259,
-   62,   91,   59,  264,  265,   59,   59,  267,   59,   59,
-   59,   66,    0,   42,   59,  256,  257,   59,   47,    7,
-  261,  262,  257,  257,  259,  259,  259,  260,   60,   91,
-   62,  269,   93,   93,   43,  258,   45,  259,  260,  264,
-  265,  115,  116,  260,  258,   59,   59,   73,   59,   59,
-  108,   40,  259,  269,  109,   40,  259,   93,   93,   91,
-   59,   87,  117,  118,   91,  260,   92,   93,  267,  108,
-  274,   58,   91,  112,  257,   93,   41,   41,  260,  265,
-   58,   93,  260,    0,  265,  143,  112,   93,   93,   93,
-   93,   59,  269,    7,  133,  102,  112,   89,   -1,   -1,
-   -1,   -1,   -1,   -1,  143,   -1,   -1,   -1,   -1,   -1,
-   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
->>>>>>> 1ce0652... comentario
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,  260,   -1,   -1,
   259,  260,  260,   -1,   -1,   -1,  269,   -1,   -1,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
-<<<<<<< HEAD
-<<<<<<< HEAD
-   -1,   -1,   -1,   -1,   -1,   -1,  259,  260,   -1,   -1,
-  259,  260,  259,  260,   -1,   -1,  269,   -1,  270,  271,
-  272,  273,  256,  257,  258,  259,  260,  261,  262,  263,
-<<<<<<< HEAD
-   -1,   -1,  266,   -1,  268,   -1,  270,  271,  272,  273,
-  256,  257,  258,  259,  260,  261,  262,  263,   -1,   -1,
-  266,   -1,  268,   -1,  270,  271,  272,  273,  256,  257,
-   -1,  259,  260,  261,  262,  263,   -1,   -1,  266,   -1,
-  268,   -1,  270,  271,  272,  273,  270,  271,  272,  273,
-=======
-   -1,   -1,  266,   -1,  268,   -1,  270,  271,  272,  273,
-  256,  257,  258,  259,  260,  261,  262,  263,   -1,   -1,
-  266,   -1,  268,   -1,  270,  271,  272,  273,  256,  257,
-  258,  259,  260,  261,  262,  263,   -1,   -1,  266,   -1,
-  268,   -1,  270,  271,  272,  273,  256,  257,  258,  259,
-  260,  261,  262,  263,   -1,   -1,  266,   -1,  268,   -1,
-  270,  271,  272,  273,  256,  257,  258,  259,  260,  261,
-  262,  263,   -1,   -1,  266,   -1,  268,   -1,  270,  271,
-  272,  273,  256,  257,   -1,  259,  260,  261,  262,  263,
-   -1,   -1,  266,   -1,  268,   -1,  270,  271,  272,  273,
-  270,  271,  272,  273,
->>>>>>> 87f0bc1... cambios pre-entrega
-=======
-   -1,   -1,   -1,  259,  260,   -1,   -1,   -1,  259,  260,
-   -1,   -1,   -1,  269,  259,  260,  270,  271,  272,  273,
-  270,  271,  272,  273,  256,  257,  258,  259,  260,  261,
-  262,  263,  264,  265,  266,   -1,  268,   -1,  270,  271,
-  272,  273,   -1,   -1,   -1,   -1,  256,  257,   -1,   -1,
-   -1,  261,  262,   -1,  256,  257,  258,  259,  260,  261,
-  262,  263,   -1,   -1,  266,   -1,  268,   -1,  270,  271,
-<<<<<<< HEAD
-<<<<<<< HEAD
-  272,  273,  256,  257,   -1,  259,  260,  261,  262,  263,
-   -1,   -1,  266,   -1,  268,   -1,  270,  271,  272,  273,
->>>>>>> 733ee4b... Agregado size y TS
-=======
-  272,  273,
->>>>>>> fcadff2... coment
-=======
-  272,  273,  256,  257,   -1,  259,  260,  261,  262,  263,
-   -1,   -1,  266,   -1,  268,   -1,  270,  271,  272,  273,
->>>>>>> f58785c... arreglos para condiciones en indice de foreach
-=======
    -1,   -1,   -1,   -1,  260,   -1,   -1,   -1,   -1,  260,
   259,  260,   -1,  260,   -1,  259,  260,  259,  260,  275,
   270,  271,  272,  273,  275,  269,  256,  257,  258,  259,
@@ -799,7 +348,6 @@ yycheck = new short[] {                         45,
   273,  256,  257,   -1,  259,  260,  261,  262,  263,   -1,
    -1,  266,   -1,  268,   -1,  270,  271,  272,  273,  270,
   271,  272,  273,
->>>>>>> 1612ef0... constantes negativas en inicializaci贸n de colecciones y control de tipos
 };
 }
 final static short YYFINAL=5;
@@ -849,74 +397,21 @@ final static String yyrule[] = {
 "lista_valores_inic : '_'",
 "lista_valores_inic : lista_valores_inic ',' constante_controlada",
 "lista_valores_inic : lista_valores_inic ',' '_'",
-<<<<<<< HEAD
-<<<<<<< HEAD
-"bloque_ejec : bloque_unico",
-"conjunto_bloques : bloque_unico",
-"conjunto_bloques : conjunto_bloques bloque_unico",
-"conjunto_bloques : conjunto_bloques sent_ejec",
-"conjunto_bloques : sent_ejec",
-"bloque_unico : comienzo_bloque conjunto_bloques END ';'",
-=======
 "bloque_ejec : comienzo_bloque conj_sent END ';'",
 "conj_sent : sent_ejec conj_sent",
 "conj_sent : sent_ejec",
->>>>>>> fcadff2... coment
 "comienzo_bloque : BEGIN",
-=======
-"bloque_ejec : comienzo_bloque conj_sent_ejec END ';'",
-"conjunto_bloques : bloque_unico",
-"conjunto_bloques : conjunto_bloques bloque_unico",
-"bloque_unico : comienzo_bloque conj_sent_ejec END ';'",
-"bloque_unico : comienzo_bloque conjunto_bloques END ';'",
-"bloque_unico : comienzo_bloque conjunto_bloques conj_sent_ejec END ';'",
-"bloque_unico : comienzo_bloque conj_sent_ejec conjunto_bloques END ';'",
-"comienzo_bloque : BEGIN",
-"conj_sent_ejec : sent_ejec",
-"conj_sent_ejec : conj_sent_ejec sent_ejec",
->>>>>>> 87f0bc1... cambios pre-entrega
 "sent_ejec : sent_cond ';'",
 "sent_ejec : sent_ctrl",
 "sent_ejec : sent_asig ';'",
 "sent_ejec : sent_print ';'",
 "sent_ejec : error_p ';'",
 "sent_ejec : error ';'",
-<<<<<<< HEAD
-<<<<<<< HEAD
-"sent_cond : comienzo_if '(' cond ')' bloque_then END_IF",
-"sent_cond : comienzo_if '(' cond ')' bloque_then ELSE bloque_else END_IF",
-<<<<<<< HEAD
-"bloque_then : conjunto_bloques",
-"bloque_else : conjunto_bloques",
-=======
-"sent_cond : comienzo_if '(' cond ')' bloque_unico END_IF",
-"sent_cond : comienzo_if '(' cond ')' bloque_unico ELSE bloque_unico END_IF",
->>>>>>> 87f0bc1... cambios pre-entrega
-=======
-=======
 "sent_cond : comienzo_if '(' cond_if ')' bloque_then END_IF",
 "sent_cond : comienzo_if '(' cond_if ')' bloque_then ELSE bloque_else END_IF",
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 1375c5c... arreglos varios
-"bloque_then : bloque_ejec",
-"bloque_else : bloque_ejec",
->>>>>>> fcadff2... coment
-=======
-"bloque_then : conj_sent",
-"bloque_else : conj_sent",
->>>>>>> bca257b... resueltos problemas en common
-=======
-"bloque_then : conj_sent",
-"bloque_else : conj_sent",
->>>>>>> 1ce0652... comentario
-"comienzo_if : IF",
-=======
 "comienzo_if : IF",
 "bloque_then : conj_sent",
 "bloque_else : conj_sent",
->>>>>>> 4812029... detalles
 "cond_if : factor comparador factor",
 "comparador : '<'",
 "comparador : '>'",
@@ -924,21 +419,10 @@ final static String yyrule[] = {
 "comparador : GET",
 "comparador : EQ",
 "comparador : DIF",
-<<<<<<< HEAD
-<<<<<<< HEAD
-"sent_ctrl : comienzo_foreach ID IN ID bloque_foreach",
-"bloque_foreach : bloque_ejec",
-"bloque_foreach : sent_ejec",
-=======
-"sent_ctrl : comienzo_foreach ID IN ID bloque_unico",
->>>>>>> 87f0bc1... cambios pre-entrega
-"comienzo_foreach : FOREACH",
-=======
 "sent_ctrl : comienzo_foreach IN ID bloque_foreach",
 "bloque_foreach : bloque_ejec",
 "bloque_foreach : sent_ejec",
 "comienzo_foreach : FOREACH ID",
->>>>>>> f58785c... arreglos para condiciones en indice de foreach
 "sent_asig : inic_sent_asig ASSIGN expression",
 "inic_sent_asig : ID",
 "inic_sent_asig : ID '[' CTE ']'",
@@ -974,107 +458,7 @@ final static String yyrule[] = {
 "error_p : comparador ASSIGN",
 };
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 222 "gramatica_2.y"
-=======
-//#line 213 "gramatica_2.y"
->>>>>>> 87f0bc1... cambios pre-entrega
-=======
-//#line 251 "gramatica.y"
->>>>>>> f713e33... comentario generico
-=======
-//#line 264 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
->>>>>>> 733ee4b... Agregado size y TS
-=======
-//#line 278 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
->>>>>>> 3ddb440... Update Parser / ElementoTS :+1:
-=======
-//#line 287 "gramatica.y"
->>>>>>> f75def1... comentario
-=======
-//#line 371 "gramatica.y"
->>>>>>> fcadff2... coment
-=======
-//#line 440 "gramatica.y"
->>>>>>> 1d41d94... Up
-=======
-//#line 441 "gramatica.y"
->>>>>>> 1daf844... Update Parser.java
-=======
-//#line 445 "gramatica.y"
->>>>>>> 67dbe83... comentario
-=======
-//#line 448 "gramatica (12).y"
->>>>>>> 4269743... generador de datos
-=======
-//#line 457 "gramatica (12).y"
->>>>>>> cf97fd0... Arreglos en ventana
-=======
-//#line 492 "gramatica (12).y"
->>>>>>> 45299ea... visualizaci贸n de 谩rbol sint谩ctico
-=======
-//#line 502 "gramatica (12).y"
->>>>>>> 1375c5c... arreglos varios
-=======
-//#line 502 "gramatica.y"
->>>>>>> 1ce0652... comentario
-=======
-//#line 503 "gramatica.y"
->>>>>>> 67de6b7... _
-=======
-//#line 502 "gramatica.y"
->>>>>>> d209296... comentario
-=======
-//#line 506 "gramatica.y"
->>>>>>> fde7cdb... varios
-=======
-//#line 508 "gramatica.y"
->>>>>>> f406b63... guardado dx:ax en registro de 32 bits
-=======
-//#line 512 "gramatica.y"
->>>>>>> fde75a9... comentario
-=======
-//#line 554 "gramatica.y"
->>>>>>> f58785c... arreglos para condiciones en indice de foreach
-=======
-//#line 582 "gramatica.y"
->>>>>>> ff6e773... uso de punteros como enteros
-=======
-//#line 596 "gramatica - copia.y"
->>>>>>> 1612ef0... constantes negativas en inicializaci贸n de colecciones y control de tipos
-=======
-//#line 595 "gramatica.y"
->>>>>>> d8fb1c1... arreglado la extracci贸n de valor del indice dentro del foreach
-=======
 //#line 588 "gramatica.y"
->>>>>>> 4812029... detalles
-=======
-//#line 589 "gramatica.y"
->>>>>>> 8381084... nothing
 
 private Lexicon lex;
 private Hashtable<String,ElementoTS> symbolTable;
@@ -1110,73 +494,13 @@ private int yylex(){
 private void yyerror(String msg){
 	//msgStack.addMsg("L铆nea "+ lex.getNewLineCounter() + ": " + msg);
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 396 "Parser.java"
-=======
-//#line 410 "Parser.java"
->>>>>>> 87f0bc1... cambios pre-entrega
-=======
-//#line 395 "Parser.java"
->>>>>>> f713e33... comentario generico
-=======
-//#line 407 "Parser.java"
->>>>>>> 733ee4b... Agregado size y TS
-=======
-//#line 409 "Parser.java"
->>>>>>> 3ddb440... Update Parser / ElementoTS :+1:
-=======
-//#line 413 "Parser.java"
->>>>>>> f75def1... comentario
-=======
 
 public ST_Control getRaiz(){
 	return nodoRaiz;
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 416 "Parser.java"
->>>>>>> fcadff2... coment
-=======
-//#line 415 "Parser.java"
->>>>>>> 0507715... Update Parser.java
-=======
-//#line 416 "Parser.java"
->>>>>>> 1d41d94... Up
-=======
-//#line 417 "Parser.java"
->>>>>>> 1daf844... Update Parser.java
-=======
-//#line 416 "Parser.java"
->>>>>>> 87ae9f5... comentario
-=======
-//#line 418 "Parser.java"
->>>>>>> 4269743... generador de datos
-=======
-//#line 421 "Parser.java"
->>>>>>> cf97fd0... Arreglos en ventana
-=======
 
 public boolean hasErrors() { return hasError; }
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 425 "Parser.java"
->>>>>>> 1375c5c... arreglos varios
-=======
-//#line 428 "Parser.java"
->>>>>>> f58785c... arreglos para condiciones en indice de foreach
-=======
 //#line 432 "Parser.java"
->>>>>>> 1612ef0... constantes negativas en inicializaci贸n de colecciones y control de tipos
 //###############################################################
 // method: yylexdebug : check lexer state
 //###############################################################
@@ -1369,89 +693,12 @@ case 11:
 //#line 53 "gramatica.y"
 { tipovar = ElementoTS.INT; numLineaDecl = lex.getNewLineCounter(); }
 break;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-case 22:
-//#line 62 "gramatica_2.y"
-{ declaracion = false; }
-=======
-case 21:
-//#line 59 "gramatica_2.y"
-{ semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() +": Bloque principal de ejecuci髇"); }
-break;
-case 22:
-//#line 62 "gramatica_2.y"
-{ declaracion = false; semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() +": Bloque de ejecuci髇"); }
->>>>>>> 87f0bc1... cambios pre-entrega
-break;
-case 23:
-//#line 63 "gramatica_2.y"
-{ declaracion = false; }
-=======
-case 13:
-//#line 43 "gramatica.y"
-=======
-case 14:
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 44 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
->>>>>>> 733ee4b... Agregado size y TS
-=======
-//#line 44 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
->>>>>>> 3ddb440... Update Parser / ElementoTS :+1:
-=======
-//#line 46 "gramatica.y"
->>>>>>> f75def1... comentario
-=======
 case 12:
 //#line 54 "gramatica.y"
 { tipovar = ElementoTS.LONG; numLineaDecl = lex.getNewLineCounter(); }
 break;
 case 13:
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 50 "gramatica.y"
-{tipovar = ElementoTS.LONG;}
-break;
-case 14:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 51 "gramatica.y"
->>>>>>> fcadff2... coment
-=======
-//#line 52 "gramatica.y"
->>>>>>> 1daf844... Update Parser.java
-=======
-//#line 53 "gramatica (12).y"
->>>>>>> 4269743... generador de datos
-=======
-//#line 52 "gramatica (12).y"
->>>>>>> cf97fd0... Arreglos en ventana
-=======
-//#line 52 "gramatica.y"
->>>>>>> 1ce0652... comentario
-=======
-//#line 53 "gramatica.y"
->>>>>>> 67de6b7... _
-=======
-//#line 52 "gramatica.y"
->>>>>>> d209296... comentario
-=======
-//#line 53 "gramatica.y"
->>>>>>> f58785c... arreglos para condiciones en indice de foreach
-=======
-//#line 57 "gramatica - copia.y"
->>>>>>> 1612ef0... constantes negativas en inicializaci贸n de colecciones y control de tipos
-=======
 //#line 57 "gramatica.y"
->>>>>>> d8fb1c1... arreglado la extracci贸n de valor del indice dentro del foreach
 {
 					if(!symbolTable.get(val_peek(0).sval).isDeclared()){
 						symbolTable.get(val_peek(0).sval).setDeclared();
@@ -1513,38 +760,8 @@ break;
 case 17:
 //#line 107 "gramatica.y"
 {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-		if(!symbolTable.get(val_peek(5).sval).getDeclaracion())
-		{
-			symbolTable.get(val_peek(5).sval).setDeclaracion(true);
-			symbolTable.get(val_peek(5).sval).setCSize(val_peek(1).sval);
-			symbolTable.get(val_peek(5).sval).setTipoAtributo(tipovar);
-		}
-		else
-			msgStack.addMsg("Error: coleccion"+ val_peek(5).sval+" re-declarada en el n?mero de l?nea " + lex.getNewLineCounter());;
-		}
->>>>>>> f713e33... comentario generico
-=======
-			if(!symbolTable.get(val_peek(5).sval).getDeclaracion())
-=======
-			if(!symbolTable.get(val_peek(5).sval).isDeclarada())
->>>>>>> 34ec829... _
-			{
-				symbolTable.get(val_peek(5).sval).setDeclarada(true);
-				int size = Integer.parseInt(val_peek(1).sval);
-				symbolTable.get(val_peek(5).sval).setCSize(size);
-				for (int i = 0; i < size - 1; i++) {
-					elems += "_,";
-=======
-				if(!symbolTable.get(val_peek(5).sval).isDeclarada()) {
-					symbolTable.get(val_peek(5).sval).setDeclarada(true);
-=======
 				if(!symbolTable.get(val_peek(5).sval).isDeclared()) {
 					symbolTable.get(val_peek(5).sval).setDeclared();
->>>>>>> 0fcca1b... varios
 					int size = Integer.parseInt(val_peek(1).sval);
 					symbolTable.get(val_peek(5).sval).setCSize(size);
 					for (int i = 0; i < size - 1; i++) {
@@ -1557,28 +774,11 @@ case 17:
 				} else {
 					msgStack.addMsg("Error: colecci贸n"+ val_peek(5).sval+" re-declarada en el n煤mero de l铆nea " + lex.getNewLineCounter());
 					hasError = true;
->>>>>>> 1375c5c... arreglos varios
 				}
 			}
->>>>>>> 4269743... generador de datos
 break;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-case 26:
-//#line 88 "gramatica.y"
-{ semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() +": Bloque de ejecuci髇"); }
-=======
-case 19:
-//#line 120 "gramatica.y"
-=======
 case 18:
-<<<<<<< HEAD
-//#line 124 "gramatica - copia.y"
->>>>>>> 1612ef0... constantes negativas en inicializaci贸n de colecciones y control de tipos
-=======
 //#line 124 "gramatica.y"
->>>>>>> d8fb1c1... arreglado la extracci贸n de valor del indice dentro del foreach
 {
 				if(!symbolTable.get(val_peek(5).sval).isDeclared()){
 					symbolTable.get(val_peek(5).sval).setDeclared();
@@ -1638,69 +838,8 @@ case 28:
 { yyval = val_peek(0); }
 break;
 case 29:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 101 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
-{ semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() +": Bloque de ejecuci螽ⅸ"); }
->>>>>>> 733ee4b... Agregado size y TS
-=======
-//#line 115 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
-=======
-//#line 117 "gramatica.y"
->>>>>>> f75def1... comentario
-{ semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() +": Bloque de ejecuci贸n"); }
->>>>>>> 3ddb440... Update Parser / ElementoTS :+1:
-=======
-//#line 140 "gramatica.y"
-=======
-//#line 141 "gramatica.y"
->>>>>>> 1daf844... Update Parser.java
-{yyval=val_peek(0);}
->>>>>>> fcadff2... coment
-=======
-//#line 154 "gramatica (12).y"
-=======
-//#line 153 "gramatica (12).y"
-<<<<<<< HEAD
->>>>>>> cf97fd0... Arreglos en ventana
-{ yyval=val_peek(0); }
->>>>>>> 4269743... generador de datos
-=======
-=======
-//#line 155 "gramatica (12).y"
->>>>>>> 1375c5c... arreglos varios
-=======
-//#line 155 "gramatica.y"
->>>>>>> 1ce0652... comentario
-=======
-//#line 156 "gramatica.y"
->>>>>>> 67de6b7... _
-=======
-//#line 155 "gramatica.y"
->>>>>>> d209296... comentario
-=======
-//#line 156 "gramatica.y"
->>>>>>> f58785c... arreglos para condiciones en indice de foreach
-{ yyval = val_peek(0); }
->>>>>>> 45299ea... visualizaci贸n de 谩rbol sint谩ctico
-=======
-//#line 161 "gramatica - copia.y"
-=======
 //#line 161 "gramatica.y"
->>>>>>> d8fb1c1... arreglado la extracci贸n de valor del indice dentro del foreach
 { yyval = val_peek(1); }
->>>>>>> 1612ef0... constantes negativas en inicializaci贸n de colecciones y control de tipos
 break;
 case 30:
 //#line 162 "gramatica.y"
@@ -1713,108 +852,16 @@ case 31:
 				/* Hay un warning en error_p, por eso hasError se setea true abajo y no ac谩 */
 			}
 break;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-case 34:
-<<<<<<< HEAD
-//#line 84 "gramatica_2.y"
-=======
-case 28:
-//#line 72 "gramatica_2.y"
-{ stackOfLines.push(lex.getNewLineCounter()); /*Para debugging*/}
-break;
-case 36:
-//#line 84 "gramatica_2.y"
-{ msgStack.addMsg("Error gen閞ico no contemplado cerca de l韓ea " + lex.getNewLineCounter()); }
-break;
-case 37:
-<<<<<<< HEAD
-//#line 87 "gramatica_2.y"
->>>>>>> 87f0bc1... cambios pre-entrega
-=======
-//#line 102 "gramatica.y"
->>>>>>> f713e33... comentario generico
-=======
-case 37:
-<<<<<<< HEAD
-//#line 115 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
->>>>>>> 733ee4b... Agregado size y TS
-=======
-//#line 129 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
->>>>>>> 3ddb440... Update Parser / ElementoTS :+1:
-=======
-//#line 131 "gramatica.y"
->>>>>>> f75def1... comentario
-=======
-case 33:
-//#line 163 "gramatica.y"
-=======
 case 32:
-<<<<<<< HEAD
-//#line 167 "gramatica - copia.y"
->>>>>>> 1612ef0... constantes negativas en inicializaci贸n de colecciones y control de tipos
-=======
 //#line 167 "gramatica.y"
->>>>>>> d8fb1c1... arreglado la extracci贸n de valor del indice dentro del foreach
 { 
 				msgStack.addMsg("Error de sint谩xis cerca de l铆nea " + lex.getNewLineCounter());
 				hasError = true;
 				yyval = new ST_Common("ERROR", null, null);
 			}
 break;
-<<<<<<< HEAD
-case 34:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 147 "gramatica.y"
->>>>>>> fcadff2... coment
-=======
-//#line 148 "gramatica.y"
->>>>>>> 1daf844... Update Parser.java
-=======
-//#line 161 "gramatica (12).y"
->>>>>>> 4269743... generador de datos
-=======
-//#line 160 "gramatica (12).y"
->>>>>>> cf97fd0... Arreglos en ventana
-=======
-//#line 165 "gramatica (12).y"
->>>>>>> 45299ea... visualizaci贸n de 谩rbol sint谩ctico
-=======
-//#line 167 "gramatica (12).y"
->>>>>>> 1375c5c... arreglos varios
-=======
-//#line 167 "gramatica.y"
->>>>>>> 1ce0652... comentario
-=======
-//#line 168 "gramatica.y"
->>>>>>> 67de6b7... _
-=======
-//#line 167 "gramatica.y"
->>>>>>> d209296... comentario
-=======
-//#line 169 "gramatica.y"
->>>>>>> f406b63... guardado dx:ax en registro de 32 bits
-=======
-//#line 170 "gramatica.y"
->>>>>>> f58785c... arreglos para condiciones en indice de foreach
-=======
 case 33:
-<<<<<<< HEAD
-//#line 174 "gramatica - copia.y"
->>>>>>> 1612ef0... constantes negativas en inicializaci贸n de colecciones y control de tipos
-=======
 //#line 174 "gramatica.y"
->>>>>>> d8fb1c1... arreglado la extracci贸n de valor del indice dentro del foreach
 {
                     semanticStructStack.addMsg("L?nea " + stackOfLines.peek().intValue() + ": Sentencia IF ");
                     stackOfLines.pop();
@@ -1822,88 +869,8 @@ case 33:
 					yyval = new ST_Common("IF",(SyntacticTree)val_peek(3),nodothen);
                 }
 break;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-case 35:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 88 "gramatica_2.y"
-=======
-case 38:
-//#line 91 "gramatica_2.y"
->>>>>>> 87f0bc1... cambios pre-entrega
-=======
-//#line 106 "gramatica.y"
->>>>>>> f713e33... comentario generico
-=======
-case 38:
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 119 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
->>>>>>> 733ee4b... Agregado size y TS
-=======
-//#line 133 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
->>>>>>> 3ddb440... Update Parser / ElementoTS :+1:
-=======
-//#line 135 "gramatica.y"
->>>>>>> f75def1... comentario
-=======
-case 35:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 152 "gramatica.y"
->>>>>>> fcadff2... coment
-=======
-//#line 153 "gramatica.y"
->>>>>>> 1daf844... Update Parser.java
-=======
-//#line 154 "gramatica.y"
->>>>>>> 67dbe83... comentario
-=======
-//#line 167 "gramatica (12).y"
->>>>>>> 4269743... generador de datos
-=======
-//#line 166 "gramatica (12).y"
->>>>>>> cf97fd0... Arreglos en ventana
-=======
-//#line 174 "gramatica (12).y"
->>>>>>> 45299ea... visualizaci贸n de 谩rbol sint谩ctico
-=======
-//#line 173 "gramatica (12).y"
->>>>>>> 1375c5c... arreglos varios
-=======
-//#line 173 "gramatica.y"
->>>>>>> 1ce0652... comentario
-=======
-//#line 174 "gramatica.y"
->>>>>>> 67de6b7... _
-=======
-//#line 173 "gramatica.y"
->>>>>>> d209296... comentario
-=======
-//#line 175 "gramatica.y"
->>>>>>> f406b63... guardado dx:ax en registro de 32 bits
-=======
-//#line 176 "gramatica.y"
->>>>>>> f58785c... arreglos para condiciones en indice de foreach
-=======
 case 34:
-<<<<<<< HEAD
-//#line 180 "gramatica - copia.y"
->>>>>>> 1612ef0... constantes negativas en inicializaci贸n de colecciones y control de tipos
-=======
 //#line 180 "gramatica.y"
->>>>>>> d8fb1c1... arreglado la extracci贸n de valor del indice dentro del foreach
 {
                     semanticStructStack.addMsg("L?nea " + stackOfLines.peek().intValue() + ": Sentencia IF ");
                     stackOfLines.pop();
@@ -1913,113 +880,17 @@ case 34:
 					yyval = new ST_Common("IF",(SyntacticTree)val_peek(5),nodoCuerpo);
                 }
 break;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-case 38:
-//#line 120 "gramatica.y"
-{ stackOfLines.push(lex.getNewLineCounter()); }
-break;
-case 46:
-<<<<<<< HEAD
-//#line 116 "gramatica_2.y"
-=======
-case 39:
-//#line 98 "gramatica_2.y"
-{ stackOfLines.push(lex.getNewLineCounter()); }
-break;
-case 47:
-//#line 112 "gramatica_2.y"
->>>>>>> 87f0bc1... cambios pre-entrega
-=======
-//#line 134 "gramatica.y"
->>>>>>> f713e33... comentario generico
-=======
-case 41:
-//#line 149 "gramatica.y"
-=======
-case 36:
-//#line 188 "gramatica.y"
-=======
 case 35:
-<<<<<<< HEAD
-//#line 192 "gramatica - copia.y"
->>>>>>> 1612ef0... constantes negativas en inicializaci贸n de colecciones y control de tipos
-=======
 //#line 192 "gramatica.y"
-<<<<<<< HEAD
->>>>>>> d8fb1c1... arreglado la extracci贸n de valor del indice dentro del foreach
-{ yyval = val_peek(0); }
-=======
 { stackOfLines.push(lex.getNewLineCounter()); }
->>>>>>> 4812029... detalles
 break;
 case 36:
 //#line 195 "gramatica.y"
 { yyval = val_peek(0); }
 break;
-<<<<<<< HEAD
-case 38:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 172 "gramatica.y"
->>>>>>> fcadff2... coment
-=======
-//#line 173 "gramatica.y"
->>>>>>> 1daf844... Update Parser.java
-=======
-//#line 176 "gramatica.y"
->>>>>>> 67dbe83... comentario
-=======
-//#line 185 "gramatica (12).y"
->>>>>>> 4269743... generador de datos
-=======
-//#line 184 "gramatica (12).y"
->>>>>>> cf97fd0... Arreglos en ventana
-=======
-//#line 198 "gramatica (12).y"
->>>>>>> 45299ea... visualizaci贸n de 谩rbol sint谩ctico
-=======
-//#line 191 "gramatica (12).y"
->>>>>>> 1375c5c... arreglos varios
-=======
-//#line 191 "gramatica.y"
->>>>>>> 1ce0652... comentario
-=======
-//#line 192 "gramatica.y"
->>>>>>> 67de6b7... _
-=======
-//#line 191 "gramatica.y"
->>>>>>> d209296... comentario
-=======
-//#line 193 "gramatica.y"
->>>>>>> f406b63... guardado dx:ax en registro de 32 bits
-=======
-//#line 194 "gramatica.y"
->>>>>>> f58785c... arreglos para condiciones en indice de foreach
-=======
 case 37:
-<<<<<<< HEAD
-//#line 198 "gramatica - copia.y"
->>>>>>> 1612ef0... constantes negativas en inicializaci贸n de colecciones y control de tipos
-=======
 //#line 198 "gramatica.y"
-<<<<<<< HEAD
->>>>>>> d8fb1c1... arreglado la extracci贸n de valor del indice dentro del foreach
-{ stackOfLines.push(lex.getNewLineCounter()); }
-=======
 { yyval = val_peek(0); }
->>>>>>> 4812029... detalles
 break;
 case 38:
 //#line 201 "gramatica.y"
@@ -2118,110 +989,8 @@ case 47:
 //#line 273 "gramatica.y"
 { yyval = val_peek(0); }
 break;
-<<<<<<< HEAD
-case 49:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 147 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
->>>>>>> 733ee4b... Agregado size y TS
-=======
-//#line 161 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
->>>>>>> 3ddb440... Update Parser / ElementoTS :+1:
-=======
-//#line 163 "gramatica.y"
->>>>>>> f75def1... comentario
-=======
-//#line 222 "gramatica.y"
-=======
-//#line 223 "gramatica.y"
->>>>>>> 1daf844... Update Parser.java
-=======
-//#line 227 "gramatica.y"
->>>>>>> 67dbe83... comentario
-{
-			stackOfLines.push(lex.getNewLineCounter()); 
-		}
-break;
-case 50:
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 227 "gramatica.y"
->>>>>>> fcadff2... coment
-=======
-//#line 228 "gramatica.y"
->>>>>>> 1daf844... Update Parser.java
-=======
-//#line 232 "gramatica.y"
->>>>>>> 67dbe83... comentario
-=======
-//#line 234 "gramatica (12).y"
-{ stackOfLines.push(lex.getNewLineCounter()); }
-break;
-case 50:
-//#line 237 "gramatica (12).y"
->>>>>>> 4269743... generador de datos
-=======
-//#line 233 "gramatica (12).y"
-{ stackOfLines.push(lex.getNewLineCounter()); }
-break;
-case 50:
-//#line 236 "gramatica (12).y"
->>>>>>> cf97fd0... Arreglos en ventana
-{ 
-                semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() + ": Asignaci锟絥"); 
-                stackOfLines.pop();
-				if(((SyntacticTree) val_peek(0)).getTipo() == "LONG" && ((SyntacticTree) val_peek(2)).getTipo().equals(ElementoTS.INT))
-=======
-//#line 251 "gramatica (12).y"
-=======
-//#line 250 "gramatica (12).y"
->>>>>>> 1375c5c... arreglos varios
-=======
-//#line 250 "gramatica.y"
->>>>>>> 1ce0652... comentario
-=======
-//#line 251 "gramatica.y"
->>>>>>> 67de6b7... _
-=======
-//#line 250 "gramatica.y"
->>>>>>> d209296... comentario
-=======
-//#line 251 "gramatica.y"
->>>>>>> fde7cdb... varios
-=======
-//#line 253 "gramatica.y"
-<<<<<<< HEAD
->>>>>>> f406b63... guardado dx:ax en registro de 32 bits
-{ stackOfLines.push(lex.getNewLineCounter()); }
-=======
-=======
-//#line 265 "gramatica.y"
->>>>>>> ff6e773... uso de punteros como enteros
-=======
 case 48:
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 269 "gramatica - copia.y"
->>>>>>> 1612ef0... constantes negativas en inicializaci贸n de colecciones y control de tipos
-=======
-//#line 269 "gramatica.y"
->>>>>>> d8fb1c1... arreglado la extracci贸n de valor del indice dentro del foreach
-=======
 //#line 276 "gramatica.y"
->>>>>>> 4812029... detalles
 { 
 					stackOfLines.push(lex.getNewLineCounter());
 					if (symbolTable.get(val_peek(0).sval).isDeclared()) {
@@ -2233,7 +1002,6 @@ case 48:
 					}
 					yyval = val_peek(0);
 				}
->>>>>>> f58785c... arreglos para condiciones en indice de foreach
 break;
 case 49:
 //#line 289 "gramatica.y"
@@ -2241,25 +1009,8 @@ case 49:
 				SyntacticTree nodo = null;
 				semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() + ": Asignaci贸n"); 
 				stackOfLines.pop();
-<<<<<<< HEAD
-<<<<<<< HEAD
-				if(((SyntacticTree) val_peek(0)).getTipo() == "LONG" && ((SyntacticTree) val_peek(2)).getTipo().equals(ElementoTS.INT)){
-<<<<<<< HEAD
->>>>>>> 45299ea... visualizaci贸n de 谩rbol sint谩ctico
-					msgStack.addMsg("ERROR: incompatibilidad de tipos");
-=======
-=======
-				if(((SyntacticTree) val_peek(0)).getType() == "LONG" && ((SyntacticTree) val_peek(2)).getType().equals(ElementoTS.INT)){
->>>>>>> fde7cdb... varios
-=======
 				if(((SyntacticTree) val_peek(0)).getType() == ElementoTS.LONG && ((SyntacticTree) val_peek(2)).getType().equals(ElementoTS.INT)){
-<<<<<<< HEAD
->>>>>>> dbec3d7... comentario
-					msgStack.addMsg("Error: incompatibilidad de tipos en l铆nea: " + lex.getNewLineCounter());
->>>>>>> 0fcca1b... varios
-=======
 					msgStack.addMsg("Error: Incompatibilidad de tipos en l铆nea: " + lex.getNewLineCounter());
->>>>>>> 4812029... detalles
 					hasError = true;
 					nodo = new ST_Common("ERROR", null, null);
 				} else {
@@ -2281,44 +1032,8 @@ case 49:
 				yyval = nodo;
 			}
 break;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-case 49:
-//#line 148 "gramatica.y"
-{ stackOfLines.push(lex.getNewLineCounter()); }
-break;
 case 50:
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 129 "gramatica_2.y"
-=======
-case 48:
-//#line 118 "gramatica_2.y"
-{ stackOfLines.push(lex.getNewLineCounter()); }
-break;
-case 49:
-//#line 121 "gramatica_2.y"
->>>>>>> 87f0bc1... cambios pre-entrega
-=======
-//#line 151 "gramatica.y"
->>>>>>> f713e33... comentario generico
-=======
-=======
-case 51:
-//#line 310 "gramatica.y"
-=======
-case 50:
-<<<<<<< HEAD
-//#line 314 "gramatica - copia.y"
->>>>>>> 1612ef0... constantes negativas en inicializaci贸n de colecciones y control de tipos
-=======
-//#line 314 "gramatica.y"
->>>>>>> d8fb1c1... arreglado la extracci贸n de valor del indice dentro del foreach
-=======
 //#line 317 "gramatica.y"
->>>>>>> 4812029... detalles
 { 
 						SyntacticTree nodo = null;
 						stackOfLines.push(lex.getNewLineCounter()); 
@@ -2335,32 +1050,13 @@ case 50:
 								nodo = new ST_Leaf("_" + val_peek(0).sval);
 								nodo.setType(symbolTable.get(val_peek(0).sval).getVariableType());
 								nodo.setAlmacenamiento(nodo.getElem());
-								((ST_Leaf)nodo).setCollectionInLeftSideAssig();
 							}
 						}
 						yyval = nodo;
 					}
 break;
-<<<<<<< HEAD
->>>>>>> fcadff2... coment
-case 52:
-//#line 330 "gramatica.y"
-=======
 case 51:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 335 "gramatica - copia.y"
->>>>>>> 1612ef0... constantes negativas en inicializaci贸n de colecciones y control de tipos
-=======
-//#line 335 "gramatica.y"
->>>>>>> d8fb1c1... arreglado la extracci贸n de valor del indice dentro del foreach
-=======
 //#line 337 "gramatica.y"
->>>>>>> 4812029... detalles
-=======
-//#line 338 "gramatica.y"
->>>>>>> 8381084... nothing
 { 
 				   		SyntacticTree nodo = null;
 						stackOfLines.push(lex.getNewLineCounter());
@@ -2384,126 +1080,10 @@ case 51:
 						yyval = nodo;
 					}
 break;
-<<<<<<< HEAD
-case 53:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 164 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
->>>>>>> 733ee4b... Agregado size y TS
-=======
-//#line 178 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
->>>>>>> 3ddb440... Update Parser / ElementoTS :+1:
-=======
-//#line 180 "gramatica.y"
->>>>>>> f75def1... comentario
-{ 
-                semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() + ": Asignaci贸n"); 
-                stackOfLines.pop();
-            }
-=======
-//#line 258 "gramatica.y"
-=======
-//#line 271 "gramatica.y"
->>>>>>> 1d41d94... Up
-=======
-//#line 272 "gramatica.y"
->>>>>>> 1daf844... Update Parser.java
-=======
-//#line 276 "gramatica.y"
->>>>>>> 67dbe83... comentario
-=======
-//#line 279 "gramatica (12).y"
->>>>>>> 4269743... generador de datos
-{
-					SintacticTree nodo;
-					if(((SintacticTree) val_peek(2)).getTipo() != ((SintacticTree) val_peek(0)).getTipo())
-							{
-							if(((SintacticTree) val_peek(2)).getTipo() == "INT")
-								nodo = new SintacticTreeCommon("+",new SintacticTreeConver("itol",(SintacticTree)val_peek(2)),(SintacticTree)val_peek(0));
-							else
-								nodo = new SintacticTreeCommon("+",(SintacticTree)val_peek(2),new SintacticTreeConver("itol",(SintacticTree)val_peek(0)));
-							nodo.setTipo("LONG");
-							}
-						else
-						{
-							nodo = new SintacticTreeCommon("+",(SintacticTree)val_peek(2),(SintacticTree)val_peek(0));
-							nodo.setTipo(((SintacticTree) val_peek(2)).getTipo());
-							}
-						yyval=nodo;
-				}
-<<<<<<< HEAD
-			yyval=nodo;
-	}
->>>>>>> fcadff2... coment
-=======
->>>>>>> 4269743... generador de datos
-=======
-//#line 275 "gramatica (12).y"
-{ 
-=======
-//#line 299 "gramatica (12).y"
-=======
-//#line 302 "gramatica (12).y"
->>>>>>> 1375c5c... arreglos varios
-=======
-//#line 302 "gramatica.y"
->>>>>>> 1ce0652... comentario
-=======
-//#line 303 "gramatica.y"
->>>>>>> 67de6b7... _
-=======
-//#line 302 "gramatica.y"
->>>>>>> d209296... comentario
-=======
-//#line 304 "gramatica.y"
->>>>>>> fde7cdb... varios
-=======
-//#line 306 "gramatica.y"
->>>>>>> f406b63... guardado dx:ax en registro de 32 bits
-=======
-//#line 310 "gramatica.y"
->>>>>>> fde75a9... comentario
-=======
-//#line 337 "gramatica.y"
->>>>>>> f58785c... arreglos para condiciones en indice de foreach
-=======
-//#line 352 "gramatica.y"
->>>>>>> ff6e773... uso de punteros como enteros
-=======
 case 52:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 357 "gramatica - copia.y"
->>>>>>> 1612ef0... constantes negativas en inicializaci贸n de colecciones y control de tipos
-=======
-//#line 357 "gramatica.y"
->>>>>>> d8fb1c1... arreglado la extracci贸n de valor del indice dentro del foreach
-=======
 //#line 359 "gramatica.y"
->>>>>>> 4812029... detalles
-=======
-//#line 360 "gramatica.y"
->>>>>>> 8381084... nothing
 {
 						SyntacticTree nodo = null;
->>>>>>> 45299ea... visualizaci贸n de 谩rbol sint谩ctico
 						stackOfLines.push(lex.getNewLineCounter());
 						if(!symbolTable.get(val_peek(3).sval).isDeclared() || !symbolTable.get(val_peek(1).sval).isDeclared()) {
 							msgStack.addMsg("Error: Una o ambas variables no fueron declaradas en l铆nea: " + lex.getNewLineCounter());
@@ -2527,109 +1107,9 @@ case 52:
 						}
 						yyval = nodo;
 					}
->>>>>>> cf97fd0... Arreglos en ventana
 break;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-case 51:
-//#line 157 "gramatica.y"
-=======
-case 54:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 170 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
->>>>>>> 733ee4b... Agregado size y TS
-=======
-//#line 184 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
->>>>>>> 3ddb440... Update Parser / ElementoTS :+1:
-=======
-//#line 186 "gramatica.y"
->>>>>>> f75def1... comentario
-{ 
-stackOfLines.push(lex.getNewLineCounter()); 
-if(symbolTable.get(val_peek(0).sval).getDeclaracion() == false)
-		        		msgStack.addMsg("ERROR: Variable no declarada.");
-}
-=======
-//#line 262 "gramatica.y"
-=======
-//#line 289 "gramatica.y"
->>>>>>> 1d41d94... Up
-=======
-//#line 290 "gramatica.y"
->>>>>>> 1daf844... Update Parser.java
-=======
-//#line 294 "gramatica.y"
->>>>>>> 67dbe83... comentario
-=======
-//#line 297 "gramatica (12).y"
->>>>>>> 4269743... generador de datos
-=======
-//#line 290 "gramatica (12).y"
->>>>>>> cf97fd0... Arreglos en ventana
-=======
-//#line 318 "gramatica (12).y"
->>>>>>> 45299ea... visualizaci贸n de 谩rbol sint谩ctico
-=======
-//#line 323 "gramatica (12).y"
->>>>>>> 1375c5c... arreglos varios
-=======
-//#line 323 "gramatica.y"
->>>>>>> 1ce0652... comentario
-=======
-//#line 324 "gramatica.y"
->>>>>>> 67de6b7... _
-=======
-//#line 323 "gramatica.y"
->>>>>>> d209296... comentario
-=======
-//#line 327 "gramatica.y"
->>>>>>> fde7cdb... varios
-=======
-//#line 329 "gramatica.y"
->>>>>>> f406b63... guardado dx:ax en registro de 32 bits
-=======
-//#line 333 "gramatica.y"
->>>>>>> fde75a9... comentario
-=======
-//#line 364 "gramatica.y"
->>>>>>> f58785c... arreglos para condiciones en indice de foreach
-=======
-//#line 382 "gramatica.y"
->>>>>>> ff6e773... uso de punteros como enteros
-=======
 case 53:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 387 "gramatica - copia.y"
->>>>>>> 1612ef0... constantes negativas en inicializaci贸n de colecciones y control de tipos
-=======
-//#line 387 "gramatica.y"
->>>>>>> d8fb1c1... arreglado la extracci贸n de valor del indice dentro del foreach
-=======
 //#line 386 "gramatica.y"
->>>>>>> 4812029... detalles
-=======
-//#line 387 "gramatica.y"
->>>>>>> 8381084... nothing
 {
 					SyntacticTree nodo = null;
 					if(((SyntacticTree) val_peek(2)).getType() != ((SyntacticTree) val_peek(0)).getType()) {
@@ -2644,15 +1124,9 @@ case 53:
 					}
 					yyval = nodo;
 				}
-<<<<<<< HEAD
-			yyval=nodo;
-	}
->>>>>>> fcadff2... coment
-=======
->>>>>>> 4269743... generador de datos
 break;
 case 54:
-//#line 401 "gramatica.y"
+//#line 400 "gramatica.y"
 {
 					SyntacticTree nodo = null;
 					if(((SyntacticTree) val_peek(2)).getType() != ((SyntacticTree) val_peek(0)).getType()) {
@@ -2668,62 +1142,12 @@ case 54:
 					yyval = nodo;
 				}
 break;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-case 59:
-<<<<<<< HEAD
-//#line 149 "gramatica_2.y"
-=======
-case 50:
-//#line 127 "gramatica_2.y"
-{ stackOfLines.push(lex.getNewLineCounter()); }
-break;
-case 51:
-//#line 128 "gramatica_2.y"
-{ stackOfLines.push(lex.getNewLineCounter()); }
-break;
-case 58:
-//#line 141 "gramatica_2.y"
->>>>>>> 87f0bc1... cambios pre-entrega
-=======
-//#line 179 "gramatica.y"
->>>>>>> f713e33... comentario generico
-=======
-case 62:
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 192 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
->>>>>>> 733ee4b... Agregado size y TS
-=======
-//#line 206 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
->>>>>>> 3ddb440... Update Parser / ElementoTS :+1:
-=======
-//#line 211 "gramatica.y"
->>>>>>> f75def1... comentario
-=======
-case 56:
-//#line 410 "gramatica.y"
-=======
 case 55:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 415 "gramatica - copia.y"
->>>>>>> 1612ef0... constantes negativas en inicializaci贸n de colecciones y control de tipos
-=======
-//#line 415 "gramatica.y"
->>>>>>> d8fb1c1... arreglado la extracci贸n de valor del indice dentro del foreach
-=======
 //#line 414 "gramatica.y"
->>>>>>> 4812029... detalles
-=======
-//#line 415 "gramatica.y"
->>>>>>> 8381084... nothing
 { yyval =val_peek(0); }
 break;
 case 56:
-//#line 418 "gramatica.y"
+//#line 417 "gramatica.y"
 {
 			SyntacticTree nodo = null;
 			if(((SyntacticTree) val_peek(2)).getType() != ((SyntacticTree) val_peek(0)).getType()) {
@@ -2739,7 +1163,7 @@ case 56:
 		}
 break;
 case 57:
-//#line 431 "gramatica.y"
+//#line 430 "gramatica.y"
 {
 			SyntacticTree nodo = null;
 			if(((SyntacticTree) val_peek(2)).getType() != ((SyntacticTree) val_peek(0)).getType()) {
@@ -2755,134 +1179,12 @@ case 57:
 			yyval = nodo;
 		}
 break;
-<<<<<<< HEAD
-case 59:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 278 "gramatica.y"
->>>>>>> fcadff2... coment
-=======
-//#line 347 "gramatica.y"
->>>>>>> 1d41d94... Up
-=======
-//#line 348 "gramatica.y"
->>>>>>> 1daf844... Update Parser.java
-=======
-//#line 352 "gramatica.y"
->>>>>>> 67dbe83... comentario
-=======
-//#line 355 "gramatica (12).y"
->>>>>>> 4269743... generador de datos
-=======
-//#line 349 "gramatica (12).y"
-{ yyval = val_peek(0); }
-break;
-case 60:
-//#line 352 "gramatica (12).y"
->>>>>>> cf97fd0... Arreglos en ventana
-=======
-//#line 376 "gramatica (12).y"
-{ yyval = val_peek(0); }
-break;
-case 60:
-//#line 379 "gramatica (12).y"
->>>>>>> 45299ea... visualizaci贸n de 谩rbol sint谩ctico
-=======
-//#line 381 "gramatica (12).y"
-{ yyval = val_peek(0); }
-break;
-case 60:
-//#line 384 "gramatica (12).y"
->>>>>>> 1375c5c... arreglos varios
-=======
-//#line 381 "gramatica.y"
-{ yyval = val_peek(0); }
-break;
-case 60:
-//#line 384 "gramatica.y"
->>>>>>> 1ce0652... comentario
-=======
-//#line 382 "gramatica.y"
-{ yyval = val_peek(0); }
-break;
-case 60:
-//#line 385 "gramatica.y"
->>>>>>> 67de6b7... _
-=======
-//#line 381 "gramatica.y"
-{ yyval = val_peek(0); }
-break;
-case 60:
-//#line 384 "gramatica.y"
->>>>>>> d209296... comentario
-=======
-//#line 385 "gramatica.y"
-{ yyval = val_peek(0); }
-break;
-case 60:
-//#line 388 "gramatica.y"
->>>>>>> fde7cdb... varios
-=======
-//#line 387 "gramatica.y"
-{ yyval = val_peek(0); }
-break;
-case 60:
-//#line 390 "gramatica.y"
->>>>>>> f406b63... guardado dx:ax en registro de 32 bits
-=======
-//#line 391 "gramatica.y"
-{ yyval = val_peek(0); }
-break;
-case 60:
-//#line 394 "gramatica.y"
->>>>>>> fde75a9... comentario
-=======
-//#line 422 "gramatica.y"
-{ yyval = val_peek(0); }
-break;
-case 60:
-//#line 425 "gramatica.y"
->>>>>>> f58785c... arreglos para condiciones en indice de foreach
-=======
-//#line 440 "gramatica.y"
-{ yyval = val_peek(0); }
-break;
-case 60:
-//#line 443 "gramatica.y"
->>>>>>> ff6e773... uso de punteros como enteros
-=======
 case 58:
-//#line 445 "gramatica.y"
+//#line 444 "gramatica.y"
 { yyval = val_peek(0); }
 break;
 case 59:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 448 "gramatica - copia.y"
->>>>>>> 1612ef0... constantes negativas en inicializaci贸n de colecciones y control de tipos
-=======
-//#line 448 "gramatica.y"
->>>>>>> d8fb1c1... arreglado la extracci贸n de valor del indice dentro del foreach
-=======
 //#line 447 "gramatica.y"
->>>>>>> 4812029... detalles
-=======
-//#line 448 "gramatica.y"
->>>>>>> 8381084... nothing
 {
 				SyntacticTree nodo = null;
 				if(!symbolTable.get(val_peek(0).sval).isDeclared()){
@@ -2900,232 +1202,12 @@ case 59:
 				yyval = nodo;
 			}
 break;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 case 60:
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 157 "gramatica_2.y"
-=======
-case 59:
-//#line 149 "gramatica_2.y"
->>>>>>> 87f0bc1... cambios pre-entrega
-=======
-//#line 183 "gramatica.y"
->>>>>>> f713e33... comentario generico
-=======
-case 63:
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 196 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
->>>>>>> 733ee4b... Agregado size y TS
-=======
-//#line 210 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
->>>>>>> 3ddb440... Update Parser / ElementoTS :+1:
-=======
-//#line 215 "gramatica.y"
->>>>>>> f75def1... comentario
-=======
-case 60:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 287 "gramatica.y"
->>>>>>> fcadff2... coment
-=======
-//#line 356 "gramatica.y"
->>>>>>> 1d41d94... Up
-=======
-//#line 357 "gramatica.y"
->>>>>>> 1daf844... Update Parser.java
-=======
-//#line 361 "gramatica.y"
->>>>>>> 67dbe83... comentario
-=======
-//#line 364 "gramatica (12).y"
->>>>>>> 4269743... generador de datos
-=======
-case 61:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 361 "gramatica (12).y"
->>>>>>> cf97fd0... Arreglos en ventana
-=======
-//#line 390 "gramatica (12).y"
->>>>>>> 45299ea... visualizaci贸n de 谩rbol sint谩ctico
-=======
-//#line 396 "gramatica (12).y"
->>>>>>> 1375c5c... arreglos varios
-=======
-//#line 396 "gramatica.y"
->>>>>>> 1ce0652... comentario
-=======
-//#line 397 "gramatica.y"
->>>>>>> 67de6b7... _
-=======
-//#line 396 "gramatica.y"
->>>>>>> d209296... comentario
-=======
-//#line 400 "gramatica.y"
->>>>>>> fde7cdb... varios
-=======
-//#line 402 "gramatica.y"
->>>>>>> f406b63... guardado dx:ax en registro de 32 bits
-=======
-//#line 406 "gramatica.y"
->>>>>>> fde75a9... comentario
-=======
-//#line 443 "gramatica.y"
->>>>>>> f58785c... arreglos para condiciones en indice de foreach
-=======
 //#line 463 "gramatica.y"
->>>>>>> ff6e773... uso de punteros como enteros
-{
-				String lexeme = val_peek(0).sval;
-				ElementoTS tts = symbolTable.get(lexeme);
-				if(lexeme == "32768"){
-					tts.setVariableType(ElementoTS.LONG);
-				}
-				if (lexeme == "2147483648"){
-					String lexnuevo = "2147483647";
-					val_peek(0).sval = lexnuevo;
-					symbolTable.get(lexeme).decreaseVariableRepetitions();
-					if(symbolTable.containsKey(lexnuevo)){
-						symbolTable.get(lexnuevo).increaseVariableRepetitions();
-					}else {
-						ElementoTS ttsnuevo = new ElementoTS( ElementoTS.CONST, tts.getValue(), tts.getVariableType());
-						symbolTable.put(lexnuevo,ttsnuevo);
-					}
-				lexeme = lexnuevo;
-					msgStack.addMsg("Warning: Constante positiva fuera de rango.");
-				}
-				SyntacticTree nodo = new ST_Leaf(lexeme);
-				nodo.setType(symbolTable.get(lexeme).getVariableType());
-				nodo.setAlmacenamiento(nodo.getElem());
-				yyval = nodo;
-	        }
-break;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-case 62:
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 177 "gramatica_2.y"
-=======
-case 61:
-<<<<<<< HEAD
-//#line 169 "gramatica_2.y"
->>>>>>> 87f0bc1... cambios pre-entrega
-=======
-case 61:
-<<<<<<< HEAD
-//#line 202 "gramatica.y"
-=======
-case 64:
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 215 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
->>>>>>> 733ee4b... Agregado size y TS
-=======
-//#line 229 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
->>>>>>> 3ddb440... Update Parser / ElementoTS :+1:
-=======
-//#line 234 "gramatica.y"
->>>>>>> f75def1... comentario
-=======
-case 61:
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 310 "gramatica.y"
->>>>>>> fcadff2... coment
-=======
-//#line 379 "gramatica.y"
->>>>>>> 1d41d94... Up
-=======
-//#line 380 "gramatica.y"
->>>>>>> 1daf844... Update Parser.java
-=======
-//#line 384 "gramatica.y"
->>>>>>> 67dbe83... comentario
-=======
-//#line 387 "gramatica (12).y"
->>>>>>> 4269743... generador de datos
-=======
-case 62:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 384 "gramatica (12).y"
->>>>>>> cf97fd0... Arreglos en ventana
-=======
-//#line 413 "gramatica (12).y"
->>>>>>> 45299ea... visualizaci贸n de 谩rbol sint谩ctico
-=======
-//#line 419 "gramatica (12).y"
->>>>>>> 1375c5c... arreglos varios
-=======
-//#line 419 "gramatica.y"
->>>>>>> 1ce0652... comentario
-=======
-//#line 420 "gramatica.y"
->>>>>>> 67de6b7... _
-=======
-//#line 419 "gramatica.y"
->>>>>>> d209296... comentario
-=======
-//#line 423 "gramatica.y"
->>>>>>> fde7cdb... varios
-=======
-//#line 425 "gramatica.y"
->>>>>>> f406b63... guardado dx:ax en registro de 32 bits
-=======
-//#line 429 "gramatica.y"
->>>>>>> fde75a9... comentario
-=======
-//#line 466 "gramatica.y"
->>>>>>> f58785c... arreglos para condiciones en indice de foreach
-=======
-//#line 487 "gramatica.y"
->>>>>>> ff6e773... uso de punteros como enteros
-=======
-case 60:
-//#line 464 "gramatica.y"
 { yyval = val_peek(0); }
 break;
 case 61:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 469 "gramatica - copia.y"
->>>>>>> 1612ef0... constantes negativas en inicializaci贸n de colecciones y control de tipos
-=======
-//#line 468 "gramatica.y"
->>>>>>> d8fb1c1... arreglado la extracci贸n de valor del indice dentro del foreach
-=======
 //#line 464 "gramatica.y"
->>>>>>> 4812029... detalles
-=======
-//#line 465 "gramatica.y"
->>>>>>> 8381084... nothing
 {
 					SyntacticTree nodo = null;
 					if(!symbolTable.get(val_peek(3).sval).isDeclared()){
@@ -3146,64 +1228,8 @@ case 61:
 					yyval = nodo;
 				}
 break;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 case 62:
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 206 "gramatica.y"
->>>>>>> f713e33... comentario generico
-=======
-case 65:
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 219 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
->>>>>>> 733ee4b... Agregado size y TS
-=======
-//#line 233 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
->>>>>>> 3ddb440... Update Parser / ElementoTS :+1:
-=======
-//#line 242 "gramatica.y"
->>>>>>> f75def1... comentario
-=======
-case 62:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 322 "gramatica.y"
->>>>>>> fcadff2... coment
-=======
-//#line 391 "gramatica.y"
->>>>>>> 1d41d94... Up
-=======
-//#line 392 "gramatica.y"
->>>>>>> 1daf844... Update Parser.java
-=======
-//#line 396 "gramatica.y"
->>>>>>> 67dbe83... comentario
-=======
-//#line 399 "gramatica (12).y"
->>>>>>> 4269743... generador de datos
-=======
-case 63:
-//#line 506 "gramatica.y"
-=======
-case 62:
-<<<<<<< HEAD
-//#line 488 "gramatica - copia.y"
->>>>>>> 1612ef0... constantes negativas en inicializaci贸n de colecciones y control de tipos
-=======
-//#line 487 "gramatica.y"
->>>>>>> d8fb1c1... arreglado la extracci贸n de valor del indice dentro del foreach
-=======
 //#line 483 "gramatica.y"
->>>>>>> 4812029... detalles
-=======
-//#line 484 "gramatica.y"
->>>>>>> 8381084... nothing
 {
 					SyntacticTree nodo = null;
 					if(!symbolTable.get(val_peek(3).sval).isDeclared() || !symbolTable.get(val_peek(1).sval).isDeclared()){
@@ -3228,7 +1254,7 @@ case 62:
 				}
 break;
 case 63:
-//#line 509 "gramatica.y"
+//#line 508 "gramatica.y"
 {
 							String lexeme = val_peek(0).sval;
 							ElementoTS tts = symbolTable.get(lexeme);
@@ -3258,64 +1284,7 @@ case 63:
 	        			}
 break;
 case 64:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 408 "gramatica (12).y"
->>>>>>> cf97fd0... Arreglos en ventana
-=======
-//#line 445 "gramatica (12).y"
->>>>>>> 45299ea... visualizaci贸n de 谩rbol sint谩ctico
-=======
-//#line 455 "gramatica (12).y"
->>>>>>> 1375c5c... arreglos varios
-=======
-//#line 455 "gramatica.y"
->>>>>>> 1ce0652... comentario
-=======
-//#line 456 "gramatica.y"
->>>>>>> 67de6b7... _
-=======
-//#line 455 "gramatica.y"
->>>>>>> d209296... comentario
-=======
-//#line 459 "gramatica.y"
->>>>>>> fde7cdb... varios
-=======
-//#line 461 "gramatica.y"
->>>>>>> f406b63... guardado dx:ax en registro de 32 bits
-=======
-//#line 465 "gramatica.y"
->>>>>>> fde75a9... comentario
-=======
-//#line 507 "gramatica.y"
->>>>>>> f58785c... arreglos para condiciones en indice de foreach
-=======
-//#line 531 "gramatica.y"
->>>>>>> ff6e773... uso de punteros como enteros
-=======
-//#line 543 "gramatica - copia.y"
->>>>>>> 1612ef0... constantes negativas en inicializaci贸n de colecciones y control de tipos
-=======
-//#line 542 "gramatica.y"
->>>>>>> d8fb1c1... arreglado la extracci贸n de valor del indice dentro del foreach
-=======
 //#line 535 "gramatica.y"
->>>>>>> 4812029... detalles
-=======
-//#line 536 "gramatica.y"
->>>>>>> 8381084... nothing
 {
 							String lexeme = val_peek(0).sval;
 							ElementoTS tts = symbolTable.get(lexeme);
@@ -3338,112 +1307,8 @@ case 64:
 							yyval = nodo;
 						}
 break;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-case 63:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 195 "gramatica_2.y"
-=======
-case 62:
-//#line 186 "gramatica_2.y"
->>>>>>> 87f0bc1... cambios pre-entrega
-=======
-//#line 224 "gramatica.y"
->>>>>>> f713e33... comentario generico
-=======
-case 66:
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 237 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
->>>>>>> 733ee4b... Agregado size y TS
-=======
-//#line 251 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
->>>>>>> 3ddb440... Update Parser / ElementoTS :+1:
-=======
-//#line 260 "gramatica.y"
->>>>>>> f75def1... comentario
-=======
-case 63:
-<<<<<<< HEAD
-//#line 343 "gramatica.y"
->>>>>>> fcadff2... coment
-=======
-//#line 412 "gramatica.y"
->>>>>>> 1d41d94... Up
-=======
-//#line 413 "gramatica.y"
->>>>>>> 1daf844... Update Parser.java
-=======
-//#line 417 "gramatica.y"
->>>>>>> 67dbe83... comentario
-=======
-//#line 420 "gramatica (12).y"
->>>>>>> 4269743... generador de datos
-=======
 case 65:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 429 "gramatica (12).y"
->>>>>>> cf97fd0... Arreglos en ventana
-=======
-//#line 464 "gramatica (12).y"
->>>>>>> 45299ea... visualizaci贸n de 谩rbol sint谩ctico
-=======
-//#line 474 "gramatica (12).y"
->>>>>>> 1375c5c... arreglos varios
-=======
-//#line 474 "gramatica.y"
->>>>>>> 1ce0652... comentario
-=======
-//#line 475 "gramatica.y"
->>>>>>> 67de6b7... _
-=======
-//#line 474 "gramatica.y"
->>>>>>> d209296... comentario
-=======
-//#line 478 "gramatica.y"
->>>>>>> fde7cdb... varios
-=======
-//#line 480 "gramatica.y"
->>>>>>> f406b63... guardado dx:ax en registro de 32 bits
-=======
-//#line 484 "gramatica.y"
->>>>>>> fde75a9... comentario
-=======
-//#line 526 "gramatica.y"
->>>>>>> f58785c... arreglos para condiciones en indice de foreach
-=======
-//#line 551 "gramatica.y"
->>>>>>> ff6e773... uso de punteros como enteros
-=======
-//#line 565 "gramatica - copia.y"
->>>>>>> 1612ef0... constantes negativas en inicializaci贸n de colecciones y control de tipos
-=======
-//#line 564 "gramatica.y"
->>>>>>> d8fb1c1... arreglado la extracci贸n de valor del indice dentro del foreach
-=======
 //#line 557 "gramatica.y"
->>>>>>> 4812029... detalles
-=======
-//#line 558 "gramatica.y"
->>>>>>> 8381084... nothing
 {
                 semanticStructStack.addMsg("Linea "+ stackOfLines.peek().intValue() +": Sentencia print");
                 stackOfLines.pop();
@@ -3453,446 +1318,71 @@ case 65:
 				yyval = new ST_Unary("PRINT", nodoCad);
             }
 break;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-case 64:
-<<<<<<< HEAD
-//#line 230 "gramatica.y"
-{ stackOfLines.push(lex.getNewLineCounter()); }
-break;
-case 65:
-//#line 233 "gramatica.y"
-{ msgStack.addMsg("Warning: Declaraci髇 de bloque sin contenido"); }
-break;
 case 66:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 234 "gramatica.y"
-{ msgStack.addMsg("Error: Comparaci髇 incompleta"); }
-break;
-=======
->>>>>>> 733ee4b... Agregado size y TS
-case 67:
-//#line 266 "gramatica.y"
-=======
-case 64:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 350 "gramatica.y"
->>>>>>> fcadff2... coment
-=======
-//#line 419 "gramatica.y"
->>>>>>> 1d41d94... Up
-=======
-//#line 420 "gramatica.y"
->>>>>>> 1daf844... Update Parser.java
-=======
-//#line 424 "gramatica.y"
->>>>>>> 67dbe83... comentario
-=======
-//#line 427 "gramatica (12).y"
->>>>>>> 4269743... generador de datos
-=======
-case 66:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 436 "gramatica (12).y"
->>>>>>> cf97fd0... Arreglos en ventana
-=======
-//#line 471 "gramatica (12).y"
->>>>>>> 45299ea... visualizaci贸n de 谩rbol sint谩ctico
-=======
-//#line 481 "gramatica (12).y"
->>>>>>> 1375c5c... arreglos varios
-=======
-//#line 481 "gramatica.y"
->>>>>>> 1ce0652... comentario
-=======
-//#line 482 "gramatica.y"
->>>>>>> 67de6b7... _
-=======
-//#line 481 "gramatica.y"
->>>>>>> d209296... comentario
-=======
-//#line 485 "gramatica.y"
->>>>>>> fde7cdb... varios
-=======
-//#line 487 "gramatica.y"
->>>>>>> f406b63... guardado dx:ax en registro de 32 bits
-=======
-//#line 491 "gramatica.y"
->>>>>>> fde75a9... comentario
-=======
-//#line 533 "gramatica.y"
->>>>>>> f58785c... arreglos para condiciones en indice de foreach
-=======
-//#line 561 "gramatica.y"
->>>>>>> ff6e773... uso de punteros como enteros
-=======
-//#line 575 "gramatica - copia.y"
->>>>>>> 1612ef0... constantes negativas en inicializaci贸n de colecciones y control de tipos
-=======
-//#line 574 "gramatica.y"
->>>>>>> d8fb1c1... arreglado la extracci贸n de valor del indice dentro del foreach
-=======
 //#line 567 "gramatica.y"
->>>>>>> 4812029... detalles
-=======
-//#line 568 "gramatica.y"
->>>>>>> 8381084... nothing
 { stackOfLines.push(lex.getNewLineCounter()); }
 break;
 case 67:
-//#line 571 "gramatica.y"
+//#line 570 "gramatica.y"
 { msgStack.addMsg("Warning: Declaraci贸n de bloque sin contenido"); }
 break;
 case 68:
-//#line 572 "gramatica.y"
+//#line 571 "gramatica.y"
 { msgStack.addMsg("Error: Comparaci贸n incompleta en l铆nea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 69:
-//#line 573 "gramatica.y"
+//#line 572 "gramatica.y"
 { msgStack.addMsg("Error: Declaraci贸n de IF sin condici贸n en l铆nea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 70:
-//#line 574 "gramatica.y"
+//#line 573 "gramatica.y"
 { msgStack.addMsg("Error: Declaracion de foreach sin 铆ndice y sin colecci贸n en l铆nea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 71:
-//#line 575 "gramatica.y"
+//#line 574 "gramatica.y"
 { msgStack.addMsg("Error: Declaracion de foreach sin colecci贸n en l铆nea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 72:
-//#line 576 "gramatica.y"
+//#line 575 "gramatica.y"
 { msgStack.addMsg("Error: Declaracion de foreach sin 铆ndice en l铆nea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 73:
-//#line 577 "gramatica.y"
+//#line 576 "gramatica.y"
 { msgStack.addMsg("Error: Nombre y valor de posicion de colecci贸n faltante en l铆nea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 74:
-//#line 578 "gramatica.y"
+//#line 577 "gramatica.y"
 { msgStack.addMsg("Error: Nombre de colecci贸n faltante en l铆nea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 75:
-//#line 579 "gramatica.y"
+//#line 578 "gramatica.y"
 { msgStack.addMsg("Error: Corchete de apertura faltante en l铆nea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 76:
-//#line 580 "gramatica.y"
+//#line 579 "gramatica.y"
 { msgStack.addMsg("Error: Corchete de cierre faltante en l铆nea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 77:
-//#line 581 "gramatica.y"
+//#line 580 "gramatica.y"
 { msgStack.addMsg("Error: Constante a la izquierda de una asignaci贸n en l铆nea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 78:
-//#line 582 "gramatica.y"
+//#line 581 "gramatica.y"
 { msgStack.addMsg("Error: Sentencia inv谩lida en l铆nea: " + lex.getNewLineCounter()); hasError = true; }
 break;
-<<<<<<< HEAD
-case 77:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 278 "gramatica.y"
-{ msgStack.addMsg("Error: Corchete de cierre faltante"); }
-break;
-case 78:
-//#line 279 "gramatica.y"
-{ msgStack.addMsg("Error: Constante a la izquierda de una asignaci贸n"); }
-break;
 case 79:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 218 "gramatica_2.y"
-=======
-case 63:
-//#line 192 "gramatica_2.y"
-{ stackOfLines.push(lex.getNewLineCounter()); }
-break;
-case 64:
-//#line 195 "gramatica_2.y"
-{ msgStack.addMsg("Warning: Declaraci髇 de bloque sin contenido"); }
-break;
-case 65:
-//#line 196 "gramatica_2.y"
-{ msgStack.addMsg("Error: Comparaci髇 incompleta"); }
-break;
-case 66:
-//#line 197 "gramatica_2.y"
-{ msgStack.addMsg("Error: Declaraci髇 de IF sin condici髇"); }
-break;
-case 67:
-//#line 198 "gramatica_2.y"
-{ msgStack.addMsg("Error: Declaracion de FOREACH sin 韓dice y sin colecci髇"); }
-break;
-case 68:
-//#line 199 "gramatica_2.y"
-{ msgStack.addMsg("Error: Declaracion de FOREACH sin colecci髇"); }
-break;
-case 69:
-//#line 200 "gramatica_2.y"
-{ msgStack.addMsg("Error: Declaracion de FOREACH sin 韓dice"); }
-break;
-case 70:
-//#line 201 "gramatica_2.y"
-{ msgStack.addMsg("Error: Nombre y valor de posicion de coleccion faltante"); }
-break;
-case 71:
-//#line 202 "gramatica_2.y"
-{ msgStack.addMsg("Error: Nombre de coleccion faltante"); }
-break;
-case 72:
-//#line 203 "gramatica_2.y"
-{ msgStack.addMsg("Error: Corchete de apertura faltante"); }
-break;
-case 73:
-//#line 204 "gramatica_2.y"
-{ msgStack.addMsg("Error: Corchete de cierre faltante"); }
-break;
-case 74:
-//#line 205 "gramatica_2.y"
-{ msgStack.addMsg("Error: Constante a la izquierda de una asignaci髇"); }
-break;
-case 75:
-//#line 206 "gramatica_2.y"
-{ msgStack.addMsg("Error: Sentencia inv醠ida"); }
-break;
-case 76:
-//#line 207 "gramatica_2.y"
-{ msgStack.addMsg("Error: Constantes declaradas con tipo"); }
-break;
-case 77:
-//#line 208 "gramatica_2.y"
-{ msgStack.addMsg("Error: Falta de separador entre valores constantes"); }
-break;
-case 78:
-//#line 209 "gramatica_2.y"
->>>>>>> 87f0bc1... cambios pre-entrega
-{ msgStack.addMsg("Error: Sentencia de asignaci髇 inv醠ida"); }
-break;
-//#line 761 "Parser.java"
-=======
-//#line 247 "gramatica.y"
-{ msgStack.addMsg("Error: Sentencia de asignaci髇 inv醠ida"); }
-break;
-//#line 790 "Parser.java"
->>>>>>> f713e33... comentario generico
-=======
-//#line 257 "C:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
-{ msgStack.addMsg("Error: Sentencia inv岈ヾa"); }
-=======
-//#line 271 "c:\Users\Carolina\Documents\GitHub\compilator\gramatica.y"
-=======
-//#line 280 "gramatica.y"
->>>>>>> f75def1... comentario
-{ msgStack.addMsg("Error: Sentencia inv谩lida"); }
->>>>>>> 3ddb440... Update Parser / ElementoTS :+1:
-break;
-case 80:
-//#line 281 "gramatica.y"
-=======
-//#line 365 "gramatica.y"
->>>>>>> fcadff2... coment
-=======
-//#line 434 "gramatica.y"
->>>>>>> 1d41d94... Up
-=======
-//#line 435 "gramatica.y"
->>>>>>> 1daf844... Update Parser.java
-=======
-//#line 439 "gramatica.y"
->>>>>>> 67dbe83... comentario
-=======
-//#line 442 "gramatica (12).y"
->>>>>>> 4269743... generador de datos
-=======
-case 79:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 451 "gramatica (12).y"
->>>>>>> cf97fd0... Arreglos en ventana
-=======
-//#line 486 "gramatica (12).y"
->>>>>>> 45299ea... visualizaci贸n de 谩rbol sint谩ctico
-{ msgStack.addMsg("Error: Constantes declaradas con tipo"); }
-=======
-//#line 496 "gramatica (12).y"
-=======
-//#line 496 "gramatica.y"
-<<<<<<< HEAD
->>>>>>> 1ce0652... comentario
-=======
-//#line 497 "gramatica.y"
->>>>>>> 67de6b7... _
-=======
-//#line 496 "gramatica.y"
->>>>>>> d209296... comentario
-{ msgStack.addMsg("Error: Constantes declaradas con tipo"); hasError = true; }
->>>>>>> 1375c5c... arreglos varios
-=======
-=======
-//#line 500 "gramatica.y"
->>>>>>> fde7cdb... varios
-=======
-//#line 502 "gramatica.y"
->>>>>>> f406b63... guardado dx:ax en registro de 32 bits
-=======
-//#line 506 "gramatica.y"
->>>>>>> fde75a9... comentario
-=======
-//#line 548 "gramatica.y"
->>>>>>> f58785c... arreglos para condiciones en indice de foreach
-=======
-//#line 576 "gramatica.y"
->>>>>>> ff6e773... uso de punteros como enteros
-=======
-//#line 590 "gramatica - copia.y"
->>>>>>> 1612ef0... constantes negativas en inicializaci贸n de colecciones y control de tipos
-=======
-//#line 589 "gramatica.y"
->>>>>>> d8fb1c1... arreglado la extracci贸n de valor del indice dentro del foreach
-=======
 //#line 582 "gramatica.y"
->>>>>>> 4812029... detalles
-=======
-//#line 583 "gramatica.y"
->>>>>>> 8381084... nothing
 { msgStack.addMsg("Error: Constantes declaradas con tipo en l铆nea: " + lex.getNewLineCounter()); hasError = true; }
->>>>>>> 0fcca1b... varios
 break;
 case 80:
-//#line 584 "gramatica.y"
+//#line 583 "gramatica.y"
 { msgStack.addMsg("Error: Falta de separador entre valores constantes en l铆nea: " + lex.getNewLineCounter()); hasError = true; }
 break;
 case 81:
-//#line 585 "gramatica.y"
+//#line 584 "gramatica.y"
 { msgStack.addMsg("Error: Sentencia de asignaci贸n inv谩lida en l铆nea: " + lex.getNewLineCounter()); hasError = true; }
 break;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-//#line 820 "Parser.java"
->>>>>>> 733ee4b... Agregado size y TS
-=======
-//#line 852 "Parser.java"
->>>>>>> 3ddb440... Update Parser / ElementoTS :+1:
-=======
-//#line 863 "Parser.java"
->>>>>>> f75def1... comentario
-=======
-//#line 1064 "Parser.java"
->>>>>>> fcadff2... coment
-=======
-//#line 1063 "Parser.java"
->>>>>>> 0507715... Update Parser.java
-=======
-//#line 1133 "Parser.java"
->>>>>>> 1d41d94... Up
-=======
-//#line 1134 "Parser.java"
->>>>>>> 1daf844... Update Parser.java
-=======
-//#line 1133 "Parser.java"
->>>>>>> 87ae9f5... comentario
-=======
-//#line 1137 "Parser.java"
->>>>>>> 67dbe83... comentario
-=======
-//#line 1142 "Parser.java"
->>>>>>> 4269743... generador de datos
-=======
-//#line 1164 "Parser.java"
->>>>>>> cf97fd0... Arreglos en ventana
-=======
-//#line 1203 "Parser.java"
->>>>>>> 45299ea... visualizaci贸n de 谩rbol sint谩ctico
-=======
-//#line 1217 "Parser.java"
->>>>>>> 1375c5c... arreglos varios
-=======
-//#line 1218 "Parser.java"
->>>>>>> 67de6b7... _
-=======
-//#line 1217 "Parser.java"
->>>>>>> d209296... comentario
-=======
-//#line 1221 "Parser.java"
->>>>>>> fde7cdb... varios
-=======
-//#line 1223 "Parser.java"
->>>>>>> f406b63... guardado dx:ax en registro de 32 bits
-=======
-//#line 1227 "Parser.java"
->>>>>>> fde75a9... comentario
-=======
-//#line 1271 "Parser.java"
->>>>>>> f58785c... arreglos para condiciones en indice de foreach
-=======
-//#line 1299 "Parser.java"
->>>>>>> ff6e773... uso de punteros como enteros
-=======
-//#line 1317 "Parser.java"
->>>>>>> 1612ef0... constantes negativas en inicializaci贸n de colecciones y control de tipos
-=======
-//#line 1316 "Parser.java"
->>>>>>> d8fb1c1... arreglado la extracci贸n de valor del indice dentro del foreach
-=======
 //#line 1309 "Parser.java"
->>>>>>> 4812029... detalles
-=======
-//#line 1310 "Parser.java"
->>>>>>> 8381084... nothing
 //########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####
@@ -3950,7 +1440,7 @@ public void run()
 
 
 
-//## Constructors ############################################
+//## Constructors ###############################################
 /**
  * Default constructor.  Turn off with -Jnoconstruct .
 

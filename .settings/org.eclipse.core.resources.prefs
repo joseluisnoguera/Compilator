@@ -1,2 +1,4 @@
 eclipse.preferences.version=1
 encoding//src/logic/Parser.java=UTF-8
+encoding//src/utils/syntacticTree/ST_Memory.java=UTF-8
+encoding//src/utils/syntacticTree/SyntacticTree.java=UTF-8

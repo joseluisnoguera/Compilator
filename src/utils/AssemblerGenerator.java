@@ -58,53 +58,6 @@ public class AssemblerGenerator {
 
 	private static MsgStack getExtraFunctions(Hashtable<String, ElementoTS> symbolTable) {
 		MsgStack extra = new MsgStack();
-<<<<<<< HEAD
-<<<<<<< HEAD
-		//TODO: Agregar funciones de control dinámico
-//		extra.addMsg("_");
-=======
-		extra.addMsg("JMP _FinDelPrograma");
-<<<<<<< HEAD
->>>>>>> f1ad94b... Update ChequeosEnEjec
-		
-<<<<<<< HEAD
-		
-		extra.addMsg("_print:"); //El print debe tener el puntero al mensaje en eax, debe pasarse como: lea eax, NombreCadena
-=======
-=======
-
->>>>>>> 6bb5a8f... _
-		extra.addMsg("_print:");
->>>>>>> 1375c5c... arreglos varios
-		extra.addMsg("invoke MessageBox, NULL, Cadena, eax, MB_OK");
-		extra.addMsg("ret");
-<<<<<<< HEAD
-		
-		
-=======
-
->>>>>>> 6bb5a8f... _
-		extra.addMsg("_DivisionPorCero:");
-<<<<<<< HEAD
-		extra.addMsg("invoke StdOut, addr _ErrorDivisionPorCero");
-		ElementoTS tupla = new ElementoTS("_ErrorDivisionPorCero", "","Error: division por cero");
-		symbolTable.put("_ErrorDivisionPorCero", tupla);
-		extra.addMsg("JMP _FinDelPrograma");//salto al final del programa
-		
-		
-=======
-		extra.addMsg("invoke StdOut, addr _@ErrorDivisionPorCero");
-		extra.addMsg("JMP _FinDelPrograma"); //salto al final del programa
-<<<<<<< HEAD
->>>>>>> 1375c5c... arreglos varios
-		
-=======
-
->>>>>>> 6bb5a8f... _
-		extra.addMsg("_ArregloFueraDeRango:");
-		extra.addMsg("invoke StdOut, addr _@ErrorArregloFueraDeRango");//revisar como hacer!!!!!!!!!!!!!!!!!!!!
-		extra.addMsg("JMP _FinDelPrograma"); //salto al final del programa
-=======
 		extra.addMsg("_print:");
 		extra.addMsg("invoke MessageBox, NULL, eax, eax, MB_OK");
 		extra.addMsg("ret");
@@ -116,7 +69,6 @@ public class AssemblerGenerator {
 		extra.addMsg("_msgArregloFueraDeRango:");
 		extra.addMsg("invoke MessageBox, NULL, addr _@ErrorArregloFueraDeRango, addr _@ErrorArregloFueraDeRango, MB_OK");
 		extra.addMsg("jmp _finDelPrograma");
->>>>>>> 51f241d... arreglos varios
 
 		extra.addMsg("_finDelPrograma:");
 		extra.addMsg("invoke ExitProcess, 0");
